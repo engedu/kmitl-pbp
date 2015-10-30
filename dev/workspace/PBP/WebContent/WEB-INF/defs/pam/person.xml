@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Person Profile -->
+	<definition name="initPerson" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/list.jsp" />
+		 
+	</definition>
+	<definition name="viewPerson" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/view.jsp" />
+		 
+	</definition>
+	<definition name="editPerson" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/edit.jsp" />
+		 
+	</definition>
+
+	<definition name="editPersonProfile" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/editPersonProfile.jsp" />
+		 
+	</definition>	
+ 
+  
+
+
+	<!-- Paper -->
+	<definition name="initPaper" extends="baseLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/person/paper/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="createPaper" extends="baseLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/person/paper/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="editPaper" extends="baseLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/person/paper/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+
+	
+	<!-- Work -->
+	<definition name="workPersonList" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/work/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="workPersonCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/work/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="workPersonEdit" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/work/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="workPersonView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/work/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+
+
+	<!-- Teach Table -->
+	<definition name="initTeachTable" extends="pamTeachLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/teachTable/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="initSubjectTeach" extends="pamTeachLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/teachTable/subjectList.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	<definition name="initSubjectView" extends="pamTeachLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/person/teachTable/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+	</definition>
+	
+	
+
+</tiles-definitions>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+
+	  	<!-- Start KPI Category -->
+	<bean id="kpiCategoryCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiCategoryCreate" /></bean>
+	<bean id="kpiCategoryCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiCategoryCreateSuccess" /></bean>
+	<bean id="kpiCategoryList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiCategoryList" /></bean>
+	<bean id="kpiCategoryEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiCategoryEdit" /></bean> 
+	<!-- End KPI Category --> 
+ 
+ 
+ 
+ 	  	<!-- Start KPI Template   -->
+	<bean id="kpiTemplateCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiTemplateCreate" /></bean>
+	<bean id="kpiTemplateCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiTemplateCreateSuccess" /></bean>
+	<bean id="kpiTemplateList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiTemplateList" /></bean>
+	<bean id="kpiTemplateEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiTemplateEdit" /></bean> 
+	<bean id="addNode"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="addNode" /></bean> 
+	<bean id="editNode"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editNode" /></bean> 
+	<!-- End KPI  Template --> 
+	
+	
+ 	  	<!-- Start KPI  Year -->
+	<bean id="kpiyearCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearCreate" /></bean>
+	<bean id="kpiyearCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearCreateSuccess" /></bean>
+	<bean id="kpiyearList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearList" /></bean>
+	<bean id="kpiyearEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearEdit" /></bean> 
+	<bean id="viewYearKpi"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewYearKpi" /></bean> 
+	<bean id="createKpiyearList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="createKpiyearList" /></bean>
+	
+	
+	  <!--  KPI Weight -->
+	 <bean id="kpiweightList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiweightList" /></bean>
+	 <bean id="kpiweightLevel1"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiweightLevel1" /></bean> 
+	 <bean id="kpiweightLevel2"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiweightLevel2" /></bean> 
+	 
+	 
+	  <!--  KPI Target -->
+	 <bean id="kpitargetList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpitargetList" /></bean>
+	 <bean id="kpitargetLevel1"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpitargetLevel1" /></bean> 
+	 <bean id="kpitargetLevel2"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpitargetLevel2" /></bean> 
+	 
+	 	  <!--  KPI Level -->
+	 <bean id="kpilevelList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpilevelList" /></bean>
+	 <bean id="kpilevelLevel1"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpilevelLevel1" /></bean> 
+	 <bean id="kpilevelLevel2"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpilevelLevel2" /></bean> 	 
+	 
+	 
+	
+	<bean id="kpiyearAddNode"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearAddNode" /></bean> 
+	<bean id="kpiyearEditNode"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiyearEditNode" /></bean> 
+	<!-- End KPI   --> 	
+
+
+ 	  	<!-- Import Profile -->
+	<bean id="initImportProfile"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportProfile" /></bean>
+	<bean id="initProfileHistory"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initProfileHistory" /></bean>
+ 	  	<!-- Import TimeTable -->
+	<bean id="initImportTimeTable"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportTimeTable" /></bean>
+	<bean id="initImportTimeTableDesc"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportTimeTableDesc" /></bean>
+	<bean id="initTimeTableHistory"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initTimeTableHistory" /></bean>
+	<bean id="initMappingUserTimeTable"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initMappingUserTimeTable" /></bean>
+ 	  	<!-- Import Works -->
+	<bean id="initImportWorks"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportWorks" /></bean>
+	<bean id="initWorksHistory"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initWorksHistory" /></bean>
+
+
+	<bean id="initImportStaff"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportStaff" /></bean>
+  	<bean id="initImportStudentInSec"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportStudentInSec" /></bean>
+  	
+  	  	<bean id="syncTimetableWS"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWS" /></bean>
+  	<bean id="recalculate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="recalculate" /></bean>
+
+	  	<!-- Year-->
+	<bean id="yearCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="yearCreate" /></bean>
+	<bean id="yearCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="yearCreateSuccess" /></bean>
+	<bean id="yearList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="yearList" /></bean>
+	<bean id="yearEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="yearEdit" /></bean> 
+ 
+ 
+ 	<!-- Semester -->
+	<bean id="semesterCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="semesterCreate" /></bean>
+	<bean id="semesterCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="semesterCreateSuccess" /></bean>
+	<bean id="semesterList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="semesterList" /></bean>
+	<bean id="semesterEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="semesterEdit" /></bean> 
+	
+	<!-- Holiday -->
+	<bean id="holidayPersonList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="holidayPersonList" /></bean> 
+	
+	
+	<!-- Workline -->
+	<bean id="worklineCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineCreate" /></bean>
+	<!--<bean id="worklineCreateSuccess" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineCreateSuccess" /></bean>-->
+	<bean id="worklineList" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineList" /></bean>
+	<bean id="worklineEdit" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineEdit" /></bean> 
+	<bean id="hierarchy" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="hierarchy" /></bean> 
+	<bean id="personWorklineList" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personWorklineList" /></bean> 
+	<bean id="personWorklineEdit" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personWorklineEdit" /></bean> 
+	<bean id="worklineHierarchyAdd" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineHierarchyAdd" /></bean> 
+	<bean id="worklineHierarchyEdit" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="worklineHierarchyEdit" /></bean> 
+	
+	
+	
+	 <!-- Start KPI Category -->
+	<bean id="unitCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="unitCreate" /></bean>
+	<bean id="unitCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="unitCreateSuccess" /></bean>
+	<bean id="unitList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="unitList" /></bean>
+	<bean id="unitEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="unitEdit" /></bean> 
+	<!-- End KPI Category --> 
+	
+	 <!-- Start Work Template-->
+	<bean id="workTemplateCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workTemplateCreate" /></bean>
+	<bean id="workTemplateList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workTemplateList" /></bean>
+	<bean id="workTemplateEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workTemplateEdit" /></bean>
+	<bean id="workTemplateKpiPopup"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workTemplateKpiPopup" /></bean>  
+	<!-- End Work Template --> 
+ 
+	<!-- Start KPI Schedule -->
+	<bean id="kpiScheduleList" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiScheduleList" /></bean>
+	<bean id="kpiScheduleCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiScheduleCreate" /></bean>
+	<bean id="kpiScheduleEdit" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="kpiScheduleEdit" /></bean> 
+	<!-- End KPI Schedule --> 
+	
+	<!-- Start Estimate Group -->
+	<bean id="initEstimateGroup" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initEstimateGroup" /></bean>
+	<bean id="estimateGroupCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="estimateGroupCreate" /></bean>
+	<bean id="estimateGroupEdit" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="estimateGroupEdit" /></bean>
+	<bean id="estimateGroupView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="estimateGroupView" /></bean>
+	<!-- End Estimate Group -->
+	
+	
+	<!-- Manage Template -->
+	<bean id="initManageTemplate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initManageTemplate" /></bean>
+	<bean id="manageTemplatekpiyearList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="manageTemplatekpiyearList" /></bean>
+	
+</beans>

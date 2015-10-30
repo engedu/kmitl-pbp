@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xmlns:p="http://www.springframework.org/schema/p" 
+				xmlns:sws="http://www.springframework.org/schema/web-services"
+				xmlns:context="http://www.springframework.org/schema/context"
+    			xmlns:oxm="http://www.springframework.org/schema/oxm"
+       			xsi:schemaLocation=
+       				"http://www.springframework.org/schema/beans 
+       				http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       	 			http://www.springframework.org/schema/web-services
+       				http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       				http://www.springframework.org/schema/context 
+       				http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       				http://www.springframework.org/schema/oxm 
+       				http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+       				
+ 
+    <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+         
+    </bean>
+
+    <bean id="abstractClient" abstract="true">
+        <constructor-arg ref="messageFactory"/>
+    </bean>
+
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">		 
+		<property name="packagesToScan">
+	    	<list>	        		   
+	        	<value>com.buckwa.ws.newws.oxm</value>	 
+	   		 </list>
+		</property>
+	</bean>	 
+    
+ 
+    
+    <bean id="supportWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+	    <property name="marshaller" ref="marshaller" />
+	    <property name="unmarshaller" ref="marshaller" />	    
+	    <property name="defaultUri"    value="http://www1.reg.kmitl.ac.th/service/service_registra_table.php" />	 
+	</bean>
+    
+ 
+  
+   <bean id="facultyWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${facultyService.enpoint}</value></property>
+   
+      <property name="interceptors">
+        <list>
+            <ref bean="payloadValidatingInterceptor" />
+        </list>
+    </property>
+ </bean>
+  
+    <bean id="teacherWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${teacherService.enpoint}</value></property>
+   
+      <property name="interceptors">
+        <list>
+            <ref bean="payloadValidatingInterceptor" />
+        </list>
+    </property>
+ </bean>
+ 
+ 
+     <bean id="teachTableWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${teachTableService.enpoint}</value></property>
+   
+      <property name="interceptors">
+        <list>
+            <ref bean="payloadValidatingInterceptor" />
+        </list>
+    </property>
+ </bean>
+ 
+ 
+      <bean id="subjectServiceWSTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${subjectService.enpoint}</value></property>
+   
+      <property name="interceptors">
+        <list>
+            <ref bean="payloadValidatingInterceptor" />
+        </list>
+    </property>
+ </bean>
+ 
+	
+<bean id="payloadValidatingInterceptor"
+    class="org.springframework.ws.client.support.interceptor.PayloadValidatingInterceptor">
+    <property name="schema"
+        value="/WEB-INF/classes/com/buckwa/ws/newws/xsd/regwsxsd.xsd" />
+    <property name="validateRequest" value="true" />
+    <property name="validateResponse" value="true" />
+</bean>
+ 
+ <bean
+class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor">
+   <property name="logRequest" value="true" />
+   <property name="logResponse" value="true" />
+</bean>
+    
+ </beans>
+   

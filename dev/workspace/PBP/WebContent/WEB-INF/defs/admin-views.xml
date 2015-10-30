@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	<!--  Security  -->
+	
+	<bean id="securityAccessDenied" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="securityAccessDenied" /></bean>
+	<bean id="securityAdminAccessDenied" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="securityAdminAccessDenied" /></bean>
+	<bean id="securityUserAccessDenied" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="securityUserAccessDenied" /></bean>
+	<bean id="securityAnonymousAccessDenied" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="securityAnonymousAccessDenied" /></bean>	
+ 	<bean id="securityDeanAccessDenied" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="securityDeanAccessDenied" /></bean>	
+ 
+ 
+	
+	
+	<!-- Start Common -->
+	<bean id="preLogin"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="preLogin" /></bean>	
+	<bean id="welcome"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="welcome" /></bean>	
+	<bean id="logout"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="logout" /></bean>
+	<bean id="loginSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="loginSuccess" /></bean>	
+	<bean id="sessionTimeout" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="sessionTimeout" /></bean>
+	<bean id="general-error" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="general-error" /></bean>
+	<bean id="error404" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="error404" /></bean>
+	<bean id="error500" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="error500" /></bean>
+
+	
+	<!-- End Common -->
+ 
+ 	<!-- Start User -->
+	<bean id="userCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userCreate" /></bean>
+	<bean id="userList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userList" /></bean>
+	<bean id="userCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userCreateSuccess" /></bean>
+	<bean id="userEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userEdit" /></bean>
+	<bean id="userProfile"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userProfile" /></bean>
+	<bean id="changePassword"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="changePassword" /></bean>
+	<bean id="changePasswordSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="changePasswordSuccess" /></bean>  	
+ 
+	<!-- End User -->
+	
+	 <!--  Start User Registration   -->
+   	<bean id="register"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="register" /></bean>  	
+ 	<bean id="registerEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="registerEdit" /></bean>  	
+ 	<bean id="registerSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="registerSuccess" /></bean>  	
+  	<!-- End User Registration   -->
+ 
+ 
+ 	<!-- Start Role -->
+	<bean id="roleCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="roleCreate" /></bean>
+	<bean id="roleCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="roleCreateSuccess" /></bean>
+	<bean id="roleList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="roleList" /></bean>
+	<bean id="roleEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="roleEdit" /></bean> 
+	<!-- End Role -->
+  
+ 	<!-- Start Group -->
+	<bean id="groupCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="groupCreate" /></bean>
+	<bean id="groupCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="groupCreateSuccess" /></bean>
+	<bean id="groupList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="groupList" /></bean>
+	<bean id="groupEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="groupEdit" /></bean>
+ 
+	<!-- End Group -->
+	
+ 	<!-- Start Holiday -->
+	<bean id="holidayCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="holidayCreate" /></bean>
+	<bean id="holidayCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="holidayCreateSuccess" /></bean>
+	<bean id="holidayList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="holidayList" /></bean>
+	<bean id="holidayEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="holidayEdit" /></bean>
+	<!-- End Holiday -->
+	
+ 	<!-- Start LeaveQuota -->
+	<bean id="leaveQuotaList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveQuotaList" /></bean>
+	<bean id="leaveQuotaEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveQuotaEdit" /></bean>
+	<bean id="leaveQuotaCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveQuotaCreate" /></bean>
+	<bean id="leaveQuotaView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveQuotaView" /></bean>
+	
+	<!-- End LeaveQuota -->
+  
+ 	<!-- Start Menu -->
+	<bean id="menuCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="menuCreate" /></bean>
+	<bean id="menuCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="menuCreateSuccess" /></bean>
+	<bean id="menuList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="menuList" /></bean>
+	<bean id="menuEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="menuEdit" /></bean>
+ 
+	<!-- End Menu -->
+	
+		 <!-- Start LOV Header -->
+	<bean id="lovHeaderCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderCreate" /></bean>
+	<bean id="lovHeaderCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderCreateSuccess" /></bean>
+	<bean id="lovHeaderList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderList" /></bean>
+	<bean id="lovHeaderEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderEdit" /></bean>
+	<bean id="lovHeaderView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderView" /></bean>
+
+	<bean id="lovHeaderManage"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovHeaderManage" /></bean>
+	<bean id="lovDetailEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="lovDetailEdit" /></bean>
+
+
+	
+ 	<!-- Start Province -->
+	<bean id="provinceCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="provinceCreate" /></bean>
+	<bean id="provinceCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="provinceCreateSuccess" /></bean>
+	<bean id="provinceList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="provinceList" /></bean>
+	<bean id="provinceEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="provinceEdit" /></bean> 
+	<!-- End Province --> 
+	
+	 	<!-- Start Aumphur -->
+	<bean id="aumphurCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="aumphurCreate" /></bean>
+	<bean id="aumphurCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="aumphurCreateSuccess" /></bean>
+	<bean id="aumphurList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="aumphurList" /></bean>
+	<bean id="aumphurEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="aumphurEdit" /></bean> 
+	<!-- End Province --> 
+	
+	 	<!-- Start Tumbon -->
+	<bean id="tumbonCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="tumbonCreate" /></bean>
+	<bean id="tumbonCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="tumbonCreateSuccess" /></bean>
+	<bean id="tumbonList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="tumbonList" /></bean>
+	<bean id="tumbonEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="tumbonEdit" /></bean> 
+	<!-- End Province --> 
+	
+	 	<!-- Start Mooban -->
+	<bean id="moobanCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanCreate" /></bean>
+	<bean id="moobanCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanCreateSuccess" /></bean>
+	<bean id="moobanList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanList" /></bean>
+	<bean id="moobanEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanEdit" /></bean> 
+	<!-- End Province --> 
+</beans>

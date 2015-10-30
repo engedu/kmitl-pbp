@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+ 	<!-- Start Common -->
+	<bean id="anonymous"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymous" /></bean>	
+	<bean id="anonymousAcademicKPIList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymousAcademicKPIList" /></bean>
+	<bean id="anonymousAcademicKPIListAll"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymousAcademicKPIListAll" /></bean>
+	
+	<!--  Start Admin -->
+	
+	<bean id="academicYear"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicYear" /></bean>	
+	<bean id="academicAjustYear"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicAjustYear" /></bean>
+	<bean id="academicAjustYearSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicAjustYearSuccess" /></bean>
+	<bean id="dateAcademicYearEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="dateAcademicYearEdit" /></bean>
+	<bean id="dateEvaluateRoundEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="dateEvaluateRoundEdit" /></bean>
+	
+	
+	
+	<!--  Faculty -->
+	<bean id="facultyList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyList" /></bean>
+	<bean id="facultyCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyCreate" /></bean>
+	<bean id="facultyView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyView" /></bean>
+	<bean id="facultyEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyEdit" /></bean>
+
+	<!--  Department -->
+	<bean id="departmentEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="departmentEdit" /></bean>
+	<bean id="departmentCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="departmentCreate" /></bean>
+	
+		<!--  Chain Of Command  -->
+	<bean id="chainOfCommandList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandList" /></bean>
+	<bean id="chainOfCommandFacultyList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandFacultyList" /></bean> 
+	<bean id="chainOfCommandDepartmentList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandDepartmentList" /></bean>
+	<bean id="chainOfCommandManageDean"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandManageDean" /></bean>
+	<bean id="chainOfCommandManageHead"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandManageHead" /></bean>
+	<bean id="chainOfCommandManagePresident"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="chainOfCommandManagePresident" /></bean>
+	
+	
+	<!--  MarkRank --> 
+	<bean id="markRankList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="markRankList" /></bean>
+	 <bean id="markRankRoundList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="markRankRoundList" /></bean>
+	
+	
+	
+	<!-- PBP WorkType -->
+		<bean id="pBPWorkTypeList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="pBPWorkTypeList" /></bean>
+	<bean id="pBPWorkTypeSubList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="pBPWorkTypeSubList" /></bean>
+	
+	<!--  Academic Unit --> 
+	<bean id="academicUnitList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicUnitList" /></bean>	
+	
+	<!--  Academic KPI --> 
+	<bean id="academicKPIList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicKPIList" /></bean>	
+	<bean id="academicKPICreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicKPICreate" /></bean>	
+	<bean id="academicKPIEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicKPIEdit" /></bean>	
+	
+		
+	
+	
+	<!--  End Admin -->
+	
+	
+	<!--  Start Head -->
+	<bean id="headWorkList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="headWorkList" /></bean>
+	<bean id="viewWork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewWork" /></bean>
+	<bean id="markDepartment"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="markDepartment" /></bean>
+	<bean id="headWorkUserList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="headWorkUserList" /></bean>
+	
+	
+	<!--  Start User -->
+	<bean id="initWorkImport"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initWorkImport" /></bean>
+	<bean id="initWorkImportByType"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initWorkImportByType" /></bean>
+
+	<bean id="importwork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="importwork" /></bean>
+	<bean id="importworkCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="importworkCreate" /></bean>
+	<bean id="academicWork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="academicWork" /></bean>
+	<bean id="viewImportWork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewImportWork" /></bean>
+	<bean id="editImportWork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editImportWork" /></bean>
+	<bean id="editKPIMapping"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editKPIMapping" /></bean>
+	<bean id="teachShare"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="teachShare" /></bean>
+	<bean id="teachShareAddSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="teachShareAddSuccess" /></bean>
+	
+	
+	<!--  End User -->
+	
+	<!-- Staff panner -->
+	<bean id="staffList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="staffList" /></bean>
+	<bean id="staffadd"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="staffadd" /></bean>
+	<bean id="useruploadview"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="useruploadview" /></bean>
+	
+	
+	<!--  President -->
+	
+	 <bean id="presidentInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="presidentInit" /></bean>	
+	  <bean id="instituteReport"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="instituteReport" /></bean>
+
+        <bean id="presidentBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="presidentBarchartInit" /></bean>		
+ 	   <bean id="presidentWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="presidentWorkTypeBarchartInit" /></bean>		
+ 	   <bean id="presidentWorkTypeCompareBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="presidentWorkTypeCompareBarchartInit" /></bean>		
+    
+
+
+       <bean id="facultyReport"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyReport" /></bean>
+   
+        <bean id="deanBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanBarchartInit" /></bean>		
+ 	   <bean id="deanWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanWorkTypeBarchartInit" /></bean>		
+ 	   <bean id="deanWorkTypeCompareBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanWorkTypeCompareBarchartInit" /></bean>		
+    
+   
+       	<bean id="headBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="headBarchartInit" /></bean>		
+  	   <bean id="headWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="headWorkTypeBarchartInit" /></bean>		
+      
+ 
+ 	<bean id="presidentRadarPlot"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="presidentRadarPlot" /></bean>	
+ 
+ 	<!--  Person -->
+	 <bean id="personReportInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personReportInit" /></bean>	
+	 
+ 
+ 	<bean id="personReportRadarPlot"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personReportRadarPlot" /></bean>
+ 	<bean id="personBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personBarchartInit" /></bean>		
+ 
+ 	<bean id="personWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personWorkTypeBarchartInit" /></bean>		
+	 
+	 <bean id="personTimeTableInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personTimeTableInit" /></bean>
+	 
+</beans>

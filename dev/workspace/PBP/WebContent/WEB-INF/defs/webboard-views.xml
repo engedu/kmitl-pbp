@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	
+	  <!--  Admin Webboard Category -->
+	  
+	<bean id="adminwebboardcategoryCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardcategoryCreate" /></bean>
+	<bean id="adminwebboardcategoryCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardcategoryCreateSuccess" /></bean>
+	<bean id="adminwebboardcategoryList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardcategoryList" /></bean>
+	<bean id="adminwebboardcategoryEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardcategoryEdit" /></bean>
+ 
+  	<bean id="adminwebboardtopicCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardtopicCreate" /></bean>
+	<bean id="adminwebboardtopicCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardtopicCreateSuccess" /></bean>
+	<bean id="adminwebboardtopicList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardtopicList" /></bean>
+	<bean id="adminwebboardtopicEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminwebboardtopicEdit" /></bean>
+  	<bean id="adminViewTopic"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminViewTopic" /></bean>
+ 
+ 
+ 	<bean id="webboardtopicCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="webboardtopicCreate" /></bean>
+	<bean id="webboardtopicCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="webboardtopicCreateSuccess" /></bean>
+	<bean id="webboardtopicList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="webboardtopicList" /></bean>
+	<bean id="webboardtopicEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="webboardtopicEdit" /></bean>
+ 
+ 	<bean id="viewTopic"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewTopic" /></bean>
+  
+	<!-- Start Message -->
+	<bean id="messageCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageCreate" /></bean>
+	<bean id="messageCreateSuccess"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageCreateSuccess" /></bean>
+	<bean id="messageList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageList" /></bean>
+	<bean id="messageEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageEdit" /></bean> 
+	
+	<bean id="adminMessageList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminMessageList" /></bean> 
+	<bean id="adminMessageView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminMessageView" /></bean> 
+
+</beans>

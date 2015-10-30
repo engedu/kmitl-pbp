@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="raise_salary_report6" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e9b2bf3-5e51-480d-ba6f-62180d4c4699">
+	<property name="ireport.zoom" value="1.0000000000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="baseStyle" fill="Solid" hAlign="Left" vAlign="Top" markup="none" isBlankWhenNull="false" fontName="Angsana New" fontSize="16" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="semesterDateToStr" class="java.lang.String"/>
+	<parameter name="semesterDateFromStr" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="380" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="49a63d0d-6728-4d95-bc63-88dd267011b0" style="baseStyle" x="36" y="40" width="90" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมที่ได้
+............ คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d32ac59-98d1-464c-914a-4fe07b5432a3" style="baseStyle" x="146" y="60" width="90" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="384710eb-b089-4454-9009-11e71d98e837" style="baseStyle" x="126" y="40" width="20" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="508927d9-0418-467b-a578-8d37b1a56403" style="baseStyle" x="256" y="40" width="120" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนผลการประเมิน
+................... คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd7b6b46-165b-4b6d-b558-9a65e3808d48" style="baseStyle" x="236" y="40" width="20" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10cd3636-61ee-4142-8fcf-03d5e7561dbd" style="baseStyle" x="36" y="0" width="125" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[2.2 สรุปผลการประเมิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49a63d0d-6728-4d95-bc63-88dd267011b0" style="baseStyle" x="146" y="40" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="3776e15d-3372-4331-8de3-746a051e989c" x="160" y="60" width="60" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="145" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e373c744-2dff-4466-af4e-60a4166f053e" style="baseStyle" x="36" y="100" width="340" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[ระดับผลกระประเมินที่ได้รับพิจารณาเพิ่มค่าจ้าง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="140" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ดีเด่น]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="340" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ไม่ได้รับการเพิ่มค่าจ้าง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="140" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 96-100 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="160" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ค่อนข้างดีเด่น]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="160" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 92-95 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="160" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="165" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="180" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 88-91 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="185" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="180" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ดีมาก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="180" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="200" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 84-87 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="225" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="205" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="220" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 80-83 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="220" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="200" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ค่อนข้างดีมาก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="200" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="220" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ดี]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="240" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 76-79 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="265" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="245" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="260" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 72-75 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="260" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="240" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ค่อนข้างดี]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="240" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="260" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ปานกลาง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="280" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 68-71 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="305" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="285" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="300" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 64-67 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="300" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="280" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ค่อนข้างปานกลาง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="280" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="300" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[พอใช้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="320" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมิน 60-63 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="345" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="41" y="325" width="10" height="10"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbf75552-c02e-45c0-8925-509c30ea65ee" style="baseStyle" x="305" y="340" width="250" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ผลประเมินตำกว่า 60 คะแนน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="140" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="320" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ค่อนข้างพอใช้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="170" y="320" width="117" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ร้อยละ 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e21bba7d-40ce-4c8d-8e57-998aa49ad44a" style="baseStyle" x="60" y="340" width="90" height="20"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ต้องปรับปรุง]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="310" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="81c608dc-7e52-43e2-9ad4-9c7f5405fb11" style="baseStyle" x="36" y="0" width="45" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true" isUnderline="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[ส่วนที่ 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18de62b9-ae20-4d1f-8613-5d6908554c68" style="baseStyle" x="81" y="0" width="474" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[ความเห็นของผู้ประเมินชั้นต้นเกี่ยวกับการพัฒนา การเพิ่มค่าจ้าง และอื่นๆ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5187069c-e10d-4263-913a-4e8bc01feace" style="baseStyle" x="61" y="30" width="20" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[3.1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a6ab4f84-0828-475c-8df6-600d7c2ccef2" style="baseStyle" x="81" y="30" width="474" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ความเห็นเกี่ยวกับการพัฒนา ฝึกอบรมและการแก้ไขการปฏิบัติงาน (ระบุความถนัด จุดเด่น และสิ่งที่ควรพัฒนา]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eb227bb1-d3c5-41eb-bb06-a76948719466" style="baseStyle" x="81" y="50" width="474" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ของผู้รับการประเมิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="90" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[..................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="110" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="130" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="190" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="170" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555d4c5a-7be6-4322-af32-7ac49d91c5ab" style="baseStyle" x="36" y="150" width="519" height="20"/>
+				<box leftPadding="10" rightPadding="10">
+					<leftPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1550bab3-e66d-43b5-95bf-fc192c34b8b5" style="baseStyle" x="343" y="230" width="212" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ ........................................ ผู้ประเมิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e82c2c85-cfcd-4885-b5e3-6f4f6a72c970" style="baseStyle" x="366" y="250" width="189" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(.......................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28a8f228-6f6e-4ef9-a19f-6ea80ceba118" style="baseStyle" x="343" y="270" width="45" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ตำแหน่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ffd5e8f7-a2eb-45e8-a5f5-90d21c4c7d06" style="baseStyle" x="343" y="290" width="45" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[วันที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac1bedfa-6bbb-48ce-897c-2825e7757dfc" style="baseStyle" x="388" y="270" width="167" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[....................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac1bedfa-6bbb-48ce-897c-2825e7757dfc" style="baseStyle" x="388" y="290" width="167" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[....................................]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

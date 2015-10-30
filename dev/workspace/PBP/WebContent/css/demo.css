@@ -1,0 +1,107 @@
+/* global, font*/
+html,body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+html>body {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 80%;
+}
+
+/* layout */
+#container {
+	margin: 0 auto;
+	margin-top: 5em;
+	text-align: center;
+}
+
+#sub-main {
+	margin: 0 auto;
+	width: 900px;
+}
+
+#sub-left {
+	float: left;
+	width: 48%;
+	/*border-right-color: gray;
+	border-right-style: dotted;
+	border-right-width: thin;*/
+	text-align: left;
+	/*background-color: fuchsia;*/
+}
+
+#sub-right {
+	float: right;
+	width: 48%;
+	text-align: left;
+	/*background-color: appworkspace;*/
+}
+
+/* XML element*/
+.ep {
+	float: right;
+	margin-top: 0.1em;
+	margin-right: 0.5em;
+	width: 1em;
+	height: 1em;
+	background-color: #994466;
+	cursor: pointer;
+}
+
+.ept {
+	float: left;
+	margin-top: 0.1em;
+	margin-left: 0.5em;
+	width: 1em;
+	height: 1em;
+	background-color: #224466;
+	cursor: auto;
+}
+
+.aLabel {
+	background-color: transparent;
+	padding: 0;
+	font: 12px sans-serif;
+	color: #555;
+	z-index: 21;
+	border: none;
+	opacity: 0.9;
+	filter: alpha(opacity =   80);
+	cursor: pointer;
+}
+
+.dragHover {
+	border: 1px dotted red;
+}
+
+/* Function mapping */
+#function-mapping {
+	top:320px;
+	left:560px;	
+	padding: 0.5em;	
+	padding-top: 0;
+	position: absolute;
+	border: 1px solid black;
+	border: 1px solid #346789;
+	border-radius: 0.5em;
+	opacity: 0.8;	
+	cursor: move;
+}
+
+.inp {
+	margin-top: 0.5em;	
+	width: 1em;
+	height: 1em;
+	background-color: #994466;
+	cursor: auto;
+}
+
+.outp {
+	margin-top: 0.5em;	
+	width: 1em;
+	height: 1em;
+	background-color: #224466;
+	cursor: pointer;
+}

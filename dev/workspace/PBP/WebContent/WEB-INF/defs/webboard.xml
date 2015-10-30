@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+ 
+  
+     <!--  Admin Webboard Category -->
+  <definition name="adminwebboardcategoryList" extends="adminLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/category/list.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardcategoryCreate" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/category/create.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardcategoryCreateSuccess" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/category/createSuccess.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardcategoryEdit" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/category/edit.jsp"/>      
+  </definition>   
+  
+  
+       <!--  Admin Webboard Topic -->
+  <definition name="adminwebboardtopicList" extends="adminLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/admin/topic/list.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardtopicCreate" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/admin/topic/create.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardtopicCreateSuccess" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/admin/topic/createSuccess.jsp"/>      
+  </definition>   
+    <definition name="adminwebboardtopicEdit" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/admin/topic/edit.jsp"/>      
+  </definition>  	
+    <definition name="adminViewTopic" extends="adminLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/admin/topic/viewTopic.jsp"/>      
+  </definition>   
+   	
+	
+	
+     <!--  User Webboard Topic -->
+  <definition name="webboardtopicList" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/topic/list.jsp"/>      
+  </definition>   
+    <definition name="webboardtopicCreate" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/topic/create.jsp"/>      
+  </definition>   
+    <definition name="webboardtopicCreateSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/topic/createSuccess.jsp"/>      
+  </definition>   
+    <definition name="webboardtopicEdit" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/topic/edit.jsp"/>      
+  </definition>  	
+  
+  
+  
+   <definition name="viewTopic" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/webboard/topic/viewTopic.jsp"/>      
+  </definition>  	
+  
+  
+  	<!--  Message  -->
+   <definition name="messageCreate" extends="pbpUserLayout">
+     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/message/create.jsp"/>      
+  </definition>   
+    <definition name="messageCreateSuccess" extends="pbpUserLayout">
+      
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/message/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="messageList" extends="pbpUserLayout">
+     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/message/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="messageUpdate" extends="pbpUserLayout">
+     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/message/update.jsp"/>      
+  </definition>    
+  
+   <definition name="messageEdit" extends="pbpUserLayout">
+   
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/message/edit.jsp"/>      
+  </definition>   
+  
+  
+     <definition name="adminMessageList" extends="pbpUserLayout">
+     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/message/list.jsp"/>      
+  </definition>  
+     <definition name="adminMessageView" extends="pbpUserLayout">
+   
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/message/view.jsp"/>      
+  </definition>   
+   
+     	
+</tiles-definitions>

@@ -1,0 +1,44 @@
+.wait {
+	text-align: center;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #fff3;
+	color: #333333;
+	position: inherit;
+	width: 105px;
+	height: 20px;
+	padding-top: 3px;
+	background-color: #9dce2c;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-khtml-border-radius: 30px;
+	border-radius: 30px;
+}
+
+.process {
+	text-align: center;
+	text-shadow:1px 1px 0px #fff3;
+	color: #333333;
+	position: inherit;
+	width: 105px;
+	height: 20px;
+	padding-top: 3px;
+	background-color: #79bcff;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-khtml-border-radius: 30px;
+	border-radius: 30px;
+}
+
+.success {
+	text-align: center;
+	text-shadow:1px 1px 0px #fff3;
+	color: #333333;
+	position: inherit;
+	width: 105px;
+	height: 20px;
+	padding-top: 3px;
+	background-color: #f24437;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-khtml-border-radius: 30px;
+	border-radius: 30px;

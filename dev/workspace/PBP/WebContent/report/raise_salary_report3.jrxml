@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="raise_salary_report3" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c017a584-c28f-478a-9d67-3565c3bc98c9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="baseStyle" fill="Solid" hAlign="Left" vAlign="Top" markup="none" isBlankWhenNull="false" fontName="Angsana New" fontSize="16" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<parameter name="semesterDateToStr" class="java.lang.String"/>
+	<parameter name="semesterDateFromStr" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="200" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="565cb141-a343-4e34-8ab5-7d466e693f1e" style="baseStyle" x="36" y="70" width="220" height="20"/>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ชื่อผู้รับมอบ ......................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6b94a27c-176e-4ff9-b6af-20f8fcc14972" style="baseStyle" x="296" y="70" width="259" height="20"/>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ตำแหน่ง .......................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bf0f56f8-933e-4cf1-8939-b88a0aa5b560" style="baseStyle" x="36" y="100" width="220" height="20"/>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ชื่อผู้มอบ .........................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4a05bad8-e7f9-4406-946d-49570e42e615" style="baseStyle" x="296" y="100" width="259" height="20"/>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ประธานสาขาวิชา/หัวหน้างาน ........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="073c9be7-cad2-474f-bf86-18e57bab58c1" style="baseStyle" x="81" y="30" width="474" height="20"/>
+				<textElement>
+					<font isBold="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[การมอบหมายงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb8724be-e67e-4721-9d3a-93ce01c984fb" style="baseStyle" x="36" y="30" width="45" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[ตอนที่ 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="efc3e903-e058-4163-bda1-c1be6ddd9086" style="baseStyle" x="36" y="160" width="220" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[งานที่ได้รับมอบหมาย/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b5bc105-8cbf-450b-b685-22592dad469d" style="baseStyle" x="36" y="180" width="220" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[งานที่ปฏิบัติเพิ่มเติมหลังจากการมอบหมายงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c72417da-7b59-4309-9f94-478149cff56a" style="baseStyle" x="496" y="160" width="59" height="40"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="38a0a7d5-29cb-4e66-b689-fdea9fd648f6" style="baseStyle" x="396" y="180" width="100" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[สำเร็จ/ไม่สำเร็จ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80f1632c-8449-485c-8626-76695baaaa09" style="baseStyle" x="396" y="160" width="100" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ผลสัมฤทธิ์ของงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dfd55665-f2b8-48d3-8aef-e627e8f183f4" style="baseStyle" x="256" y="160" width="140" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[เป้าหมาย/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09d6cffa-d072-4a91-a2bc-41634faacbfc" style="baseStyle" x="256" y="180" width="140" height="20"/>
+				<box topPadding="0" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[มาตรฐานผลผลิตที่ต้องการ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4fb3fded-92e8-4275-bda8-c474e2c1c0a3" style="baseStyle" x="36" y="140" width="519" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ครั้งที่ 1 (" +
+$P{semesterDateFromStr} +
+" - " +
+$P{semesterDateToStr} +
+")"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7b5bc105-8cbf-450b-b685-22592dad469d" style="baseStyle" stretchType="RelativeToBandHeight" x="496" y="0" width="59" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b5bc105-8cbf-450b-b685-22592dad469d" style="baseStyle" stretchType="RelativeToBandHeight" x="396" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[.........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b5bc105-8cbf-450b-b685-22592dad469d" style="baseStyle" stretchType="RelativeToBandHeight" x="256" y="0" width="140" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isStrikeThrough="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[...........................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="be4b8795-a0c4-4e8c-a44d-468cc5ab21d9" style="baseStyle" stretchType="RelativeToBandHeight" x="36" y="0" width="220" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fe49b94d-46ee-4c06-bd2b-a969f70430ea" style="baseStyle" x="36" y="0" width="180" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ลงชื่อ) .............................. ผู้รับมอบ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d187fdd-905c-4e59-9f5e-429d69f68ace" style="baseStyle" x="216" y="0" width="180" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[(ลงชื่อ) ................................. ผู้มอบ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3edc80e1-bc9e-41b1-8b9c-7be110e9e664" style="baseStyle" x="396" y="0" width="159" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="16" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[วันที่ ..... เดือน ........... พ.ศ. .......]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

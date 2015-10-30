@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	
+	<!-- Person Report -->
+	<bean id="initPersonSummary"   class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initPersonSummary" /></bean>
+	<bean id="initPersonByFaculty" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initPersonByFaculty" /></bean>
+	
+	<!-- Kpi Summary Report -->
+	<bean id="initKpiSummary" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummary" /></bean>
+	
+	<!-- Kpi Summary In Faculty Report -->
+	<bean id="initKpiSummaryInFaculty" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryInFaculty" /></bean>
+	<bean id="initKpiSummaryInFacultyByTopic"  class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryInFacultyByTopic" /></bean>
+	<bean id="initKpiSummaryInFacultyByPerson" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryInFacultyByPerson" /></bean>
+	
+	<!-- Kpi Summary All Faculty Report -->
+	<bean id="initKpiSummaryAllFaculty" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryAllFaculty" /></bean>
+	<bean id="initKpiSummaryAllFacultyByTopic"  class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryAllFacultyByTopic" /></bean>
+	<bean id="initKpiSummaryAllFacultyByFaculty" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryAllFacultyByFaculty" /></bean>
+	
+	<!-- Kpi Summary Rank Report -->
+	<bean id="initKpiSummaryRank" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryRank" /></bean>
+	<bean id="initKpiSummaryRankByPerson" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initKpiSummaryRankByPerson" /></bean>
+	
+</beans>

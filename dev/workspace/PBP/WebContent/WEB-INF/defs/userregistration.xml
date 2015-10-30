@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+ 
+   <!--  User Registration -->
+   <definition name="registerCreate" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/create.jsp"/>      
+  </definition>   
+    <definition name="registerCreateSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/createSuccess.jsp"/>      
+  </definition>  
+   <definition name="registerEdit" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/edit.jsp"/>      
+  </definition>    
+    <definition name="registerEditSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/editSuccess.jsp"/>      
+  </definition>  
+    <definition name="enableUserSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/enableUserSuccess.jsp"/>      
+  </definition>   
+
+
+
+
+
+    <definition name="initForgotPASS" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/forgotPASS.jsp"/>      
+  </definition>   
+      <definition name="forgotPASSSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/userregistration/forgotPASSSuccess.jsp"/>      
+  </definition>
+  
+       	
+</tiles-definitions>

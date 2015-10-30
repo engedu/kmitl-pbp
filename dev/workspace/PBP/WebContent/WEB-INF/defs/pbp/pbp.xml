@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>   
+   <definition name="anonymous" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/anonymous/list.jsp"/>      
+  </definition>   
+  
+      <definition name="anonymousAcademicKPIList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/anonymous/kpiList.jsp"/>      
+  </definition> 
+      <definition name="anonymousAcademicKPIListAll" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/anonymous/kpiListAll.jsp"/>      
+  </definition>   
+  
+         
+  <!--  Start Admin -->
+  
+    <definition name="academicYear" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/list.jsp"/>      
+  </definition> 
+      <definition name="academicAjustYear" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/ajustYear.jsp"/>      
+  </definition>   
+      <definition name="academicAjustYearSuccess" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/ajustYearSuccess.jsp"/>      
+  </definition>   
+     <definition name="dateAcademicYearEdit" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/dateAcademicYearEdit.jsp"/>      
+  </definition>  
+       <definition name="dateEvaluateRoundEdit" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/dateEvaluateRoundEdit.jsp"/>      
+  </definition>  
+  
+  
+  
+  <!--  Faculty -->  
+    <definition name="facultyList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/faculty/list.jsp"/>      
+  </definition> 
+     <definition name="facultyCreate" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/faculty/create.jsp"/>      
+  </definition>  
+  
+   <definition name="facultyView" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/faculty/view.jsp"/>      
+  </definition>  
+    <definition name="facultyEdit" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/faculty/edit.jsp"/>      
+  </definition>  
+  
+   <!--  Department -->    
+    <definition name="departmentEdit" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/department/edit.jsp"/>      
+  </definition>    
+    <definition name="departmentCreate" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/department/create.jsp"/>      
+  </definition>    
+  
+     <!--  Chain Of Command -->    
+    <definition name="chainOfCommandList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/list.jsp"/>      
+  </definition>    
+    <definition name="chainOfCommandFacultyList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/listFaculty.jsp"/>      
+  </definition>     
+    <definition name="chainOfCommandDepartmentList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/listDepartment.jsp"/>      
+  </definition>   
+    <definition name="chainOfCommandManageDean" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/manageDean.jsp"/>      
+  </definition>   
+      <definition name="chainOfCommandManageHead" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/manageHead.jsp"/>      
+  </definition>   
+      <definition name="chainOfCommandManagePresident" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/chainOfCommand/managePresident.jsp"/>      
+  </definition>   
+  
+     <!--  MarkRank -->    
+    <definition name="markRankList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/markRank/list.jsp"/>      
+  </definition> 
+      <definition name="markRankRoundList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/markRank/listRound.jsp"/>      
+  </definition>   
+  
+  
+       <!--  PBP WorkType -->    
+    <definition name="pBPWorkTypeList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/pbpWorkType/list.jsp"/>      
+  </definition>    
+    <definition name="pBPWorkTypeSubList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/pbpWorkType/sub.jsp"/>      
+  </definition>     
+  
+  
+       <!--  Unit -->    
+    <definition name="academicUnitList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicUnit/list.jsp"/>      
+  </definition>    
+  
+         <!--  Academic Year KPI -->    
+    <definition name="academicKPIList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYearKPI/list.jsp"/>      
+  </definition>  
+     <definition name="academicKPICreate" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYearKPI/create.jsp"/>      
+  </definition>   
+     <definition name="academicKPIEdit" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYearKPI/edit.jsp"/>      
+  </definition>     
+  
+   
+  <!--  End Admin -->
+  
+  <!--  Start Head -->
+ 
+       <definition name="headWorkList" extends="pbpUserLayout">     
+      	<put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/list_total.jsp"/>      
+  		</definition>  
+  	 	
+  		 <!-- 
+  		 <definition name="headWorkList" extends="pbpUserLayout">     
+      	<put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/list_total.jsp"/>      
+  		</definition>  
+  		-->
+  		 <definition name="headWorkUserList" extends="pbpUserLayout">     
+      	<put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/list_user.jsp"/>      
+  		</definition>  
+  		
+      <definition name="viewWork" extends="pbpUserLayout">     
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/view.jsp"/>      
+  		</definition>    
+       <definition name="markDepartment" extends="pbpUserLayout">     
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/markDepartment.jsp"/>      
+  		</definition>   
+  
+  
+  <!--  End Head -->
+  
+  	<!--  Start User --> 
+	<definition name="initWorkImport" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/list.jsp"/>      
+  </definition> 
+  	<definition name="initWorkImportByType" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/listByType.jsp"/>      
+  </definition> 
+  
+  	<definition name="importwork" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/importwork.jsp"/>      
+  </definition>
+   	<definition name="importworkCreate" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/importworkCreate.jsp"/>      
+  </definition> 
+  
+   <definition name="academicWork" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/work/list.jsp"/>      
+  </definition>    
+   	<definition name="viewImportWork" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/viewImportWork.jsp"/>      
+  </definition> 
+    <definition name="editImportWork" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/editImportWork.jsp"/>      
+  </definition>  
+   	<definition name="editKPIMapping" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/importwork/editKPIMapping.jsp"/>      
+  </definition> 
+  
+  
+	<!--  End User -->
+	
+	<!-- Staff panner -->
+	<definition name="staffList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/staffPartner/listSubject.jsp"/>      
+  	</definition> 
+	<definition name="staffadd" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/staffPartner/add.jsp"/>      
+  	</definition> 
+	<definition name="useruploadview" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/staffPartner/useruploadView.jsp"/>      
+  	</definition> 
+  	
+  	
+  	<!--  President -->
+  	
+  	
+  	<definition name="kendoDemoBaseLayout" template="/WEB-INF/jsp/tiles/pbp/new/baseLayout.jsp"> 
+     <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/new/header.jsp"/> 
+      <put-attribute name="left"   value="/WEB-INF/jsp/tiles/pbp/new/left.jsp"/>     
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/new/right.jsp"/>            
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/new/footer.jsp"/>
+  </definition> 
+  
+    
+   <definition name="presidentInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/president/radarPlot.jsp"/>  
+   </definition> 
+   
+   
+   
+      <definition name="instituteReport" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/president/instituteReport.jsp"/>  
+   </definition> 
+  
+        <definition name="facultyReport" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/dean/facultyReport.jsp"/>  
+   </definition>  
+   
+     <definition name="presidentRadarPlot" extends="kendoDemoBaseLayout"><put-attribute name="main"   
+     value="/WEB-INF/jsp/pbp/president/radarPlot.jsp"/>  </definition> 
+   
+
+      <definition name="presidentBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/president/barChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition> 
+   
+         <definition name="presidentWorkTypeBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/president/workTypeBarChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>
+
+	<definition name="presidentWorkTypeCompareBarchartInit" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pbp/president/workTypeCompareBarChart.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/pbp/report/person/left.jsp" />
+	</definition>  
+
+
+      <definition name="deanBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/dean/barChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition> 
+   
+         <definition name="deanWorkTypeBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/dean/workTypeBarChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>
+
+	<definition name="deanWorkTypeCompareBarchartInit" extends="pbpUserLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pbp/dean/workTypeCompareBarChart.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/pbp/report/person/left.jsp" />
+	</definition>     
+
+
+      <definition name="headBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/barChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>   
+   
+        <definition name="headWorkTypeBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/workTypeBarChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>   
+     
+  <!--  Start Person -->  
+      
+   <definition name="personReportInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/report/person/radarPlot.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>    
+   
+     <definition name="personReportRadarPlot" extends="pbpUserLayout">
+     <put-attribute name="main"     value="/WEB-INF/jsp/pbp/report/person/radarPlot.jsp"/>  
+     <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+    </definition> 
+    
+    <definition name="personBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/report/person/barChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>   
+   
+       <definition name="personWorkTypeBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/report/person/workTypeBarChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>   
+   
+   
+     <!--  Start Person -->  
+      
+   <definition name="personTimeTableInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/timetable/list.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/user/timetable/left.jsp"/>  
+   </definition>    
+ 	<definition name="teachShare" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/staffPartner/listSubject.jsp"/>      
+  	</definition> 
+   	<definition name="teachShareAddSuccess" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/staffPartner/teachShareAddSuccess.jsp"/>      
+  	</definition> 	
+  	
+</tiles-definitions>
