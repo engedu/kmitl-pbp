@@ -1,0 +1,11 @@
+delete from academic_year where name ='2557';
+update academic_year set year_status ='Y';
+delete from academic_evaluate_round where academic_year='2557';
+delete from faculty where academic_year='2557';
+delete from department where academic_year='2557';
+delete from academic_kpi where academic_year='2557';
+delete from academic_kpi_attribute where academic_year='2557';
+delete from person_pbp where academic_year='2557';
+delete from academic_kpi_user_mapping where academic_year='2557';
+delete from pbp_work_type where academic_year='2557';
+delete from mark_rank where academic_year='2557';
