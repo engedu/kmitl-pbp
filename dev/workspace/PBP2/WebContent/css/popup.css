@@ -1,0 +1,115 @@
+/*---------------------------------------
+
+	RESET, BODY
+
+-----------------------------------------*/
+	/*---------------------------------------
+
+	LEAN MODAL
+
+-----------------------------------------*/
+#lean_overlay {
+	position: fixed;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	display: none;
+}
+
+/*---------------------------------------
+
+	EXAMPLES
+
+-----------------------------------------*/
+#subjectView {
+	width: 404px;
+	padding-bottom: 2px;
+	display: none;
+	background: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.7);
+}
+
+#subjectView-header {
+	background: url(../img/hd-bg.png);
+	padding: 18px 18px 14px 18px;
+	border-bottom: 1px solid #CCC;
+	border-top-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+}
+
+#subjectView-header  h2 {
+	color: #444;
+	font-size: 1.2em;
+	font-weight: 700;
+	margin-bottom: 3px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#subjectView-header  p {
+	color: #444;
+	font-size: 1em;
+	margin: 0;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+	text-shadow: none;
+}
+
+#subjectView .txt-fld {
+	position: relative;
+	width: 364px;
+	padding: 10px 20px;
+	border-bottom: 1px solid #EEE;
+	text-align: right;
+}
+
+#subjectView .btn-fld {
+	width: 254px;
+	overflow: hidden;
+	padding: 12px 20px 12px 130px;
+}
+
+#subjectView .txt-fld label {
+	display: block;
+	float: left;
+	width: 70px;
+	padding-top: 8px;
+	color: #222;
+	font-size: 1em;
+	text-align: left;
+}
+
+#subjectView .txt-fld input {
+	width: 244px;
+	padding: 4px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-size: 1em;
+	color: #222;
+	background: #F7F7F7;
+	font-family: "Helvetica Neue";
+	outline: none;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #E7E6E6;
+	border-bottom: 1px solid #E7E6E6;
+}
+
+#subjectView .txt-fld input.good_input {
+	background: #DEF5E1 url(../img/good.png) 236px center no-repeat;
+}
+
+#subjectView .txt-fld input.error_input {
+	background: #FDE0E0;
+}

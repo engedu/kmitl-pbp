@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Person Report -->
+	<definition name="initPersonSummary" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/personsummary/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initPersonByFaculty" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/personbyfaculty/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	
+	<!-- Kpi Summary Report -->
+	<definition name="initKpiSummary" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummary/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	
+	<!-- Kpi Summary In Faculty Report -->
+	<definition name="initKpiSummaryInFaculty" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryinfaculty/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initKpiSummaryInFacultyByTopic" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryinfaculty/viewByTopic.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initKpiSummaryInFacultyByPerson" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryinfaculty/viewByPerson.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	
+	<!-- Kpi Summary All Faculty Report -->
+	<definition name="initKpiSummaryAllFaculty" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryallfaculty/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initKpiSummaryAllFacultyByTopic" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryallfaculty/viewByTopic.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initKpiSummaryAllFacultyByFaculty" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryallfaculty/viewByFaculty.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	
+	<!-- Kpi Summary Rank Report -->
+	<definition name="initKpiSummaryRank" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryrank/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	<definition name="initKpiSummaryRankByPerson" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/report/kpisummaryrank/viewByPerson.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/report/menu.jsp" />
+	</definition>
+	
+</tiles-definitions>

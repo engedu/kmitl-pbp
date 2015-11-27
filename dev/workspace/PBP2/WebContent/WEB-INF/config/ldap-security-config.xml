@@ -1,0 +1,61 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/security
+
+http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<http auto-config="true">
+		<custom-filter ref="commonAuthenticationFilter" before="FORM_LOGIN_FILTER" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/pam/**" access="ROLE_USER" />
+		<intercept-url pattern="/css/**" filters="none" />
+		<intercept-url pattern="/images/**" filters="none" />
+		<intercept-url pattern="/secure/**" access="ROLE_USER"
+			requires-channel="https" />
+		<intercept-url pattern="/project/**" access="ROLE_USER" />
+		<form-login login-page="/preLogin.htm"/>
+		<logout logout-success-url="/index.jsp" />
+		<session-management invalid-session-url="/sessionTimeout.htm">
+			<concurrency-control max-sessions="1" />
+		</session-management>
+		<access-denied-handler ref="customAccessDeniedHandler" />
+	</http>
+	
+	<beans:bean id="commonAuthenticationFilter"
+		class="com.buckwa.web.security.CommonAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="authenticationFailureHandler" ref="failureHandler"/> 
+		<beans:property name="authenticationSuccessHandler" ref="successHandler" />
+	</beans:bean>
+
+	<beans:bean id="successHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/loginSuccess.htm"/>
+	</beans:bean>
+	
+	<beans:bean id="failureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/login.htm?login_error=true"/>
+	</beans:bean>
+	
+	<beans:bean id="customAccessDeniedHandler" class="com.buckwa.web.security.AccessDeniedHandler" />
+	
+	<beans:bean id="customUserContextMapper" class="com.buckwa.web.security.LdapCustomUserDetailsMapper"/>
+		
+	<authentication-manager alias="authenticationManager">
+	       <ldap-authentication-provider user-dn-pattern="mail={0},ou=People" 
+	       			user-search-filter="(mail={0})" 
+	        		user-search-base="ou=People"
+	        		user-context-mapper-ref="customUserContextMapper"/>
+	</authentication-manager>
+	
+	<ldap-server url="ldap://161.246.34.43:389/dc=kmitl,dc=ac,dc=th"/>
+	<!-- <ldap-server url="ldap://localhost:389/dc=kmitl,dc=ac,dc=th"/> -->
+	
+ 
+ 
+
+</beans:beans>

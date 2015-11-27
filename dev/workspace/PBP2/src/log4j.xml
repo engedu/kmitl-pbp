@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+<!--  TRACE,DEBUG,INFO,WARN,ERROR ,FATAL -->
+
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+	 <param name="File" value="D:/Project/pbp/logs/pbp2_log.log" /> 
+<!--  <param name="File" value="/project/pbp/logs/pbp2_log.log" /> -->
+		
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="MaxFileSize" value="10000000" />
+		<param name="MaxBackupIndex" value="5" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="####%d{dd/MM/yyyy HH:mm:ss:SSS} %p [%c{1}] %L %m%n" />
+		</layout>
+	</appender>
+
+
+
+	<!-- Append messages to the console -->
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="MaxFileSize" value="10000000" />
+		<param name="MaxBackupIndex" value="5" />		
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />  -->
+			<param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss:SSS} %p  %c{1}.%M():%L %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Setup the Root category -->
+	<root>		
+
+		<appender-ref ref="FILE" />
+		<appender-ref ref="CONSOLE" />
+		
+		 
+	</root>
+	
+</log4j:configuration>  

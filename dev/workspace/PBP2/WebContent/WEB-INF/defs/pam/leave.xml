@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="initLeave" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="initLeaveOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	<definition name="createLeave" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+
+	<definition name="leaveResearchCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/research/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveResearchView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/research/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveResearchViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/research/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	
+	<definition name="leaveVacationCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/vacation/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveVacationView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/vacation/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leaveVacationViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/vacation/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+		
+	<definition name="leaveSuccess" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/success.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leaveSuccessOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/success.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveSickCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/sick/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveSickView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/sick/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveSickViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/sick/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<definition name="leavePersonalCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/personal/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leavePersonalView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/personal/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leavePersonalViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/personal/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveMaternityCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/maternity/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveMaternityView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/maternity/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leaveMaternityViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/maternity/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveMonkhoodCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/monkhood/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveMonkhoodView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/monkhood/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leaveMonkhoodViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/monkhood/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveCancelCreate" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/cancel/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	<definition name="leaveCancelView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/cancel/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	<definition name="leaveCancelViewOffer" extends="baseLayoutOffer">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/cancel/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+	
+	<!-- Summary Leave -->
+	<definition name="leaveSummaryView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/summary/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+	
+	
+	  <!--  Officer  -->
+  
+   <definition name="leaveAccumulateList" extends="baseLayoutOffer">  
+      <put-attribute name="main"   value="/WEB-INF/jsp/pam/officer/leaveaccumulate/list.jsp"/>     
+      <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/> 
+  </definition> 
+ 
+   <definition name="leaveAccumulateEdit" extends="baseLayoutOffer">   
+      <put-attribute name="main"   value="/WEB-INF/jsp/pam/officer/leaveaccumulate/edit.jsp"/>   
+      <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>   
+  </definition>    
+  
+  	<definition name="allLeaveView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/summary/allLeaveView.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+  	<definition name="allLeaveFacultyView" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/leave/summary/allLeaveFacultyView.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>
+ 
+	
+</tiles-definitions>

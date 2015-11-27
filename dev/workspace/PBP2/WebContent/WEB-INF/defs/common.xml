@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+
+   <definition name="pbpAnonymousLayout" template="/WEB-INF/jsp/tiles/pbp/anonymous/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/anonymous/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  </definition> 
+   <definition name="pbpLayout" template="/WEB-INF/jsp/tiles/pbp/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  </definition>  
+ 
+       <definition name="pbpUserLayout" template="/WEB-INF/jsp/tiles/new/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/new/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/new/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/new/footer.jsp"/>
+  </definition> 
+  
+ 
+      <definition name="pbpKPIAdminLayout" template="/WEB-INF/jsp/tiles/pbp/kpiAdmin/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/kpiAdmin/header.jsp"/>  
+      <put-attribute name="left" value="/WEB-INF/jsp/tiles/pbp/kpiAdmin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  </definition> 
+  
+     <definition name="pbpAdminLayout" template="/WEB-INF/jsp/tiles/pbp/admin/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/admin/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  </definition> 
+      <definition name="pbpDeanLayout" template="/WEB-INF/jsp/tiles/pbp/dean/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/dean/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  </definition>  
+  
+  
+      <definition name="academicYearKPILayout" template="/WEB-INF/jsp/tiles/pbp/academicYearKPI/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/admin/header.jsp"/>  
+       <put-attribute name="subHeader" value="/WEB-INF/jsp/tiles/pbp/academicYearKPI/subHeader.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  	</definition> 
+  	
+  	
+       <definition name="userWorkImportLayout" template="/WEB-INF/jsp/tiles/pbp/user/wokImportLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pbp/user/header.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pbp/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pbp/footer.jsp"/>
+  	</definition>  	
+  	
+<!--  Start PAM -->
+
+   <definition name="pamBaseLayout" template="/WEB-INF/jsp/tiles/pam/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pam/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/pam/subheader.jsp"/>            
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pam/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pam/footer.jsp"/>
+  </definition> 
+
+   <definition name="pamLeftLayout" template="/WEB-INF/jsp/tiles/pam/leftLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/pam/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/pam/subheader.jsp"/>      
+       <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/pam/menu.jsp"/>         
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/pam/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/pam/footer.jsp"/>
+  </definition> 
+  
+<!--  End  PAM -->   
+
+  <definition name="baseLayout" template="/WEB-INF/jsp/tiles/baseLayout.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>
+      <put-attribute name="left"   value="/WEB-INF/jsp/tiles/leftRight/left.jsp"/>          
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>
+  
+  <definition name="baseLayoutOffer" template="/WEB-INF/jsp/tiles/baseLayout.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>
+      <put-attribute name="left"   value="/WEB-INF/jsp/tiles/leftRight/left.jsp"/>          
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      
+  </definition>
+  
+   <definition name="leftRightLayout" template="/WEB-INF/jsp/tiles/leftRight/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>   
+      <put-attribute name="left"   value="/WEB-INF/jsp/tiles/leftRight/left.jsp"/>      
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+  </definition>
+  
+   <definition name="project" template="/WEB-INF/jsp/tiles/project/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>            
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+  </definition>  
+  
+     <definition name="customerServiceLayout" template="/WEB-INF/jsp/tiles/customerService/baseLayout.jsp">     
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>   
+      <put-attribute name="left"   value="/WEB-INF/jsp/tiles/customerService/left.jsp"/>      
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+  </definition>
+  
+     <definition name="adminLayout" template="/WEB-INF/jsp/tiles/admin/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>   
+      <put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>      
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>
+  
+   <definition name="frameworkLayout" template="/WEB-INF/jsp/tiles/framework/baseLayout.jsp"> 
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>            
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/framework/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+  </definition>
+  
+  
+  <definition name="pamEvaluateLayout" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayout.jsp">     
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>        
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>  
+  
+  <definition name="baseLoginLayout" template="/WEB-INF/jsp/tiles/baseLoginLayout.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>   
+  </definition>
+  
+  
+  <definition name="pamKpiLayout" template="/WEB-INF/jsp/tiles/pam/kpi/baseLayout.jsp">     
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/> 
+       <put-attribute name="top"   value="/WEB-INF/jsp/tiles/pam/kpi/top.jsp"/>           
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>  
+  
+  <definition name="popupLayout" template="/WEB-INF/jsp/tiles/popupLayout.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>   
+  </definition>
+  <definition name="baseLayoutError" template="/WEB-INF/jsp/tiles/baseLayoutError.jsp">
+      <put-attribute name="title"  value="Template"/>
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>
+  <definition name="pamTeachLayout" template="/WEB-INF/jsp/tiles/pam/teach/baseLayout.jsp">     
+      <put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+      <put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/tiles/body.jsp"/>              
+      <put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+      <put-attribute name="menu"   value="/WEB-INF/jsp/tiles/menu.jsp"/>
+  </definition>  
+</tiles-definitions>

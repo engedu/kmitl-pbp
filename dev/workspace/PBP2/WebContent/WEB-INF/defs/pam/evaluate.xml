@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+ 
+   		<!--  Evaluate -->
+      <definition name="initEvaluate" extends="pamEvaluateLayout">  
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pam/evaluate/list.jsp"/>   
+     	 <put-attribute name="menu" value="/WEB-INF/jsp/pam/evaluate/menu.jsp"/>
+      </definition> 
+      <definition name="initEvaluateForm" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayoutForm.jsp">  
+			<put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+			<put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>        
+			<put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+			<put-attribute name="main"   value="/WEB-INF/jsp/pam/evaluate/evalForm.jsp"/> 
+			 <put-attribute name="menu" value="/WEB-INF/jsp/pam/evaluate/menu.jsp"/>  
+      </definition> 
+      <definition name="historyEvaluate" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayout.jsp">  
+			<put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+			<put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>        
+			<put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+			<put-attribute name="menu" value="/WEB-INF/jsp/pam/evaluate/menu.jsp"/>
+			<put-attribute name="main"   value="/WEB-INF/jsp/pam/evaluate/historyEvaluate.jsp"/>   
+      </definition> 
+      <definition name="userHistoryEvaluate" extends="baseLayout">  
+<!--       <definition name="userHistoryEvaluate" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayoutForm.jsp">   -->
+<!-- 			<put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>      -->
+<!-- 			<put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>         -->
+<!-- 			<put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/> -->
+			<put-attribute name="main"   value="/WEB-INF/jsp/pam/evaluate/userHistoryEvaluate.jsp"/>  
+			<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+<!-- 			 <put-attribute name="menu" value="/WEB-INF/jsp/pam/evaluate/menu.jsp"/>  -->
+<!-- 			<put-attribute name="left" value="/WEB-INF/jsp/pam/left.jsp" /> -->
+      </definition> 
+      <definition name="historyEvaluateForm" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayoutForm.jsp">  
+			<put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+			<put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>        
+			<put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+			<put-attribute name="main"   value="/WEB-INF/jsp/pam/evaluate/evalHistoryForm.jsp"/> 
+			 <put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>  
+      </definition> 
+      
+      <!-- Raise Salary -->
+	<definition name="initRaiseSalary" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/evaluate/raisesalary/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp"/>
+	</definition>
+  
+      
+</tiles-definitions>

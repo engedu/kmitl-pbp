@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	
+	<!-- Person Profile -->
+	<bean id="initPerson" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initPerson" /></bean>
+	<bean id="viewPerson" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewPerson" /></bean>
+	<bean id="editPerson" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editPerson" /></bean>
+	 <bean id="editPersonProfile"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editPersonProfile" /></bean>
+	
+	
+	<!-- Paper -->
+	<bean id="initPaper" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initPaper" /></bean>
+	<bean id="createPaper" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="createPaper" /></bean>
+	<bean id="editPaper" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editPaper" /></bean>
+	
+	
+	<!-- Work -->
+	<bean id="workPersonList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workPersonList" /></bean>
+	<bean id="workPersonCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workPersonCreate" /></bean>
+	<bean id="workPersonEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workPersonEdit" /></bean>
+	<bean id="workPersonView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workPersonView" /></bean>
+	
+	
+	<!-- Teach Table -->
+	<bean id="initTeachTable"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initTeachTable" /></bean>
+	<bean id="initSubjectTeach"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initSubjectTeach" /></bean>
+	<bean id="initSubjectView"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initSubjectView" /></bean>
+	
+</beans>

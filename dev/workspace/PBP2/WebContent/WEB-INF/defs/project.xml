@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+ 		<!--  Project -->
+      <definition name="projectCreate" extends="baseLayout">  
+      <put-attribute name="main"   value="/WEB-INF/jsp/project/project/create.jsp"/>   
+      </definition> 
+      <definition name="initProject" extends="baseLayout">          
+      <put-attribute name="main"   value="/WEB-INF/jsp/project/project/list.jsp"/>   
+      </definition> 
+      <definition name="projectEdit" extends="baseLayout">   
+      <put-attribute name="main"   value="/WEB-INF/jsp/project/project/edit.jsp"/>   
+      </definition> 
+
+
+       <!--  Vision -->
+  	   <definition name="initVision" extends="project">  
+  	   <put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  	 
+  	   <put-attribute name="main"   value="/WEB-INF/jsp/project/vision/list.jsp"/>   
+  	   </definition> 
+   	   <definition name="visionEdit" extends="project">   
+   	    <put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   
+   	   <put-attribute name="main"   value="/WEB-INF/jsp/project/vision/edit.jsp"/>  
+   	    </definition> 
+      
+      
+       <!--  Requirement -->
+   	   <definition name="initRequirement" extends="leftRightLayout">    
+   	   <put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/list.jsp"/>   
+   	   </definition> 
+
+   	   <definition name="initRegistration" extends="leftRightLayout">  
+   	   <put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/registration/list.jsp"/>   
+   	   </definition> 
+   	   
+    	   <!--  Module Rule -->
+    	<definition name="initModule" extends="leftRightLayout">     
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/module/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="moduleCreate" extends="leftRightLayout">     	 
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/module/create.jsp"/>   
+   	   </definition>   
+     	<definition name="moduleEdit" extends="leftRightLayout">    
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/module/edit.jsp"/>   
+   	   </definition>     	   
+   	   
+   	   
+   	   <!--  Business Rule -->
+    	<definition name="initBusinessRule" extends="leftRightLayout">     	  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/businessRule/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="businessRuleCreate" extends="leftRightLayout">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/businessRule/create.jsp"/>   
+   	   </definition>   
+     	<definition name="businessRuleEdit" extends="leftRightLayout">    
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/businessRule/edit.jsp"/>   
+   	   </definition>    
+   	   
+   	   
+   	      	   <!--  Use Case -->
+    	<definition name="initUseCase" extends="leftRightLayout">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/usecase/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="initAllUseCase" extends="leftRightLayout">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/usecase/all.jsp"/>   
+   	   </definition>   	   	   
+   	   
+    	<definition name="useCaseCreate" extends="leftRightLayout">  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/usecase/create.jsp"/>   
+   	   </definition>   
+     	<definition name="useCaseEdit" extends="leftRightLayout">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/usecase/edit.jsp"/>   
+   	   </definition>      	   
+   	   
+     	<definition name="useCaseDetail" extends="leftRightLayout">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/usecase/detail.jsp"/>   
+   	   </definition>    	    	   
+ 
+ 
+    	   <!--  Actor Rule -->
+    	<definition name="initActor" extends="leftRightLayout">     	  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/actor/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="actorCreate" extends="leftRightLayout">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/actor/create.jsp"/>   
+   	   </definition>   
+     	<definition name="actorEdit" extends="leftRightLayout">    
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/actor/edit.jsp"/>   
+   	   </definition>   
+   	   
+   	   
+ 
+    	      	   <!--  Detail Design -->
+    	<definition name="initDetailDesign" extends="leftRightLayout">  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/detaildesign/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="detailDesignCreate" extends="leftRightLayout">   
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/detaildesign/create.jsp"/>   
+   	   </definition>   
+     	<definition name="detailDesignEdit" extends="leftRightLayout"> 
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>    	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/detaildesign/edit.jsp"/>   
+   	   </definition>  
+    	<definition name="initAllDetailDesign" extends="leftRightLayout">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/detaildesign/all.jsp"/>   
+   	   </definition>    	   
+     	<definition name="detailDesignDetail" extends="leftRightLayout">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/detaildesign/detail.jsp"/>   
+   	   </definition>    	    
+   	   
+    	 <!--  Message -->
+    	<definition name="initMessage" extends="leftRightLayout">     
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/message/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="messageCreate" extends="leftRightLayout">     
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/message/create.jsp"/>   
+   	   </definition>   
+     	<definition name="messageEdit" extends="leftRightLayout">    
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/message/edit.jsp"/>   
+   	   </definition>    	   
+   	   
+      	 <!--  Util -->
+    	<definition name="initUtil" extends="leftRightLayout">  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/util/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="utilCreate" extends="leftRightLayout">     
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/util/create.jsp"/>   
+   	   </definition>   
+     	<definition name="utilEdit" extends="leftRightLayout">     	 
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/requirement/detaildesign/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/requirement/util/edit.jsp"/>   
+   	   </definition>    	   
+         
+         
+         
+      	 <!--  Team -->   	         
+      	<definition name="initTeam" extends="project">     
+      	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/team/list.jsp"/>   
+   	   </definition>    	
+        <definition name="initProjecTeam" extends="baseLayout">       
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/projectteam/list.jsp"/>   
+   	   </definition>      
+        <definition name="editProjectTeam" extends="baseLayout">    	           	  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/projectteam/edit.jsp"/>   
+   	   </definition>     	   
+   	                 
+         
+       <!--  Development --> 
+     	<definition name="initDevelopment" extends="project">   
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/development/list.jsp"/>   
+   	   </definition>  
+     	<definition name="initSoftwareAndTool" extends="project">    
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/> 
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/development/softwareAndTool.jsp"/>   
+   	   </definition>     	   
+     	<definition name="initDeployment" extends="project">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>	 
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/development/deployment.jsp"/>   
+   	   </definition>     	       
+   	   
+   	          
+        <!--  Testing 
+        
+  	    <definition name="initTesting" extends="project">  
+  	   <put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  
+  	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/testing/list.jsp"/>   
+  	   </definition> 
+  	   
+  	   -->  	  
+  	   
+  	      <!--  Testing -->  	 
+    	<definition name="initTesting" extends="leftRightLayout">  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/testing/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/testing/list.jsp"/>   
+   	   </definition>   
+   	    <definition name="initAllTesting" extends="leftRightLayout">  
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>   	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/testing/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/testing/listAll.jsp"/>   
+   	   </definition> 	   
+    	<definition name="testcaseCreate" extends="leftRightLayout">   
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>  	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/testing/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/testing/create.jsp"/>   
+   	   </definition>   
+     	<definition name="testcaseEdit" extends="leftRightLayout"> 
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>    	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/testing/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/testing/edit.jsp"/>   
+   	   </definition>   
+   	     <definition name="testCaseDetail" extends="leftRightLayout">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/top.jsp"/>    	   
+   	    <put-attribute name="left"    value="/WEB-INF/jsp/project/testing/left.jsp"/>  
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/testing/detail.jsp"/>  
+   	   </definition>   
+   	   
+   	   
+   	   
+   	       	   <!--  Lab -->
+    	<definition name="initLabCategory" extends="project">     
+		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/> 
+   	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/labCategory/list.jsp"/>   
+   	   </definition>   	   
+    	<definition name="labCategoryCreate" extends="project">     	 
+		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>  
+   	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/labCategory/create.jsp"/>   
+   	   </definition>   
+     	<definition name="labCategoryEdit" extends="project">    
+		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>
+   	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/labCategory/edit.jsp"/>   
+   	   </definition>     	   
+   	   
+  
+     	      	   <!--  Lab -->
+    	<definition name="initLab" extends="project">    
+    	<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>
+   	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/lab/list.jsp"/>   
+   	   </definition>   	   
+   	   
+    	<definition name="initAllLab" extends="project">    
+    		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>	 
+		<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/lab/all.jsp"/>   
+   	   </definition>   	   	   
+   	   
+    	<definition name="labCreate" extends="project">  
+		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/> 
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/lab/lab/create.jsp"/>   
+   	   </definition>   
+   	   
+     	<definition name="labEdit" extends="project">     
+		<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>
+   	   	<put-attribute name="main"   value="/WEB-INF/jsp/project/lab/lab/edit.jsp"/>   
+   	   </definition>      	   
+   	   
+     	<definition name="labDetail" extends="project">     
+     	<put-attribute name="top"    value="/WEB-INF/jsp/project/lab/top.jsp"/>	   
+   	   	<put-attribute name="main"    value="/WEB-INF/jsp/project/lab/lab/detail.jsp"/>   
+   	   </definition>    
+   	   
+   	   
+</tiles-definitions>

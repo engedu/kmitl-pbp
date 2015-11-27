@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="raise_salary_report5" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13960400-79ea-4b40-b033-c9f2360e08ea">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="baseStyle" fill="Solid" hAlign="Left" vAlign="Top" markup="none" isBlankWhenNull="false" fontName="Angsana New" fontSize="16" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="40" width="80" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ระดับพฤติกรรม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40322edb-3df3-4c7f-96df-c9dddc9f9f97" style="baseStyle" x="86" y="40" width="269" height="40"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[รายการประเมิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce9bf259-b981-4a82-8d81-4d75d4b198d3" style="baseStyle" x="495" y="40" width="60" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนที่ได้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b46e445-4ac9-40ea-a570-a91ebe793039" style="baseStyle" x="36" y="40" width="50" height="40"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="40" width="60" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนเต็ม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="60" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="60" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce9bf259-b981-4a82-8d81-4d75d4b198d3" style="baseStyle" x="495" y="60" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[1 x 2]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="560" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="0" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="0" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isBold="true" isItalic="false" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[พฤติกรรมการปฏิบัติราชการ (สมรรถนะ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="20" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="20" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[การวางแผนและการจัดการระบบงาน (ความมีวิสัยทัศน์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="20" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="766fc71d-f753-4d8f-8c7a-a7e3d8c5e474" style="baseStyle" x="36" y="0" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isBold="true" isItalic="false" pdfFontName="ANGSAB.TTF"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="0" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="20" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="0" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="20" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="60" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[วิธีการปฏิบัติงานให้เหมาะสม)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="40" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ความสามารถ ในการคาดการณ์ กำหนดเป้าหมายและ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="160" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="140" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[จากการทำงาน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="180" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ความสามารถในการปฏิบัติงาน (ความรอบรู้ในงานเข้าใจ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="100" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ความรับผิดชอบ (การปฏิบัติงานในหน้าที่ที่ได้รับมอบหมาย]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="240" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="220" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[เชื่อมโยงความสัมพันธ์ระหว่างสิ่งต่างๆ ที่เกี่ยวข้องกับงาน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="260" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ความอุตสาหะ (ความขยันหมั่นเพียร ตั้งใจที่จะทำงานให้สำเร็จ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="200" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[เกี่ยวกับงานในหน้าที่และงานที่เกี่ยวข้อง สามารถคิด วิเคราะห์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="300" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="280" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[โดยไม่ย่อท้อต่ออุปสรรคและปัญหา)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="340" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ราชการ และประพฤติตนเป็นตัวอย่างที่ดีในการเคารพกฎ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="320" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[การรรักษาวินัย (การปฏิบัติตนตามระเบียบแบบแผนของทาง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="440" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[หน่วยงาน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="420" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[อยู่ในกรอบจรรยาบรรณ และค่านิยมของข้าราชการหรือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="480" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[พฤติกรรมหรือสมรรถนะ (ถ้ามี)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="400" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[การปฏิบัตตนเหมาะสมกับการเป็นข้าราชการ (การปฏิบัติตน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="500" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[1) ..................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="586cb1a2-9577-454d-8014-984550d2fe78" style="baseStyle" x="86" y="520" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2) ..................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="80" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="120" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[โดยเต็มใจ มุ่งมั่นทำงานให้สำเร็จลุล่วง  และยอมรับผลที่เกิด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="380" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="360" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ระเบียบต่างๆ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="460" width="269" height="20"/>
+				<box leftPadding="5" rightPadding="2">
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="771980c1-40fb-4b82-a398-1d09c1ab4289" style="baseStyle" x="86" y="540" width="269" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="100" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="180" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="260" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="320" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="400" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="480" width="50" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2.7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="40" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="120" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="200" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="500" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="280" width="50" height="40"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="340" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dda46c14-7e99-4ed5-b6c7-0b526f38b2a3" style="baseStyle" x="36" y="420" width="50" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="100" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="100" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="100" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="180" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="180" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="180" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="260" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="260" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="260" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="320" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="320" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="320" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="400" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="400" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="400" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="420" width="80" height="140"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="420" width="60" height="140"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="420" width="60" height="140"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="340" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="340" width="80" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="340" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="280" width="60" height="40"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="280" width="80" height="40"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="280" width="60" height="40"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="200" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="200" width="80" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="200" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="120" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="120" width="80" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="120" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="495" y="40" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="355" y="40" width="60" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18420e0b-8de4-4906-a1b6-e6cdef402135" style="baseStyle" x="415" y="40" width="80" height="60"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+		<band height="100">
+			<staticText>
+				<reportElement uuid="49a63d0d-6728-4d95-bc63-88dd267011b0" style="baseStyle" x="36" y="40" width="220" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[คะแนนพฤติกรรมการปฏิบัติราชการ (สมรรถนะ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd7b6b46-165b-4b6d-b558-9a65e3808d48" style="baseStyle" x="256" y="80" width="20" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a2c1678-016d-44d4-bca3-28c72931f65c" style="baseStyle" x="276" y="40" width="120" height="20"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[ผลรวมของคะแนนที่ได้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="384710eb-b089-4454-9009-11e71d98e837" style="baseStyle" x="256" y="40" width="20" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[=]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e41c9e95-16cb-40ff-9eb9-7832d9227ec4" style="baseStyle" x="495" y="0" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d32ac59-98d1-464c-914a-4fe07b5432a3" style="baseStyle" x="276" y="60" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="508927d9-0418-467b-a578-8d37b1a56403" style="baseStyle" x="276" y="80" width="120" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[................... คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e41c9e95-16cb-40ff-9eb9-7832d9227ec4" style="baseStyle" x="36" y="0" width="319" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[รวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e41c9e95-16cb-40ff-9eb9-7832d9227ec4" style="baseStyle" x="355" y="0" width="60" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[100]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e41c9e95-16cb-40ff-9eb9-7832d9227ec4" style="baseStyle" x="415" y="0" width="80" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="16" isItalic="false" pdfFontName="ANGSA.TTF"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

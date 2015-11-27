@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/pbp/" targetNamespace="http://www.example.org/pbp/">
+    <complexType name="TimeTable">
+    	<sequence>
+    		<element name="code" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="credit" type="double" maxOccurs="1" minOccurs="1"></element>
+    		<element name="type" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="teachers" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RequestHeader">
+    	<sequence>
+    		<element name="requestSystem" type="string"></element>    	
+    		<element name="academicYear" type="string"></element>
+    		<element name="simester" type="string"></element>
+    	</sequence>
+    </complexType>
+    <complexType name="ResponseHeader">
+    	<sequence>
+    		<element name="status" type="string"></element>
+    		<element name="statusDesc" type="string"></element>
+    		<element name="totalElement" type="string"></element>
+    		<element name="academicYear" type="string"></element>
+    		<element name="simester" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="TimeTables">
+    	<sequence>
+    		<element name="NewElement" type="tns:TimeTable" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+</schema>

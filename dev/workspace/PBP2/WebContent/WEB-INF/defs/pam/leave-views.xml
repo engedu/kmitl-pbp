@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+
+	<!-- Leave -->
+	<bean id="initLeave"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initLeave" /></bean>
+	<bean id="initLeaveOffer"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initLeaveOffer" /></bean>
+	<bean id="createLeave"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="createLeave" /></bean>
+
+	<!-- Research Leave -->
+	<bean id="leaveResearchCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveResearchCreate"/></bean>
+	<bean id="leaveResearchView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveResearchView" /></bean>
+	<bean id="leaveResearchViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveResearchViewOffer" /></bean>
+	
+	<!--  Vacation Leave -->
+	<bean id="leaveVacationCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveVacationCreate"/></bean>
+	<bean id="leaveVacationView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveVacationView" /></bean>
+	<bean id="leaveVacationViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveVacationViewOffer" /></bean>
+	<!-- Sick Leave -->
+	<bean id="leaveSickCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSickCreate"/></bean>
+	<bean id="leaveSickView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSickView" /></bean>
+	<bean id="leaveSickViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSickViewOffer" /></bean>
+	<!-- Personal Leave -->
+	<bean id="leavePersonalCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leavePersonalCreate"/></bean>
+	<bean id="leavePersonalView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leavePersonalView" /></bean>
+	<bean id="leavePersonalViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leavePersonalViewOffer" /></bean>
+	<!-- Maternity Leave -->
+	<bean id="leaveMaternityCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMaternityCreate"/></bean>
+	<bean id="leaveMaternityView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMaternityView" /></bean>
+	<bean id="leaveMaternityViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMaternityViewOffer" /></bean>
+	<!-- Monkhood Leave -->
+	<bean id="leaveMonkhoodCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMonkhoodCreate"/></bean>
+	<bean id="leaveMonkhoodView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMonkhoodView" /></bean>
+	<bean id="leaveMonkhoodViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveMonkhoodViewOffer" /></bean>
+	<!-- Cancel Leave -->
+	<bean id="leaveCancelCreate" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveCancelCreate"/></bean>
+	<bean id="leaveCancelView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveCancelView" /></bean>
+	<bean id="leaveCancelViewOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveCancelViewOffer" /></bean>
+	<bean id="leaveSuccess" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSuccess"/></bean>
+ 	<bean id="leaveSuccessOffer" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSuccessOffer"/></bean>
+ 	<!-- Summary Leave -->
+ 	<bean id="leaveSummaryView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveSummaryView" /></bean>
+ 	<bean id="allLeaveView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="allLeaveView" /></bean>
+ 	<bean id="allLeaveFacultyView" class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="allLeaveFacultyView" /></bean>
+ 	
+ 	
+ 	
+ 	 	<!-- Start User -->
+	 
+	<bean id="leaveAccumulateList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveAccumulateList" /></bean> 
+	<bean id="leaveAccumulateEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="leaveAccumulateEdit" /></bean>
+ 	
+ 	
+</beans>

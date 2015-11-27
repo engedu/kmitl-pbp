@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+  <!--  Security  -->
+  
+   <definition name="securityAccessDenied" extends="baseLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/accessDenied.jsp"/>  </definition> 
+   
+    <definition name="securityAdminAccessDenied" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/accessDenied.jsp"/>  </definition> 
+     <definition name="securityUserAccessDenied" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/accessDenied.jsp"/>  </definition> 
+	<definition name="securityAnonymousAccessDenied" extends="pbpAnonymousLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/accessDenied.jsp"/>  </definition> 
+	<definition name="securityDeanAccessDenied" extends="pbpDeanLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/accessDenied.jsp"/>  </definition> 
+	
+	
+   <!--  Common View --> 
+   <definition name="welcome" extends="baseLayout">  <put-attribute name="main"   value="/WEB-INF/jsp/welcome.jsp"/>   </definition> 
+   <definition name="loginSuccess" extends="baseLayout">  <put-attribute name="main"   value="/WEB-INF/jsp/welcome.jsp"/>   </definition>    
+   <definition name="preLogin" extends="pbpUserLayout"><put-attribute name="main"   value="/WEB-INF/jsp/common/login.jsp"/>  </definition> 
+   <definition name="logout" extends="baseLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/logout.jsp"/>   </definition>   
+   <definition name="sessionTimeout" extends="baseLayout">    <put-attribute name="main"   value="/WEB-INF/jsp/common/sessionTimeout.jsp"/> </definition> 
+   <definition name="general-error" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/generalError.jsp"/>  </definition> 
+   <definition name="error404" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/error404Detail.jsp"/>  </definition> 
+   <definition name="error500" extends="baseLayoutError"> <put-attribute name="main"   value="/WEB-INF/jsp/common/generalError.jsp"/> </definition> 
+
+
+ 
+   <!--  End Common View -->
+
+	<!--  Role  -->
+   <definition name="roleCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/role/create.jsp"/>      
+  </definition>   
+    <definition name="roleCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/role/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="roleList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/role/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="roleUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/role/update.jsp"/>      
+  </definition>    
+  
+   <definition name="roleEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/role/edit.jsp"/>      
+  </definition>   
+  
+
+	<!--  Group  -->
+   <definition name="groupCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/group/create.jsp"/>      
+  </definition>   
+    <definition name="groupCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/group/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="groupList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/group/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="groupUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/group/update.jsp"/>      
+  </definition>    
+  
+   <definition name="groupEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/group/edit.jsp"/>      
+  </definition>  
+  
+  
+	<!--  Holiday  -->
+	<definition name="holidayCreate" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/holiday/create.jsp"/>      
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>
+	</definition>   
+	  <definition name="holidayCreateSuccess" extends="pbpUserLayout">
+	   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/holiday/createSuccess.jsp"/>   
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>   
+	</definition>    
+	 <definition name="holidayList" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/holiday/list.jsp"/>    
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>  
+	</definition>    
+	
+	 <definition name="holidayEdit" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/holiday/edit.jsp"/>    
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>  
+	</definition> 
+	
+	<!--  leaveQuota  -->
+	 <definition name="leaveQuotaList" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/leaveQuota/list.jsp"/> 
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>     
+	</definition>    
+	
+	 <definition name="leaveQuotaEdit" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/leaveQuota/edit.jsp"/>  
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>    
+	</definition> 
+	
+	 <definition name="leaveQuotaCreate" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/leaveQuota/create.jsp"/>   
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>   
+	</definition> 
+   
+   <definition name="leaveQuotaView" extends="pbpUserLayout">
+	  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+	    <put-attribute name="main"   value="/WEB-INF/jsp/admin/leaveQuota/view.jsp"/>   
+	    <put-attribute name="menu" value="/WEB-INF/jsp/pam/leave/menu.jsp"/>   
+	</definition> 
+  
+  <!--  Menu -->
+  <definition name="menuList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/menu/list.jsp"/>      
+  </definition>   
+    <definition name="menuCreate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/menu/create.jsp"/>      
+  </definition>   
+    <definition name="menuCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/menu/createSuccess.jsp"/>      
+  </definition>   
+    <definition name="menuEdit" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/menu/edit.jsp"/>      
+  </definition>   
+  
+  
+  <!--  User  -->
+   <definition name="userCreate" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/create.jsp"/>      
+  </definition>    
+   <definition name="userList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/list.jsp"/>      
+  </definition> 
+    <definition name="userCreateSuccess" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/createSuccess.jsp"/>      
+  </definition>  
+   <definition name="userEdit" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/edit.jsp"/>      
+  </definition>    
+    <definition name="userProfile" extends="baseLayout">    
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/userProfile.jsp"/>      
+  </definition>   
+    <definition name="changePassword" extends="baseLayout">   
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/changePassword.jsp"/>      
+  </definition>   
+    <definition name="changePasswordSuccess" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/changePasswordSuccess.jsp"/>      
+  </definition>       
+  
+  
+  
+    <!--  User Registration   -->
+    <definition name="register" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/register.jsp"/>      
+  </definition>   
+     <definition name="registerEdit" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/registerEdit.jsp"/>      
+  </definition> 
+     <definition name="registerSuccess" extends="baseLayout">
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/registerSuccess.jsp"/>      
+  </definition>   
+  
+    <!--  LOV header -->
+  <definition name="lovHeaderList" extends="pbpUserLayout">
+  <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/list.jsp"/>      
+  </definition>   
+    <definition name="lovHeaderCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/create.jsp"/>      
+  </definition>   
+    <definition name="lovHeaderCreateSuccess" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/createSuccess.jsp"/>      
+  </definition>   
+    <definition name="lovHeaderEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/edit.jsp"/>      
+  </definition>  
+      <definition name="lovHeaderView" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/view.jsp"/>      
+  </definition>     
+     <definition name="lovHeaderManage" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/manage.jsp"/>      
+  </definition>   
+       <definition name="lovDetailEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/lovHeader/detailEdit.jsp"/>      
+  </definition>   
+   
+  
+  
+  	<!--  Province  -->
+   <definition name="provinceCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/province/create.jsp"/>      
+  </definition>   
+    <definition name="provinceCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/province/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="provinceList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/province/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="provinceUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/province/update.jsp"/>      
+  </definition>    
+  
+   <definition name="provinceEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/province/edit.jsp"/>      
+  </definition>   
+  
+    	<!--  Aumphur  -->
+   <definition name="aumphurCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/aumphur/create.jsp"/>      
+  </definition>   
+    <definition name="aumphurCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/aumphur/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="aumphurList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/aumphur/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="aumphurUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/aumphur/update.jsp"/>      
+  </definition>    
+  
+   <definition name="aumphurEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/aumphur/edit.jsp"/>      
+  </definition> 
+  
+  
+    	<!--  Tumbon  -->
+   <definition name="tumbonCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/tumbon/create.jsp"/>      
+  </definition>   
+    <definition name="tumbonCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/tumbon/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="tumbonList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/tumbon/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="tumbonUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/tumbon/update.jsp"/>      
+  </definition>    
+  
+   <definition name="tumbonEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/tumbon/edit.jsp"/>      
+  </definition>  
+  
+  
+    	<!--  Mooban  -->
+   <definition name="moobanCreate" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/create.jsp"/>      
+  </definition>   
+    <definition name="moobanCreateSuccess" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/createSuccess.jsp"/>      
+  </definition>    
+   <definition name="moobanList" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/list.jsp"/>      
+  </definition>    
+ 
+    <definition name="moobanUpdate" extends="pbpUserLayout">
+     <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/update.jsp"/>      
+  </definition>    
+  
+   <definition name="moobanEdit" extends="pbpUserLayout">
+    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/>  
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/edit.jsp"/>      
+  </definition>     
+  
+</tiles-definitions>

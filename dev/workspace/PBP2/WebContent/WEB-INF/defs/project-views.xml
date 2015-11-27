@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+
+       <!--  Project -->
+		<bean id="projectCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="projectCreate" /></bean>	         
+ 		<bean id="initProject"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initProject" /></bean>	         
+  		<bean id="projectEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="projectEdit" /></bean>	         
+ 
+ 
+	
+       <!--  Vision -->
+		<bean id="initVision"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initVision" /></bean>	         
+		<bean id="visionEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="visionEdit" /></bean>	         
+
+    
+    
+       <!--  Requirement -->
+        <bean id="initRequirement"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initRequirement" /></bean>   
+        <bean id="initRegistration"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initRegistration" /></bean>   
+ 
+  		<!-- Module -->
+        <bean id="initModule"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initModule" /></bean>   
+        <bean id="moduleCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moduleCreate" /></bean>   
+        <bean id="moduleEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moduleEdit" /></bean>   
+ 
+ 
+ 		<!-- BusinessRule -->
+        <bean id="initBusinessRule"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initBusinessRule" /></bean>   
+        <bean id="businessRuleCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="businessRuleCreate" /></bean>   
+        <bean id="businessRuleEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="businessRuleEdit" /></bean>   
+ 
+  		<!-- Actor -->
+        <bean id="initActor"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initActor" /></bean>   
+        <bean id="actorCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="actorCreate" /></bean>   
+        <bean id="actorEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="actorEdit" /></bean>   
+ 
+ 		<!-- Use Case -->
+        <bean id="initUseCase"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initUseCase" /></bean>   
+       <bean id="initAllUseCase"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initAllUseCase" /></bean>   
+         <bean id="useCaseCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="useCaseCreate" /></bean>   
+        <bean id="useCaseEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="useCaseEdit" /></bean>   
+         <bean id="useCaseDetail"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="useCaseDetail" /></bean>   
+ 
+ 
+ 
+  		<!-- Detail Design -->
+        <bean id="initDetailDesign"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initDetailDesign" /></bean>   
+        <bean id="detailDesignCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="detailDesignCreate" /></bean>   
+        <bean id="detailDesignEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="detailDesignEdit" /></bean>   
+        <bean id="initAllDetailDesign"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initAllDetailDesign" /></bean>   
+        <bean id="detailDesignDetail"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="detailDesignDetail" /></bean>   
+ 
+ 
+   		<!-- Message -->
+        <bean id="initMessage"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initMessage" /></bean>   
+        <bean id="messageCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageCreate" /></bean>   
+        <bean id="messageEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="messageEdit" /></bean>   
+ 
+    		<!-- Util -->
+        <bean id="initUtil"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initUtil" /></bean>   
+        <bean id="utilCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="utilCreate" /></bean>   
+        <bean id="utilEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="utilEdit" /></bean>   
+ 
+     		<!-- Team -->
+        <bean id="initTeam"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initTeam" /></bean>   
+
+     		<!-- Team -->
+        <bean id="initProjecTeam"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initProjecTeam" /></bean>   
+        <bean id="editProjectTeam"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editProjectTeam" /></bean>   
+
+ 
+ 
+ 
+       <!--  Development -->
+ 		<bean id="initDevelopment"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initDevelopment" /></bean>	            
+		<bean id="initSoftwareAndTool"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initSoftwareAndTool" /></bean>	            
+		<bean id="initDeployment"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initDeployment" /></bean>	            
+
+
+
+        <!--  Testing -->
+		<bean id="initTesting"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initTesting" /></bean>	
+		<bean id="initAllTesting"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initAllTesting" /></bean>
+		<bean id="testcaseCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="testcaseCreate" /></bean>	
+		<bean id="testCaseDetail"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="testCaseDetail" /></bean>	
+
+
+ 	  		<!-- Lab Category-->
+        <bean id="initLabCategory"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initLabCategory" /></bean>   
+        <bean id="labCategoryCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="labCategoryCreate" /></bean>   
+        <bean id="labCategoryEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="labCategoryEdit" /></bean>   
+ 
+
+ 		<!-- Lab -->
+        <bean id="initLab"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initLab" /></bean>   
+       <bean id="initAllLab"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initAllLab" /></bean>   
+         <bean id="labCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="labCreate" /></bean>   
+        <bean id="labEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="labEdit" /></bean>   
+         <bean id="labDetail"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="labDetail" /></bean>   
+
+</beans>

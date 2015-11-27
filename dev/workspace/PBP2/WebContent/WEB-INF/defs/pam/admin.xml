@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+
+	<!--  KPI Category  -->
+	<definition name="kpiCategoryCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiCategory/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiCategoryCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiCategory/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiCategoryList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiCategory/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="kpiCategoryUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiCategory/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="kpiCategoryEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiCategory/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+
+	<!--  KIP Template -->
+	<definition name="kpiTemplateCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiTemplateCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiTemplate/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>	
+	
+	<definition name="kpiTemplateList" extends="pamKpiLayout">	 	 
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="kpiTemplateUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="kpiTemplateEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+	 <definition name="addNode" extends="pamKpiLayout">		 
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/addNode.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+		<definition name="editNode" extends="pamKpiLayout">	 
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiTemplate/editNode.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+		
+
+
+
+	<!--  KIP  Year-->
+	<definition name="kpiyearCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiyear/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiyearCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiyear/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiyearList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="createKpiyearList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/createkpiyear.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>	
+	
+
+	<definition name="kpiyearUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/kpiyear/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="kpiyearEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+		<definition name="viewYearKpi" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/view.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+	<definition name="kpiyearAddNode" extends="baseLayout">		 
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/addNode.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+ 
+	
+	<definition name="kpiyearEditNode" extends="baseLayout">	 
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiyear/editNode.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+	
+	<!--  KPI Weight -->
+	
+	<definition name="kpiweightList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiweight/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiweightLevel1" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiweight/viewLevel1.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiweightLevel2" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpiweight/viewLevel2.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>	
+	
+	
+		
+	<!--  KPI Target -->
+	
+	<definition name="kpitargetList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpitarget/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpitargetLevel1" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpitarget/viewLevel1.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpitargetLevel2" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpitarget/viewLevel2.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>	
+	
+	
+		
+	<!--  KPI Level -->
+	
+	<definition name="kpilevelList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpilevel/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpilevelLevel1" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpilevel/viewLevel1.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpilevelLevel2" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpilevel/viewLevel2.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>	
+
+
+	<!--  Import Profile -->
+	<definition name="initImportProfile" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/profile/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="initProfileHistory" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/profile/profileHistory.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<!--  Import TimeTable -->
+	<definition name="initImportTimeTable" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/timetable/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+		<definition name="initImportTimeTableDesc" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/timetable/listDesc.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="initTimeTableHistory" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/timetable/timetableHistory.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="initMappingUserTimeTable" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/timetable/mapping.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
+	<!--  Import Works -->
+	<definition name="initImportWorks" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/works/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="initWorksHistory" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/works/worksHistory.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+
+
+
+
+	<definition name="initImportStaff" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/staff/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+ 
+	
+		<definition name="initImportStudentInSec" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/importdata/studentInSec/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+ 
+ 		<definition name="syncTimetableWS" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pbp/admin/ws/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+ 		<definition name="recalculate" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pbp/admin/ws/recalculate.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+
+	<!--  Year -->
+	<definition name="yearCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/year/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="yearCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/year/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="yearList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/year/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="yearUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/year/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="yearEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/year/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+
+	<!-- Semester -->
+	<definition name="semesterCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/semester/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="semesterCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/semester/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="semesterList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/semester/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="semesterUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/semester/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="semesterEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pam/admin/semester/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+
+
+	<!-- Holiday -->
+	<definition name="holidayPersonList" extends="baseLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/holiday/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/pam/menu.jsp" />
+		
+	</definition>
+	
+	
+	<!-- Workline --> 
+	<definition name="worklineList" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/list.jsp"/>      
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>   
+	<definition name="worklineEdit" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/edit.jsp"/> 
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />     
+	</definition>  
+	<definition name="worklineCreate" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/create.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />      
+	</definition>   
+	<!--<definition name="worklineCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/createSuccess.jsp"/>      
+	</definition>   -->
+	<definition name="hierarchy" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/hierarchy.jsp"/>    
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />  
+	</definition> 
+	<definition name="personWorklineList" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/personworklinelist.jsp"/>    
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />  
+	</definition> 
+	<definition name="personWorklineEdit" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/personworklineedit.jsp"/> 
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />     
+	</definition> 
+	<definition name="worklineHierarchyAdd" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/hierarchyworklineadd.jsp"/>  
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />    
+	</definition> 
+	<definition name="worklineHierarchyEdit" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/workline/hierarchyworklineedit.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />      
+	</definition>
+	<!-- Start Unit -->
+ 
+	<definition name="unitCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/unit/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="unitCreateSuccess" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main"  value="/WEB-INF/jsp/pam/unit/createSuccess.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="unitList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/unit/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="unitUpdate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/unit/update.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+
+	<definition name="unitEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/unit/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<!-- End Unit -->
+	
+	<!-- Start Work Template -->
+	<definition name="workTemplateList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/worktemplate/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="workTemplateEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/worktemplate/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="workTemplateCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/worktemplate/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="workTemplateKpiPopup" extends="popupLayout">
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/worktemplate/kpi_popup.jsp" />
+	</definition>
+	<!-- End Work Template -->
+	
+	
+	<!-- Start KPI Schedule -->
+	<definition name="kpiScheduleList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpischedule/list.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiScheduleCreate" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpischedule/create.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<definition name="kpiScheduleEdit" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/kpischedule/edit.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	<!-- End KPI Schedule -->
+	
+	<!-- Start Estimate Group -->
+	<definition name="initEstimateGroup" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/admin/estimategroup/list.jsp"/>      
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>  
+	<definition name="estimateGroupCreate" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/admin/estimategroup/create.jsp"/>      
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition> 
+	<definition name="estimateGroupEdit" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/admin/estimategroup/edit.jsp"/>      
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition> 
+	<definition name="estimateGroupView" extends="pbpUserLayout">
+		<put-attribute name="left"   value="/WEB-INF/jsp/admin/left.jsp"/>  
+		<put-attribute name="main"   value="/WEB-INF/jsp/pam/admin/estimategroup/view.jsp"/>      
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition> 
+	
+	<!-- End Estimate Group -->
+	
+	<!-- Manage Template -->
+	      <definition name="initManageTemplate" template="/WEB-INF/jsp/tiles/pam/evaluate/baseLayoutForm.jsp">  
+			<put-attribute name="header" value="/WEB-INF/jsp/tiles/header.jsp"/>     
+			<put-attribute name="subheader" value="/WEB-INF/jsp/tiles/subheader.jsp"/>        
+			<put-attribute name="footer"   value="/WEB-INF/jsp/tiles/footer.jsp"/>
+			<put-attribute name="main"   value="/WEB-INF/jsp/pam/admin/manageTemplate/list.jsp"/> 
+			 <put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp"/>  
+      </definition> 
+      
+      	<definition name="manageTemplatekpiyearList" extends="pbpUserLayout">
+		<put-attribute name="left" value="/WEB-INF/jsp/admin/left.jsp" />
+		<put-attribute name="main" value="/WEB-INF/jsp/pam/admin/manageTemplate/search.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+</tiles-definitions>

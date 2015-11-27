@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="25" />
+		<property name="username" value="chawean@gmail.com" />
+		<property name="password" value="morkandmee" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>				 
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="newUserConfirmeMailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="otopnongbour@gmail.com" />
+		<property name="to" value="otopnb@gmail.com" />
+		<property name="subject" value="Welcome to Wnext" />
+		<property name="text">
+			<value>
+				<![CDATA[
+				Dear %s ,
+				Welcome to Huaywa.com 
+				Best Regard,
+				Huaywa admin
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="resetPasswordMailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="otopnongbour@gmail.com" />
+		<property name="to" value="otopnb@gmail.com" />
+		<property name="subject" value="New Password" />
+		<property name="text">
+			<value>
+			<![CDATA[			
+			Your new password is %s			
+			]]>
+			</value>
+		</property>
+	</bean>		
+ 
+</beans>
