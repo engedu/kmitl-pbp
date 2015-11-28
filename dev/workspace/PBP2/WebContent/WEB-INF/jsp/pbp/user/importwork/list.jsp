@@ -10,42 +10,79 @@
 
 <form:form modelAttribute="academicKPIWrapper" action="edit.htm" method="POST" name="mainForm"> 	 
 <form:hidden path="academicYear"/>
- 
- 
-        <div id="page-wrapper">
-            <div id="page-inner">
 
-
+   <div class="row">
+   <div class="col-md-2 col-sm-2"></div>
+   <div class="col-md-6 col-sm-6">
+        <div class="panel panel-default">
+          
+   			<div class="panel-body">
+              <div class="list-group">
+              <c:forEach items="${academicKPIWrapper.pBPWorkTypeList}" var="domain5" varStatus="status5"> 
+              
+          
+                
+                <a href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${domain5.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>" class="list-group-item">
+               <span style="font-size: 20px; font-weight: bold; color: rgb(92,184,92);">  ${domain5.name}</span> 
+                           
+                </a>
+                     </c:forEach>
+              </div>
+            </div>
+   		</div>
+   		
+  </div>
+  </div>
+ 
                 <div class="row">
                     <div class="col-md-12">
                         <h1 class="page-header" style="text-align: center; font-size: 25px;">
-                                      เลือกกลุ่มภาระงานเพื่อนำเข้าผลงาน <small></small>
+                            เลือกรายการภาระงานเพื่อนำเข้าผลงาน <small></small>
                         </h1>
                     </div>
                 </div>
                 
-                <br>
-                 
-                	<c:forEach items="${academicKPIWrapper.pBPWorkTypeList}" var="domain5" varStatus="status5"> 
-                	
-                	<a href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${domain5.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>">
-                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="panel panel-primary text-center no-boder bg-color-green">
-                            <div class="panel-body">
-                               
-                              <h4>   <span style="font-size: 25px; font-weight: bold; color: rgb(92,184,92);">  ${domain5.name}</span> </h4>
-                            </div>
-                            <div class="panel-footer back-footer-blue"> &nbsp;  </div>       
-                        </div>
-                    </div>   
-                    </a>
-                              	
-                	
-                	</c:forEach> 
-                    
-         </div>
-                </div>
- 
+    			<table class="pbp-table">
+		   	   	<thead>
+		   	   		<tr><th colspan="3">
+		   	   		<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>  ${academicKPIWrapper.pBPWorkType.name} </div> 
+					
+					</th></tr>
+		   	   		<tr>
+		   	   			<th class="thFirst">ภาระงาน</th>
+		   	   			<th class="thFirst">คะแนน</th>
+ 						<th class="thFirst">หมายเหตุ</th>
+		   	   		</tr>
+		   	   	</thead>
+		   	   	
+		   	   	<tbody> 
+		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
+		   			<tr class="row1">
+		   				<td class="tdFirst">
+		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
+		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"> 
+		   				     ${domain.name}
+		   				</a>		
+		   				</c:if>
+		   				 <c:if test="${domain.fromRegis == 'Y' }">    
+		   				  ${domain.name}
+		   				 </c:if>				 
+		   				 </td>
+		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+ 	   					<td class="tdFirst">
+ 	   					 ${domain.description}
+ 	   					<!--  
+								    <c:if test="${domain.fromRegis == 'Y' }">  	 
+						        ระบบดึงข้อมูลตารางสอนอัตโนมัติจาก สำนักทะเบียน
+								    </c:if > 	   					
+-->
+						 </td>
+		   			</tr>
+		   			 	   			           
+		       </c:forEach>   
+		       
+		       	 </tbody>		   	   	
+			</table> 
 </form:form>
  <script type="text/javascript">
     $(document).ready(function() {
