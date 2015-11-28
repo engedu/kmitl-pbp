@@ -1,5 +1,8 @@
 package com.buckwa.service.impl.pbp;
 
+import java.io.File;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -11,11 +14,16 @@ import com.buckwa.dao.intf.pbp.AcademicKPIDao;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.AcademicKPI;
+import com.buckwa.domain.pbp.AcademicKPIAttachFile;
 import com.buckwa.domain.pbp.AcademicKPIAttribute;
 import com.buckwa.domain.pbp.AcademicKPIUserMapping;
 import com.buckwa.domain.pbp.AcademicKPIWrapper;
+import com.buckwa.service.intf.pam.FileLocationService;
 import com.buckwa.service.intf.pbp.AcademicKPIService;
+import com.buckwa.service.intf.util.PathUtil;
 import com.buckwa.util.BuckWaConstants;
+import com.buckwa.util.BuckWaUtils;
+import com.buckwa.util.FileUtils;
 
 @Service("academicKPIService")
  
@@ -24,7 +32,12 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 	
 	@Autowired
 	private AcademicKPIDao academicKPIDao;
- 
+	
+	@Autowired
+	private FileLocationService fileLocationService;
+	
+	@Autowired
+    private PathUtil pathUtil;
 
 	@Override	
 	public BuckWaResponse getByAcademicYear(BuckWaRequest request) {
@@ -194,13 +207,37 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public BuckWaResponse importwork(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
-		try{	
-			AcademicKPIUserMapping academicKPIUserMapping = (AcademicKPIUserMapping)request.get("academicKPIUserMapping");		
- 
-				Long academicKPIId =academicKPIDao.importwork(academicKPIUserMapping);
-				response.addResponse("academicKPIId", academicKPIId);
-				response.setSuccessCode(BuckWaConstants.MSGCODE_IMPORT_SUCESS);
-		 
+		try {
+			AcademicKPIUserMapping academicKPIUserMapping = (AcademicKPIUserMapping) request.get("academicKPIUserMapping");
+
+			Long academicKPIId = academicKPIDao.importwork(academicKPIUserMapping);
+			response.addResponse("academicKPIId", academicKPIId);
+			response.setSuccessCode(BuckWaConstants.MSGCODE_IMPORT_SUCESS);
+
+			
+			String tempPath = pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext() + "/";
+			String uploadPath = pathUtil.getPBPAttatchFilePath() + academicKPIId + "/";
+			if (FileUtils.createDirectoryIfNotExist(uploadPath)) {
+				logger.info(" create folder " + uploadPath + " success");
+			}
+			
+			List<String> tmpFileNameList = (List<String>) request.get("tmpFileNameList");
+			AcademicKPIAttachFile academicKPIAttachFile = null;
+			for (String tmpFileName : tmpFileNameList) {
+				FileUtils.copyTempImageToRealPath(tempPath, uploadPath, tmpFileName);
+				
+				academicKPIAttachFile = new AcademicKPIAttachFile();
+				academicKPIAttachFile.setKpiUserMappingId(String.valueOf(academicKPIId));
+				academicKPIAttachFile.setFullFilePathName(uploadPath + tmpFileName);
+				academicKPIAttachFile.setFileName(tmpFileName);
+				fileLocationService.createPBPAttachFile(academicKPIAttachFile);
+			}
+			
+			// Delete Temp File
+			File tempDir = new File(tempPath);
+			if (tempDir.exists() && tempDir.isDirectory()) {
+				FileUtils.deleteDirectory(tempDir);
+			}
 
 		}catch(DuplicateKeyException dx){			
 			response.setStatus(BuckWaConstants.FAIL);

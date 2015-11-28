@@ -62,7 +62,7 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 					 
 					 
 						String sqlAttributeValue =" SELECT a.* ,b.ratio AS ratio FROM academic_kpi_attribute_value a LEFT JOIN academic_kpi_user_mapping b ON a.kpi_user_mapping_id = b.kpi_user_mapping_id WHERE a.kpi_user_mapping_id ="+id; 
-						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList<AcademicKPIAttributeValue>();
 						try{
 							logger.info(" sqlAttributeValue:"+sqlAttributeValue);
 							academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
@@ -76,7 +76,7 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 						
 						
 						String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
-						List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+						List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList<AcademicKPIAttribute>();
 						try{
 							logger.info(" sqlAttribute:"+sqlAttribute);
 							academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
@@ -91,7 +91,7 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 						// Get Image
 						
 						String sqlAttachFile  =" select *  from academic_kpi_attach_file  where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
-						 List<AcademicKPIAttachFile> academicKPIAttachFileList = new ArrayList();
+						 List<AcademicKPIAttachFile> academicKPIAttachFileList = new ArrayList<AcademicKPIAttachFile>();
 						try{
 							logger.info(" sqlAttachFile:"+sqlAttribute);
 							academicKPIAttachFileList = this.jdbcTemplate.query(sqlAttachFile,	new AcademicKPIAttachFileMapper() );

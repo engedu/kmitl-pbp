@@ -2,6 +2,7 @@ package com.buckwa.web.controller.pam.person;
 
 import static com.googlecode.charts4j.Color.BLACK;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -903,6 +904,13 @@ public class PersonProfileController {
 					}
 				}	 
 				mav.addObject("academicKPI", academicKPI);
+				
+				// Delete Temp File
+				File uploadPath = new File(pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext());
+				if (uploadPath.exists() && uploadPath.isDirectory()) {
+					FileUtils.deleteDirectory(uploadPath);
+				}
+				
 			} else{
 				mav.addObject("errorCode", "E001"); 
 				mav.setViewName("initWorkImport");
@@ -964,13 +972,19 @@ public class PersonProfileController {
 				academicKPIUserMapping.setStatus("CREATE");
 				// Save
 				BuckWaRequest request = new BuckWaRequest(); 
-				request.put("academicKPIUserMapping",academicKPIUserMapping); 
+				request.put("academicKPIUserMapping",academicKPIUserMapping);
+				request.put("tmpFileNameList", academicKPI.getTmpFileNameList());
 				BuckWaResponse response = academicKPIService.importwork(request); 
 				
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					Long academicKPIId = (Long)response.getResObj("academicKPIId");	
 					academicKPI.setAcademicKPIUserMappingId(academicKPIId); 
-					mav.addObject("successCode", response.getSuccessCode()); 
+					//mav.addObject("successCode", response.getSuccessCode()); 
+					
+					String	url = httpRequest.getContextPath() + "/pam/person/initAcademicWork.htm"; 
+					
+					logger.info(" ### Redirect to :"+url);
+					mav.setView(new RedirectView(url));
 				} else{
 					mav.addObject("errorCode", "E001"); 
 					mav.setViewName("initWorkImport"); 
@@ -1068,7 +1082,6 @@ public class PersonProfileController {
 		}
 		return mav;
 	}
-	
 	
 	@RequestMapping(value="editKPIMapping.htm", method = RequestMethod.GET)
 	public ModelAndView editKPIMapping(@RequestParam("kpiUserMappingId") String kpiUserMappingId  ) {
@@ -1515,6 +1528,9 @@ public class PersonProfileController {
 		return null;
 	}	
 	
+	/*
+	 * Using in importWork.htm only
+	 * */
 	@RequestMapping(value="uploadAttatchFileCreate.htm")
 	public ModelAndView uploadAttatchFileCreate(@ModelAttribute AcademicKPI academicKPI, BindingResult result  ,HttpServletRequest httpRequest ) {
 	 
@@ -1547,7 +1563,8 @@ public class PersonProfileController {
 					}else{		
 						
 						//  For Upload File >>>>
-						String uploadPath =  pathUtil.getPBPAttatchFilePath()+academicKPI.getAcademicKPIUserMappingId();
+//						String uploadPath =  pathUtil.getPBPAttatchFilePath()+academicKPI.getAcademicKPIUserMappingId();
+						String uploadPath =  pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext();
 						String file = originalfile.getOriginalFilename();
 						String fullFilePathName =uploadPath+"/"+file;
 						String fileName = file.substring(0,file.lastIndexOf("."));
@@ -1560,7 +1577,7 @@ public class PersonProfileController {
 
 						
 						
-						academicKPIAttachFile.setKpiUserMappingId(academicKPI.getAcademicKPIUserMappingId()+"");
+//						academicKPIAttachFile.setKpiUserMappingId(academicKPI.getAcademicKPIUserMappingId()+"");
 						academicKPIAttachFile.setFullFilePathName(fullFilePathName);
 						academicKPIAttachFile.setFileName(file);
 						
@@ -1607,15 +1624,15 @@ public class PersonProfileController {
 								//	mav.addObject("errorCode", BuckWaConstants.MSGCODE_FILE_NAME_EXIST); 
 								//	return mav;
 								//}
-							case 3 :
-								logger.info(" Step : "+step+" >> Insert into File createPBPAttachFile Database (table : academic_kpi_attach_file) For File Upload History");
-								Long key = fileLocationService.createPBPAttachFile(academicKPIAttachFile);
-								if(isnext && null != key){
-									step++; 
-									continue;
-								}else{
-									isnext = false;
-								} 
+//							case 3 :
+//								logger.info(" Step : "+step+" >> Insert into File createPBPAttachFile Database (table : academic_kpi_attach_file) For File Upload History");
+//								Long key = fileLocationService.createPBPAttachFile(academicKPIAttachFile);
+//								if(isnext && null != key){
+//									step++; 
+//									continue;
+//								}else{
+//									isnext = false;
+//								} 
 							default:
 								isnext = false;
 							}
@@ -1623,7 +1640,7 @@ public class PersonProfileController {
 	 
 					}	
 					
-					mav =  viewWorkCreate( academicKPI.getAcademicKPIUserMappingId()+"");
+					mav =  viewWorkCreateTemp();
 					
 					return  mav;
  
@@ -2030,4 +2047,29 @@ public class PersonProfileController {
 		return mav;
 	}	
 
+	public ModelAndView viewWorkCreateTemp() {
+		logger.info(" Start  viewWorkCreateTemp");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("importwork");
+		try{
+			File file = new File(pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext());
+			if (file.isDirectory()) {
+				List<String> fileNameList = new ArrayList<String>();
+				for (File tmpFile : file.listFiles()) {
+					fileNameList.add(tmpFile.getName());
+				}
+				mav.addObject("fileNameList", fileNameList);
+			} else {
+				mav.addObject("errorCode", "E001");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}
+	
+	
+//	deleteAttachTempFile
 }

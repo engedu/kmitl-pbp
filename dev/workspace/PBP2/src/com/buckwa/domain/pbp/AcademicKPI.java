@@ -44,6 +44,8 @@ public class AcademicKPI  extends BaseDomain{
 	
 	private String remark;
 	
+	private List<String> tmpFileNameList;
+	
 	public String getOrderNo() {
 		return orderNo;
 	}
@@ -190,7 +192,11 @@ public class AcademicKPI  extends BaseDomain{
 	public void setTotalStudentTo(String totalStudentTo) {
 		this.totalStudentTo = totalStudentTo;
 	}
-	
-	
+	public List<String> getTmpFileNameList() {
+		return tmpFileNameList;
+	}
+	public void setTmpFileNameList(List<String> tmpFileNameList) {
+		this.tmpFileNameList = tmpFileNameList;
+	}
 	
 }

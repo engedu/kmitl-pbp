@@ -75,26 +75,27 @@
     <br>
     
         
-     <c:if test="${academicKPI.academicKPIUserMappingId!=null}"> 
+<%--      <c:if test="${academicKPI.academicKPIUserMappingId!=null}">  --%>
 		<div class="pbptableWrapper">
             <div  ><span style="color: red;margin-left: 15%;">  * เอกสารแนบ  (ไม่เกิน 10 MB)</span></div>
             
              	<table style="width: 600px; margin-left: 15%;"> 
-             <c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttachFileList}" var="domain" varStatus="status">
+             <c:forEach items="${fileNameList}" var="file" varStatus="status">
  	 				 <tr>
 					<td class="tdFirst">	${status.index+1} </td>
 					<td class="tdFirst">
-						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/downloadAttachFile.htm?attachFileId=<c:out  value="${domain.attachFileId}"/>"> 
-							 <c:out  value="${domain.fileName}"/> 
+						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/downloadAttachTempFile.htm?attachFileName=<c:out  value="${file}"/>"> 
+							 <c:out  value="${file}"/>
+							 <input type="hidden" name="tmpFileNameList[${status.index}]" value="${file}">
 						</a>
 					 
 					</td>
 					<td class="tdLast">	
-					<c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">  
-						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/deleteAttachFile.htm?kpiUserMappingId=<c:out value="${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}"/>&attachFileId=<c:out  value="${domain.attachFileId}"/>"> 
+<%-- 					<c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">   --%>
+						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/deleteAttachTempFile.htm?attachFileName=<c:out  value="${file}"/>"> 
 						   Delete
 						 </a>					
-					 </c:if> 
+<%-- 					 </c:if>  --%>
 					</td> 
 					 
 					</tr>
@@ -113,7 +114,7 @@
 					</tr> 
 			</table> 
     </div>   
-    </c:if>
+<%--     </c:if> --%>
      
 <br> 
 
@@ -123,13 +124,13 @@
  		 &nbsp;
  		 
 
-  <c:if test="${academicKPI.academicKPIUserMappingId==null}"> 
-	<input class="btn btn-primary"	value="Next" type="submit" >	
-</c:if>
- <c:if test="${academicKPI.academicKPIUserMappingId!=null}"> 
-  	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm"> Next หน้าสรุปผลงานประจำปี</a>
- 		 &nbsp;
- </c:if>
+<%--   <c:if test="${academicKPI.academicKPIUserMappingId==null}">  --%>
+	<input class="btn btn-primary"	value="Next" type="submit" >
+<%-- </c:if> --%>
+<%--  <c:if test="${academicKPI.academicKPIUserMappingId!=null}">  --%>
+<%--   	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm"> Next หน้าสรุปผลงานประจำปี</a> --%>
+<%--   	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm">Submit</a> --%>
+<%--  </c:if> --%>
 	</div>
 
 	
@@ -147,7 +148,7 @@
 		form.submit();	
 	}
 	function validateUpload (){		
-		alert(document.getElementById('image').value);
+// 		alert(document.getElementById('image').value);
 		var form = document.forms['mainForm']; 
 		form.action ="<%=request.getContextPath()%>/pam/person/uploadAttatchFileCreate.htm";
 		form.method = 'POST';
