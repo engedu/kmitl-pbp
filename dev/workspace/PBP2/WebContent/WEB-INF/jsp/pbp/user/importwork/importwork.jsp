@@ -84,7 +84,7 @@
  	 				 <tr>
 					<td class="tdFirst">	${status.index+1} </td>
 					<td class="tdFirst">
-						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/downloadAttachTempFile.htm?attachFileName=<c:out  value="${file}"/>"> 
+						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/downloadFile.htm?fileName=<c:out  value="${file}"/>"> 
 							 <c:out  value="${file}"/>
 							 <input type="hidden" name="tmpFileNameList[${status.index}]" value="${file}">
 						</a>
@@ -92,7 +92,7 @@
 					</td>
 					<td class="tdLast">	
 <%-- 					<c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">   --%>
-						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/deleteAttachTempFile.htm?attachFileName=<c:out  value="${file}"/>"> 
+						 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/deleteFile.htm?fileName=<c:out  value="${file}"/>"> 
 						   Delete
 						 </a>					
 <%-- 					 </c:if>  --%>

@@ -5,8 +5,10 @@ import static com.googlecode.charts4j.Color.BLACK;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -1326,7 +1328,12 @@ public class PersonProfileController {
 					mav.addObject("errorCode", "E001"); 
 				 
 					
-				}			
+				}	
+				
+				String	url = httpRequest.getContextPath() + "/pam/person/initAcademicWork.htm"; 
+				
+				logger.info(" ### Redirect to :"+url);
+				mav.setView(new RedirectView(url));
  
 			}
 		 			
@@ -2069,7 +2076,43 @@ public class PersonProfileController {
 		}
 		return mav;
 	}
+
+	@RequestMapping(value="downloadFile.htm")
+	public void downloadFile(@RequestParam("fileName") String fileName ,HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		logger.info("#####  Start  Download   << "+ fileName +" >> #### ");
+		
+		try {
+			
+			httpResponse.addHeader("Content-Disposition", "attachment;filename="+fileName+"");
+			httpResponse.setContentType("application/pdf");
+			OutputStream outputStream = httpResponse.getOutputStream();
+
+			byte[] downloadFileName = org.apache.commons.io.FileUtils.readFileToByteArray(new File(pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext() + "/" + fileName));
+			outputStream.write(downloadFileName);
+			
+			outputStream.close();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+	}
 	
+	@RequestMapping(value="deleteFile.htm")
+	public ModelAndView deleteFile(@RequestParam("fileName") String fileName ,HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+		logger.info("#####  Delete   << "+ fileName +" >> #### ");
+		ModelAndView mav = new ModelAndView();
+		try {
+			File file = new File(pathUtil.getPBPAttatchFilePath() + "temp/" + BuckWaUtils.getUserIdFromContext() + "/" + fileName);
+			file.delete();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		mav =  viewWorkCreateTemp();
+		
+		return mav;
+	}
 	
-//	deleteAttachTempFile
 }
