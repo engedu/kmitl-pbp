@@ -811,8 +811,8 @@ public class PersonProfileController {
 	public ModelAndView listByWorktype(@RequestParam("workTypeCode") String workTypeCode,@RequestParam("academicYear") String academicYear) {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
-	//	mav.setViewName("initWorkImport");
-		mav.setViewName("initWorkImportByType");
+		mav.setViewName("initWorkImport");
+		//	mav.setViewName("initWorkImportByType");
 		
 		try{
 			BuckWaRequest request = new BuckWaRequest();
