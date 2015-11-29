@@ -59,6 +59,7 @@ import com.buckwa.domain.validator.pam.PersonProfileValidator;
 import com.buckwa.domain.validator.pbp.EditImportWorkValidator;
 import com.buckwa.domain.validator.pbp.EditPersonProfilePBPValidator;
 import com.buckwa.domain.validator.pbp.ImportWorkValidator;
+import com.buckwa.domain.validator.pbp.ReplyPBPMessageNewValidator;
 import com.buckwa.domain.validator.pbp.ReplyPBPMessageValidator;
 import com.buckwa.domain.webboard.Message;
 import com.buckwa.service.intf.pam.FileLocationService;
@@ -97,6 +98,7 @@ import com.googlecode.charts4j.Shape;
 @RequestMapping("/pam/person") 
 @SessionAttributes({"person","academicKPIWrapper","academicKPI","academicKPIUserMappingWrapper","academicKPIUserMapping"} )  
 public class PersonProfileController {
+	
 	private static Logger logger = Logger.getLogger(PersonProfileController.class);
 
 	@Autowired
@@ -110,8 +112,10 @@ public class PersonProfileController {
 	
 	@Autowired
 	private PBPWorkTypeService pBPWorkTypeService;	
+	
 	@Autowired
 	private SchoolUtil schoolUtil;
+	
 	@Autowired
 	private AcademicKPIService academicKPIService;	
 	
@@ -120,13 +124,13 @@ public class PersonProfileController {
 	
 	@Autowired
 	private AcademicUnitService academicUnitService;	
-	
  
 	@Autowired
     private PathUtil pathUtil;
 	
 	@Autowired
 	private FileLocationService fileLocationService;
+	
 	@Autowired
 	private LovHeaderDao lovHeaderDao;
 	
@@ -933,6 +937,12 @@ public class PersonProfileController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("importworkCreate");
 		try{
+			logger.info(" ## replyMessageNew:"+academicKPI.getReplyMessage());
+			 
+			new ReplyPBPMessageNewValidator().validate(academicKPI, result);			
+			if (result.hasErrors()) {				
+				mav.setViewName("importwork");
+			}
 			new ImportWorkValidator().validate(academicKPI, result);			
 			if (result.hasErrors()) {				
 				mav.setViewName("importwork");
@@ -983,7 +993,30 @@ public class PersonProfileController {
 					academicKPI.setAcademicKPIUserMappingId(academicKPIId); 
 					//mav.addObject("successCode", response.getSuccessCode()); 
 					
-					String	url = httpRequest.getContextPath() + "/pam/person/initAcademicWork.htm"; 
+					BuckWaRequest requestRelyMessage = new BuckWaRequest();
+					 
+					Message newMessage = new Message();
+					newMessage.setMessageDetail(academicKPI.getReplyMessage());
+//					newMessage.setTopicId(academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getKpiUserMappingId());
+					newMessage.setTopicId(academicKPI.getAcademicKPIUserMappingId());
+					newMessage.setStatus("1");				
+					newMessage.setCreateBy(BuckWaUtils.getFullNameFromContext());
+					
+					requestRelyMessage.put("message", newMessage);
+					logger.info(" replyMessage newMessage:"+BeanUtils.getBeanString(newMessage));
+					BuckWaResponse responseRelyMessage = webboardTopicService.replyPBPMessage(requestRelyMessage);
+					if(responseRelyMessage.getStatus()==BuckWaConstants.SUCCESS){		
+						logger.info(" replyMessage newMessage Success");
+						mav.addObject("successCode", responseRelyMessage.getSuccessCode()); 
+						academicKPI.setReplyMessage("");
+						mav = viewWork(academicKPI.getAcademicKPIUserMappingId()+"");	
+					}else {
+						mav.addObject("errorCode", responseRelyMessage.getErrorCode()); 
+						 
+					}	
+					
+//					String	url = httpRequest.getContextPath() + "/pam/person/initAcademicWork.htm"; 
+					String	url = httpRequest.getContextPath() + "/pam/person/initWorkImport.htm"; 
 					
 					logger.info(" ### Redirect to :"+url);
 					mav.setView(new RedirectView(url));
@@ -2114,5 +2147,42 @@ public class PersonProfileController {
 		
 		return mav;
 	}
+	
+//	@RequestMapping(value="replyMessageNew.htm", method = RequestMethod.POST)
+//	public ModelAndView replyMessageNew(HttpServletRequest httpRequest, @ModelAttribute AcademicKPI academicKPI , BindingResult result) {
+//		ModelAndView mav = new ModelAndView();
+//		try{			
+//			logger.info(" ## replyMessageNew:"+academicKPI.getReplyMessage());
+//			 
+//			new ReplyPBPMessageNewValidator().validate(academicKPI, result);			
+//			if (result.hasErrors()) {				
+//				mav.setViewName("importwork");
+//			}else {					
+//				BuckWaRequest request = new BuckWaRequest();
+//				 
+//				Message newMessage = new Message();
+//				newMessage.setMessageDetail(academicKPI.getReplyMessage());
+//				newMessage.setTopicId(academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getKpiUserMappingId());
+//				newMessage.setStatus("1");				
+//				newMessage.setCreateBy(BuckWaUtils.getFullNameFromContext());
+//				request.put("message", newMessage);
+//				logger.info(" replyMessage newMessage:"+BeanUtils.getBeanString(newMessage));
+//				BuckWaResponse response = webboardTopicService.replyPBPMessage(request);
+//				if(response.getStatus()==BuckWaConstants.SUCCESS){		
+//					logger.info(" replyMessage newMessage Success");
+//					mav.addObject("successCode", response.getSuccessCode()); 
+//					academicKPI.setReplyMessage("");
+//					mav = viewWork(academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getKpiUserMappingId()+"");	
+//				}else {
+//					mav.addObject("errorCode", response.getErrorCode()); 
+//					 
+//				}				
+//			}							
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//			mav.addObject("errorCode", "E001"); 
+//		}
+//		return mav;
+//	}	
 	
 }

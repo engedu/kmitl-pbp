@@ -115,17 +115,44 @@
 			</table> 
     </div>   
 <%--     </c:if> --%>
-     
+<br> 
+
+<%-- 	<c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='CREATE'}"> --%>
+<!--    		 <sec:authorize ifAnyGranted="ROLE_USER">     -->
+   		 <table style="width: 600px; margin-left: 15%;"> 
+   		  <tr>
+   		 <td class="tdLast">	
+   		 		     		 
+   		 <div class="messageReply"> 
+   		 <div style="width: 90%;text-align: left;"> <h3 >ส่งข้อความถึงหัวหน้าภาค/ประธานสาขาวิชา</h3> </div>
+   		
+   		 	<form:textarea path="replyMessage" cssClass="tinymce" rows="5" cols="60" />
+   		 	 <span class ="require"  >*</span> 
+   		 	 <form:errors path="replyMessage" cssClass="require" />
+   		 </div> 
+   		 </td>
+   		 </tr>
+<!--    		 </sec:authorize> -->
+   		 
+<!--    		 <br><br> -->
+              <tr>
+   		 <td class="tdLast">	 
+<!--    		 <input class="btn btn-primary" value="Reply Message"  onclick="replyMessagex();"  />  -->
+   		 </td>
+   		 </tr>
+<%--    		 </c:if> --%>
+</table> 
+
 <br> 
 
  	<div  class="back_center">	
  		 &nbsp;
-	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>"> Back</a>
+	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>">ยกเลิก</a>
  		 &nbsp;
  		 
 
 <%--   <c:if test="${academicKPI.academicKPIUserMappingId==null}">  --%>
-	<input class="btn btn-primary"	value="Next" type="submit" >
+	<input class="btn btn-primary"	value="บันทึก" type="submit" >
 <%-- </c:if> --%>
 <%--  <c:if test="${academicKPI.academicKPIUserMappingId!=null}">  --%>
 <%--   	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm"> Next หน้าสรุปผลงานประจำปี</a> --%>
@@ -157,10 +184,23 @@
 	function editRatio(dat){
 		 $('#ratio').val = dat;
 	}
-	
-
-	
-	 
-	
+	function replyMessagex (){	 
+		 
+		var form = document.forms['mainForm']; 
+		if(isSelect()){
+			form.action ="<%=request.getContextPath()%>/pam/person/replyMessage.htm";
+			form.method = 'POST';
+			form.submit();
+		}
+	}
+	function isSelect(){
+		
+		if(document.getElementById('image').value== ""){			
+			return true;
+		}else{
+			alert(" กรุณา Upload File ที่เลื่อกไว้");
+			return false;
+		}
+	}
 </script>
  

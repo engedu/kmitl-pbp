@@ -39,6 +39,8 @@ public class AcademicKPI  extends BaseDomain{
 	private String fromRegis;
 	private String errorDesc;
 	private Long academicKPIUserMappingId;
+	
+	private String replyMessage;
 	//new field by tum 19/07/2014
 	private Integer ratio;
 	
@@ -197,6 +199,12 @@ public class AcademicKPI  extends BaseDomain{
 	}
 	public void setTmpFileNameList(List<String> tmpFileNameList) {
 		this.tmpFileNameList = tmpFileNameList;
+	}
+	public String getReplyMessage() {
+		return replyMessage;
+	}
+	public void setReplyMessage(String replyMessage) {
+		this.replyMessage = replyMessage;
 	}
 	
 }
