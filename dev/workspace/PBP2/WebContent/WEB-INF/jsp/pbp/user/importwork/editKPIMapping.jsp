@@ -115,7 +115,7 @@
 		   			
 		   				<td class="tdFirst">
 		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
-		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"> 
+		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value=""/>"> 
 		   				     ${domain.name}
 		   				</a>		
 		   				</c:if>

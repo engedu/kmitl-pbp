@@ -51,7 +51,12 @@
         	        valueAxis: {
         	            min: 0,
         	            max: 200,
-        	            majorUnit: 20
+        	            majorUnit: 20,
+        	            plotBands: [{
+            	            from: 99,
+            	            to: 100,
+            	            color: "#f99"
+            	        }]
         	        },
                     tooltip: {
                         visible: true,

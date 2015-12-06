@@ -119,7 +119,7 @@
 
  	<div  class="back_center">	
  		 &nbsp;
-	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>"> Back</a>
+	 <a class="btn btn-primary" href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>"> Back</a>
  		 &nbsp;
   <c:if test="${academicKPI.academicKPIUserMappingId==null}"> 
 	<input class="btn btn-primary"	value="Next" type="submit" >	
@@ -135,7 +135,7 @@
  <script type="text/javascript">
 	function init (){
 		var form = document.forms['mainForm']; 
-		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>";
+		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>";
 	 	form.method='GET';	
 	 	alert(form.action);
 		form.submit();	

@@ -119,7 +119,7 @@
 
  	<div  class="back_center">	
  		 &nbsp;
-	 <a class="btn btn-primary"  onclick="return isSelect();"  href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>"> นำเข้าผลงานใหม่</a>
+	 <a class="btn btn-primary"  onclick="return isSelect();"  href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>"> นำเข้าผลงานใหม่</a>
  		 &nbsp;
  		 
 
@@ -141,7 +141,7 @@
  <script type="text/javascript">
 	function init (){
 		var form = document.forms['mainForm']; 
-		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>";
+		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>";
 	 	form.method='GET';	
 	 	alert(form.action);
 		form.submit();	

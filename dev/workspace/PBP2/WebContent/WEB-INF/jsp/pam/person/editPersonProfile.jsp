@@ -31,59 +31,61 @@
 				<tbody>
 	<tr>
 		<td   > -->
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<table width="50%"> 
-				<tr>
-					<td class="tdFirst">ชื่อสกุล (ไทย): </td>
-					<td class="tdFirst">${person.titleName}  ${person.thaiName} ${person.thaiSurname}</td> 
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td class="tdFirst">ชื่อสกุล (ไทย): </td> -->
+<%-- 					<td class="tdFirst">${person.titleName}  ${person.thaiName} ${person.thaiSurname}</td>  --%>
+<!-- 				</tr> -->
  
-				<tr>
-					<td class="tdFirst">สังกัด: </td>
-					<td class="tdFirst"> ${person.facultyDesc}</td>
+<!-- 				<tr> -->
+<!-- 					<td class="tdFirst">สังกัด: </td> -->
+<%-- 					<td class="tdFirst"> ${person.facultyDesc}</td> --%>
 					 
-				</tr>
-				<tr>
-					<td class="tdFirst">ส่วนงาน: </td>
-					<td class="tdFirst">${person.departmentDesc}</td>
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td class="tdFirst">ส่วนงาน: </td> -->
+<%-- 					<td class="tdFirst">${person.departmentDesc}</td> --%>
 					 
-				</tr>
-				<tr>
-					<td class="tdFirst">ประเภท: </td>
-					<td class="tdFirst"> ${person.employeeType}  </td>
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<td class="tdFirst">ประเภท: </td> -->
+<%-- 					<td class="tdFirst"> ${person.employeeType}  </td> --%>
 					 
-				</tr> 
-				<tr>
-					<td class="tdFirst">เลขที่อัตรา: </td> 
-					 <td class="tdFirst"> ${person.rateNo}  </td>
+<!-- 				</tr>  -->
+<!-- 				<tr> -->
+<!-- 					<td class="tdFirst">เลขที่อัตรา: </td>  -->
+<%-- 					 <td class="tdFirst"> ${person.rateNo}  </td> --%>
 					 
-				</tr> 				
-				  <tr>				
-					<td class="tdFirst">ตำแหน่งงาน: </td>
-					<td class="tdFirst">
+<!-- 				</tr> 				 -->
+<!-- 				  <tr>				 -->
+<!-- 					<td class="tdFirst">ตำแหน่งงาน: </td> -->
+<!-- 					<td class="tdFirst"> -->
 					
-					 <form:select path="academicRank" id="academicRank" disabled="true">
-						<form:options items="${person.lovAcademicRankList}" itemValue="code" itemLabel="name" />
-					</form:select> 
-					</td>
+<%-- 					 <form:select path="academicRank" id="academicRank" disabled="true"> --%>
+<%-- 						<form:options items="${person.lovAcademicRankList}" itemValue="code" itemLabel="name" /> --%>
+<%-- 					</form:select>  --%>
+<!-- 					</td> -->
 		 
-				</tr>	
-								  <tr>				
-					<td class="tdFirst">วุฒิการศึกษา: </td>
-					<td class="tdFirst"> 
+<!-- 				</tr>	 -->
+<!-- 								  <tr>				 -->
+<!-- 					<td class="tdFirst">วุฒิการศึกษา: </td> -->
+<!-- 					<td class="tdFirst">  -->
 					
-					 <form:select path="maxEducation" id="maxEducation" disabled="true">
-						<form:options items="${person.lovMaxEducationList}" itemValue="code" itemLabel="name" />
-					</form:select>					
+<%-- 					 <form:select path="maxEducation" id="maxEducation" disabled="true"> --%>
+<%-- 						<form:options items="${person.lovMaxEducationList}" itemValue="code" itemLabel="name" /> --%>
+<%-- 					</form:select>					 --%>
 					
-					</td>
+<!-- 					</td> -->
 					 		 
-				</tr>	
-				<tr>
+<!-- 				</tr>	 -->
+<!-- 				<tr> -->
 			
-					<td class="tdFirst">Email: </td>
-					<td class="tdFirst">${person.email}</td>
+<!-- 					<td class="tdFirst">Email: </td> -->
+<%-- 					<td class="tdFirst">${person.email}</td> --%>
 					 
-                </tr>
+<!--                 </tr> -->
 
 			<tr>
 				<td class="tdFirst">รูปประวัติส่วนตัว:</td>
@@ -95,16 +97,17 @@
 					<form:errors path="picture" cssClass="require" />
 				</td>
 			</tr>	
-				<tr>
+<!-- 				<tr> -->
 			
-					<td class="tdFirst">รูปส่วนตัว: </td>
-					<td class="tdFirst"> <img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2"></td>
+<!-- 					<td class="tdFirst">รูปส่วนตัว: </td> -->
+<%-- 					<td class="tdFirst"> <img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2"></td> --%>
 					 
-                </tr>			
+<!--                 </tr>			 -->
 			
 	 			
 		
-			</table>			 
+			</table>
+		</div>			 
 <!-- 		</td>
  
 	</tr>			
@@ -126,8 +129,9 @@
 					</td>
 				</tr>	
  
- 				 <tr>
-					<td align="center">
+ 			<div class="col-md-12" style="text-align: center;">
+<!--  				 <tr> -->
+<!-- 					<td align="center"> -->
  
 					<input class="btn btn-primary"
 					value="<spring:message code="label.button.save"/>" type="submit" id="saveBtn">
@@ -135,8 +139,9 @@
 					value="<spring:message code="label.button.back"/>" type="button"
 					id="cancelBtn">
 				 
-					</td>
-				</tr>	
+<!-- 					</td> -->
+<!-- 				</tr>	 -->
+			</div>
 <!-- </table>   -->
 
 </div>

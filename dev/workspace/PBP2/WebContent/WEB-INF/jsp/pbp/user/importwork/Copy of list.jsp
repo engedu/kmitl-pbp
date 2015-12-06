@@ -36,7 +36,7 @@
 		   			<tr>
 		   				<td class="tdFirst">
 		   			 
-		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"> 
+		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value=""/>"> 
 		   				 ${status.index+1}   ${domain.name}
 		   				</a>		   				 
 		   				 </td>

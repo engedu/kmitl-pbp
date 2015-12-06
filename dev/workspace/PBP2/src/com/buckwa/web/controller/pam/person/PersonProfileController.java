@@ -802,6 +802,7 @@ public class PersonProfileController {
 					academicKPIWrapper.setAcademicYear(academicYear); 
 					academicKPIWrapper.setpBPWorkType(workTypeList.get(0));
 					academicKPIWrapper.setpBPWorkTypeList(workTypeList);	
+//					mav.addObject("successCode", response.getSuccessCode()); 
 					mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 				}
 
@@ -814,7 +815,7 @@ public class PersonProfileController {
 		return mav;
 	}	
 	@RequestMapping(value="listByWorktype.htm", method = RequestMethod.GET)
-	public ModelAndView listByWorktype(@RequestParam("workTypeCode") String workTypeCode,@RequestParam("academicYear") String academicYear) {
+	public ModelAndView listByWorktype(@RequestParam("workTypeCode") String workTypeCode,@RequestParam("academicYear") String academicYear,@RequestParam("index") String index) {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("initWorkImport");
@@ -867,6 +868,7 @@ public class PersonProfileController {
 					}
 					 
 				}				 
+				academicKPIWrapper.setIndex(index);
 				mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 			}	 
 
@@ -878,7 +880,7 @@ public class PersonProfileController {
 	}		
 	
 	@RequestMapping(value="importwork.htm", method = RequestMethod.GET)
-	public ModelAndView importwork(@RequestParam("academicKPICode") String academicKPICode,@RequestParam("academicYear") String academicYear ) {
+	public ModelAndView importwork(@RequestParam("academicKPICode") String academicKPICode,@RequestParam("academicYear") String academicYear,@RequestParam("index") String index) {
 		logger.info(" Start  academicKPICode:"+academicKPICode+" academicYear:"+academicYear);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("importwork");
@@ -909,6 +911,7 @@ public class PersonProfileController {
 						
 					}
 				}	 
+				academicKPI.setIndex(index);
 				mav.addObject("academicKPI", academicKPI);
 				
 				// Delete Temp File

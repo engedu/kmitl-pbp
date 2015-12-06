@@ -42,7 +42,7 @@
 		   			<tr class="row1">
 		   				<td class="tdFirst">
 		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
-		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"> 
+		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value=""/>"> 
 		   				     ${domain.name}
 		   				</a>		
 		   				</c:if>
@@ -101,7 +101,7 @@
 	function changeWorkType (In){		
 		var form = document.forms['mainForm']; 
 	//	 alert(In);
-		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode="+In+"&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>";
+		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode="+In+"&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>";
 		//alert(form.action);
 		form.method='GET';	
 		form.submit();

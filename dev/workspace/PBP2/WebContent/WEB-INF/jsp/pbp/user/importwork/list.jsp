@@ -12,21 +12,23 @@
 <form:hidden path="academicYear"/>
 
    <div class="row">
-   <div class="col-md-2 col-sm-2"></div>
+   <div class="col-md-3 col-sm-2"></div>
    <div class="col-md-6 col-sm-6">
         <div class="panel panel-default">
           
    			<div class="panel-body">
               <div class="list-group">
               <c:forEach items="${academicKPIWrapper.pBPWorkTypeList}" var="domain5" varStatus="status5"> 
-              
-          
-                
-                <a href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${domain5.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>" class="list-group-item">
-               <span style="font-size: 20px; font-weight: bold; color: rgb(92,184,92);">  ${domain5.name}</span> 
-                           
-                </a>
-                     </c:forEach>
+               		<a href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=<c:out value="${domain5.code}"/>&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value="${status5.count}"/>" class="list-group-item">
+               		<span id="row[${status5.count}]" style="font-size: 20px; font-weight: bold; color: rgb(92,184,92);">  ${domain5.name}</span></a>
+              	<c:if test="${academicKPIWrapper.index == status5.count}">
+              		<input type="hidden" id="hiddenColorId" value="${academicKPIWrapper.index}"/>
+              		<script type="text/javascript">
+              			
+              			document.getElementById("row["+$("#hiddenColorId").val()+"]").style.color = "#f00000";
+              		</script>
+              	</c:if>
+              </c:forEach>
               </div>
             </div>
    		</div>
@@ -60,7 +62,7 @@
 		   			<tr class="row1">
 		   				<td class="tdFirst">
 		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
-		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"> 
+		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value="${academicKPIWrapper.index}"/>"> 
 		   				     ${domain.name}
 		   				</a>		
 		   				</c:if>
@@ -108,10 +110,13 @@
 	function changeWorkType (In){		
 		var form = document.forms['mainForm']; 
 	//	 alert(In);
-		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode="+In+"&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>";
+		form.action ="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode="+In+"&academicYear=<c:out value="${academicKPIWrapper.academicYear}"/>&index=<c:out value=""/>";
 		//alert(form.action);
 		form.method='GET';	
 		form.submit();
+	}
+	function changeColor(id) {		
+		 document.getElementById("row["+id+"]").style.color = "#ff0000";
 	}
 </script>
  

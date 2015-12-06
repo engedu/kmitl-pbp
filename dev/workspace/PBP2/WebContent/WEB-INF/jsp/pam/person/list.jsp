@@ -11,13 +11,14 @@
 <% Person person = (Person) request.getAttribute("person"); %>
 <form:form modelAttribute="person" action="search.htm" method="POST" name="mainForm">
    <div class="row">
- 	<div class="four columns">
+ 	<div class="one columns"></div>
+ 	<div class="five columns">
  		 <div class="pbptableWrapper">
             <div class="pbp-header"> 
             	<table style="width: 100%;">
             		<tr>
             		
-            			<td width="70%;"> 
+            			<td width="70%;" style="text-align: center;"> 
             			ข้อมูลส่วนตัว   &nbsp; 
             		<form:select path="academicYear" cssStyle="width:60px;" > 
 							<form:options items="${person.academicYearList}" itemValue="name" itemLabel="name" />
@@ -25,7 +26,7 @@
 						
 
             			</td>
-            			<td>
+            			<td style="text-align: center;">
             			
             			<sec:authentication var="principal" property="principal" />
             			
@@ -40,21 +41,22 @@
             			 
             			</c:if>
             			
-            			 <a rel="notLoading" onclick="initAcademic();" > 
+            			 	<a rel="notLoading" onclick="initAcademic();" > 
 							 <input value="ผลประเมิน" class="btn btn-primary" type="button" onclick="#">
-							 </a>
+							</a>
             			
             			</td>
             		</tr>
             	</table>
             </div> 
-			<table class="pbp-table">
-				<tbody>
-	<tr>
-		<td width="35%" style="border-right: 1px solid white; margin-right: 1px;" valign="top" >
-		 <img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2" width="90px;" height="100px;">
-		</td>
-		<td valign="top" style="padding-left: 15px;">
+	<table class="pbp-table">
+		<tbody>
+			<tr height="332px">
+				<td width="30%" style="border-center: 1px solid white; margin-right: 1px;" valign="top" >
+		 			<img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2" width="90px;" height="100px;">
+				</td>
+		
+				<td valign="top" style="padding-left: 15px;" colspan="2">
 			<table width="100%"> 
 				<tr>
 					<td class="tdFirst">ชื่อสกุล (ไทย): ${person.titleName}  ${person.thaiName} ${person.thaiSurname}</td> 
@@ -105,7 +107,7 @@
 					 
 					<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editProfile.htm?personId=<c:out value="${person.personId}"/>"> 
 					
-					Edit >>
+					แก้ไขรูปประจำตัว >>
 					
 					</a>
 					</td>
@@ -120,18 +122,18 @@
 	</div>
 <!-- 	</td>
  	<td valign="top"> -->
- 	<div class="eight columns">
+ 	<div class="five columns">
  	 		 <div class="pbptableWrapper">
             <div class="pbp-header">
                 <table style="width: 100%;">
             		<tr>
-            			<td width="100%;"  >					
+            			<td width="100%;">					
 	            			
 	            			
 	           			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
             		<!--  รอบที่   1  -->	
             			</c:if>
-            		    &nbsp;    อัตราการขึ้นเงินเดือน     &nbsp; <span style="font-size:30px; color: rgb(112,146,190);"> ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp;         			
+            		    &nbsp;    ระดับคะแนน     &nbsp; <span style="font-size:30px; color: rgb(112,146,190);"> ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp;         			
 	            
 							 
 				
@@ -149,8 +151,8 @@
             
           <table class="pbp-table">
 				<tbody>
-            <td width="100%" style="border-right: 1px solid white;" valign="top">
-  		<iframe src=" <c:out value="${person.radarURL}"/>" width="600" height="400" marginwidth="0" marginheight="0" frameborder="no" scrolling="no"
+            <td width="100%" style="border-center: 1px solid white;" valign="top">
+  		<iframe src=" <c:out value="${person.radarURL}"/>" width="520" height="320" marginwidth="0" marginheight="0" frameborder="no" scrolling="no"
 			style="background:#FFF;padding-bottom: 5px;">
 
  		</iframe>
@@ -180,7 +182,7 @@
            	</tr>
 			<tr>
 				<th  class="thLast" width="250px;">   ประเภทภาระงาน      </th> 		 
- 				<th   class="thFirst" style="width: 80px;">% </th> 				 
+ 				<th   class="thFirst" style="width: 80px;">ระดับคะแนน </th> 				 
 			</tr> 
 		</thead>		
 		<tbody>
@@ -209,11 +211,11 @@
 			
 			<tr>
 				<th  class="thLast"  align="right">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
- 				<th  class="thLast" colspan="1" align="center">   ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} % </th>
+ 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} คะแนน </th>
 			</tr>	
 			
 			<tr>
-				<th  class="thLast" colspan="5" align="right"><span style="font-size:30px; color: rgb(112,146,190);">   อัตราการขึ้นเงินเดือน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp; &nbsp; &nbsp; &nbsp;</th>
+				<th  class="thLast" colspan="5" align="right"><span style="font-size:30px; color: rgb(112,146,190);">   ระดับคะแนน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp; &nbsp; &nbsp; &nbsp;</th>
  				
 			</tr>					
 			
@@ -301,3 +303,4 @@
 	}
 	 
 </script>
+
