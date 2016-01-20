@@ -25,7 +25,7 @@
               		<input type="hidden" id="hiddenColorId" value="${academicKPIWrapper.index}"/>
               		<script type="text/javascript">
               			
-              			document.getElementById("row["+$("#hiddenColorId").val()+"]").style.color = "#f00000";
+              			document.getElementById("row["+$("#hiddenColorId").val()+"]").style.color = "#4450A8";
               		</script>
               	</c:if>
               </c:forEach>

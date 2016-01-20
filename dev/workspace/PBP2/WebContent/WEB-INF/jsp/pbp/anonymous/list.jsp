@@ -88,8 +88,8 @@
 				<th colspan="2"><div class="pbp-header txtleft"><span class="lsf-icon colororange" title="table"></span>อัตราการขึ้นเงินเดือน ประจำปี  ${anonymousWrapper.academicYearWrapper.academicYear.name}  </div></th>
 			</tr>
 			<tr>
-				<th class="thFirst"> ภาระงานที่ปฎิบัติสำเร็จ(%)   </th>
-				<th class="thFirst">อัตราการขึ้นเงินเดือน (%) </th> 
+				<th class="thFirst"> ภาระงานที่ปฎิบัติสำเร็จ   </th>
+				<th class="thFirst">ระดับคะแนน </th> 
 			</tr>
 		</thead>
 

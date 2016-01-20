@@ -133,8 +133,7 @@
 	           			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
             		<!--  รอบที่   1  -->	
             			</c:if>
-            		    &nbsp;    ระดับคะแนน     &nbsp; <span style="font-size:30px; color: rgb(112,146,190);"> ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp;         			
-	            
+            		   
 							 
 				
 							 
@@ -214,12 +213,9 @@
  				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} คะแนน </th>
 			</tr>	
 			
-			<tr>
-				<th  class="thLast" colspan="5" align="right"><span style="font-size:30px; color: rgb(112,146,190);">   ระดับคะแนน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate} </span> &nbsp; &nbsp; &nbsp; &nbsp;</th>
- 				
-			</tr>					
+	 					
 			
-		</tbody>
+		</tbody> 
  
 			</table>
 		</div>  

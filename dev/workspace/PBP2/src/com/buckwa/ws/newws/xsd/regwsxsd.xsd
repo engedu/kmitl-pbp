@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema targetNamespace="http://161.246.85.61/registrar/service/"
+<xs:schema targetNamespace="http://www1.reg.kmitl.ac.th/service/"
            xmlns="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://161.246.85.61/registrar/service/"
+           xmlns:tns="http://www1.reg.kmitl.ac.th/service/"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified">
            

@@ -803,6 +803,7 @@ public class PersonProfileController {
 					academicKPIWrapper.setpBPWorkType(workTypeList.get(0));
 					academicKPIWrapper.setpBPWorkTypeList(workTypeList);	
 //					mav.addObject("successCode", response.getSuccessCode()); 
+					academicKPIWrapper.setIndex("1");
 					mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 				}
 
@@ -942,10 +943,10 @@ public class PersonProfileController {
 		try{
 			logger.info(" ## replyMessageNew:"+academicKPI.getReplyMessage());
 			 
-			new ReplyPBPMessageNewValidator().validate(academicKPI, result);			
-			if (result.hasErrors()) {				
-				mav.setViewName("importwork");
-			}
+			//new ReplyPBPMessageNewValidator().validate(academicKPI, result);			
+			//if (result.hasErrors()) {				
+			//	mav.setViewName("importwork");
+			//}
 			new ImportWorkValidator().validate(academicKPI, result);			
 			if (result.hasErrors()) {				
 				mav.setViewName("importwork");
