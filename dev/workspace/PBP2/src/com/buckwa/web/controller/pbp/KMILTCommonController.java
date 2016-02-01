@@ -78,23 +78,23 @@ public class KMILTCommonController {
 				anonymousWrapper.setAcademicYearWrapper(academicYearWrapper);
 			}	
 			 
-			logger.info(" # anonymous 2");
-			request.put("academicYear",academicYear);
-			response = pBPWorkTypeService.getByAcademicYear(request);
-			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
-				pBPWorkTypeWrapper.setAcademicYear(academicYear);
-				anonymousWrapper.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
-			}		
-			logger.info(" # anonymous 3 ");
- 
-			response = markRankService.getByRound(request);
-			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				MarkRankWrapper markRankWrapper = (MarkRankWrapper)response.getResObj("markRankWrapper");
-			 
-				markRankWrapper.setAcademicYear(academicYear);
-				anonymousWrapper.setMarkRankWrapper(markRankWrapper);
-			}	
+//			logger.info(" # anonymous 2");
+//			request.put("academicYear",academicYear);
+//			response = pBPWorkTypeService.getByAcademicYear(request);
+//			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
+//				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+//				anonymousWrapper.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
+//			}		
+//			logger.info(" # anonymous 3 ");
+// 
+//			response = markRankService.getByRound(request);
+//			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//				MarkRankWrapper markRankWrapper = (MarkRankWrapper)response.getResObj("markRankWrapper");
+//			 
+//				markRankWrapper.setAcademicYear(academicYear);
+//				anonymousWrapper.setMarkRankWrapper(markRankWrapper);
+//			}	
  
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -123,26 +123,26 @@ public class KMILTCommonController {
 				AcademicKPIWrapper academicKPIWrapper = (AcademicKPIWrapper)response.getResObj("academicKPIWrapper");			 
 				academicKPIWrapper.setAcademicYear(academicYear);
 				
-				request.put("academicYear",academicYear);
-				 response = pBPWorkTypeService.getByAcademicYear(request);
-				if(response.getStatus()==BuckWaConstants.SUCCESS){	
-					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
-					academicKPIWrapper.setpBPWorkTypeList(pBPWorkTypeWrapper.getpBPWorkTypeList());
-				} 
-				request.put("workTypeCode",workTypeCode);
-				 response = pBPWorkTypeService.getByCode(request);
-				if(response.getStatus()==BuckWaConstants.SUCCESS){	
-					PBPWorkType pBPWorkType  = (PBPWorkType)response.getResObj("pBPWorkType");
-					 
-					academicKPIWrapper.setpBPWorkType(pBPWorkType);
-					
-					
-					List<PBPWorkTypeSub> workTypeSubList  =pBPWorkType.getpBPWorkTypeSubList();
-					if(workTypeSubList!=null&&workTypeSubList.size()>0){
-						// Set
-					}
-					 
-				}				 
+//				request.put("academicYear",academicYear);
+//				 response = pBPWorkTypeService.getByAcademicYear(request);
+//				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
+//					academicKPIWrapper.setpBPWorkTypeList(pBPWorkTypeWrapper.getpBPWorkTypeList());
+//				} 
+//				request.put("workTypeCode",workTypeCode);
+//				 response = pBPWorkTypeService.getByCode(request);
+//				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//					PBPWorkType pBPWorkType  = (PBPWorkType)response.getResObj("pBPWorkType");
+//					 
+//					academicKPIWrapper.setpBPWorkType(pBPWorkType);
+//					
+//					
+//					List<PBPWorkTypeSub> workTypeSubList  =pBPWorkType.getpBPWorkTypeSubList();
+//					if(workTypeSubList!=null&&workTypeSubList.size()>0){
+//						// Set
+//					}
+//					 
+//				}				 
 				mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 			}	 
 

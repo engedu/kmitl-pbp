@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.buckwa.dao.intf.pbp.FacultyDao;
 import com.buckwa.dao.intf.pbp.InstituteDao;
 import com.buckwa.dao.intf.pbp.PBPWorkTypeDao;
 import com.buckwa.domain.common.BuckWaRequest;
@@ -59,6 +60,9 @@ public class InstituteDaoImpl implements InstituteDao {
 	@Autowired
 	private PBPWorkTypeService pBPWorkTypeService;
 	
+	@Autowired
+	private FacultyDao  facultyDao;
+ 
 	@Override
 	public void recalculate( String academicYear ) {	 
 		
@@ -82,15 +86,18 @@ public class InstituteDaoImpl implements InstituteDao {
 			List<Department> departmentListX = getDepartmentMark(academicYear);
 			if(departmentListX!=null&&departmentListX.size()>0){	
 				
-				for(Department departmentx:departmentListX){
-					
+			 for(Department departmentx:departmentListX){
+			
+			 String facultyCode = departmentx.getFacultyCode();
 				 
 			 try{
 				 departmentx.setAcademicYear(academicYear);
 				 request = new BuckWaRequest(); 
 				 
 				request.put("academicYear",academicYear);
-				BuckWaResponse response = pBPWorkTypeService.getByAcademicYear(request);
+				request.put("facultyCode",facultyCode);
+				//BuckWaResponse response = pBPWorkTypeService.getByAcademicYear(request);
+				BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
 					List<PBPWorkType> pBPWorkTypeList = pBPWorkTypeWrapper.getpBPWorkTypeList();				
@@ -970,8 +977,8 @@ public class InstituteDaoImpl implements InstituteDao {
 						 
 					 } 		
 					 
-				 
-					personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType)); 
+					 String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+					personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType,facultyCode)); 
 					totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
 				}		
 				

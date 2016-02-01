@@ -87,7 +87,7 @@
 		<div class="pbptableWrapper">
             <table class="pbp-table">
              <thead><tr><th colspan="2">
- 		 	<div class="pbp-header"><span class="lsf-icon colororange" title="list" ></span>เอกสารแนบ  (ไม่เกิน 10 MB) </div>
+ 		 	<div class="pbp-header"> เอกสารแนบ  (ไม่เกิน 10 MB) </div>
 			</th></tr></thead>
              <c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttachFileList}" var="domain" varStatus="status">
  	 				 <tr>
@@ -146,8 +146,7 @@
    		 <div class="messageReply"> 
    		 
    		 	<form:textarea path="replyMessage" cssClass="tinymce" rows="10" cols="80" />
-   		 	 <span class ="require"  >*</span> 
-   		 	 <form:errors path="replyMessage" cssClass="require" />
+   		 
    		 </div> 
    		 </td>
    		 </tr>

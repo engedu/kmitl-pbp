@@ -19,7 +19,7 @@
 		<thead>
 			<tr>
 				<th>
-				<span class="lsf-icon colororange" title="graph"></span>คะแนนประจำปีการศึกษา 2557
+				<span class="lsf-icon colororange" title="graph"></span>คะแนนประจำปี
 				</th>
 			</tr>
 		</thead>
@@ -43,7 +43,7 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "คะแนนประจำปีการศึกษา 2557"
+                    text: "คะแนนประจำปี"
                 },
                 dataSource: {
                     transport: {

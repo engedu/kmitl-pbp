@@ -99,7 +99,7 @@
     
  
 		<div class="pbptableWrapper">
-           <div  ><span style="color: red;"> * เอกสารแนบ  (ไม่เกิน 10 MB)</span></div>
+           <div  >  เอกสารแนบ  (ไม่เกิน 10 MB) </div>
             
             
             	<table style="width: 600px;" >
@@ -173,8 +173,7 @@
    		 <div style="width: 90%;text-align: left;"> <h3 >ส่งข้อความถึงหัวหน้าภาค/ประธานสาขาวิชา</h3> </div>
    		
    		 	<form:textarea path="replyMessage" cssClass="tinymce" rows="5" cols="60" />
-   		 	 <span class ="require"  >*</span> 
-   		 	 <form:errors path="replyMessage" cssClass="require" />
+   		 
    		 </div> 
    		 </td>
    		 </tr>

@@ -8,23 +8,49 @@
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
 
-<form:form modelAttribute="pBPWorkTypeWrapper" action="edit.htm" method="POST" name="mainForm"> 	 
-<form:hidden path="academicYear"/>
+<form:form modelAttribute="pBPWorkTypeWrapper" action="search.htm" method="POST" name="mainForm">  	 
+ 
  
 <div class="post"> 
 	<div class="entry"> 
 			 <div class="pbptableWrapper">
-             
-               <div class="pbp-header"> 
-               <table>
-               	<tr>
-               		<td width="80%">	ข้อมูลประเภทภาระงาน ประจำปีการศึกษา  ${pBPWorkTypeWrapper.academicYear}  </td>
-               		<td > <!-- <a> <input	value="<spring:message code="label.button.new"/>" type="button" class="btn btn-primary" onclick="create();"> </a>  -->	</td>
-               	</tr>
-               </table>
-               	 
-             </div> 	
-	
+			 
+			 
+			 
+		<table class="pbp-table"> 
+			<thead><tr><th colspan="7">
+			<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>ข้อมูลประเภทภาระงาน คณะ ${pBPWorkTypeWrapper.facultyName} ประจำปีการศึกษา ${pBPWorkTypeWrapper.academicYear}   </div>
+			</thead></tr></th>
+ 		
+			
+			<tr>	
+					  <td class="label-form">
+					   ประจำปี:   
+				</td>
+				 <td>
+				 	 
+            		 <form:select path="academicYear" > 
+							<form:options items="${pBPWorkTypeWrapper.academicYearList}" itemValue="name" itemLabel="name" />
+						</form:select>
+				</td> 
+				<td class="label-form">
+					คณะ:
+				</td>
+				<td>
+            		 <form:select path="facultyCodeSelect" > 
+							<form:options items="${pBPWorkTypeWrapper.facultyList}" itemValue="code" itemLabel="name" />
+						</form:select> 					 
+				</td>
+				 <td rowspan="2">
+					 
+					<input class="btn btn-primary" value="<spring:message code="label.button.search"/>" type="submit"> 
+				</td>
+ 
+			</tr> 
+
+		</table>
+		<div class="line">&nbsp;</div>		 
+
 	
 	
 	<table>
@@ -35,7 +61,7 @@
 				<th colspan="2">ภาระงานคาดหวัง ต่อปี </td>
 				<!--<td rowspan="2">Sub  </td>  -->
 				<th rowspan="2">ฐานการคำนวณ  </td>
-			 	<th rowspan="2">Delete  </td>
+			 <!--	<th rowspan="2">Delete  </td> -->
 			</tr>
 			<tr>
 				<th> ขั้นต่ำ   </td>
@@ -83,12 +109,13 @@
 				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].limitBase" value="${domain.limitBase}"  />  
 				   
 				</td>		 		 
-		 		
+		 		<!-- 
 				<td>					<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/delete.htm?pBPWorkTypeId=<c:out  value="${domain.workTypeId}"/>"
 												onclick="return confirmPage('ยืนยันการลบข้อมูล <c:out value="${domain.name}"/> ?')">
 												Delete
 												</a> 
 				</td>
+				 -->
 			</tr> 
 			</c:forEach>
 		</tbody>
@@ -98,7 +125,8 @@
  </div>
 	
 	<div class="back_center"> 
-	<input class="btn btn-primary"	value="<spring:message code="label.button.save"/>" type="submit" > 
+	 
+	<input value="<spring:message code="label.button.save"/>" type="button" class="btn btn-primary" onclick="edit();"/>
 	</div>
 	</div>
 </div>
@@ -113,10 +141,17 @@
 		form.method='GET';	
 		form.submit();	
 	}
+	
 	function create (){		
 		var form = document.forms['mainForm']; 
 		form.action ="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/create.htm";
 		form.method='GET';	
+		form.submit();
+	}
+	function edit (){		
+		var form = document.forms['mainForm']; 
+		form.action ="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/edit.htm";
+		form.method='POST';	
 		form.submit();
 	}
 </script>

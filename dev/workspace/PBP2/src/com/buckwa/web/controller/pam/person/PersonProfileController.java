@@ -150,8 +150,10 @@ public class PersonProfileController {
 			
 			String academicYear = academicYearUtil.getAcademicYear();
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
+			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
 			logger.info("viewUserProfile  username :"+user.getUsername());
-
+			logger.info("### facultyCodeFromContext :"+facultyCode);
+			
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
 			request.put("academicYear", academicYearUtil.getAcademicYear());
@@ -189,6 +191,7 @@ public class PersonProfileController {
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",person.getEvaluateRound());
 				request.put("employeeType",person.getEmployeeTypeNo());
+				request.put("facultyCode",facultyCode);
 				
 				//response = pBPWorkTypeService.getByAcademicYear(request);
 				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
@@ -352,6 +355,7 @@ public class PersonProfileController {
 				request.put("round",round);
 				request.put("employeeType",person.getEmployeeTypeNo());
 				
+				request.put("facultyCode",person.getFacultyCode());
 				//response = pBPWorkTypeService.getByAcademicYear(request);
 				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
 				
@@ -506,10 +510,12 @@ public class PersonProfileController {
 				
 				mav.addObject("person", person); 
 				//String academicYear =schoolUtil.getCurrentAcademicYear();
+				String facultyCode = person.getFacultyCode();
 				request.put("academicYear",selectAcademicYear);
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",round);
 				request.put("employeeType",person.getEmployeeTypeNo());
+				request.put("facultyCode",facultyCode);
 				
 				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
 				
@@ -563,6 +569,7 @@ public class PersonProfileController {
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",round);
 				request.put("employeeType",person.getEmployeeTypeNo());
+				request.put("facultyCode",person.getFacultyCode());
 				
 				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
 				
@@ -754,12 +761,12 @@ public class PersonProfileController {
 		mav.setViewName("initWorkImport");
 		try {
 			BuckWaRequest request = new BuckWaRequest();
-			String academicYear =schoolUtil.getCurrentAcademicYear();
-			request.put("academicYear",academicYear);
+			String academicYear =schoolUtil.getCurrentAcademicYear(); 
+			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
 			
-			 
-			request.put("academicYear",academicYear);
-			BuckWaResponse  response = pBPWorkTypeService.getByAcademicYear(request);
+			request.put("academicYear",academicYear); 
+			request.put("facultyCode",facultyCode); 
+			BuckWaResponse  response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
 				List<PBPWorkType> workTypeListx = pBPWorkTypeWrapper.getpBPWorkTypeList();
@@ -796,7 +803,8 @@ public class PersonProfileController {
 					request.put("workTypeCode",workType0.getCode());
 				}
 				
-				response = academicKPIService.getByAcademicYearWorkTypeCode(request);
+				//response = academicKPIService.getByAcademicYearWorkTypeCode(request);
+				response = academicKPIService.getByAcademicYearWorkTypeCodeFacultyCode(request);
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					AcademicKPIWrapper academicKPIWrapper = (AcademicKPIWrapper)response.getResObj("academicKPIWrapper");			 
 					academicKPIWrapper.setAcademicYear(academicYear); 
@@ -825,15 +833,20 @@ public class PersonProfileController {
 		try{
 			BuckWaRequest request = new BuckWaRequest();
 			 
+			String facultyCode =BuckWaUtils.getFacultyCodeFromUserContext();
+			request.put("facultyCode",facultyCode);
 			request.put("academicYear",academicYear);
 			request.put("workTypeCode",workTypeCode);
-			BuckWaResponse response = academicKPIService.getByAcademicYearWorkTypeCode(request);
+			
+			//BuckWaResponse response = academicKPIService.getByAcademicYearWorkTypeCode(request);
+			BuckWaResponse response = academicKPIService.getByAcademicYearWorkTypeCodeFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				AcademicKPIWrapper academicKPIWrapper = (AcademicKPIWrapper)response.getResObj("academicKPIWrapper");			 
 				academicKPIWrapper.setAcademicYear(academicYear);
 				academicKPIWrapper.setWorkTypeCode(workTypeCode);
-				request.put("academicYear",academicYear);
-				 response = pBPWorkTypeService.getByAcademicYear(request);
+				//request.put("academicYear",academicYear);
+				 //response = pBPWorkTypeService.getByAcademicYear(request);
+				 response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
 					
@@ -856,7 +869,7 @@ public class PersonProfileController {
 					academicKPIWrapper.setpBPWorkTypeList(workTypeList);
 				} 
 				request.put("workTypeCode",workTypeCode);
-				 response = pBPWorkTypeService.getByCode(request);
+				 response = pBPWorkTypeService.getByCodeAcademicFacultyCode(request);
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					PBPWorkType pBPWorkType  = (PBPWorkType)response.getResObj("pBPWorkType");
 					 
@@ -887,10 +900,12 @@ public class PersonProfileController {
 		mav.setViewName("importwork");
 		try{
 			BuckWaRequest request = new BuckWaRequest();
-			 
+			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
 			request.put("academicYear",academicYear);
 			request.put("academicKPICode",academicKPICode);
+			request.put("facultyCode",facultyCode);
 			BuckWaResponse response = academicKPIService.getByCodeAcademicYear(request);
+			 
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				AcademicKPI academicKPI = (AcademicKPI)response.getResObj("academicKPI");	
 				
@@ -906,7 +921,7 @@ public class PersonProfileController {
 						String attributeName =tmp.getName();
 						logger.info(" Attribute Name:"+attributeName+" index of �Ѵ��ǹ:"+attributeName.indexOf("�Ѵ��ǹ"));
 						
-						if(attributeName.indexOf("�Ѵ��ǹ")!=-1){
+						if(attributeName.indexOf("สัดส่วน")!=-1){
 							tmp.setValue("100");
 						}
 						
@@ -1139,7 +1154,8 @@ public class PersonProfileController {
 				
 				String academicYear = schoolUtil.getCurrentAcademicYear();
 				String workTypeCode ="1";
-				
+				String facultyCode =BuckWaUtils.getFacultyCodeFromUserContext();
+				request.put("facultyCode",facultyCode);
 				request.put("academicYear",academicYear);
 				request.put("workTypeCode",workTypeCode);
 				 response = academicKPIService.getByAcademicYearWorkTypeCode(request);
@@ -1148,7 +1164,8 @@ public class PersonProfileController {
 					academicKPIWrapper.setAcademicYear(academicYear);
 					academicKPIWrapper.setWorkTypeCode(workTypeCode);
 					request.put("academicYear",academicYear);
-					 response = pBPWorkTypeService.getByAcademicYear(request);
+					// response = pBPWorkTypeService.getByAcademicYear(request);
+					 response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 					if(response.getStatus()==BuckWaConstants.SUCCESS){	
 						PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
 						
@@ -1171,7 +1188,7 @@ public class PersonProfileController {
 						academicKPIWrapper.setpBPWorkTypeList(workTypeList);
 					} 
 					request.put("workTypeCode",workTypeCode);
-					 response = pBPWorkTypeService.getByCode(request);
+					 response = pBPWorkTypeService.getByCodeAcademicFacultyCode(request);
 					if(response.getStatus()==BuckWaConstants.SUCCESS){	
 						PBPWorkType pBPWorkType  = (PBPWorkType)response.getResObj("pBPWorkType");
 						 

@@ -77,25 +77,22 @@ public class JSONPersonController {
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Person person = (Person) response.getResObj("person");
 				user.setFirstLastName(person.getThaiName() + " " + person.getThaiSurname());
-				List<Paper> paperList = (List<Paper>) response.getResObj("paperList");
+			 
 
-				// Set Date format
-				// person.setBirthdateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getBirthdate()));
-				// person.setWorkingDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getWorkingDate()));
-				// person.setAssignDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getAssignDate()));
-				// person.setRetireDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getRetireDate()));
-
+ 
 				person.setAcademicYear(academicYear);
 				person.setAcademicYearList(academicYearUtil.getAcademicYearList());
 				person.setEvaluateRound("1");
 				user.setPersonProfile(person);
 				mav.addObject("person", person);
-				mav.addObject("paperList", paperList);
+				 
+				String facultyCode = person.getFacultyCode();
 
 				request.put("academicYear", academicYear);
 				request.put("userName", BuckWaUtils.getUserNameFromContext());
 				request.put("round", person.getEvaluateRound());
 				request.put("employeeType", person.getEmployeeTypeNo());
+				request.put("facultyCode", facultyCode);
 
 				// response = pBPWorkTypeService.getByAcademicYear(request);
 				response = pBPWorkTypeService.getCalculateByAcademicYear(request);

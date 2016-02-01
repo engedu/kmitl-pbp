@@ -43,57 +43,10 @@
 	<span style="font-size: 30px; color: rgb(74,132,47);"> ${academicYearWrapper.academicYear.startDateThaiShort} ${academicYearWrapper.academicYear.name}  &nbsp; -  &nbsp; ${academicYearWrapper.academicYear.endDateThaiShort} ${academicYearWrapper.nextAcademicYear} </span>
 	</div>
 	-->
-	
-		 <div class="pbptableWrapper">
-		 
-			<table class="pbp-table">
-				<tbody>
-					<tr>
-					<td class="tdFirst">ปีการศึกษา ปัจุจุบัน    ${academicYearWrapper.academicYear.name}</td>
-					<td class="tdFirst"> ${academicYearWrapper.academicYear.startDateThaiShort}  &nbsp; -  &nbsp; ${academicYearWrapper.academicYear.endDateThaiShort   } 
-					   
-					<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicYear/editDateAcademicYear.htm?academicYear=<c:out value="${academicYearWrapper.academicYear.name}"/>"> <span class="lsf-icon colororange" title="gear"></a>
-					  
-					</td>
-					 <td>
-					              <a href="<%=request.getContextPath()%>/admin/pbp/academicYear/ajustYear.htm"><input class="btn btn-primary" value="ปรับปีการศึกษา" type="button"  >  </a> 
-               &nbsp;  &nbsp; 
-               
-					 </td>
-					</tr>
-				</tbody> 
-			</table> 		 
-		 
-            <div class="pbp-header"> 
-            
-               <table style="width: 100%;">
-               		<tr>
-               			<td width="70%;"> ปีการศึกษา  &nbsp; 
-               			
-            		 <form:select path="academicYear" > 
-							<form:options items="${academicYearList}" itemValue="name" itemLabel="name" />
-						</form:select> 
-               			</td>
-               			<td>
  
-               <!-- 
-	  			<a href="<%=request.getContextPath()%>/admin/pbp/academicYear/getCurrentAcademicYear.htm"><input class="btn btn-primary" value="สิ้นสุดการประเมิน" type="button"  >  </a>              			
-               			 --> 
-               			</td>
-               		</tr>
-               		
-               </table>
-            
-            		  
-	 
-             </div> 
-			
-
-		</div>	
-		
-		<br><br>
-		
 		 <div class="pbptableWrapper">
+		  <div style="width: 100%; text-align: right ;"><a href="<%=request.getContextPath()%>/admin/pbp/academicYear/ajustYear.htm"><input class="btn btn-primary" value="ปรับปีการศึกษา" type="button"  >  </a></div> 
+		 	<br>
 		 	<table class="pbp-table">
 		 		<thead>
 		 		<tr>

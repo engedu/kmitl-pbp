@@ -1,5 +1,7 @@
 package com.buckwa.web.controller.pbp;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -16,13 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.AcademicKPI;
+import com.buckwa.domain.pbp.Faculty;
+import com.buckwa.domain.pbp.FacultyWrapper;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.domain.validator.pbp.PBPWorkTypeValidator;
+import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.school.SchoolUtil;
+import com.buckwa.web.util.AcademicYearUtil;
 
 @Controller
 @RequestMapping("/admin/pbp/pBPWorkType")
@@ -31,9 +37,13 @@ public class PBPWorkTypeController {
 	private static Logger logger = Logger.getLogger(PBPWorkTypeController.class);	 
 	@Autowired
 	private PBPWorkTypeService pBPWorkTypeService;	
+	@Autowired
+	private FacultyService facultyService;	
 	
 	@Autowired
 	private SchoolUtil schoolUtil;
+	@Autowired
+	private AcademicYearUtil academicYearUtil;
 	
 	@RequestMapping(value="init.htm", method = RequestMethod.GET)
 	public ModelAndView initList() {
@@ -44,11 +54,27 @@ public class PBPWorkTypeController {
 			BuckWaRequest request = new BuckWaRequest();
 			String academicYear =schoolUtil.getCurrentAcademicYear();
 			request.put("academicYear",academicYear);
-			BuckWaResponse response = pBPWorkTypeService.getByAcademicYear(request);
+			String facultyCodeSelect ="01";
+			request.put("facultyCode",facultyCodeSelect);
+			BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
 			 
 				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+				pBPWorkTypeWrapper.setFacultyCodeSelect(facultyCodeSelect);
+				pBPWorkTypeWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
+				
+				 response = facultyService.getFacultyListByAcademicYear(request);
+				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+					 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
+					 for(Faculty ftmp:facultyList){
+						 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
+							 pBPWorkTypeWrapper.setFacultyName(ftmp.getName());
+						 }
+						 
+					 }
+					 pBPWorkTypeWrapper.setFacultyList(facultyList);
+				}
 				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
 			}				  
 		}catch(Exception ex){
@@ -58,7 +84,44 @@ public class PBPWorkTypeController {
 		return mav;
 	}	
 	
-
+	@RequestMapping(value="search.htm", method = RequestMethod.POST)
+	public ModelAndView search(@RequestParam("academicYear") String academicYear,@RequestParam("facultyCodeSelect") String facultyCodeSelect) {
+		logger.info(" Start  ");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("pBPWorkTypeList");
+		try{
+			BuckWaRequest request = new BuckWaRequest();
+			//String academicYear =schoolUtil.getCurrentAcademicYear();
+			request.put("academicYear",academicYear);
+			request.put("facultyCode",facultyCodeSelect);
+			BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
+			 
+				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+				pBPWorkTypeWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
+				pBPWorkTypeWrapper.setFacultyCodeSelect(facultyCodeSelect);
+				
+				 response = facultyService.getFacultyListByAcademicYear(request);
+				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+					 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
+					 for(Faculty ftmp:facultyList){
+						 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
+							 pBPWorkTypeWrapper.setFacultyName(ftmp.getName());
+						 }
+						 
+					 }
+					 pBPWorkTypeWrapper.setFacultyList(facultyList);
+				}
+				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
+			}				  
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}	
+	
 	@RequestMapping(value="create.htm", method = RequestMethod.GET)
 	public ModelAndView init() {
 		logger.info(" Start  ");
@@ -74,13 +137,13 @@ public class PBPWorkTypeController {
 		if(response.getStatus()==BuckWaConstants.SUCCESS){							 
 			 
 			request.put("academicYear",academicYear);
-			 response = pBPWorkTypeService.getByAcademicYear(request);
-			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
-			 
-				pBPWorkTypeWrapper.setAcademicYear(academicYear);
-				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
-			} 				
+//			 response = pBPWorkTypeService.getByAcademicYear(request);
+//			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
+//			 
+//				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+//				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
+//			} 				
 		}else {
 			mav.addObject("errorCode", response.getErrorCode()); 
 			 
@@ -121,7 +184,9 @@ public class PBPWorkTypeController {
 	
 	@RequestMapping(value="edit.htm", method = RequestMethod.POST)
 	public ModelAndView edit(@ModelAttribute PBPWorkTypeWrapper pBPWorkTypeWrapper, BindingResult result) {	
-		logger.info(" Start  ");
+		 String facultyCodeSelect =pBPWorkTypeWrapper.getFacultyCodeSelect();
+		 String academicYear = pBPWorkTypeWrapper.getAcademicYear();
+		logger.info(" Start  facultyCodeSelect:"+facultyCodeSelect+" academicYear:"+academicYear);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.ADMIN_INIT);
 		mav.setViewName("pBPWorkTypeList");
@@ -142,13 +207,30 @@ public class PBPWorkTypeController {
 				}				
 			}		
 			BuckWaRequest request = new BuckWaRequest();
-			String academicYear =schoolUtil.getCurrentAcademicYear();
+			//String academicYear =schoolUtil.getCurrentAcademicYear();
 			request.put("academicYear",academicYear);
-			BuckWaResponse response = pBPWorkTypeService.getByAcademicYear(request);
+			
+			request.put("facultyCode",facultyCodeSelect);
+			BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				 pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
 			 
 				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+				pBPWorkTypeWrapper.setFacultyCodeSelect(facultyCodeSelect);
+				pBPWorkTypeWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
+
+				 response = facultyService.getFacultyListByAcademicYear(request);
+					if(response.getStatus()==BuckWaConstants.SUCCESS){	
+						 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
+						 for(Faculty ftmp:facultyList){
+							 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
+								 pBPWorkTypeWrapper.setFacultyName(ftmp.getName());
+							 }
+							 
+						 }
+						 pBPWorkTypeWrapper.setFacultyList(facultyList);
+					}
+					
 				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
 			}	
 		}catch(Exception ex){
@@ -173,13 +255,13 @@ public class PBPWorkTypeController {
 		if(response.getStatus()==BuckWaConstants.SUCCESS){							 
 			 
 			request.put("academicYear",academicYear);
-			 response = pBPWorkTypeService.getByAcademicYear(request);
-			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
-			 
-				pBPWorkTypeWrapper.setAcademicYear(academicYear);
-				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
-			} 				
+//			 response = pBPWorkTypeService.getByAcademicYear(request);
+//			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
+//			 
+//				pBPWorkTypeWrapper.setAcademicYear(academicYear);
+//				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
+//			} 				
 		}else {
 			mav.addObject("errorCode", response.getErrorCode()); 
 			 

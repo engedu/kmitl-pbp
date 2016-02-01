@@ -25,13 +25,34 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	private PBPWorkTypeDao pBPWorkTypeDao;
  
 
+//	@Override	
+//	public BuckWaResponse getByAcademicYear(BuckWaRequest request) {
+//		BuckWaResponse response = new BuckWaResponse();
+//		try{				 
+//			
+//			String academicYear = (String)request.get("academicYear");
+//			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getByAcademicYear(academicYear);
+//		 
+//			 response.addResponse("pBPWorkTypeWrapper",pBPWorkTypeWrapper);
+// 	
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//			response.setStatus(BuckWaConstants.FAIL);
+//			response.setErrorCode("E001");			
+//		}
+//	 
+//		return response;
+//	}
+	 
+	
 	@Override	
-	public BuckWaResponse getByAcademicYear(BuckWaRequest request) {
+	public BuckWaResponse getByAcademicYearFacultyCode(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 
 			
 			String academicYear = (String)request.get("academicYear");
-			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getByAcademicYear(academicYear);
+			String facultyCode = (String)request.get("facultyCode");
+			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getByAcademicYearFacultyCode(academicYear,facultyCode);
 		 
 			 response.addResponse("pBPWorkTypeWrapper",pBPWorkTypeWrapper);
  	
@@ -44,6 +65,7 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 		return response;
 	}
 	
+	
 	@Override	
 	public BuckWaResponse getCalculateByAcademicYear(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
@@ -53,7 +75,9 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 			String userName = (String)request.get("userName");
 			String round = (String)request.get("round");
 			String employeeType = (String)request.get("employeeType");
-			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getCalculateByAcademicYear(academicYear,userName,round,employeeType);
+			String facultyCode = (String)request.get("facultyCode");
+			
+			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getCalculateByAcademicYear(academicYear,userName,round,employeeType,facultyCode);
 		 
 			 response.addResponse("pBPWorkTypeWrapper",pBPWorkTypeWrapper);
  	
@@ -87,13 +111,14 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	}
 	
 	@Override	
-	public BuckWaResponse getByCode(BuckWaRequest request) {
+	public BuckWaResponse getByCodeAcademicFacultyCode(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 
 			
 			String code =  request.get("workTypeCode")+"";
 			String academicYear =  request.get("academicYear")+"";
-			PBPWorkType  pBPWorkType  = ( PBPWorkType)pBPWorkTypeDao.getByCode(code,academicYear);
+			String facultyCode =  request.get("facultyCode")+"";
+			PBPWorkType  pBPWorkType  = ( PBPWorkType)pBPWorkTypeDao.getByCodeAcademicFacultyCode (code,academicYear,facultyCode);
 		 
 			 response.addResponse("pBPWorkType",pBPWorkType);
  	

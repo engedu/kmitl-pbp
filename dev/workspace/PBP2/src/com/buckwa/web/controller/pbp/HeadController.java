@@ -243,8 +243,11 @@ public class HeadController {
 				Department department = (Department)response.getResObj("department"); 
 				department.setAcademicYear(academicYear);
 				 request = new BuckWaRequest(); 
+				 String facultyCode =department.getFacultyCode();
 				request.put("academicYear",academicYear);
-				 response = pBPWorkTypeService.getByAcademicYear(request);
+				request.put("facultyCode",facultyCode);
+				 //response = pBPWorkTypeService.getByAcademicYear(request);
+				 response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
 					List<PBPWorkType> pBPWorkTypeList = pBPWorkTypeWrapper.getpBPWorkTypeList();

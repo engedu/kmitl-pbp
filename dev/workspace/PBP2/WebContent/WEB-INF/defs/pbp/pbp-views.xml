@@ -21,7 +21,8 @@
 	<bean id="dateAcademicYearEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="dateAcademicYearEdit" /></bean>
 	<bean id="dateEvaluateRoundEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="dateEvaluateRoundEdit" /></bean>
 	
-	
+		<!--  Evaluate Round -->
+	<bean id="evaluateRound"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="evaluateRound" /></bean>	
 	
 	<!--  Faculty -->
 	<bean id="facultyList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="facultyList" /></bean>

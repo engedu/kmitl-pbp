@@ -77,7 +77,7 @@
         
      <c:if test="${academicKPI.academicKPIUserMappingId!=null}"> 
 		<div class="pbptableWrapper">
-            <div  ><span style="color: red;"> * เอกสารแนบ  (ไม่เกิน 10 MB)</span></div>
+            <div  > เอกสารแนบ  (ไม่เกิน 10 MB) </div>
             
              	<table style="width: 600px; margin-left: 15%;"> 
              <c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttachFileList}" var="domain" varStatus="status">

@@ -7,8 +7,10 @@ import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 public interface PBPWorkTypeDao {
 	
 
-	public PBPWorkTypeWrapper getByAcademicYear(String academicYear); 
-	public PBPWorkTypeWrapper getCalculateByAcademicYear(String academicYear,String userName,String round,String employeeType); 
+//	public PBPWorkTypeWrapper getByAcademicYear(String academicYear); 
+	 
+	
+	public PBPWorkTypeWrapper getCalculateByAcademicYear(String academicYear,String userName,String round,String employeeType,String facultyCode); 
 	
 	public boolean isExist(PBPWorkType domain);
 	public void create(PBPWorkType domain);
@@ -24,5 +26,6 @@ public interface PBPWorkTypeDao {
 	public void deleteSub(String markRankId);
 	public void editSub(PBPWorkType domain);
 	
-	public PBPWorkType getByCode(String code,String academicYear);
+	public PBPWorkType getByCodeAcademicFacultyCode(String code,String academicYear,String facultyCode);
+	public PBPWorkTypeWrapper getByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode);
 }

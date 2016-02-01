@@ -64,7 +64,8 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 			
 			String academicYear = (String)request.get("academicYear");
 			String academicKPICode = (String)request.get("academicKPICode");
-			AcademicKPI academicKPI= ( AcademicKPI)academicKPIDao.getByCodeAcademicYear(academicKPICode,academicYear);
+			String facultyCode = (String)request.get("facultyCode");
+			AcademicKPI academicKPI= ( AcademicKPI)academicKPIDao.getByCodeAcademicYearFacultyCode (academicKPICode,academicYear,facultyCode);
 		 
 			 response.addResponse("academicKPI",academicKPI);
  	
@@ -173,6 +174,28 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 	 
 		return response;
 	}
+	
+	@Override	
+	public BuckWaResponse getByAcademicYearWorkTypeCodeFacultyCode(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+			String workTypeCode = (String)request.get("workTypeCode");
+			String facultyCode = (String)request.get("facultyCode");
+			AcademicKPIWrapper academicKPIWrapper= ( AcademicKPIWrapper)academicKPIDao.getByAcademicYearWorkTypeCodeFacultyCode(academicYear,workTypeCode,facultyCode);
+		 
+			 response.addResponse("academicKPIWrapper",academicKPIWrapper);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
 	
 	
 	@Override

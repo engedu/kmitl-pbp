@@ -35,6 +35,10 @@
       <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/academicYear/dateEvaluateRoundEdit.jsp"/>      
   </definition>  
   
+    <!--  Evaluate Round --> 
+    <definition name="evaluateRound" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/evaluateRound/list.jsp"/>      
+  </definition> 
   
   
   <!--  Faculty -->  

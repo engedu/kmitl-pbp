@@ -20,6 +20,7 @@ import com.buckwa.domain.admin.Group;
 import com.buckwa.domain.admin.Holiday;
 import com.buckwa.domain.pam.Leave;
 import com.buckwa.domain.pam.LeaveTotal;
+import com.buckwa.domain.pam.Person;
 
 public class BuckWaUtils {
 	private static Logger logger = Logger.getLogger(BuckWaUtils.class);
@@ -82,7 +83,7 @@ public class BuckWaUtils {
 		BuckWaUser userReturn = null;
 		try {
 			userReturn = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+			
 		} catch (Exception ex) {
 			// ex.printStackTrace();
 			// User Not Found
@@ -91,6 +92,24 @@ public class BuckWaUtils {
 		}
 
 		return userReturn;
+	}
+	
+	public static String getFacultyCodeFromUserContext() throws BuckWaException {
+
+		String facultyCode = null;
+		try {
+			BuckWaUser buckwaUser = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Person person =buckwaUser.getPersonProfile();
+			facultyCode = person.getFacultyCode();
+			logger.info("   ########### facultyCode:"+facultyCode);
+		} catch (Exception ex) {
+			 ex.printStackTrace();
+			// User Not Found
+			// throw new BuckWaException("E003","");
+
+		}
+
+		return facultyCode;
 	}
 
 	public static boolean ifAnyGROUP(String groupName) {

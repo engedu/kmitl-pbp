@@ -40,6 +40,10 @@ public interface FacultyService {
 	
 	public BuckWaResponse getAllFaculty(BuckWaRequest request);
 	
+	public BuckWaResponse getFacultyListByAcademicYear(BuckWaRequest request);
+	
+	public BuckWaResponse getFacultyByCodeByAcademicYearAndName(BuckWaRequest request);
+	
 	
 }
 

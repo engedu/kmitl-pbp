@@ -37,7 +37,7 @@
 				   	   	<thead>
 				   	   		<tr>
 				   	   			<th class="thFirst" >ภาระงานที่ปฎิบัติสำเร็จ(%) </th>
-				   	   			<th class="thFirst">อัตราการขึ้นเงินเดือน (%) </th>
+				   	   			<th class="thFirst">ระดับคะแนน (%) </th>
 			 
 				   	   		</tr>
 				   	   	</thead>

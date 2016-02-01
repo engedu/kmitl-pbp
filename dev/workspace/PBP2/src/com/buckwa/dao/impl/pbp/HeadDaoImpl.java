@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.buckwa.dao.intf.pbp.FacultyDao;
 import com.buckwa.dao.intf.pbp.HeadDao;
 import com.buckwa.dao.intf.pbp.PBPWorkTypeDao;
 import com.buckwa.domain.pbp.AcademicKPI;
@@ -32,9 +33,9 @@ import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.report.DepartmentReport;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
-import com.buckwa.domain.pbp.report.ReportDepartmentLevel;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
+import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolConstants;
 import com.buckwa.util.school.SchoolUtil;
 
@@ -53,6 +54,9 @@ public class HeadDaoImpl implements HeadDao {
 	
 	@Autowired
 	private PBPWorkTypeDao pBPWorkTypeDao;
+	
+	@Autowired
+	private FacultyDao  facultyDao;
  
 	@Override
 	public AcademicKPIUserMappingWrapper getByHeadAcademicYear( String headUserName ,String academicYear,String status) {	 
@@ -504,8 +508,10 @@ public class HeadDaoImpl implements HeadDao {
 					 
 				 } 		
 				 
-			 
-				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType)); 
+				 
+			    String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+				 
+				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType,facultyCode)); 
 				totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
 			}
 			
@@ -567,8 +573,8 @@ public class HeadDaoImpl implements HeadDao {
 					 
 				 } 		
 				 
-			 
-				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType)); 
+				    String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType,facultyCode)); 
 				totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
 			}
 			

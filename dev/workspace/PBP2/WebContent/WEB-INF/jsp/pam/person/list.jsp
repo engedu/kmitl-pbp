@@ -134,7 +134,7 @@
             		<!--  รอบที่   1  -->	
             			</c:if>
             		   
-							 
+							คะแนน รวม ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} 
 				
 							 
 							 

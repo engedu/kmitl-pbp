@@ -18,7 +18,7 @@ public class AcademicKPI extends BaseDomain {
 	private BigDecimal mark;
 	private String unitCode;
 	private String unitDesc;
-
+    private String facultyCode;
 	private String specialP1;
 	private String specialP2;
 	private String specialP3;
@@ -51,6 +51,14 @@ public class AcademicKPI extends BaseDomain {
 
 	public String getOrderNo() {
 		return orderNo;
+	}
+
+	public String getFacultyCode() {
+		return facultyCode;
+	}
+
+	public void setFacultyCode(String facultyCode) {
+		this.facultyCode = facultyCode;
 	}
 
 	public void setOrderNo(String orderNo) {

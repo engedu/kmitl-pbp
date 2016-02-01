@@ -13,7 +13,7 @@
 <body> 
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
-            <strong>ระดับคะแนนในภาควิชา    ${departmentName}  ประจำปีการศึกษา  2557   
+            <strong>ระดับคะแนนในภาควิชา    ${departmentName}    
         <!--     <a href="<%=request.getContextPath()%>/json/person/getBarchart">JSON Object</a> -->
             </h1> 
   <div id="example">

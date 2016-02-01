@@ -16,6 +16,13 @@ public class AcademicKPIWrapper {
 
 	private String index;
 	private String color;
+	
+	private List<AcademicYear> academicYearList;
+	
+	private List<Faculty> facultyList ;
+	private String facultyCodeSelect;
+	private String facultyName;
+	private String workTypeName;
 
 	public String getWorkTypeCode() {
 		return workTypeCode;
@@ -79,6 +86,46 @@ public class AcademicKPIWrapper {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public List<AcademicYear> getAcademicYearList() {
+		return academicYearList;
+	}
+
+	public void setAcademicYearList(List<AcademicYear> academicYearList) {
+		this.academicYearList = academicYearList;
+	}
+
+	public List<Faculty> getFacultyList() {
+		return facultyList;
+	}
+
+	public void setFacultyList(List<Faculty> facultyList) {
+		this.facultyList = facultyList;
+	}
+
+	public String getFacultyCodeSelect() {
+		return facultyCodeSelect;
+	}
+
+	public void setFacultyCodeSelect(String facultyCodeSelect) {
+		this.facultyCodeSelect = facultyCodeSelect;
+	}
+
+	public String getFacultyName() {
+		return facultyName;
+	}
+
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
+	}
+
+	public String getWorkTypeName() {
+		return workTypeName;
+	}
+
+	public void setWorkTypeName(String workTypeName) {
+		this.workTypeName = workTypeName;
 	}
 
 }

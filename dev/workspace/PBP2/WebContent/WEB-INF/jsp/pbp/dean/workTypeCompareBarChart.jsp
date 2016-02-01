@@ -14,7 +14,7 @@
 <body>
 <h1 id="exampleTitle">
 	<span><img src="<c:url value="/images/chart_example.jpg"/>" /></span>
-	<strong>ระดับคะแนนเปรียบเทียบแต่ละด้านในภาควิชา ${facultyName} ประจำปีการศึกษา 2557 
+	<strong>ระดับคะแนนเปรียบเทียบแต่ละด้านในภาควิชา ${facultyName} 
 </h1>
 <form:form modelAttribute="workTypeCompareReport" action="workTypeCompareBarChart.htm" method="POST" name="mainForm">
 <table> 
@@ -80,6 +80,13 @@ function createColumnChart() {
 				rotation : -90
 			}
 		},
+		valueAxis: {
+		    plotBands: [{
+		      from: 22,
+		      to : 22.5,
+		      color: "red"
+		    }]
+		  },
 		tooltip: {
 			visible: true,
 			template: "#= series.name #: #= value #"

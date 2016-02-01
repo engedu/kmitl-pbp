@@ -5,7 +5,9 @@ import com.buckwa.domain.common.BuckWaResponse;
 
 
 public interface PBPWorkTypeService {
-	public BuckWaResponse getByAcademicYear(BuckWaRequest request);
+	//public BuckWaResponse getByAcademicYear(BuckWaRequest request);
+	 
+	
 	public BuckWaResponse getCalculateByAcademicYear(BuckWaRequest request);
 	
 	public BuckWaResponse create(BuckWaRequest request);
@@ -19,7 +21,9 @@ public interface PBPWorkTypeService {
 	public BuckWaResponse editSub(BuckWaRequest request);
 	
 	
-	public BuckWaResponse getByCode(BuckWaRequest request);
+	public BuckWaResponse getByCodeAcademicFacultyCode(BuckWaRequest request);
+	
+	public BuckWaResponse getByAcademicYearFacultyCode(BuckWaRequest request);
 	 
 }
 

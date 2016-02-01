@@ -85,6 +85,7 @@
            <a href="#">สถาบัน & บุคลากร</a><a href="#" class="flyout-toggle"></a>
             <ul class="flyout"><!-- Flyout Menu -->
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/academicYear/init.htm">ปีการศึกษา</a></li>
+              <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/evaluateRound/init.htm">รอบการประเมิน</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/faculty/init.htm">หน่วยงาน</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/chainOfCommand/init.htm">สายบังคับบัญชา</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/importdata/profile/initProfileHistory.htm">นำเข้าบุคลากร</a></li>

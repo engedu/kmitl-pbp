@@ -13,6 +13,8 @@ public class AcademicYearWrapper extends BaseDomain{
 	private String previousAcademicYear;
 	private String isNext;
 	
+	private String academicYearSelect;
+	
 	private List<AcademicYearEvaluateRound> academicYearEvaluateRoundList;
 	
 	
@@ -59,6 +61,12 @@ public class AcademicYearWrapper extends BaseDomain{
 	}
 	public void setIsNext(String isNext) {
 		this.isNext = isNext;
+	}
+	public String getAcademicYearSelect() {
+		return academicYearSelect;
+	}
+	public void setAcademicYearSelect(String academicYearSelect) {
+		this.academicYearSelect = academicYearSelect;
 	}
 	
 	

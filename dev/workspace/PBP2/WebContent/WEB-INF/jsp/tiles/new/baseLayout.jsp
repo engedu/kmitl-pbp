@@ -63,7 +63,7 @@
 	<tiles:insertAttribute name="header"/>	
 	</div> 
 	
-	<section class="twelve columns" style="padding-left: 3%;"> 
+	<section class="twelve columns" style="padding-left: 2%;"> 
 	<div class="right_main" style="margin-top: 2px;">
 	<%@include file="/WEB-INF/jsp/common/pageInfo.jsp" %>
 	<tiles:insertAttribute name="main"/>	

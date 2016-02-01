@@ -222,28 +222,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
 			logger.info(" PersonProfileServiceImpl.getByUsername  username:"+username+"  academicYear:"+academicYear);
 			Person person = personProfileDao.getByUsername(username,academicYear);
 			if (person != null) {
-				/*
-				List<LovDetail> lovSexList           = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_SEX);
-				List<LovDetail> lovEmployeeTypeList  = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_EMPLOYEE_TYPE);
-				List<LovDetail> lovPositionList      = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_POSITION);
-				List<LovDetail> lovWorkLineList      = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_WORK_LINE);
-				List<LovDetail> lovFacultyList       = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_FACULTY);
-				List<LovDetail> lovInsigniaList      = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_INSIGNIA);
-				List<LovDetail> lovMarriedStatusList = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_MARRIED_STATUS);
-				List<LovDetail> lovEducationList     = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_EDUCATION);
-				List<LovDetail> lovWorkingStatusList = lovHeaderDao.getDetailListByCode(PAMConstants.LOV_CODE_WORKING_STATUS);
-				
-				 
-				person.setLovSexList(lovSexList);
-				person.setLovEmployeeTypeList(lovEmployeeTypeList);
-				person.setLovPositionList(lovPositionList);
-				person.setLovWorkLineList(lovWorkLineList);
-				person.setLovFacultyList(lovFacultyList);
-				person.setLovInsigniaList(lovInsigniaList);
-				person.setLovMarriedStatusList(lovMarriedStatusList);
-				person.setLovEducationList(lovEducationList);
-				person.setLovWorkingStatusList(lovWorkingStatusList);
-				*/
+ 
 				response.addResponse("person", person);
 				response.setStatus(BuckWaConstants.SUCCESS);
 			} else {
@@ -251,17 +230,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
 				response.setErrorCode("E022");
 			}
 			
-			/*
-			List<Paper> paperList = paperDao.getForPersonProfile(String.valueOf(person.getPersonId()), pagingBean);
-			if (paperList != null) {
-				response.addResponse("paperList", paperList);
-				response.setStatus(BuckWaConstants.SUCCESS);
-			}
-			else {
-				response.setStatus(BuckWaConstants.FAIL);
-				response.setErrorCode(BuckWaConstants.ERROR_E001);
-			}
-			*/
+	 
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -107,9 +107,9 @@ public class PersonTimetableServiceImpl implements PersonTimeTableService {
 		try{				 
 			
 			TimeTableReport timeTableReport = (TimeTableReport)request.get("timeTableReport");
-	 
+			String facultyCode = "01";
 			
-			 facultyDao.addShareSubject(timeTableReport);
+			 facultyDao.addShareSubject(timeTableReport,facultyCode);
 		 
 			 
 		}catch(Exception ex){

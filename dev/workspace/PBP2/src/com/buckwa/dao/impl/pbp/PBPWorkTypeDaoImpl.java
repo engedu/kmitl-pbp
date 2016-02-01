@@ -31,7 +31,6 @@ import com.buckwa.domain.pbp.MarkRankWrapper;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
-import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
 import com.buckwa.util.BuckwaNumberUtil;
 import com.buckwa.util.school.SchoolUtil;
@@ -47,62 +46,84 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	
 	@Autowired
 	private GenerateCodeUtil  generateCodeUtil;
+//	@Override
+//	public PBPWorkTypeWrapper getByAcademicYear( String getByAcademicYear) {		 		
+//		String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"'" ;  
+//		
+//		logger.info("  getByAcademicYear sql:"+sql);
+//		
+//		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	
+//		
+//		try{
+//		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	
+//		
+//		
+//
+//		for(PBPWorkType tmp:pBPWorkTypeList){
+//			String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
+//			logger.info(" sqlSub:"+sqlSub);
+//			List<PBPWorkTypeSub> pBPWorkTypeSubList  =null;
+//			
+//			try{
+//				pBPWorkTypeSubList = this.jdbcTemplate.query(sqlSub,	new PBPWorkTypeSubMapper() );	
+//				
+//				if(pBPWorkTypeSubList!=null&&pBPWorkTypeSubList.size()>0){
+//					
+//					for(PBPWorkTypeSub subTmp:pBPWorkTypeSubList){
+//						
+//						// Get KPI User Mapping belong to sub
+//						
+//					}
+//					
+//					
+//					tmp.setpBPWorkTypeSubList(pBPWorkTypeSubList);
+//				}else{
+//					
+//					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" and academic_year='"+tmp.getAcademicYear()+"'"; 
+//					
+//			 
+//					List<AcademicKPIUserMapping>	academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
+//					
+//					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
+//						
+//						for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){
+//							
+//							//AcademicKPIAttributeValueMapper
+//							
+//						}
+//						
+//					}
+//					
+//					tmp.setAcademicKPIUserMappingList(academicKPIUserMappingList);
+//				}
+//				
+//				
+//			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+//				ex.printStackTrace();
+//			} 
+//		}
+//		
+//		pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//		}
+//		return pBPWorkTypeWrapper;
+//	}
+	
+	
+	
 	@Override
-	public PBPWorkTypeWrapper getByAcademicYear( String getByAcademicYear) {		 		
-		String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"'" ;  
+	public PBPWorkTypeWrapper getByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode) {		 		
+		String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"' and faculty_code='"+facultyCode+"'" ;  
 		
-		logger.info("  getByAcademicYear sql:"+sql);
+		logger.info("  getByAcademicYearAndFactulty sql:"+sql);
 		
 		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	
 		
 		try{
 		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	
 		
-		
-
-		for(PBPWorkType tmp:pBPWorkTypeList){
-			String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
-			logger.info(" sqlSub:"+sqlSub);
-			List<PBPWorkTypeSub> pBPWorkTypeSubList  =null;
-			
-			try{
-				pBPWorkTypeSubList = this.jdbcTemplate.query(sqlSub,	new PBPWorkTypeSubMapper() );	
-				
-				if(pBPWorkTypeSubList!=null&&pBPWorkTypeSubList.size()>0){
-					
-					for(PBPWorkTypeSub subTmp:pBPWorkTypeSubList){
-						
-						// Get KPI User Mapping belong to sub
-						
-					}
-					
-					
-					tmp.setpBPWorkTypeSubList(pBPWorkTypeSubList);
-				}else{
-					
-					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" and academic_year='"+tmp.getAcademicYear()+"'"; 
-					
-			 
-					List<AcademicKPIUserMapping>	academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
-					
-					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
-						
-						for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){
-							
-							//AcademicKPIAttributeValueMapper
-							
-						}
-						
-					}
-					
-					tmp.setAcademicKPIUserMappingList(academicKPIUserMappingList);
-				}
-				
-				
-			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-				ex.printStackTrace();
-			} 
-		}
+ 
 		
 		pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
 		}catch(Exception ex){
@@ -113,8 +134,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	
 	
 	@Override
-	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType) {
-		logger.info("  getCalculateByAcademicYear getByAcademicYear xx:"+academicYear+"userName :"+userName+" round:"+round+" employeeType:"+employeeType);
+	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType,String facultyCode) {
+		logger.info("  getCalculateByAcademicYear getByAcademicYear xx:"+academicYear+"userName :"+userName+" round:"+round+" employeeType:"+employeeType+" facultyCode:"+facultyCode);
 		
 		
 		// Get Start ,End Date 
@@ -171,7 +192,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		 
 		 
 		
-		String sql =" select *  from pbp_work_type where academic_year ='"+academicYear+"'" ;  
+		String sql =" select *  from pbp_work_type where academic_year ='"+academicYear+"' and faculty_code='"+facultyCode+"'" ;  
 		
 		logger.info(" getByAcademicYear sql:"+sql);
 		
@@ -180,12 +201,12 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		try{
 		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	 
 		for(PBPWorkType tmp:pBPWorkTypeList){
-			String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
-			logger.info(" sqlSub:"+sqlSub);
-			List<PBPWorkTypeSub> pBPWorkTypeSubList  =null;
+			//String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
+			//logger.info(" sqlSub:"+sqlSub);
+			//List<PBPWorkTypeSub> pBPWorkTypeSubList  =null;
 			
 			try{
-				pBPWorkTypeSubList = this.jdbcTemplate.query(sqlSub,	new PBPWorkTypeSubMapper() );	
+				//pBPWorkTypeSubList = this.jdbcTemplate.query(sqlSub,	new PBPWorkTypeSubMapper() );	
 				
 				/*
 				if(pBPWorkTypeSubList!=null&&pBPWorkTypeSubList.size()>0){
@@ -561,8 +582,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		return pBPWorkType;
 	}
 	@Override
-	public PBPWorkType  getByCode( String code, String academicYear) {		 		
-		String sql =" select *  from pbp_work_type where code="+code+" and academic_year='"+academicYear+"'" ;  
+	public PBPWorkType  getByCodeAcademicFacultyCode( String code, String academicYear,String facultyCode) {		 		
+		String sql =" select *  from pbp_work_type where code="+code+" and academic_year='"+academicYear+"' and faculty_code='"+facultyCode+"'" ;  
 		
 		logger.info("  getByAcademicYear sql:"+sql);
 		 	 				
@@ -667,11 +688,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		List<PBPWorkType> pBPWorkTypeList = finalPBPWorkTypeWrapper.getpBPWorkTypeList();
 		
 		for(final PBPWorkType pBPWorkTypeTmp:pBPWorkTypeList){		
-			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase());
+			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase());
 			jdbcTemplate.update(new PreparedStatementCreator() {  
 				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 					PreparedStatement ps = connection.prepareStatement("" +						
-							"  update  pbp_work_type set name =? ,min_percent=?,min_hour=?,max_percent=? ,max_hour=?,limit_base=? where work_type_id=? and academic_year='"+finalPBPWorkTypeWrapper.getAcademicYear()+"'" +
+							"  update  pbp_work_type set name =? ,min_percent=?,min_hour=?,max_percent=? ,max_hour=?,limit_base=? where work_type_id=? " +
 						 "", Statement.RETURN_GENERATED_KEYS);   
 					ps.setString(1,pBPWorkTypeTmp.getName());
 					ps.setInt(2,pBPWorkTypeTmp.getMinPercent());
@@ -680,6 +701,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					ps.setInt(5,pBPWorkTypeTmp.getMaxHour());
 					ps.setInt(6,pBPWorkTypeTmp.getLimitBase());
 					ps.setLong(7, pBPWorkTypeTmp.getWorkTypeId());
+				 
 				 
 				
 					return ps;  
@@ -811,6 +833,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			domain.setMaxHour(rs.getInt("max_hour"));
 			domain.setAcademicYear(rs.getString("academic_year"));
 			domain.setLimitBase(rs.getInt("limit_base"));
+			domain.setFacultyCode(rs.getString("faculty_code"));
 		 
 		return domain;
     }

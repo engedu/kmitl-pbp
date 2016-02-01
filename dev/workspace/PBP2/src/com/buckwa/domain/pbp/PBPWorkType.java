@@ -16,6 +16,7 @@ public class PBPWorkType extends BaseDomain{
     private String shortDesc;
     private int limitBase;
     private BigDecimal totalAllWorkType;
+    private String facultyCode;
     
     private List<AcademicKPI> academicKPIList;
     
@@ -28,7 +29,13 @@ public class PBPWorkType extends BaseDomain{
     
     
     
-    public BigDecimal getTotalInPercentCompareBaseWorkTypeAVG() {
+    public String getFacultyCode() {
+		return facultyCode;
+	}
+	public void setFacultyCode(String facultyCode) {
+		this.facultyCode = facultyCode;
+	}
+	public BigDecimal getTotalInPercentCompareBaseWorkTypeAVG() {
 		return totalInPercentCompareBaseWorkTypeAVG;
 	}
 	public void setTotalInPercentCompareBaseWorkTypeAVG(

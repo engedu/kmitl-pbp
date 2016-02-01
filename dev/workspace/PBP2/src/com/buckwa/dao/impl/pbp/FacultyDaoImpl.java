@@ -115,6 +115,23 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 	
 	@Override
+	public List<Faculty> getFacultyListByAcademicYear( String getByAcademicYear) {		 		
+		String sql =" select *  from faculty where academic_year ='"+getByAcademicYear+"'" ; 
+		logger.info(" sql:"+sql);
+		List<Faculty> facultyList  =null;
+		
+		try{
+			facultyList = this.jdbcTemplate.query(sql,	new FacultyMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		}
+ 
+		 
+		
+		return facultyList;
+	}
+	
+	@Override
 	public Faculty getById( String facultyId) {		 		
 		String sql =" select *  from faculty where faculty_id ="+facultyId+"" ; 
 		logger.info(" sql:"+sql);
@@ -191,6 +208,26 @@ public class FacultyDaoImpl implements FacultyDao {
 	 
 		logger.info(" sql faculty:"+BeanUtils.getBeanString(faculty));
 		return faculty;
+	}
+	
+	@Override
+	public String getFacultyByCodeByAcademicYearAndName( String academicYear,String name) {	
+		
+		String returnValue="";
+		String sql =" select *  from faculty where name ='"+name+"' and academic_year="+academicYear ; 
+		logger.info(" sql:"+sql);
+		 Faculty  faculty   =null;
+		
+		try{
+			faculty = this.jdbcTemplate.queryForObject(sql,	new FacultyMapper() );	
+			returnValue = faculty.getCode();
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		}
+		
+	 
+		logger.info(" sql faculty:"+BeanUtils.getBeanString(faculty));
+		return returnValue;
 	}
 	
 	
@@ -819,7 +856,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	 
 	
 	@Override
-	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree) {
+	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
 		
 		for(com.buckwa.ws.newws.oxm.TeachTable tmp:teachTableList){ 
@@ -990,7 +1027,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							logger.info(" ############################### Start Create KPI User Mapping #########################");
 							
-							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,finalIsCoTeach,academicYear);
+							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
 							 
 								
 							academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
@@ -1020,7 +1057,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 	}
 	@Override
-	public void addShareSubject( TimeTableReport timeTableReport ) {
+	public void addShareSubject( TimeTableReport timeTableReport,String facultyCode ) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
 		
 		 
@@ -1139,7 +1176,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							logger.info(" ############################### Start Create KPI User Mapping #########################");
 							
-							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,"N",academicYear);
+							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,"N",academicYear,facultyCode);
 							
 							academicKPIUserMapping.setStatus("CREATED");
 							
@@ -1161,7 +1198,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 	}
 	
-	private AcademicKPIUserMapping getMatchingKPI(com.buckwa.ws.newws.oxm.TeachTable timetable, Subject subject,final String finalIsCoTeach,String academicYear){
+	private AcademicKPIUserMapping getMatchingKPI(com.buckwa.ws.newws.oxm.TeachTable timetable, Subject subject,final String finalIsCoTeach,String academicYear,String facultyCode){
 		AcademicKPIUserMapping returnObj = new AcademicKPIUserMapping();;
 		
 		try{
@@ -1298,10 +1335,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 				ex.printStackTrace();
 			} 
-			
-			
-			
-			
+			 
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -1591,6 +1625,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			domain.setSpecialP4(rs.getString("special_p4"));
 			domain.setTotalStudentFrom(rs.getString("total_student_from"));
 			domain.setTotalStudentTo(rs.getString("total_student_to"));
+			domain.setFacultyCode(rs.getString("faculty_code"));
 			//logger.info(" ###### Multiply Value:"+rs.getString("rule_code"));
 			
 			try{

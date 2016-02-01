@@ -8,32 +8,71 @@
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
 
-<form:form modelAttribute="academicKPIWrapper" action="edit.htm" method="POST" name="mainForm"> 	 
-<form:hidden path="academicYear"/>
+<form:form modelAttribute="academicKPIWrapper" action="search.htm" method="POST" name="mainForm"> 	 
+ 
  
 <div class="post">
  
 <div class="entry">		
  
-			
-			<table class="pbp-table">
-		   	   	<thead>
-		   	   		<tr>
-		   	   		
-		   	   		<th  > <div class="pbp-header">  <span class="lsf-icon colororange" title="list"></span> เลือกประเภทภาระงาน :</div>  &nbsp;
- 					
-					</th>
-					<th>
-					<form:select path="workTypeCode" id="year-dropdown" onchange="changeWorkType(this.value);"  >  									  
-									<form:options items="${academicKPIWrapper.pBPWorkTypeList}" itemValue="code" itemLabel="name" />
-							</form:select> 						
-					</th>
-
-							 					
-					</tr>
  
-		   	   	</thead>			
-			</table>
+ 			 
+			 
+		<table class="pbp-table"> 
+			<thead><tr><th colspan="7">
+			<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>ข้อมูลประเภทภาระงาน คณะ ${academicKPIWrapper.facultyName} ประจำปีการศึกษา ${academicKPIWrapper.academicYear}   </div>
+			</thead></tr></th>
+ 		
+			
+			<tr>	
+					  <td class="label-form">
+					   ประจำปี:   
+				</td>
+				 <td>
+				 	 
+            		 <form:select path="academicYear" > 
+							<form:options items="${academicKPIWrapper.academicYearList}" itemValue="name" itemLabel="name" />
+						</form:select>
+				</td> 
+				<td class="label-form">
+					คณะ:
+				</td>
+				<td>
+            		 <form:select path="facultyCodeSelect" > 
+							<form:options items="${academicKPIWrapper.facultyList}" itemValue="code" itemLabel="name" />
+						</form:select> 					 
+				</td>
+				 <td rowspan="2">
+					 
+					<input class="btn btn-primary" value="<spring:message code="label.button.search"/>" type="submit"> 
+				</td>
+ 
+			</tr> 
+			
+			<tr>	
+					  <td class="label-form">
+					  ภาระงานด้าน:   
+				</td>
+				 <td>
+				 	 
+					<form:select path="workTypeCode"  >  									  
+									<form:options items="${academicKPIWrapper.pBPWorkTypeList}" itemValue="code" itemLabel="name" />
+							</form:select> 	
+				</td> 
+				<td class="label-form">
+					 
+				</td>
+				<td>
+            		 			 
+				</td>
+			 
+ 
+			</tr> 		
+
+		</table>
+		<div class="line">&nbsp;</div>	
+ 
+
  
  
             
@@ -44,10 +83,10 @@
 		   	   		<tr>
 		   	   		<th colspan="5">
 		   	   		
-		   	   		${academicKPIWrapper.pBPWorkType.name} ประจำปีการศึกษา  ${academicKPIWrapper.academicYear}  
+		   	   		ภาระงานด้าน ${academicKPIWrapper.workTypeName}  
 		   	   		</th>
 		   	   		 <th  >
-               		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/create.htm?workTypeCode=<c:out  value="${academicKPIWrapper.pBPWorkType.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>"  >
+               		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/create.htm?workTypeCode=<c:out  value="${academicKPIWrapper.workTypeCode}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>"  >
 	         Add <span class="lsf-icon colororange" title="plus">
 	         <%-- <img class="imagePlus" src="<c:url value="/images/plus1.png"/>" /> --%>  
 	          </a>		   	   		
@@ -75,7 +114,7 @@
 	                   		 Edit</a>
 		   				</td>
 		   				<td class="tdLast"> 
-	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/delete.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>&workTypeCode=<c:out  value="${domain.workTypeCode}"/>&academicYear=<c:out  value="${domain.academicYear}"/>" 
+	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/delete.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>&workTypeCode=<c:out  value="${domain.workTypeCode}"/>&academicYear=<c:out  value="${domain.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>" 
 	                   		onclick="return confirmPage('ยืนยันการลบข้อมูล <c:out value="${domain.name}"/> ?')" >
 	                   		 Delete</a>
 		   				</td>		

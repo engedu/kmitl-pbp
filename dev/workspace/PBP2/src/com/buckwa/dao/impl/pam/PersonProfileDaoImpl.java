@@ -14,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.buckwa.dao.intf.pam.PersonProfileDao;
+import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.PagingBean;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.util.BuckWaDateUtils;
@@ -280,10 +282,29 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 		try {
 			
 			result = this.jdbcTemplate.queryForObject(sql.toString(), personPBPMapper );
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info(" ERROR " + e.getMessage());
+		}
+
+		try {
+			String facultyCodeSQL =" select code   from faculty where academic_year="+academicYear+" and name ='"+result.getFacultyDesc()+"'";
+			logger.info("  ######## facultyCodeSQL:"+facultyCodeSQL);
+			List<String> facultyCodeReturnList =  this.jdbcTemplate.query(facultyCodeSQL, new CodeMapper() );
+			if(facultyCodeReturnList!=null&&facultyCodeReturnList.size()>0){
+				String facultyCode = facultyCodeReturnList.get(0);
+				result.setFacultyCode(facultyCode);
+				logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
+			}
+			
 		} catch (EmptyResultDataAccessException e) {
 			logger.info(" ERROR " + e.getMessage());
 		}
 		
+		BuckWaUser buckwaUser = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		buckwaUser.setPersonProfile(result);
+		 
 		
 		return result;
 	}
@@ -784,6 +805,14 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 		@Override
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 			String value = String.valueOf(rs.getLong("value"));
+			return value;
+		}
+	}
+	
+	private static class CodeMapper implements RowMapper<String> {
+		@Override
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			String value =  rs.getString("code");
 			return value;
 		}
 	}

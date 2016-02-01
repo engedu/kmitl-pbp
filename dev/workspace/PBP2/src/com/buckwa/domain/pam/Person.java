@@ -64,6 +64,8 @@ public class Person extends BaseDomain  {
 	private String assignDateStr;
 	private String retireDateStr;
 	
+	private String facultyCode;
+	
 	private String regId;
 	
 	private List<LovDetail> lovSexList;
@@ -167,6 +169,14 @@ public class Person extends BaseDomain  {
 
 	
 	
+	public String getFacultyCode() {
+		return facultyCode;
+	}
+
+	public void setFacultyCode(String facultyCode) {
+		this.facultyCode = facultyCode;
+	}
+
 	public String getEmployeeTypeNo() {
 		String evalType = "1";
 		

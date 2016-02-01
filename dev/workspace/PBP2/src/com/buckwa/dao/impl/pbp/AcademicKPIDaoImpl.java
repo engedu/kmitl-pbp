@@ -60,9 +60,9 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 	}
 	
 	@Override
-	public AcademicKPI getByCodeAcademicYear( String code ,String getByAcademicYear) {		 		
-		String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"' and code ='"+code+"'" ; 
-		logger.info(" sql:"+sql);
+	public AcademicKPI getByCodeAcademicYearFacultyCode( String code ,String getByAcademicYear,String facultyCode) {		 		
+		String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"' and code ='"+code+"' and faculty_code='"+facultyCode+"'" ; 
+		logger.info("getByCodeAcademicYearFacultyCode  sql:"+sql);
 		AcademicKPI academicKPI   =null;
 		
 		try{
@@ -71,11 +71,12 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			
 		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 			ex.printStackTrace();
-		} 
+		}  
 		
 		if(academicKPI!=null){
 			// Get KPI Attribute
-			String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+getByAcademicYear+"' and academic_kpi_code ='"+code+"'" ; 
+			//String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+getByAcademicYear+"' and academic_kpi_code ='"+code+"'" ; 
+			String sqlAttribute =" select *  from academic_kpi_attribute where academic_kpi_id ="+academicKPI.getAcademicKPIId()  ; 
 			List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 			try{
 				academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );	
@@ -193,6 +194,25 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 	}
 	
 	@Override
+	public AcademicKPIWrapper getByAcademicYearWorkTypeCodeFacultyCode( String getByAcademicYear,String workTypeCode,String facultyCode) {		 		
+		String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"' and work_type_code='"+workTypeCode+"' and faculty_code='"+facultyCode+"' order by order_no asc " ; 
+		logger.info("getByAcademicYearWorkTypeCodeFacultyCode  sql:"+sql);
+		List<AcademicKPI> academicKPIList  =null;
+		
+		try{
+			academicKPIList = this.jdbcTemplate.query(sql,	new AcademicKPIMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		} 
+		AcademicKPIWrapper academicKPIWrapper = new AcademicKPIWrapper();  
+		academicKPIWrapper.setAcademicKPIList(academicKPIList);
+		return academicKPIWrapper;
+	}
+	
+	
+ 
+
+	@Override
 	public boolean isExistCreate(AcademicKPI domain) {
 		 boolean returnValue = false;
 		try{
@@ -216,7 +236,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 		jdbcTemplate.update(new PreparedStatementCreator() {  
 			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 				PreparedStatement ps = connection.prepareStatement("" +						
-						"  insert into academic_kpi (name, code,work_type_code,mark,academic_year,unit_code,rule_code,order_no,description) values (?, ?,?,?,?,?,?,?,?)" +
+						"  insert into academic_kpi (name, code,work_type_code,mark,academic_year,unit_code,rule_code,order_no,description,faculty_code) values (?,?, ?,?,?,?,?,?,?,?)" +
 					 "", Statement.RETURN_GENERATED_KEYS);   
 				ps.setString(1,finalDomain.getName());
 				ps.setInt(2,nexCode);
@@ -227,6 +247,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 				ps.setString(7,finalDomain.getMultiplyValue());
 				ps.setInt(8,new Integer(finalDomain.getOrderNo()));
 				ps.setString(9,finalDomain.getDescription());
+				ps.setString(10,finalDomain.getFacultyCode());
 				return ps;  
 				}
 			}, 	keyHolder); 	
@@ -422,6 +443,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			domain.setTotalStudentFrom(rs.getString("total_student_from"));
 			domain.setTotalStudentTo(rs.getString("total_student_to"));
 			domain.setFromRegis(rs.getString("from_reg"));
+			domain.setFacultyCode(rs.getString("faculty_code"));
 			//logger.info(" ###### Multiply Value:"+rs.getString("rule_code"));
 			
 			try{

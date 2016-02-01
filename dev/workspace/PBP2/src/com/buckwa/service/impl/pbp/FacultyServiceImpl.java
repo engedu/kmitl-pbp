@@ -49,6 +49,25 @@ public class FacultyServiceImpl implements FacultyService {
 		return response;
 	}
 	@Override	
+	public BuckWaResponse getFacultyListByAcademicYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+			 List<Faculty> facultyList= (  List<Faculty>)facultyDao.getFacultyListByAcademicYear(academicYear);
+		 
+			 response.addResponse("facultyList",facultyList);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	@Override	
 	public BuckWaResponse getById(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 
@@ -184,6 +203,27 @@ public class FacultyServiceImpl implements FacultyService {
 			Faculty faculty=  facultyDao.getFacultyByCodeAndYear(depCode ,academicYear);
 			logger.info(" sql faculty:"+BeanUtils.getBeanString(faculty));
 			 response.addResponse("faculty",faculty);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	@Override	
+	public BuckWaResponse getFacultyByCodeByAcademicYearAndName(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String facultyName = (String)request.get("facultyName");
+			String academicYear = (String)request.get("academicYear");
+			
+			String facultyCode=  facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear ,facultyName);
+			logger.info(" sql faculty:"+BeanUtils.getBeanString(facultyCode));
+			 response.addResponse("facultyCode",facultyCode);
  	
 		}catch(Exception ex){
 			ex.printStackTrace();

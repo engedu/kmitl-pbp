@@ -8,6 +8,8 @@ public interface AcademicKPIService {
 	public BuckWaResponse getByAcademicYear(BuckWaRequest request);
 	public BuckWaResponse create(BuckWaRequest request);
 	public BuckWaResponse getByAcademicYearWorkTypeCode(BuckWaRequest request);
+	public BuckWaResponse getByAcademicYearWorkTypeCodeFacultyCode(BuckWaRequest request);
+	
 	public BuckWaResponse getById(BuckWaRequest request);
 	public BuckWaResponse edit(BuckWaRequest request);
 	public BuckWaResponse deleteById(BuckWaRequest request);

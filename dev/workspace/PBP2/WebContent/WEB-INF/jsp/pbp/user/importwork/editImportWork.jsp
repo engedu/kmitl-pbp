@@ -93,7 +93,7 @@
     <br> 
  
 		<div class="pbptableWrapper">
-             <div  ><span style="color: red;"> * เอกสารแนบ  (ไม่เกิน 10 MB)</span></div>
+             <div  >  เอกสารแนบ  (ไม่เกิน 10 MB) </div>
             
             
              <table class="pbp-table">
@@ -165,8 +165,7 @@
    		 <div class="messageReply"> 
    		 
    		 	<form:textarea path="replyMessage" cssClass="tinymce" rows="10" cols="80" />
-   		 	 <span class ="require"  >*</span> 
-   		 	 <form:errors path="replyMessage" cssClass="require" />
+   		  
    		 </div> 
    		 </td>
    		 </tr>

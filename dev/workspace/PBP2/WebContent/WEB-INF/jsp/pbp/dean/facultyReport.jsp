@@ -15,7 +15,7 @@
 		<thead>
 			<tr>
 				<th>
-				<span class="lsf-icon colororange" title="graph"></span>คะแนนภาพรวมระดับคณะ  ${faculty.name} ประจำปีการศึกษา 2557
+				<span class="lsf-icon colororange" title="graph"></span>คะแนนภาพรวมระดับคณะ  ${faculty.name} 
 				</th>
 			</tr>
 		</thead>

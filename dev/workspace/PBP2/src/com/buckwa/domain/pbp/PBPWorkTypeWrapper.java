@@ -15,6 +15,11 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	private BigDecimal totalPercentMark = new BigDecimal(0.00);
 	private BigDecimal totalPercentMarkCompareBase = new BigDecimal(0.00);
 	private int increaseSalaryRate;
+	private List<AcademicYear> academicYearList;
+	
+	private List<Faculty> facultyList ;
+	private String facultyCodeSelect;
+	private String facultyName;
 	
 	public List<PBPWorkType> getpBPWorkTypeList() {
 		return pBPWorkTypeList;
@@ -58,6 +63,30 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	public void setTotalPercentMarkCompareBase(
 			BigDecimal totalPercentMarkCompareBase) {
 		this.totalPercentMarkCompareBase = totalPercentMarkCompareBase;
+	}
+	public List<AcademicYear> getAcademicYearList() {
+		return academicYearList;
+	}
+	public void setAcademicYearList(List<AcademicYear> academicYearList) {
+		this.academicYearList = academicYearList;
+	}
+	public List<Faculty> getFacultyList() {
+		return facultyList;
+	}
+	public void setFacultyList(List<Faculty> facultyList) {
+		this.facultyList = facultyList;
+	}
+	public String getFacultyCodeSelect() {
+		return facultyCodeSelect;
+	}
+	public void setFacultyCodeSelect(String facultyCodeSelect) {
+		this.facultyCodeSelect = facultyCodeSelect;
+	}
+	public String getFacultyName() {
+		return facultyName;
+	}
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
 	}
  
 	

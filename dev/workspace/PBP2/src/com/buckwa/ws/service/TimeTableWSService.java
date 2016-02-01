@@ -30,6 +30,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import com.buckwa.dao.intf.pbp.FacultyDao;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pbp.Teacher;
 import com.buckwa.service.intf.pbp.InstituteService;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaConstants;
@@ -177,18 +178,9 @@ public class TimeTableWSService   {
 					}
 				}
 			}); 
-			
-			//logger.info(" ----returnObj: "+BeanUtils.getBeanString(returnObj));
+
 			List<Faculty> facultyList =returnObj.getFaculty();
-			//logger.info(" ----facultyList: "+facultyList);
-			//for(Faculty facultytmp:facultyList){
-				
-				//logger.info(" ----facultytmp: "+BeanUtils.getBeanString(facultytmp) );
-				//logger.info(facultytmp.getFacultyId()+" : "+facultytmp.getFacultyTname()+" : "+facultytmp.getFacultyEname());
-			//}
-			
-			facultyDao.updateFacultyWS(facultyList);;
-			
+			facultyDao.updateFacultyWS(facultyList);;			
 			
 			
 			logger.info(" ################################# Start get Dapartment From WS ##########################");
@@ -197,7 +189,8 @@ public class TimeTableWSService   {
 			for(Faculty facttmp:facultyList){
                 
 				GetDepartmentList departmentRequest = new GetDepartmentList();
-				departmentRequest.setFacultyId(facttmp.getFacultyId());
+				departmentRequest.setFacultyId(facttmp.getFacultyId());		
+				
 				
 				GetDepartmentListResponse returnObjDepartment =(GetDepartmentListResponse)facultyWSTemplate.marshalSendAndReceive(departmentRequest, new WebServiceMessageCallback() {
 					public void doWithMessage(WebServiceMessage messagedepartment) throws IOException, TransformerException {
@@ -212,21 +205,10 @@ public class TimeTableWSService   {
 						}
 					}
 				}); 
-				
-				//logger.info(" ----returnObj: "+BeanUtils.getBeanString(returnObjDepartment));
+
 				List<Department> departmentList =returnObjDepartment.getDepartment();
-				//logger.info(" ----departmentList: "+departmentList);
-				
-				//logger.info(" ################### Faculty : "+facttmp.getFacultyId()+":"+facttmp.getFacultyTname());
-				//for(Department deptmp:departmentList){
-					
-					//logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
-				//}
-				
+
 				facultyDao.updateDepartmentWS(departmentList);;
-				
-		 
-			
 			
 			}
 			
@@ -235,15 +217,16 @@ public class TimeTableWSService   {
 			logger.info(" ################################# Start get Teacher From WS  ##########################");
 			
 			List<String> teacherIdList = new ArrayList();
+			List<Teacher> teacherList  = new ArrayList();
 			Map teacherIdMap = new HashMap();
 			
 			for(Faculty facttmp:facultyList){
 				// For Debug  Engineering
-				//if(!"01".equals(facttmp.getFacultyId())){  
+				if(!"01".equals(facttmp.getFacultyId())){  
 					
-				//}else{
+				 }else{
 					
-				
+				String facultyCode = facttmp.getFacultyId();
 				
 				GetDepartmentList departmentRequest = new GetDepartmentList();
 				departmentRequest.setFacultyId(facttmp.getFacultyId());
@@ -261,18 +244,15 @@ public class TimeTableWSService   {
 						}
 					}
 				}); 
-				
-				//logger.info(" ----returnObj: "+BeanUtils.getBeanString(returnObjDepartment));
+ 
 				List<Department> departmentList =returnObjDepartment.getDepartment();
-				//logger.info(" ----departmentList: "+departmentList);
-				
-				//logger.info(" ################### Faculty : "+facttmp.getFacultyId()+":"+facttmp.getFacultyTname());
+ 
 				for(Department deptmp:departmentList){					
 					logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
 					
-					//if( !"12".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
+					if( !"12".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
 					//	logger.info(" #############  Skip Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-					//}else{
+					}else{
 						
 						logger.info(" #############  Work only on  Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
 					
@@ -295,179 +275,46 @@ public class TimeTableWSService   {
 						}
 					}); 	
 					
-					List<TeacherList> teacherList =returnObjTeacher.getTeacherList();
+					List<TeacherList> teacherListWS =returnObjTeacher.getTeacherList();
 					logger.info(" ################### Faculty : "+facttmp.getFacultyId()+":"+facttmp.getFacultyTname());
 					logger.info(" ######  Department : "+deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
-					for(TeacherList teacherListTmp:teacherList){
+					for(TeacherList teacherListWSTmp:teacherListWS){
 						
-						logger.info(teacherListTmp.getTeacherId()+":"+teacherListTmp.getTeacherTname()+" :"+teacherListTmp.getTeacherEname());
-						if(teacherListTmp.getTeacherId()==null){
+						logger.info(teacherListWSTmp.getTeacherId()+":"+teacherListWSTmp.getTeacherTname()+" :"+teacherListWSTmp.getTeacherEname());
+						if(teacherListWSTmp.getTeacherId()==null){
 							
 						}else{
-							teacherIdList.add(teacherListTmp.getTeacherId());
-							teacherIdMap.put(teacherListTmp.getTeacherId(), teacherListTmp.getTeacherId());							
+							teacherIdList.add(teacherListWSTmp.getTeacherId());
+							teacherIdMap.put(teacherListWSTmp.getTeacherId(), teacherListWSTmp.getTeacherId());	
+							
+							Teacher pbpTeacher = new Teacher();
+							pbpTeacher.setTeacherIdStr(teacherListWSTmp.getTeacherId());
+							pbpTeacher.setFacultyCode(facultyCode);
+							pbpTeacher.setAcademicYear(academicYear);
+							teacherList.add(pbpTeacher);
 						}
 
 					}
 					
-			//	}// debug
+			 	}// debug Department
 				}
 				
-			//}//Debug
+			 }//Debug Faculty
 			}
 						
 			logger.info(" ########  Found Teacher Id Size:"+teacherIdList.size());
 			logger.info(" ########  Found Teacher Unique Id Size:"+teacherIdMap.size());
 			
-			
-			
-			
+			logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 1 ##########################");			
+			 getAndInsertTeachTableWS(1,1, teacherList);				
+			logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 2 ##########################");			
+			getAndInsertTeachTableWS(1,2, teacherList);			
+			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 1 ##########################");			
+			 getAndInsertTeachTableWS(2,1, teacherList);				
+			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 2 ##########################");			
+			getAndInsertTeachTableWS(2,2, teacherList);	
 			
 	 
-			for(String teacherIdStr:teacherIdList){
-			logger.info(" ################################# Start Teacher Id:"+teacherIdStr);
-	
-			
-		  //  if(!"11215".equalsIgnoreCase(teacherIdStr)){ // 11215:ktpitak, 10535:kkamnach  , 10518:kcwatcha
-		    	
-		  //  }else{
-		    
-		    
-		    
-		     logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 1 ##########################");
-				
-			if(teacherIdStr!=null&&teacherIdStr.length()>0){
-				GetTeachTable teachTableRequest = new GetTeachTable();
-				teachTableRequest.setSemester(1);
-				teachTableRequest.setYear(academicYear);
-				teachTableRequest.setTeacherId(teacherIdStr);
-				teachTableRequest.setDegree(1); 
-				
-				GetTeachTableResponse returnObjTeachTable =(GetTeachTableResponse)teachTableWSTemplate.marshalSendAndReceive(teachTableRequest, new WebServiceMessageCallback() {
-					public void doWithMessage(WebServiceMessage messageTeachTable) throws IOException, TransformerException {
-						try {
-							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
-					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       soapMessageTeachTable.writeTo(out);
-				            logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
-					         
-						} catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}); 	
-				
-				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 	
-				
-				for(TeachTable teachtablews:teachTableResponseList){
-					if(teachtablews.getTeacherId()==null||teachtablews.getSubjectId()==null||teachtablews.getSemester()==null||teachtablews.getLectOrPrac()==null){
-		 					 logger.info(" ############ Found Null at teachTableRequest   : "+BeanUtils.getBeanString(teachTableRequest) );
-					}else{
-						
-					}
-				}
-				facultyDao.updateTeachTableWS(teachTableResponseList,1);;				
-			}			
-		 
-			
-			
-			 
-			 
-			
-			logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 2 ##########################");
-			
-		 
-				
-			if(teacherIdStr!=null&&teacherIdStr.length()>0){
-				GetTeachTable teachTableRequest = new GetTeachTable();
-				teachTableRequest.setSemester(1);
-				teachTableRequest.setYear(academicYear);
-				teachTableRequest.setTeacherId(teacherIdStr);
-				teachTableRequest.setDegree(2); 
-				
-				GetTeachTableResponse returnObjTeachTable =(GetTeachTableResponse)teachTableWSTemplate.marshalSendAndReceive(teachTableRequest, new WebServiceMessageCallback() {
-					public void doWithMessage(WebServiceMessage messageTeachTable) throws IOException, TransformerException {
-						try {
-							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
-					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       soapMessageTeachTable.writeTo(out);
-				           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
-					         
-						} catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}); 	
-				
-				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 				
-				facultyDao.updateTeachTableWS(teachTableResponseList,2);;				
-			}			
-			 
-			
-			
-		
-			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 1 ##########################");
-			
-		 
-				
-			if(teacherIdStr!=null&&teacherIdStr.length()>0){
-				GetTeachTable teachTableRequest = new GetTeachTable();
-				teachTableRequest.setSemester(2);
-				teachTableRequest.setYear(academicYear);
-				teachTableRequest.setTeacherId(teacherIdStr);
-				teachTableRequest.setDegree(1); 
-				
-				GetTeachTableResponse returnObjTeachTable =(GetTeachTableResponse)teachTableWSTemplate.marshalSendAndReceive(teachTableRequest, new WebServiceMessageCallback() {
-					public void doWithMessage(WebServiceMessage messageTeachTable) throws IOException, TransformerException {
-						try {
-							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
-					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       soapMessageTeachTable.writeTo(out);
-				           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
-					         
-						} catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}); 	
-				
-				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 				
-				facultyDao.updateTeachTableWS(teachTableResponseList,1);;				
-			}			
-		 
-			
-			
-			
-			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 2 ##########################");
-		 
-				
-			if(teacherIdStr!=null&&teacherIdStr.length()>0){
-				GetTeachTable teachTableRequest = new GetTeachTable();
-				teachTableRequest.setSemester(2);
-				teachTableRequest.setYear(academicYear);
-				teachTableRequest.setTeacherId(teacherIdStr);
-				teachTableRequest.setDegree(2); 
-				
-				GetTeachTableResponse returnObjTeachTable =(GetTeachTableResponse)teachTableWSTemplate.marshalSendAndReceive(teachTableRequest, new WebServiceMessageCallback() {
-					public void doWithMessage(WebServiceMessage messageTeachTable) throws IOException, TransformerException {
-						try {
-							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
-					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       soapMessageTeachTable.writeTo(out);
-				           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
-					         
-						} catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}); 	
-				
-				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 				
-				facultyDao.updateTeachTableWS(teachTableResponseList,2);;				
-			}	
-			
-			
-		  } // End debug teacher
 			
 			
 		//	}
@@ -485,6 +332,38 @@ public class TimeTableWSService   {
 		}
 		return response;
 	} 
+	
+	
+	private void getAndInsertTeachTableWS(int semester,int degree ,List<Teacher> teacherListIn){
+		
+		//if(teacherIdStr!=null&&teacherIdStr.length()>0){
+		for(Teacher teacherTmp:teacherListIn){
+		    String facultyCode = teacherTmp.getFacultyCode();
+			GetTeachTable teachTableRequest = new GetTeachTable();
+			teachTableRequest.setSemester(semester);
+			teachTableRequest.setYear(teacherTmp.getAcademicYear());
+			teachTableRequest.setTeacherId(teacherTmp.getTeacherIdStr());
+			teachTableRequest.setDegree(degree); 
+			
+			GetTeachTableResponse returnObjTeachTable =(GetTeachTableResponse)teachTableWSTemplate.marshalSendAndReceive(teachTableRequest, new WebServiceMessageCallback() {
+				public void doWithMessage(WebServiceMessage messageTeachTable) throws IOException, TransformerException {
+					try {
+						SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
+				       ByteArrayOutputStream out = new ByteArrayOutputStream();
+				       soapMessageTeachTable.writeTo(out);
+			           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
+				         
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}); 	
+			
+			List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 				
+			facultyDao.updateTeachTableWS(teachTableResponseList,degree,facultyCode);;				
+		}	
+		
+	}
 	
 	
 	

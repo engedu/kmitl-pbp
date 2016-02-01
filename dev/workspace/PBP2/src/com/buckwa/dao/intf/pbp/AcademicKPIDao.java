@@ -12,13 +12,16 @@ public interface AcademicKPIDao {
 	public boolean isExistCreate(AcademicKPI academicKPI); 
 	public Long create(AcademicKPI academicKPI); 
 	public AcademicKPIWrapper getByAcademicYearWorkTypeCode(String academicYear,String typeCode); 
+	public AcademicKPIWrapper getByAcademicYearWorkTypeCodeFacultyCode(String academicYear,String typeCode,String facultyCode); 
+ 
 	public AcademicKPI getById(String id); 
 	public void edit(AcademicKPI academicKPI); 
 	public void deleteById(String id);
 	public void deleteAttributeById(String id); 
 	public boolean isAttributeExistCreate(AcademicKPIAttribute academicKPIAttribute); 
 	public AcademicKPIAttribute addNewAttribute(AcademicKPIAttribute academicKPIAttribute);
-	public AcademicKPI getByCodeAcademicYear(String code,String academicYear); 
+	//public AcademicKPI getByCodeAcademicYear(String code,String academicYear); 
+	public AcademicKPI getByCodeAcademicYearFacultyCode(String code,String academicYear,String facultyCode); 
 	
 	
 	public Long importwork(AcademicKPIUserMapping academicKPIUserMapping); 

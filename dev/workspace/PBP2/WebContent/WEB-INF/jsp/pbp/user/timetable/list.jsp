@@ -20,7 +20,7 @@
 <script type="text/javascript" src='<c:url value="/kendo/js/angular.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/kendo/js/kendo.all.min.js"/>'></script> 
  
- <div style=" width: 100%; padding-left: 0px;">
+ <div style=" width: 80%; padding-left: 0px;">
  <form:form modelAttribute="timetableReport" action="search.htm" method="POST" name="mainForm"> 
  <table class="pbp-table"> 
 		<thead><tr><th>
@@ -39,7 +39,7 @@
 		
       
  <div id="example">
-     <h4 style="color: rgb(255,164,67); font-weight: bold;">เทอม  1</h4>
+     <h4 style="color: rgb(255,164,67); font-weight: bold; text-align: center;">เทอม  1</h4>
      <div id="grid"></div>
 
      <script>
@@ -70,7 +70,7 @@
      	        title: {
     	            text: "ระดับคะแนนในภาควิชา"
     	        },
-                 height: 500,                 
+                 height: 400,                 
                  change: onChange,
                  dataBound: onDataBound,
                  dataBinding: onDataBinding,
@@ -140,7 +140,7 @@
          });
      </script>
   
-    <h4 style="color: rgb(255,164,67); font-weight: bold;">เทอม  2</h4>
+    <h4 style="color: rgb(255,164,67); font-weight: bold;text-align: center;">เทอม  2</h4>
      <div id="grid2"></div>
 
  
