@@ -81,7 +81,7 @@
     <br>
     
 	<div class="pbptableWrapper">
-            <div class="pbp-header">รูปแบบการกรอกข้อมูลผู้ใช้งาน 
+            <div class="pbp-header"> <span style="color: gray; font-size: 20px;">รูปแบบการกรอกข้อมูลผู้ใช้งาน</span> 
  	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/addNewAttribute.htm?academicKPIId=<c:out  value="${academicKPI.academicKPIId}"/>"  >
 	                   		<img class="imagePlus" src="<c:url value="/images/plus1.png"/>" /></a>   
             </div>
@@ -133,10 +133,10 @@
     
     
     	<div class="pbptableWrapper">
-            <div  >
+           <span style="color: gray;">
             กำหนดคุณสมบัติ (เฉพาะด้านวิชาการ) 
  	                   	   
-            </div>
+           </span>
              
 			<table class="pbp-table">
  		 		 <thead>
@@ -216,7 +216,9 @@
  	<div  class="back_center">	
 	<input class="btn btn-primary"	value="<spring:message code="label.button.save"/>" type="submit" >	
 	 &nbsp;
-	<input class="btn btn-primary" value="<spring:message code="label.button.back"/>" type="button" onclick="init();">
+	 
+	
+	<a class="btn btn-primary" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/listByWorktype.htm?workTypeCode=<c:out  value="${academicKPI.workTypeCode}"/>&academicYear=<c:out  value="${academicKPI.academicYear}"/>&facultyCode=<c:out  value="${academicKPI.facultyCode}"/>"> ย้อนกลับ</a>
 	</div>
 
 	
@@ -239,5 +241,14 @@
 		form.method='GET';	
 		form.submit();
 	}
+	
+	function listByWorktype (){		
+		var form = document.forms['mainForm']; 
+		form.action ="<%=request.getContextPath()%>/admin/pbp/academicKPI/listByWorktype.htm?workTypeCode=<c:out  value="${academicKPI.workTypeCode}"/>&academicYear=<c:out  value="${academicKPI.academicYear}"/>&facultyCode=<c:out  value="${academicKPI.facultyCode}"/>";
+		 
+		form.method='GET';	
+		form.submit();
+	}
+	
 </script>
  

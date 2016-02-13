@@ -15,7 +15,7 @@
 <div class="entry">	
 
 		  <div class="pbptableWrapper">
-            <div class="pbp-header" style="text-align: center;"> ข้อมูลอัตราการขึ้นเงินเดือน ประจำปีการศึกษา  ${markRankWrapper.academicYear} 
+            <div class="pbp-header" style="text-align: center;"> ข้อมูลระดับคะแนน ประจำปีการศึกษา  ${markRankWrapper.academicYear} 
             </div>  
              
 	 

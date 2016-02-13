@@ -53,6 +53,41 @@ public class BuckWaUserDetailsService implements UserDetailsService {
 	       }
 	       
 	       
+	       System.out.println(" ## User Login :"+username);
+	       
+	       if(username.indexOf("admin")!=-1){
+	    	   
+	    	   if(username.indexOf("01")!=-1){
+	    		   user.setFacultyCode("01");
+	    	   } else if(username.indexOf("02")!=-1){
+	    		   user.setFacultyCode("02");
+	    	   }else if(username.indexOf("03")!=-1){
+	    		   user.setFacultyCode("03");
+	    	   }else if(username.indexOf("04")!=-1){
+	    		   user.setFacultyCode("04");
+	    	   }else if(username.indexOf("05")!=-1){
+	    		   user.setFacultyCode("05");
+	    	   }else if(username.indexOf("06")!=-1){
+	    		   user.setFacultyCode("06");
+	    	   }else if(username.indexOf("07")!=-1){
+	    		   user.setFacultyCode("07");
+	    	   }else if(username.indexOf("08")!=-1){
+	    		   user.setFacultyCode("08");
+	    	   }else if(username.indexOf("09")!=-1){
+	    		   user.setFacultyCode("09");
+	    	   }else if(username.indexOf("10")!=-1){
+	    		   user.setFacultyCode("10");
+	    	   }else if(username.indexOf("11")!=-1){
+	    		   user.setFacultyCode("11");
+	    	   }else if(username.indexOf("12")!=-1){
+	    		   user.setFacultyCode("12");
+	    	   }
+	    	   
+	       }
+	       
+	       System.out.println(" ## User faculty Code :"+user.getFacultyCode());
+	       
+	       
            // Load Menu
 	       /*
 	       StringBuffer sb = new StringBuffer();

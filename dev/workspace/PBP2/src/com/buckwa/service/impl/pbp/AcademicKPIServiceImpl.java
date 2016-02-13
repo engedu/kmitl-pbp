@@ -100,6 +100,30 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 	
 	
 	@Override	
+	public BuckWaResponse getAllByAcademicYearFacultyCode(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+			String facultyCode = (String)request.get("facultyCode");
+			 
+			AcademicKPIWrapper academicKPIWrapper= ( AcademicKPIWrapper)academicKPIDao.getAllByAcademicYearFacultyCode( academicYear,facultyCode);
+		 
+			 response.addResponse("academicKPIWrapper",academicKPIWrapper);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	
+	
+	
+	@Override	
 	public BuckWaResponse getById(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 

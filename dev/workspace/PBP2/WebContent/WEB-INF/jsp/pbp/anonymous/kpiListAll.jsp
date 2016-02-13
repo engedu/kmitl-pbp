@@ -17,13 +17,13 @@
 
  
 		  <div class="pbptableWrapper">
-            <div class="pbp-header" style="text-align: center;"> เกณฑ์ภาระงานประจำปีการศึกษา  ${academicKPIWrapper.academicYear}  
+            <div class="pbp-header" style="text-align: center; color: black;"> เกณฑ์ภาระงานประจำปีการศึกษา  ${academicKPIWrapper.academicYear}  
             </div> 
             
  <c:forEach items="${academicKPIWrapper.pBPWorkTypeList}" var="domain" varStatus="status">
  
  		  <div class="pbptableWrapper">
-            <div class="pbp-header">    ${status.index+1} ${domain.name} 
+            <div class="pbp-header">  <span style="color: black;"> ${status.index+1} ${domain.name} </span> 
   
             </div> 
 			

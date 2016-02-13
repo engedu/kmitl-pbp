@@ -191,7 +191,9 @@ public class HeadDaoImpl implements HeadDao {
 								
 								
 								
-								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+							//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+
 								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 								try{
 									logger.info(" sqlAttribute:"+sqlAttribute);
@@ -387,7 +389,9 @@ public class HeadDaoImpl implements HeadDao {
 								
 								
 								
-								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+							//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								
 								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 								try{
 									logger.info(" sqlAttribute:"+sqlAttribute);

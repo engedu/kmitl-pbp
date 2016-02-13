@@ -9,12 +9,12 @@ public class PBPWorkType extends BaseDomain{
 	
 	 
 	private Long workTypeId;
-    private int minPercent;
-    private int minHour;
-    private int maxPercent;
-    private int maxHour;
+    private BigDecimal minPercent;
+    private BigDecimal minHour;
+    private BigDecimal maxPercent;
+    private BigDecimal maxHour;
     private String shortDesc;
-    private int limitBase;
+    private BigDecimal limitBase;
     private BigDecimal totalAllWorkType;
     private String facultyCode;
     
@@ -95,30 +95,7 @@ public class PBPWorkType extends BaseDomain{
 	public void setWorkTypeId(Long workTypeId) {
 		this.workTypeId = workTypeId;
 	}
-	public int getMinPercent() {
-		return minPercent;
-	}
-	public void setMinPercent(int minPercent) {
-		this.minPercent = minPercent;
-	}
-	public int getMinHour() {
-		return minHour;
-	}
-	public void setMinHour(int minHour) {
-		this.minHour = minHour;
-	}
-	public int getMaxPercent() {
-		return maxPercent;
-	}
-	public void setMaxPercent(int maxPercent) {
-		this.maxPercent = maxPercent;
-	}
-	public int getMaxHour() {
-		return maxHour;
-	}
-	public void setMaxHour(int maxHour) {
-		this.maxHour = maxHour;
-	}
+ 
 	public String getAcademicYear() {
 		return academicYear;
 	}
@@ -143,10 +120,35 @@ public class PBPWorkType extends BaseDomain{
 	public void setAcademicKPIList(List<AcademicKPI> academicKPIList) {
 		this.academicKPIList = academicKPIList;
 	}
-	public int getLimitBase() {
+ 
+	public BigDecimal getMinPercent() {
+		return minPercent;
+	}
+	public void setMinPercent(BigDecimal minPercent) {
+		this.minPercent = minPercent;
+	}
+	public BigDecimal getMinHour() {
+		return minHour;
+	}
+	public void setMinHour(BigDecimal minHour) {
+		this.minHour = minHour;
+	}
+	public BigDecimal getMaxPercent() {
+		return maxPercent;
+	}
+	public void setMaxPercent(BigDecimal maxPercent) {
+		this.maxPercent = maxPercent;
+	}
+	public BigDecimal getMaxHour() {
+		return maxHour;
+	}
+	public void setMaxHour(BigDecimal maxHour) {
+		this.maxHour = maxHour;
+	}
+	public BigDecimal getLimitBase() {
 		return limitBase;
 	}
-	public void setLimitBase(int limitBase) {
+	public void setLimitBase(BigDecimal limitBase) {
 		this.limitBase = limitBase;
 	}
 	public BigDecimal getTotalInPercentCompareBaseWorkType() {

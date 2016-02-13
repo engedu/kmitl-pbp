@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.AcademicKPI;
@@ -27,6 +28,7 @@ import com.buckwa.domain.validator.pbp.PBPWorkTypeValidator;
 import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
+import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
 
@@ -54,7 +56,21 @@ public class PBPWorkTypeController {
 			BuckWaRequest request = new BuckWaRequest();
 			String academicYear =schoolUtil.getCurrentAcademicYear();
 			request.put("academicYear",academicYear);
-			String facultyCodeSelect ="01";
+			
+			
+			// Get Faculty Code
+			BuckWaUser buckwaUser =BuckWaUtils.getUserFromContext();
+			String facultyCode = buckwaUser.getFacultyCode();
+			String facultyCodeSelect ="";
+			if(facultyCode==null||facultyCode.trim().length()==0){
+				facultyCodeSelect ="01";
+			}else{
+				facultyCodeSelect = facultyCode;
+			}
+			
+			   System.out.println(" ## /admin/pbp/pBPWorkType/init.htm facultyCodeSelect  :"+facultyCodeSelect);
+			   
+			   
 			request.put("facultyCode",facultyCodeSelect);
 			BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
@@ -75,6 +91,7 @@ public class PBPWorkTypeController {
 					 }
 					 pBPWorkTypeWrapper.setFacultyList(facultyList);
 				}
+				pBPWorkTypeWrapper.setFacultyCodeSelect(facultyCodeSelect);
 				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
 			}				  
 		}catch(Exception ex){

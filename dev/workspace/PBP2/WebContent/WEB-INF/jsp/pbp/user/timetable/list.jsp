@@ -65,7 +65,7 @@
                              dataType: "json"
                          }
                      },
-                     pageSize: 20
+                     pageSize: 70
                  },
      	        title: {
     	            text: "ระดับคะแนนในภาควิชา"
@@ -167,7 +167,7 @@
                              dataType: "json"
                          }
                      },
-                     pageSize: 20
+                     pageSize: 70
                  },
      	        title: {
     	            text: "ระดับคะแนนในภาควิชา"

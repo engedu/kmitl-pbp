@@ -260,7 +260,9 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 									
 									
 									
-									String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+									String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+									
 									List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 									try{
 										//logger.info(" sqlAttribute:"+sqlAttribute);
@@ -321,11 +323,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		BigDecimal totalPercentMarkComareBase = new BigDecimal(0.00);
 		
 		for(PBPWorkType tmp:pBPWorkTypeList){
-			BigDecimal maxMark = new BigDecimal(tmp.getMaxHour());
-			BigDecimal limitBase = new BigDecimal(tmp.getLimitBase());
+			BigDecimal maxMark =  tmp.getMaxHour();
+			BigDecimal limitBase = tmp.getLimitBase();
 			
-			int minHour =tmp.getMinHour();
-			int maxHour =tmp.getMaxHour();
+			BigDecimal minHour =tmp.getMinHour();
+			BigDecimal maxHour =tmp.getMaxHour();
 			
 			BigDecimal totalInWorkType = new BigDecimal(0.00);
 			List<AcademicKPIUserMapping> academicKPIUserMappingList =  tmp.getAcademicKPIUserMappingList();
@@ -405,9 +407,13 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										
 											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
 										}else{ 
-											
-											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));
 											logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
+										
+											try{
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));
+											}catch(Exception ex){
+												ex.printStackTrace();
+											}
 											calResultStr=calResultStr+ " X (" +attributeValueValue+" "+attributeValueName+")";
 										}
 										
@@ -448,13 +454,13 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			tmp.setTotalInWorkType(totalInWorkType.setScale(2));
 			
 			tmp.setTotalInPercentWorkType(totalInPercentWorkType.setScale(2));
-			if(totalInWorkType.intValue()<minHour){
+			if(totalInWorkType.compareTo(minHour)==-1){
 				tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
 				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2));
 				tmp.setCompareBaseStatus("UNDER");
-			}else  if(totalInWorkType.intValue()>maxHour){
-				tmp.setTotalInPercentCompareBaseWorkType (new BigDecimal(tmp.getMaxPercent()).setScale(2));
-				tmp.setTotalInWorkTypeCompareBase(new BigDecimal(tmp.getMinHour()).setScale(2));
+			}else  if(totalInWorkType.compareTo(maxHour)==1){
+				tmp.setTotalInPercentCompareBaseWorkType ( tmp.getMaxPercent() .setScale(2));
+				tmp.setTotalInWorkTypeCompareBase( tmp.getMinHour() .setScale(2));
 				tmp.setCompareBaseStatus("OVER");
 			}else {
 				tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
@@ -688,18 +694,18 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		List<PBPWorkType> pBPWorkTypeList = finalPBPWorkTypeWrapper.getpBPWorkTypeList();
 		
 		for(final PBPWorkType pBPWorkTypeTmp:pBPWorkTypeList){		
-			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase());
+			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase()+" min_hour:"+pBPWorkTypeTmp.getMinHour());
 			jdbcTemplate.update(new PreparedStatementCreator() {  
 				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 					PreparedStatement ps = connection.prepareStatement("" +						
 							"  update  pbp_work_type set name =? ,min_percent=?,min_hour=?,max_percent=? ,max_hour=?,limit_base=? where work_type_id=? " +
 						 "", Statement.RETURN_GENERATED_KEYS);   
 					ps.setString(1,pBPWorkTypeTmp.getName());
-					ps.setInt(2,pBPWorkTypeTmp.getMinPercent());
-					ps.setInt(3,pBPWorkTypeTmp.getMinHour());
-					ps.setInt(4,pBPWorkTypeTmp.getMaxPercent());
-					ps.setInt(5,pBPWorkTypeTmp.getMaxHour());
-					ps.setInt(6,pBPWorkTypeTmp.getLimitBase());
+					ps.setBigDecimal(2,pBPWorkTypeTmp.getMinPercent());
+					ps.setBigDecimal(3,pBPWorkTypeTmp.getMinHour());
+					ps.setBigDecimal(4,pBPWorkTypeTmp.getMaxPercent());
+					ps.setBigDecimal(5,pBPWorkTypeTmp.getMaxHour());
+					ps.setBigDecimal(6,pBPWorkTypeTmp.getLimitBase());
 					ps.setLong(7, pBPWorkTypeTmp.getWorkTypeId());
 				 
 				 
@@ -827,12 +833,12 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			domain.setCode(rs.getString("code"));
 			domain.setName(rs.getString("name"));
 			domain.setDescription(rs.getString("description"));
-			domain.setMinPercent(rs.getInt("min_percent"));
-			domain.setMinHour(rs.getInt("min_hour"));
-			domain.setMaxPercent(rs.getInt("max_percent"));
-			domain.setMaxHour(rs.getInt("max_hour"));
+			domain.setMinPercent(rs.getBigDecimal("min_percent"));
+			domain.setMinHour(rs.getBigDecimal("min_hour"));
+			domain.setMaxPercent(rs.getBigDecimal("max_percent"));
+			domain.setMaxHour(rs.getBigDecimal("max_hour"));
 			domain.setAcademicYear(rs.getString("academic_year"));
-			domain.setLimitBase(rs.getInt("limit_base"));
+			domain.setLimitBase(rs.getBigDecimal("limit_base"));
 			domain.setFacultyCode(rs.getString("faculty_code"));
 		 
 		return domain;

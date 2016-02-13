@@ -230,9 +230,142 @@ public class FacultyDaoImpl implements FacultyDao {
 		return returnValue;
 	}
 	
+	@Override
+	public void assignKPIInit(  ) {	
+		
+		//1. select kpi engineering
+		//2. loop kpi select attribute
+		
+		
+		String sqlacademickpi =" select *  from academic_kpi   " ; 
+		logger.info("   sqlacademickpi:"+sqlacademickpi);
+		List<AcademicKPI> academicKPIList  =null;
+		
+		try{
+			academicKPIList = this.jdbcTemplate.query(sqlacademickpi,	new AcademicKPIMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		} 
+		
+		logger.info(" Found Academic kpi size :"+academicKPIList.size());
+		
+		
+		
+		for(AcademicKPI kpitmp:academicKPIList){ 
+			
+			String sqlAttribute =" select *  from academic_kpi_attribute where academic_kpi_id ="+kpitmp.getAcademicKPIId()  ; 
+			List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+			try{
+				academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );	
+			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+				ex.printStackTrace();
+			}  
+			
+			kpitmp.setAcademicKPIAttributeList(academicKPIAttributeList);
+			
+		}
+		
+	 
+		String sql =" select *  from faculty  where academic_year="+2558 ; 
+		logger.info(" sql:"+sql);
+		List <Faculty > facultyList   =null;
+		
+		try{
+			facultyList = this.jdbcTemplate.query(sql,	new FacultyMapper() );	
+			 
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		}
+		
+		logger.info(" Found Faculty Sise:"+facultyList.size());
+		for(Faculty facultyTmp:facultyList){
+			logger.info(" code :"+facultyTmp.getCode());
+		}
+		
+		for(Faculty facultyTmp:facultyList){
+			final String facultyCode =facultyTmp.getCode();
+			if(facultyCode.equalsIgnoreCase("01")){
+				
+			}else{
+				
+				logger.info(" Start Insert Faculty :"+facultyCode);
+				
+				
+				try{
+				for(final AcademicKPI finalDomain:academicKPIList){ 
+					final int nexCode = 0;
+					KeyHolder keyHolder = new GeneratedKeyHolder(); 		
+					jdbcTemplate.update(new PreparedStatementCreator() {  
+						public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+							PreparedStatement ps = connection.prepareStatement("" +						
+									"  insert into academic_kpi (name, code,work_type_code,mark,academic_year,unit_code,rule_code,order_no,description,faculty_code,from_reg) values (?,?, ?,?,?,?,?,?,?,?,?)" +
+								 "", Statement.RETURN_GENERATED_KEYS);   
+							ps.setString(1,finalDomain.getName());
+							ps.setInt(2,Integer.parseInt(finalDomain.getCode()));
+							ps.setInt(3,new Integer(finalDomain.getWorkTypeCode()));	
+							ps.setBigDecimal(4, finalDomain.getMark());
+							ps.setString(5,finalDomain.getAcademicYear());
+							ps.setInt(6,new Integer(finalDomain.getUnitCode()));	
+							ps.setString(7,finalDomain.getMultiplyValue());
+							ps.setInt(8, finalDomain.getOrderNo()==null?new Integer(1):new Integer(finalDomain.getOrderNo()));
+							ps.setString(9,finalDomain.getDescription());
+							ps.setString(10,facultyCode);
+							ps.setString(11,finalDomain.getFromRegis());
+							return ps;  
+							}
+						}, 	keyHolder); 	
+					final Long returnid =  keyHolder.getKey().longValue();	
+					
+					
+					List<AcademicKPIAttribute> attributeList = finalDomain.getAcademicKPIAttributeList();
+					
+					for(final AcademicKPIAttribute attbuttmp:attributeList){ 
+						 
+						jdbcTemplate.update(new PreparedStatementCreator() {  
+							public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+								PreparedStatement ps = connection.prepareStatement("" +						
+										"  insert into academic_kpi_attribute (name, code,academic_kpi_code,is_calculate,academic_year,academic_kpi_id,mandatory,is_validate_number) values (?,?, ?,?,?,?,?,?  )" +
+									 "", Statement.RETURN_GENERATED_KEYS);   
+								ps.setString(1,attbuttmp.getName());
+								ps.setInt(2,nexCode);
+								ps.setInt(3,new Integer(attbuttmp.getAcademicKPICode()));	 
+								ps.setString(4,attbuttmp.getIsCalculate()); 
+								
+								ps.setString(5,attbuttmp.getAcademicYear()); 
+								ps.setLong(6,returnid); 
+								ps.setString(7,attbuttmp.getMandatory()); 
+								ps.setString(8,attbuttmp.getIsValidateNumber()); 
+								
+								return ps;  
+								}
+							} ); 	
+						 				
+						
+					}
+					
+					
+				}
+				
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+
+				
+				
+			}
+			
+			
+			
+		}
+		
+		
+	}	
+	
+	 
 	
 	
 	
+ 
 	
 	@Override
 	public ChainOfCommandWrapper getByFaculty(String facultyId,String academicYear) {
@@ -1243,7 +1376,10 @@ public class FacultyDaoImpl implements FacultyDao {
 					returnObj.setRatio(100);
 					 
 					
-					String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+zeroKPI.getCode()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+					//String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+zeroKPI.getCode()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+			
+					String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+zeroKPI.getAcademicKPIId()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+					
 					List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 					try{
 						logger.info(" sqlAttribute:"+sqlAttribute);
@@ -1626,6 +1762,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			domain.setTotalStudentFrom(rs.getString("total_student_from"));
 			domain.setTotalStudentTo(rs.getString("total_student_to"));
 			domain.setFacultyCode(rs.getString("faculty_code"));
+			domain.setFromRegis(rs.getString("from_reg"));
 			//logger.info(" ###### Multiply Value:"+rs.getString("rule_code"));
 			
 			try{

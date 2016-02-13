@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.AcademicKPI;
@@ -33,6 +34,7 @@ import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaConstants;
+import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
 
@@ -67,7 +69,22 @@ public class AcademicKPIController {
 		try{
 			BuckWaRequest request = new BuckWaRequest();
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-			String facultyCodeSelect ="01";
+			 
+			
+			
+			
+			// Get Faculty Code
+			BuckWaUser buckwaUser =BuckWaUtils.getUserFromContext();
+			String facultyCode = buckwaUser.getFacultyCode();
+			String facultyCodeSelect ="";
+			if(facultyCode==null||facultyCode.trim().length()==0){
+				facultyCodeSelect ="01";
+			}else{
+				facultyCodeSelect = facultyCode;
+			}
+			
+			   System.out.println(" ## /admin/pbp/academicKPI/init.htm facultyCodeSelect  :"+facultyCodeSelect);
+			   			
 			request.put("academicYear",academicYear); ;
 			request.put("facultyCode",facultyCodeSelect);
 			
@@ -105,7 +122,7 @@ public class AcademicKPIController {
 							 academicKPIWrapper.setFacultyList(facultyList);
 						}
 					
-						
+						academicKPIWrapper.setFacultyCodeSelect(facultyCodeSelect);
 					academicKPIWrapper.setWorkTypeName(workTypeName);	
 					mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 				}

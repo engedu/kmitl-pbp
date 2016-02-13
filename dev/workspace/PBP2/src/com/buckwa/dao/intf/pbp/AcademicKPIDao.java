@@ -27,5 +27,7 @@ public interface AcademicKPIDao {
 	public Long importwork(AcademicKPIUserMapping academicKPIUserMapping); 
 	
 	public AcademicKPIWrapper getAllByAcademicYear( String getByAcademicYear) ;
+	public AcademicKPIWrapper getAllByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode) ;	
+	
 	
 }

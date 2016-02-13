@@ -27,10 +27,12 @@ import com.buckwa.service.intf.pam.PersonProfileService;
 import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
+import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 
 @RestController
 @RequestMapping("/person")
@@ -144,6 +146,7 @@ public class JSONPersonController {
 
 	@RequestMapping(value = "/getBarchart", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<RadarPlotReport> getWorkTypeBarChartReport() {
+		System.out.println(" ### getBarchart ###");
 
 		List<RadarPlotReport> returnList = new ArrayList<RadarPlotReport>();
 		ModelAndView mav = new ModelAndView();
@@ -160,6 +163,7 @@ public class JSONPersonController {
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Department department = (Department) response.getResObj("department");
+				System.out.println(" department :"+BeanUtils.getBeanString(department));
 
 				if (department != null) {
 
@@ -176,6 +180,7 @@ public class JSONPersonController {
 						if (response.getStatus() == BuckWaConstants.SUCCESS) {
 							Person person = (Person) response.getResObj("person");
 							String firstLast = person.getThaiName() + " " + person.getThaiSurname();
+							System.out.println(" firstLast :"+firstLast);
 
 							int loopx = 1;
 							for (DepartmentWorkTypeReport personTmp : reportWorkTypeDepartmentList) {

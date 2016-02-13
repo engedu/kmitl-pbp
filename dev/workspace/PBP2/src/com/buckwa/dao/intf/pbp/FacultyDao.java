@@ -65,6 +65,8 @@ public interface FacultyDao {
 	
 	public String getFacultyByCodeByAcademicYearAndName( String getByAcademicYear,String facultyName) ;
 	
+	public void  assignKPIInit();
+	
 	 
 	 
 }

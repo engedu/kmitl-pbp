@@ -89,7 +89,7 @@ public class CommonAuthenticationFilter extends
 			authentication = this.getAuthenticationManager().authenticate(authRequest);
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new BadCredentialsException("Invalid username/password/captcha");
+			throw new BadCredentialsException("Invalid username/password");
 		}
 		
 		return authentication;

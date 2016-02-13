@@ -85,7 +85,7 @@
 		<table class="pbp-table" style="width: 90%;"> -->
 		<thead>
 			<tr>
-				<th colspan="2"><div class="pbp-header txtleft"><span class="lsf-icon colororange" title="table"></span>อัตราการขึ้นเงินเดือน ประจำปี  ${anonymousWrapper.academicYearWrapper.academicYear.name}  </div></th>
+				<th colspan="2"><div class="pbp-header txtleft"><span class="lsf-icon colororange" title="table"></span>ระดับคะแนน ประจำปี  ${anonymousWrapper.academicYearWrapper.academicYear.name}  </div></th>
 			</tr>
 			<tr>
 				<th class="thFirst"> ภาระงานที่ปฎิบัติสำเร็จ   </th>
@@ -209,7 +209,7 @@
  
 			<tr>
 				<th class="thFirst"><div class="pbp-header">
-				<a rel="notLoading" class="colorwhite" href="<%=request.getContextPath()%>/anonymous/listByWorktype.htm?academicYear=<c:out value="${anonymousWrapper.academicYear}"/>">
+				<a rel="notLoading" class="colorwhite" href="<%=request.getContextPath()%>/anonymous/listByWorktypeFaculty.htm?academicYear=<c:out value="${anonymousWrapper.academicYear}"/>">
 				 View All  </a>  </div></th> 
 				 
 			</tr> 

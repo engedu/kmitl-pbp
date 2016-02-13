@@ -10,6 +10,12 @@
          <li class=""><span class="lsf-icon colororange" title="home"></span><a href="<%=request.getContextPath()%>/welcome.htm">หน้าแรก</a></li>
          
          
+         
+         <sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
+              <li class=""><a href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/init.htm"  >ประเภทภาระงาน</a></li>
+              <li class="" ><a href="<%=request.getContextPath()%>/admin/pbp/academicKPI/init.htm">ภาระงานประจำปี</a></li>          
+          </sec:authorize>
+         
           <sec:authorize ifNotGranted="ROLE_ADMIN">	
           
           
@@ -81,6 +87,7 @@
       </sec:authorize>
       
       <sec:authorize ifAnyGranted="ROLE_ADMIN">
+      <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
            <a href="#">สถาบัน & บุคลากร</a><a href="#" class="flyout-toggle"></a>
             <ul class="flyout"><!-- Flyout Menu -->
@@ -121,11 +128,13 @@
            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
              
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวนคะแนน</a></li>
+              <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/assignKPIInit.htm">กำหนด kpi คณะ</a></li>
+ 
          <!--    <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/staffpartner/init.htm">สัดส่วนสตาฟ</a></li>  -->  
  
             </ul> 
           </li><!-- END Flyout Menu -->     
-
+		</sec:authorize>
         </sec:authorize>  
           
           

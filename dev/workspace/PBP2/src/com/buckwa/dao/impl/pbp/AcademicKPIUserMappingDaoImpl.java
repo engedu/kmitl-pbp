@@ -75,7 +75,8 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 						
 						
 						
-						String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+						//String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+						String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
 						List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList<AcademicKPIAttribute>();
 						try{
 							logger.info(" sqlAttribute:"+sqlAttribute);
@@ -187,7 +188,8 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 		
 		List<AcademicKPIAttributeValue> academicKPIAttributeValueList =academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getAcademicKPIAttributeValueList();
 		for(final AcademicKPIAttributeValue tmp:academicKPIAttributeValueList){
-			String sql =" update   academic_kpi_user_mapping set academic_kpi_code='"+academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getAcademicKPI().getCode()+"'"
+			//String sql =" update   academic_kpi_user_mapping set academic_kpi_code='"+academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getAcademicKPI().getCode()+"'"
+			String sql =" update   academic_kpi_user_mapping set academic_kpi_id='"+academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getAcademicKPI().getAcademicKPIId()+"'"
 					+ ", academic_kpi_id="+academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getAcademicKPI().getAcademicKPIId()+"  "
 							+ "where   kpi_user_mapping_id ="+tmp.getAcademicKPIMappingId()+"" ; 
 			logger.info(" sql update :"+sql);
@@ -314,12 +316,12 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 			domain.setCode(rs.getString("code"));
 			domain.setName(rs.getString("name"));
 			domain.setDescription(rs.getString("description"));
-			domain.setMinPercent(rs.getInt("min_percent"));
-			domain.setMinHour(rs.getInt("min_hour"));
-			domain.setMaxPercent(rs.getInt("max_percent"));
-			domain.setMaxHour(rs.getInt("max_hour"));
+			domain.setMinPercent(rs.getBigDecimal("min_percent"));
+			domain.setMinHour(rs.getBigDecimal("min_hour"));
+			domain.setMaxPercent(rs.getBigDecimal("max_percent"));
+			domain.setMaxHour(rs.getBigDecimal("max_hour"));
 			domain.setAcademicYear(rs.getString("academic_year"));
-			domain.setLimitBase(rs.getInt("limit_base"));
+			domain.setLimitBase(rs.getBigDecimal("limit_base"));
 		 
 		return domain;
     }

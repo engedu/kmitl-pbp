@@ -159,7 +159,7 @@
             </div> 	
             <!-- 
             <div class="pbp-header" style="text-align: center;"><span style="font-size:30px; color: rgb(112,146,190);">
-             	อัตราการขึ้นเงินเดือน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate}
+             	ระดับคะแนน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate}
             </div>   
             -->         
             <div class="pbp-header" style="text-align: center;"><span style="font-size:30px; color: rgb(112,146,190);">

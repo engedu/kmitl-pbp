@@ -19,7 +19,7 @@
 			    <c:forEach items="${markRankWrapper.markRankRoundList}" var="domain" varStatus="status">
 			        <div class="pbp-header"> 
 		            <table>
-		                <thead><tr><th colspan="2"><div class="pbp-header" style="text-align: left: ;"> ข้อมูลอัตราการขึ้นเงินเดือน ประจำปีการศึกษา  ${markRankWrapper.academicYear} </div>  </th></tr></thead>
+		                <thead><tr><th colspan="2"><div class="pbp-header" style="text-align: left: ;"> ข้อมูลระดับคะแนน ประจำปีการศึกษา  ${markRankWrapper.academicYear} </div>  </th></tr></thead>
 		            	<tr>
 		            		<td width="70%" >    
 		            		 	<c:if test="${domain.employeeType=='0'}">ข้าราชการรอบที่   <c:out value="${domain.round}"/>  </c:if> 

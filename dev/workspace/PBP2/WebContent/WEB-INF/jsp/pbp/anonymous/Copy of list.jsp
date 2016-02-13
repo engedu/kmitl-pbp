@@ -65,7 +65,7 @@
 		
 		
 				 <div class="pbptableWrapper">
-            <div class="pbp-header">อัตราการขึ้นเงินเดือน ประจำปี  ${anonymousWrapper.academicYearWrapper.academicYear.name}  </div>
+            <div class="pbp-header">ระดับคะแนน ประจำปี  ${anonymousWrapper.academicYearWrapper.academicYear.name}  </div>
            
           <table class="pbp-table">
           <tbody>
@@ -77,7 +77,7 @@
 			
 			<tr>
 				<th class="thFirst"> ภาระงานที่ปฎิบัติสำเร็จ(%)   </th>
-				<th class="thFirst">อัตราการขึ้นเงินเดือน (%) </th> 
+				<th class="thFirst">ระดับคะแนน (%) </th> 
 			</tr>
 		</thead>
 

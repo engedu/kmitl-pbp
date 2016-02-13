@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib  prefix="pg" uri="http://jsptags.com/tags/navigation/pager"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
 
@@ -37,9 +37,22 @@
 					คณะ:
 				</td>
 				<td>
+				
+				<sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
+            		 <form:select path="facultyCodeSelect" disabled="true" > 
+							<form:options items="${academicKPIWrapper.facultyList}" itemValue="code" itemLabel="name"/>
+						</form:select> 	
+						<form:hidden path="facultyCodeSelect"/>
+				</sec:authorize>	
+				
+				<sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+				<sec:authorize ifAnyGranted="ROLE_ADMIN">	
             		 <form:select path="facultyCodeSelect" > 
-							<form:options items="${pBPWorkTypeWrapper.facultyList}" itemValue="code" itemLabel="name" />
-						</form:select> 					 
+							<form:options items="${academicKPIWrapper.facultyList}" itemValue="code" itemLabel="name" />
+						</form:select> 	
+				</sec:authorize>
+				</sec:authorize>					
+ 				 
 				</td>
 				 <td rowspan="2">
 					 

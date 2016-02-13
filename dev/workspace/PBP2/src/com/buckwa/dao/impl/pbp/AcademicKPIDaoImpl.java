@@ -120,7 +120,8 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			
 			
 			for(AcademicKPI tmpxx: academicKPIList){
-				String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+tmpxx.getAcademicYear()+"' and academic_kpi_code ='"+tmpxx.getCode()+"'" ; 
+			//	String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+tmpxx.getAcademicYear()+"' and academic_kpi_code ='"+tmpxx.getCode()+"'" ; 
+				String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+tmpxx.getAcademicYear()+"' and academic_kpi_id ="+tmpxx.getAcademicKPIId() ; 
 				List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 				try{
 					academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );	
@@ -138,6 +139,47 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
  
 		return academicKPIWrapper;
 	}
+
+	
+	@Override
+	public AcademicKPIWrapper getAllByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode) {			
+		String sqlpbp_work_type =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"' and faculty_code='"+facultyCode+"'" ;  		
+		logger.info("  getAllByAcademicYear  sqlpbp_work_type:"+sqlpbp_work_type);		
+		AcademicKPIWrapper academicKPIWrapper = new AcademicKPIWrapper();	 			 
+		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sqlpbp_work_type,	new PBPWorkTypeMapper() );	
+		for(PBPWorkType tmp:pBPWorkTypeList){ 			
+			String sqlkpi =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"' and work_type_code ='"+tmp.getCode()+"' and faculty_code ='"+facultyCode+"' order by order_no" ; 
+			logger.info(" sqlkpi:"+sqlkpi);
+			List<AcademicKPI> academicKPIList   =null;			
+			try{
+				academicKPIList = this.jdbcTemplate.query(sqlkpi,	new AcademicKPIMapper() );				
+				
+			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+				ex.printStackTrace();
+			} 
+			
+			
+			for(AcademicKPI tmpxx: academicKPIList){
+			//	String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+tmpxx.getAcademicYear()+"' and academic_kpi_code ='"+tmpxx.getCode()+"'" ; 
+				String sqlAttribute =" select *  from academic_kpi_attribute where academic_year ='"+tmpxx.getAcademicYear()+"' and academic_kpi_id ="+tmpxx.getAcademicKPIId() ; 
+				List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+				try{
+					academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );	
+				}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+					ex.printStackTrace();
+				} 
+				 
+				tmpxx.setAcademicKPIAttributeList(academicKPIAttributeList);
+			}
+			tmp.setAcademicKPIList(academicKPIList);
+			
+		}
+		
+		academicKPIWrapper.setpBPWorkTypeList(pBPWorkTypeList); 
+ 
+		return academicKPIWrapper;
+	}	
+	
 	
 	
 
@@ -148,8 +190,10 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 		logger.info(" sql:"+sql);
 		 AcademicKPI  academicKPI  = academicKPI = this.jdbcTemplate.queryForObject(sql,	new AcademicKPIMapper() );	
 	     if(academicKPI!=null){
-	 		String sqlAttribute =" select *  from academic_kpi_attribute where academic_kpi_code ='"+academicKPI.getCode()+"' and academic_year='"+academicKPI.getAcademicYear()+"'" ; 
-			logger.info(" sqlAttribute:"+sqlAttribute);
+	// 		String sqlAttribute =" select *  from academic_kpi_attribute where academic_kpi_code ='"+academicKPI.getCode()+"' and academic_year='"+academicKPI.getAcademicYear()+"'" ; 
+	 		String sqlAttribute =" select *  from academic_kpi_attribute where academic_kpi_id ="+academicKPI.getAcademicKPIId() ; 
+
+	 		logger.info(" sqlAttribute:"+sqlAttribute);
 			List<AcademicKPIAttribute>  academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );	
 			
 			academicKPI.setAcademicKPIAttributeList(academicKPIAttributeList);
@@ -484,10 +528,10 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			domain.setCode(rs.getString("code"));
 			domain.setName(rs.getString("name"));
 			domain.setDescription(rs.getString("description"));
-			domain.setMinPercent(rs.getInt("min_percent"));
-			domain.setMinHour(rs.getInt("min_hour"));
-			domain.setMaxPercent(rs.getInt("max_percent"));
-			domain.setMaxHour(rs.getInt("max_hour"));
+			domain.setMinPercent(rs.getBigDecimal("min_percent"));
+			domain.setMinHour(rs.getBigDecimal("min_hour"));
+			domain.setMaxPercent(rs.getBigDecimal("max_percent"));
+			domain.setMaxHour(rs.getBigDecimal("max_hour"));
 			domain.setAcademicYear(rs.getString("academic_year"));
 		 
 		return domain;

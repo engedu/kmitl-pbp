@@ -58,6 +58,21 @@ public class TimeTableWSController {
 	}	
 	
 	
+	
+	@RequestMapping(value="assignKPIInit.htm", method = RequestMethod.GET)
+	public ModelAndView assignKPIInit( ) {			
+		 
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.LEAVE_INIT);
+		
+		mav.setViewName("welcome");		 
+		BuckWaResponse response =  timeTableWSService.assignKPIInit( );
+ 	
+		return mav;
+	}	
+	
+	
 	@RequestMapping(value="syncTimeTable.htm", method = RequestMethod.GET)
 	public ModelAndView syncTimeTableYearSemester() {			
 	 

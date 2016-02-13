@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -59,7 +58,6 @@ import com.buckwa.domain.validator.pam.PersonProfileValidator;
 import com.buckwa.domain.validator.pbp.EditImportWorkValidator;
 import com.buckwa.domain.validator.pbp.EditPersonProfilePBPValidator;
 import com.buckwa.domain.validator.pbp.ImportWorkValidator;
-import com.buckwa.domain.validator.pbp.ReplyPBPMessageNewValidator;
 import com.buckwa.domain.validator.pbp.ReplyPBPMessageValidator;
 import com.buckwa.domain.webboard.Message;
 import com.buckwa.service.intf.pam.FileLocationService;
@@ -245,11 +243,21 @@ public class PersonProfileController {
 				}				
 				dataList.add(data1);
 				
-				logger.info(" Data List ");
+				logger.info(" Data List :"+dataList);
+				logger.info(" Data List size :"+dataList.size());
+				if(dataList==null||dataList.size()==1){
+					 dataList = new ArrayList();
+					 dataList.add(new BigDecimal(0));
+					 dataList.add(new BigDecimal(0));
+					 dataList.add(new BigDecimal(0));
+					 dataList.add(new BigDecimal(0));
+					 dataList.add(new BigDecimal(0));
+				}
 				for(Number datax :dataList){
 					logger.info("  "+datax);
 				}
 
+			
 				
 		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
 		       RadarPlot plot2 = Plots.newRadarPlot(Data.newData(60, 25, 60, 25, 20,60));
@@ -919,7 +927,7 @@ public class PersonProfileController {
 					List<AcademicKPIAttribute> ratioList =academicKPI.getAcademicKPIAttributeList();
 					for(AcademicKPIAttribute tmp:ratioList){
 						String attributeName =tmp.getName();
-						logger.info(" Attribute Name:"+attributeName+" index of �Ѵ��ǹ:"+attributeName.indexOf("�Ѵ��ǹ"));
+						logger.info(" Attribute Name:"+attributeName+" index of �Ѵ��ǹ:"+attributeName.indexOf("สัดส่วน"));
 						
 						if(attributeName.indexOf("สัดส่วน")!=-1){
 							tmp.setValue("100");

@@ -20,6 +20,7 @@ public class BuckWaUser extends User {
 	GrantedAuthority []authorities;
 	
 	private Person personProfile ;
+	private String facultyCode;
 	
 	private String firstLastName;
 	
@@ -37,6 +38,14 @@ public class BuckWaUser extends User {
 	super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
  
 	//	super(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+	}
+
+	public String getFacultyCode() {
+		return facultyCode;
+	}
+
+	public void setFacultyCode(String facultyCode) {
+		this.facultyCode = facultyCode;
 	}
 
 	public List<Menu> getMenuList() {
