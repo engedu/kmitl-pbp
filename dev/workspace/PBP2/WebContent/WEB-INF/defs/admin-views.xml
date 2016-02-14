@@ -127,4 +127,12 @@
 	<bean id="moobanList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanList" /></bean>
 	<bean id="moobanEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="moobanEdit" /></bean> 
 	<!-- End Province --> 
+	
+ 
+ 	<!-- TimeTable -->
+ 	<bean id="timeTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="timeTableList" /></bean>
+ 	<bean id="viewTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewTableList" /></bean>
+  <bean id="editTimeTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editTimeTableList" /></bean>
+	<!-- End User -->
+		
 </beans>

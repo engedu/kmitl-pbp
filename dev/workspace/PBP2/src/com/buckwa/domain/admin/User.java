@@ -10,6 +10,7 @@ import com.buckwa.domain.common.Address;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pbp.AcademicYear;
 import com.buckwa.domain.pbp.Faculty;
+import com.buckwa.domain.pbp.report.TimeTableReport;
  
 
 public class User extends BaseDomain  {
@@ -85,7 +86,8 @@ public class User extends BaseDomain  {
 	
 	private String icNumber ;
 	
-	
+	private List<TimeTableReport> timeTableList;
+	private List<TimeTableReport> timeTableList2;
 	
 	private List<AcademicYear> academicYearList;
 	private List<Faculty> facultyList;
@@ -96,6 +98,22 @@ public class User extends BaseDomain  {
 
 	public void setIcNumber(String icNumber) {
 		this.icNumber = icNumber;
+	}
+
+	public List<TimeTableReport> getTimeTableList() {
+		return timeTableList;
+	}
+
+	public List<TimeTableReport> getTimeTableList2() {
+		return timeTableList2;
+	}
+
+	public void setTimeTableList2(List<TimeTableReport> timeTableList2) {
+		this.timeTableList2 = timeTableList2;
+	}
+
+	public void setTimeTableList(List<TimeTableReport> timeTableList) {
+		this.timeTableList = timeTableList;
 	}
 
 	public String getFacultyCode() {

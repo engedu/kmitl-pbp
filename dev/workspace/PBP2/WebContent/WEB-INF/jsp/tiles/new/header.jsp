@@ -126,7 +126,7 @@
            
             <ul class="flyout"><!-- Flyout Menu -->
            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
-             
+                <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวนคะแนน</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/assignKPIInit.htm">กำหนด kpi คณะ</a></li>
  

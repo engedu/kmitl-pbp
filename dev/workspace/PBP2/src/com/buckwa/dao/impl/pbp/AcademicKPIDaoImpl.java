@@ -297,11 +297,11 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			}, 	keyHolder); 	
 		Long returnid =  keyHolder.getKey().longValue();		
  
-		
+		// Set Default Attribute
 		AcademicKPIAttribute academicKPIAttribute = new AcademicKPIAttribute();
 		academicKPIAttribute.setAcademicKPICode(nexCode+"");
 		academicKPIAttribute.setAcademicKPIId(returnid);
-		academicKPIAttribute.setName("���ͧҹ");
+		academicKPIAttribute.setName("ชื่องาน");
 		//academicKPIAttribute.setMandatory("Y");
 		academicKPIAttribute.setAcademicYear(finalDomain.getAcademicYear());
 		addNewAttribute(academicKPIAttribute);

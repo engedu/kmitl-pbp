@@ -107,6 +107,8 @@ public class AcademicKPIController {
 					AcademicKPIWrapper academicKPIWrapper = (AcademicKPIWrapper)response.getResObj("academicKPIWrapper");			 
 					academicKPIWrapper.setAcademicYear(academicYear); 
 					academicKPIWrapper.setpBPWorkType(workTypeList.get(0));
+					PBPWorkType work0 =workTypeList.get(0);
+					academicKPIWrapper.setWorkTypeCode(work0.getCode());
 					academicKPIWrapper.setpBPWorkTypeList(workTypeList);	
 					
 					academicKPIWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());

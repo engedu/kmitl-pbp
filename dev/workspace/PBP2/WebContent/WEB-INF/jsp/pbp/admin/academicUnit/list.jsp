@@ -18,7 +18,7 @@
                <div class="pbp-header"> 
                <table style="width:100%">
                	<tr>
-               		<td width="80%">	ข้อมูล หน่วยนับประจำปีการศึกษา  ${academicUnitWrapper.academicYear} </td>
+               		<td width="80%">	ข้อมูล หน่วยนับ  </td>
                		<td ><a> <input value="<spring:message code="label.button.new"/>" type="button" class="btn btn-primary" onclick="create();"> </a> 	</td>
                	</tr>
                </table>
@@ -46,7 +46,7 @@
 		<td style=" border: 1px solid white;">
 		
  
-			 <input   name="academicUnitList[${status.index}].name" value="${domain.name}"  />
+			 <input   name="academicUnitList[${status.index}].name" value="${domain.name}"  style="width: 400px;"/>
 		 
 			 
 		</td>

@@ -26,7 +26,7 @@ public class GenerateCodeUtil   {
 	public int getNextAcademicUnitCode(String academicYear) {
 		 int returnValue = 0;
 		try{
-			String sqltmp = " select  max(code) as maxCode from academic_unit where academic_year='"+academicYear+"'";
+			String sqltmp = " select  max(code) as maxCode from academic_unit ";
 			logger.info(" getNextAcademicUnitCode:"+sqltmp);
 			String code = this.jdbcTemplate.queryForObject(sqltmp,new CodeMapper());
 	         

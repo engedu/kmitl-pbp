@@ -318,4 +318,21 @@
       <put-attribute name="main"   value="/WEB-INF/jsp/admin/address/mooban/edit.jsp"/>      
   </definition>     
   
+  
+  <!-- Time Table -->
+  
+   <definition name="timeTableList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/list.jsp"/>      
+  </definition> 
+  
+   <definition name="viewTableList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/viewTimeTableList.jsp"/>      
+  </definition> 
+    
+    <definition name="editTimeTableList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/edit.jsp"/>      
+  </definition>  
 </tiles-definitions>
