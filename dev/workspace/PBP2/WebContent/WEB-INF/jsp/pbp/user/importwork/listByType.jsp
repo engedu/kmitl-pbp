@@ -50,7 +50,7 @@
 		   				  ${domain.name}
 		   				 </c:if>				 
 		   				 </td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
  	   					<td class="tdFirst">
  	   					 ${domain.description}
  	   					<!--  

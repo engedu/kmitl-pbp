@@ -9,13 +9,18 @@
 <%@ page import="java.util.*" %>  
 <form:form modelAttribute="user"	action="edit.htm" method="POST" name="mainForm"  enctype="multipart/form-data">  
  <div class="post">
-	<h2 class="title"> </h2>
+ 
 		<div class="entry">
-		
+		 <div class="pbp-header" style=" color: black;"> ข้อมูลตารางสอน ${user.first_name}  ${user.last_name} ประจำปีการศึกษา ${academicYearStr}</div>
+		  <div class="pbp-header" style=" color: black;">RegId: ${user.regId}  </div>
+		 
+		<hr>
  		 <div class="pbptableWrapper">
-           <div class="pbp-header" style="text-align: left; color: black;"> ข้อมูลตารางสอนเทอม 1/${academicYearStr}
+           <div class="pbp-header" style="text-align: left; color: black;"> เทอม 1/${academicYearStr}
            
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input class="btn btn-primary" value="NEW" type="button" onclick="init();">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <a rel="notLoading" href="<%=request.getContextPath()%>/admin/timetable/createTimeTable.htm?username=<c:out  value="${user.username}"/>&semester=1" class="btn btn-primary" >NEW</a>
+           
             </div>			
 
 				<table class="pbp-table"> 
@@ -60,8 +65,10 @@
 	<br><br>
 	
  		 <div class="pbptableWrapper">
-            <div class="pbp-header" style="text-align: center;"><span style="color: black;">ข้อมูลตารางสอนเทอม 2/${academicYearStr}</span> 
-             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input class="btn btn-primary" value="NEW" type="button" onclick="init();">
+            <div class="pbp-header" style="text-align: left;"><span style="color: black;">เทอม 2/${academicYearStr}</span> 
+             &nbsp; &nbsp; &nbsp; &nbsp;
+   <a rel="notLoading" href="<%=request.getContextPath()%>/admin/timetable/createTimeTable.htm?username=<c:out  value="${user.username}"/>&semester=2" class="btn btn-primary" >NEW</a>
+         
             </div>			
 
 				<table class="pbp-table"> 

@@ -12,6 +12,10 @@ public class PAMConstants implements Serializable{
 	public static String MARK_TYPE_1 ="1";
 
 	
+	public static String LEC_OR_PRAC = "LEC_OR_PRAC";
+	public static String DEGREE_LEVEL = "DEGREE_LEVEL";
+	public static String THAI_SHORT_DATE  = "THAI_SHORT_DATE";
+	
 	// Lov Code
 	public static final String LOV_CODE_SEX            = "SEX";
 	public static final String LOV_CODE_EMPLOYEE_TYPE  = "EMPLOYEE_TYPE";

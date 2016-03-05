@@ -49,7 +49,7 @@ public interface FacultyDao {
 	public void updateFacultyWS(List<com.buckwa.ws.newws.oxm.Faculty> facultyList);
 	public void updateDepartmentWS(List<com.buckwa.ws.newws.oxm.Department> departmentList);
 	
-	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> timetableList,int degree,String facultyCode);
+	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea);
 	
 	public void addShareSubject( TimeTableReport timeTableReport ,String facultyCode);
 	

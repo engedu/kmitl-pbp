@@ -178,6 +178,28 @@ public class AdminUserServiceImpl implements AdminUserService {
 	}
 
 	@Override
+	public BuckWaResponse getUserByFacultyCodeOffset(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try {
+			logger.info(" getUserByOffset :");
+			PagingBean pagingBean = (PagingBean) request.get("pagingBean");
+			PagingBean returnBean = userDao.getUserByFacultyCodeOffset(pagingBean);
+			List<User> userList = returnBean.getCurrentPageItem();
+			for (User usrtmp : userList) {
+				usrtmp.setEditable("Y");
+			}
+			response.addResponse("pagingBean", returnBean);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");
+		}
+		return response;
+	}
+
+	
+	@Override
 	public BuckWaResponse getUserDepartmentByOffset(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try {

@@ -27,6 +27,7 @@ import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.domain.validator.pbp.PBPWorkTypeValidator;
 import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
+import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
@@ -69,9 +70,9 @@ public class PBPWorkTypeController {
 			}
 			
 			   System.out.println(" ## /admin/pbp/pBPWorkType/init.htm facultyCodeSelect  :"+facultyCodeSelect);
-			   
-			   
 			request.put("facultyCode",facultyCodeSelect);
+			
+			
 			BuckWaResponse response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper");
@@ -85,7 +86,7 @@ public class PBPWorkTypeController {
 					 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
 					 for(Faculty ftmp:facultyList){
 						 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
-							 pBPWorkTypeWrapper.setFacultyName(ftmp.getName());
+							 pBPWorkTypeWrapper.setFacultyName(ftmp.getName()); 
 						 }
 						 
 					 }
@@ -241,13 +242,14 @@ public class PBPWorkTypeController {
 						 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
 						 for(Faculty ftmp:facultyList){
 							 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
+								 System.out.println(" ftmp:"+BeanUtils.getBeanString(ftmp));
 								 pBPWorkTypeWrapper.setFacultyName(ftmp.getName());
 							 }
 							 
 						 }
 						 pBPWorkTypeWrapper.setFacultyList(facultyList);
 					}
-					
+					pBPWorkTypeWrapper.setFacultyCodeSelect(facultyCodeSelect);
 				mav.addObject("pBPWorkTypeWrapper", pBPWorkTypeWrapper);	
 			}	
 		}catch(Exception ex){

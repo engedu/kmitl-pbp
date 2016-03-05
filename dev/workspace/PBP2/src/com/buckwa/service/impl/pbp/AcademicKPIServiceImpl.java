@@ -270,15 +270,18 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 			
 			List<String> tmpFileNameList = (List<String>) request.get("tmpFileNameList");
 			AcademicKPIAttachFile academicKPIAttachFile = null;
-			for (String tmpFileName : tmpFileNameList) {
-				FileUtils.copyTempImageToRealPath(tempPath, uploadPath, tmpFileName);
-				
-				academicKPIAttachFile = new AcademicKPIAttachFile();
-				academicKPIAttachFile.setKpiUserMappingId(String.valueOf(academicKPIId));
-				academicKPIAttachFile.setFullFilePathName(uploadPath + tmpFileName);
-				academicKPIAttachFile.setFileName(tmpFileName);
-				fileLocationService.createPBPAttachFile(academicKPIAttachFile);
+			if(tmpFileNameList!=null){
+				for (String tmpFileName : tmpFileNameList) {
+					FileUtils.copyTempImageToRealPath(tempPath, uploadPath, tmpFileName);
+					
+					academicKPIAttachFile = new AcademicKPIAttachFile();
+					academicKPIAttachFile.setKpiUserMappingId(String.valueOf(academicKPIId));
+					academicKPIAttachFile.setFullFilePathName(uploadPath + tmpFileName);
+					academicKPIAttachFile.setFileName(tmpFileName);
+					fileLocationService.createPBPAttachFile(academicKPIAttachFile);
+				}				
 			}
+
 			
 			// Delete Temp File
 			File tempDir = new File(tempPath);

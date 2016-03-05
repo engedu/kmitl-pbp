@@ -12,6 +12,7 @@ public interface AdminUserDao {
 	public void update(User user);
 	public void create(User user);
 	public PagingBean getAllUserByOffset(PagingBean pagingBean);		 
+	public PagingBean getUserByFacultyCodeOffset(PagingBean pagingBean);		
 	public User getUserByUsername(String userName,String academicYear);
 	public User getUserByUserId(String userId);
 	public void enableUser(User user) throws BuckWaException;

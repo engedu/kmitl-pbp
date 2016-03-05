@@ -36,7 +36,7 @@
 		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
 		   			<tr>
 		   				<td class="tdFirst">   ${domain.name}</td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
  		   				
 		   			</tr>
 		   			 	   			           

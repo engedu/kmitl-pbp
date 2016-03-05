@@ -8,6 +8,7 @@ public interface AdminUserService {
 	public BuckWaResponse createUser(BuckWaRequest request);
 	public BuckWaResponse updateUser(BuckWaRequest request);
 	public BuckWaResponse getUserByOffset(BuckWaRequest request);	
+	public BuckWaResponse getUserByFacultyCodeOffset(BuckWaRequest request);	
 	 
 	public BuckWaResponse getUserById(BuckWaRequest request);
 	

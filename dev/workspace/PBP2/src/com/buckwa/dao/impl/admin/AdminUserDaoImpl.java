@@ -19,6 +19,7 @@ import com.buckwa.dao.intf.pbp.FacultyDao;
 import com.buckwa.domain.admin.User;
 import com.buckwa.domain.common.PagingBean;
 import com.buckwa.domain.pbp.Department;
+import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.util.BuckWaException;
 import com.buckwa.util.BuckWaUtils;
 
@@ -212,7 +213,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("   select  u.username,CONCAT(CONCAT(p.thai_name,' '), p.thai_surname) AS firstLastName,u.password  ,u.enable ,p.employee_type");
-		sb.append("   ,p.faculty_desc,p.department_desc,p.academic_year  ");
+		sb.append("   ,p.faculty_desc,p.department_desc,p.academic_year ,p.reg_id ");
 		sb.append("  from buckwauser u   ");
 		sb.append("  left join person_pbp p on (u.username=p.email) ");		
 		 	
@@ -244,6 +245,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 						domain.setFacultyDesc(rs.getString("faculty_desc"));
 						domain.setDepartmentDesc(rs.getString("department_desc"));
 						domain.setAcademicYear(rs.getString("academic_year"));
+						domain.setRegId(rs.getString("reg_id"));
 						return domain;
 					}
 				});
@@ -252,8 +254,91 @@ public class AdminUserDaoImpl implements AdminUserDao {
 
 		return pagingBean;
 	}
+	
+	
+	
+ 
+	@Override
+	public PagingBean getUserByFacultyCodeOffset(PagingBean pagingBean) {
+		logger.info("start");
+		User user = (User) pagingBean.get("user");
+		List<User> returnList = new ArrayList<User>();
+		StringBuffer sqltotalsb = new StringBuffer();
+		
+		String facultyCode = user.getFacultyCode();
+		String academicYear = user.getAcademicYear();
+		
+		Faculty facTmp =facultyDao.getFacultyByCodeAndYear(facultyCode, academicYear);
+		
+		logger.info(" Faculty Code:"+facTmp.getCode()+"   Name:"+facTmp.getName());
+		
+		String facultyDesc  = facTmp.getName();
+		
+		
+		//sqltotalsb.append("  select count(*) as total_item  from  buckwauser u  ");
+		sqltotalsb.append("   select count(*) as total_item  from  buckwauser u ");
+		sqltotalsb.append("  left join person_pbp p on (u.username=p.email) ");		
+		sqltotalsb.append(" where 1=1 ");		
+		sqltotalsb.append(" and p.academic_year ='" + user.getAcademicYear()+"'");
+		if (StringUtils.hasText(user.getUsername())) {
+			sqltotalsb.append(" and u.username like '%"+ StringEscapeUtils.escapeSql(user.getUsername().trim()) + "%'");
+		}
+		if (StringUtils.hasText(user.getFirstLastName())) {
+			sqltotalsb.append(" and CONCAT(CONCAT(p.thai_name,' '), p.thai_surname) like '%"+ StringEscapeUtils.escapeSql(user.getFirstLastName().trim()) + "%'");
+		}
+		if (StringUtils.hasText(user.getFacultyCode())) {	
+			sqltotalsb.append(" and p.faculty_desc like '%" + StringEscapeUtils.escapeSql(facultyDesc)+ "%'");
+		} 
+		logger.info("sqltotalsb:"+sqltotalsb.toString());
+		
+		int rows_totalItem = jdbcTemplate.queryForInt(sqltotalsb.toString());
+		pagingBean.setTotalItems(rows_totalItem);
 
+		StringBuffer sb = new StringBuffer();
+		sb.append("   select  u.username,CONCAT(CONCAT(p.thai_name,' '), p.thai_surname) AS firstLastName,u.password  ,u.enable ,p.employee_type");
+		sb.append("   ,p.faculty_desc,p.department_desc,p.academic_year ,p.reg_id ");
+		sb.append("  from buckwauser u   ");
+		sb.append("  left join person_pbp p on (u.username=p.email) ");		
+		 	
+		sb.append(" where 1=1 ");
+		sb.append(" and p.academic_year ='" + user.getAcademicYear()+"'");
+		if (StringUtils.hasText(user.getUsername())) {	
+			sb.append(" and u.username like '%" + StringEscapeUtils.escapeSql(user.getUsername().trim())+ "%'");
+		}
+		
+		if (StringUtils.hasText(user.getFirstLastName())) {
+			sb.append(" and CONCAT(CONCAT(p.thai_name,' '), p.thai_surname) like '%"+ StringEscapeUtils.escapeSql(user.getFirstLastName().trim()) + "%'");
+		}	
+		if (StringUtils.hasText(user.getFacultyCode())) {	
+			sb.append(" and p.faculty_desc like '%" + StringEscapeUtils.escapeSql(facultyDesc)+ "%'");
+		} 
+		
+		sb.append(" LIMIT " + pagingBean.getLimitItemFrom() + ","	+ pagingBean.getMaxPageItems());
+ 
+		logger.info("sql:"+sb.toString());
+		
+		returnList = this.jdbcTemplate.query(sb.toString(),
+				new RowMapper<User>() {
+					public User mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						User domain = new User();
+						domain.setUsername(rs.getString("username"));
+						domain.setPassword(rs.getString("password"));
+						domain.setEnabled(rs.getBoolean("enable"));
+						domain.setFirstLastName(rs.getString("firstLastName"));
+						domain.setEmployeeType(rs.getString("employee_type"));
+						domain.setFacultyDesc(rs.getString("faculty_desc"));
+						domain.setDepartmentDesc(rs.getString("department_desc"));
+						domain.setAcademicYear(rs.getString("academic_year"));
+						domain.setRegId(rs.getString("reg_id"));
+						return domain;
+					}
+				});
 
+		pagingBean.setCurrentPageItem(returnList);
+
+		return pagingBean;
+	}
 	@Override
 	public PagingBean getUserDepartmentByOffset(PagingBean pagingBean) {
 		logger.info("start");
@@ -333,7 +418,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 	@Override
 	public User getUserByUsername(String userName,String academicYear) {
 		logger.info(" userName :"+userName);
-		String sql = " select us.*,p.thai_name,p.thai_surname  from buckwauser us inner join person_pbp p on p.email = us.username where username ='" + userName
+		String sql = " select us.*,p.thai_name,p.thai_surname,p.reg_id  from buckwauser us inner join person_pbp p on p.email = us.username where username ='" + userName
 				+ "' and academic_year='"+academicYear+"'";
 		RowMapper<User> mapper = new RowMapper<User>() {
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -349,6 +434,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 				domain.setEmail(rs.getString("email"));
 				domain.setUser_id(rs.getInt("user_id"));
 				domain.setSignatureImagePath(rs	.getString("signature_image_path"));
+				 domain.setRegId(rs.getString("reg_id"));
 				//domain.setLeaveAccumulate(rs.getInt("leave_accumulate"));
 				return domain;
 			}

@@ -96,8 +96,8 @@
 		   	   		ภาระงานด้าน ${academicKPIWrapper.workTypeName}  
 		   	   		</th>
 		   	   		 <th  >
-               		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/create.htm?workTypeCode=<c:out  value="${academicKPIWrapper.workTypeCode}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>"  >
-	         Add <span class="lsf-icon colororange" title="plus">
+               		<a rel="notLoading" class="btn btn-primary" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/create.htm?workTypeCode=<c:out  value="${academicKPIWrapper.workTypeCode}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>"  >
+	         Add  
 	         <%-- <img class="imagePlus" src="<c:url value="/images/plus1.png"/>" /> --%>  
 	          </a>		   	   		
 		   	   		
@@ -117,7 +117,7 @@
 		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
 		   			<tr class="row1">
 		   				 <td class="tdFirst">    ${domain.name}</td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
 		   				 <td class="tdFirst">    ${domain.description}</td>
 		   				<td class="tdFirst"> 
 	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/edit.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>"  >

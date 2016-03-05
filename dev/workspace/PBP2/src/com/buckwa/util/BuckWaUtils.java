@@ -111,6 +111,8 @@ public class BuckWaUtils {
 
 		return facultyCode;
 	}
+	
+	
 
 	public static boolean ifAnyGROUP(String groupName) {
 		boolean returnResult = false;

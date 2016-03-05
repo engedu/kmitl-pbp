@@ -129,8 +129,9 @@ public class JSONPersonController {
 					radartmp.setAxisName(tempLabel);
 
 					loop++;
-					radartmp.setAxisValue(typeTmp.getTotalInPercentCompareBaseWorkType().setScale(0, BigDecimal.ROUND_UP) + "");
-
+				//	radartmp.setAxisValue(typeTmp.getTotalInPercentCompareBaseWorkType().setScale(0, BigDecimal.ROUND_UP) + "");
+					radartmp.setAxisValue(typeTmp.getTotalInWorkType().setScale(0, BigDecimal.ROUND_UP) + "");
+					logger.info(" Label:" + radartmp.getAxisName() + "  Value:" + radartmp.getAxisValue());
 					returnList.add(radartmp);
 				}
 

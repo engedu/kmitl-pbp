@@ -33,7 +33,7 @@
 	
 	     	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='APPROVED'}">
 	              <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.fromRegis=='Y'}">
-						<input class="btn btn-primary" value="แก้ไข  KPI ที่ใช้คำนวน" type="button" onclick="#">              
+						<input class="btn btn-primary" value="แก้ไข  KPI ที่ใช้คำนวณ" type="button" onclick="#">              
 	              </c:if>
 
 			 </c:if>		 
@@ -44,7 +44,7 @@
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
 				<td class="tdLast"> 
-				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} ชั่วโมงภาระงาน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
+				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
 			

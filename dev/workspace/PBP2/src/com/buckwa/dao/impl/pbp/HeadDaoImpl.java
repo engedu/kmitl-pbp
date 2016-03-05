@@ -168,46 +168,46 @@ public class HeadDaoImpl implements HeadDao {
 							departmentTotalApproved++;
 						}
 						
-						String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
-						logger.info(" sqlkpi:"+sqlkpi);
-						 
-						
-						try{
-							 AcademicKPI  academicKPI  = this.jdbcTemplate.queryForObject(sqlkpi,	new AcademicKPIMapper() );
-							 mappingTmp.setAcademicKPI(academicKPI);
-							 
-							 
-								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
-								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
-								try{
-									logger.info(" sqlAttributeValue:"+sqlAttributeValue);
-									academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
-									
-								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-									ex.printStackTrace();
-								} 
-								
-								mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
-								
-								
-								
-							//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
-								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
-
-								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
-								try{
-									logger.info(" sqlAttribute:"+sqlAttribute);
-									academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
-									
-								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-									ex.printStackTrace();
-								} 									
-								
-								mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
-							 
-						}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-							ex.printStackTrace();
-						} 
+//						String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
+//						logger.info(" sqlkpi:"+sqlkpi);
+//						 
+//						
+//						try{
+//							 AcademicKPI  academicKPI  = this.jdbcTemplate.queryForObject(sqlkpi,	new AcademicKPIMapper() );
+//							 mappingTmp.setAcademicKPI(academicKPI);
+//							 
+//							 
+//								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
+//								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+//								try{
+//									logger.info(" sqlAttributeValue:"+sqlAttributeValue);
+//									academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
+//									
+//								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+//									ex.printStackTrace();
+//								} 
+//								
+//								mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
+//								
+//								
+//								
+//							//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+//								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+//
+//								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+//								try{
+//									logger.info(" sqlAttribute:"+sqlAttribute);
+//									academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+//									
+//								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+//									ex.printStackTrace();
+//								} 									
+//								
+//								mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
+//							 
+//						}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+//							ex.printStackTrace();
+//						} 
 						
 						
 						// departmentTotalApproved   =departmentTotalApproved+ totalApproved;
@@ -644,29 +644,35 @@ public class HeadDaoImpl implements HeadDao {
 					BigDecimal markTotal = new BigDecimal(0.00);
 					for(final PBPWorkType tmp:pbpWorkTypeList){						
 						if(loop1==1){
-							depReport1.setMark1(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							//depReport1.setMark1(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark1(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode1(tmp.getCode());
 							depReport1.setTypeName1(tmp.getShortDesc());
 							
 						}else if(loop1==2){
-							depReport1.setMark2(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							//depReport1.setMark2(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark2(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode2(tmp.getCode());
 							depReport1.setTypeName2(tmp.getShortDesc());
 						}else if(loop1==3){
-							depReport1.setMark3(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							//depReport1.setMark3(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark3(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode3(tmp.getCode());
 							depReport1.setTypeName3(tmp.getShortDesc());
 						}else if(loop1==4){
-							depReport1.setMark4(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							//depReport1.setMark4(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark4(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode4(tmp.getCode());
 							depReport1.setTypeName4(tmp.getShortDesc());
 						} else if(loop1==5){
-							depReport1.setMark5(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							//depReport1.setMark5(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark5(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode5(tmp.getCode());
 							depReport1.setTypeName5(tmp.getShortDesc());
 						}
 						
-						markTotal = markTotal.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+						//markTotal = markTotal.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+						markTotal = markTotal.add(tmp.getTotalInWorkType());
 						loop1++;
 					}
 			 
@@ -785,31 +791,41 @@ public class HeadDaoImpl implements HeadDao {
 					
 					
 					if(loop==1){
-						depReport2.setMark1(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						//depReport2.setMark1(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark1(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode1(tmp.getCode());
 						depReport2.setTypeName1(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						//totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==2){
-						depReport2.setMark2(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						//depReport2.setMark2(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark2(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode2(tmp.getCode());
 						depReport2.setTypeName2(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						//totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==3){
-						depReport2.setMark3(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						//depReport2.setMark3(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark3(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode3(tmp.getCode());
 						depReport2.setTypeName3(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						//totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==4){
-						depReport2.setMark4(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						//depReport2.setMark4(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark4(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode4(tmp.getCode());
 						depReport2.setTypeName4(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						//totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}
 					else if(loop==5){
-						depReport2.setMark5(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						//depReport2.setMark5(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark5(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode5(tmp.getCode());
 						depReport2.setTypeName5(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						//totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}
 					
 					

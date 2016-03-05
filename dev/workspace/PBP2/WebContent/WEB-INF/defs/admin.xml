@@ -24,7 +24,7 @@
    <definition name="sessionTimeout" extends="baseLayout">    <put-attribute name="main"   value="/WEB-INF/jsp/common/sessionTimeout.jsp"/> </definition> 
    <definition name="general-error" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/generalError.jsp"/>  </definition> 
    <definition name="error404" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/error404Detail.jsp"/>  </definition> 
-   <definition name="error500" extends="baseLayoutError"> <put-attribute name="main"   value="/WEB-INF/jsp/common/generalError.jsp"/> </definition> 
+   <definition name="error500" extends="pbpUserLayout"> <put-attribute name="main"   value="/WEB-INF/jsp/common/generalError.jsp"/> </definition> 
 
 
  
@@ -335,4 +335,10 @@
    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
       <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/edit.jsp"/>      
   </definition>  
+ 
+     <definition name="createTimeTable" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/create.jsp"/>      
+  </definition>   
+  
 </tiles-definitions>

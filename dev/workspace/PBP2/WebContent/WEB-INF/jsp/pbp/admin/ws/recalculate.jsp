@@ -18,12 +18,12 @@
 			
 			<table class="pbp-table">
 				<thead><tr><th colspan="3">
-				<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>คำนวนคะแนน  ปีการศึกษา  ${academicYearStr} </div>
+				<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>คำนวณคะแนน  ปีการศึกษา  ${academicYearStr} </div>
 				</th></tr>
 				
 			<tr>
 				 
-				<th   class="thFirst">คำนวนคะแนน </th>
+				<th   class="thFirst">คำนวณคะแนน </th>
 		 		<th   class="thFirst" >หมายเหตุ </th>
 			</tr> 				
 				
@@ -39,7 +39,7 @@
 					 </a> 
 						 
 					</td> 
-					<td class="tdFirst" style="text-align: center;" rowspan="3"> ระบบจะทำการคำนวนคะแนนระดับ<br>
+					<td class="tdFirst" style="text-align: center;" rowspan="3"> ระบบจะทำการคำนวณคะแนนระดับ<br>
 					1. คณะ <br>
 					2. ภาควิชา<br>
 					3. สถาบัน<br>

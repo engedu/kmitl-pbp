@@ -236,8 +236,11 @@ public class KMILTCommonController {
 			}else if("2556".equalsIgnoreCase(fileCode)){
 				fileName ="2556.pdf";
 				fullPath =  filePath+fileName;
-			}
-			 
+		 
+		}else if("59".equalsIgnoreCase(fileCode)){
+			fileName ="Person Report.doc";
+			fullPath =  filePath+fileName;
+		}			 
 			logger.info("#####fullPath :"+fullPath);
 			
 			InputStream inputStream = new FileInputStream(fullPath);

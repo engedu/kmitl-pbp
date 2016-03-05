@@ -19,7 +19,7 @@
 		   	   	<thead>
 		   	   		<tr>
 		   	   		
-		   	   		<th  > <div class="pbp-header">  <span class="lsf-icon colororange" title="list"></span> แก้ไข KPI การคำนวน </div>  &nbsp;
+		   	   		<th  > <div class="pbp-header">  <span class="lsf-icon colororange" title="list"></span> แก้ไข KPI การคำนวณ </div>  &nbsp;
  					
 					</th>
  
@@ -50,7 +50,7 @@
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
 				<td class="tdLast"> 
-				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} ชั่วโมงภาระงาน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
+				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
 			
@@ -71,7 +71,7 @@
 		
 					</c:forEach>
 				<tr>
-				<td class="tdFirst">การคำนวน:</td>
+				<td class="tdFirst">การคำนวณ:</td>
 				<td class="tdLast"> 
 				<c:out  value="${academicKPIUserMappingWrapper.academicKPIUserMapping.calResultStr}"/>
 				
@@ -123,7 +123,7 @@
 		   				  ${domain.name}
 		   				 </c:if>				 
 		   				 </td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
  	   					<td class="tdFirst">
  	   					 ${domain.description}
  	   					<!--  

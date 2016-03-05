@@ -188,23 +188,37 @@
 							
 							</td> 
 		 					<td class="tdLast"> 1: มี  <br> 2: ไม่มี </td>
-						</tr>		
+						</tr>
 						<tr>
-							<td class="tdFirst"> ใช้จำนวนนักศึกษาคำนวนหรือไม่</td>
+							<td class="tdFirst"> Project Base Learning</td>
+							<td class="tdLast">  
+							<form:select path="specialP4"  >
+				     			 
+			     			 <form:option value="1" label="ไช่" />
+		     			 <form:option value="2" label="ไม่ไช่" />			     			 
+				     			 
+							</form:select></td> 							
+							
+							</td> 
+		 					<td class="tdLast"> 1: ไช่ <br> 2: ไม่ไช่</td>
+						</tr>								
+								
+						<tr>
+							<td class="tdFirst"> ใช้จำนวนนักศึกษาคำนวณหรือไม่</td>
 							<td class="tdLast">
 							<form:select path="specialP4"  >
 			 
-				     			 <form:option value="1" label="ใช้ในการคำนวน" />
-		     			 <form:option value="2" label="ไม่ใช้ในการคำนวน " />				     			 
+				     			 <form:option value="1" label="ใช้ในการคำนวณ" />
+		     			 <form:option value="2" label="ไม่ใช้ในการคำนวณ " />				     			 
 				     			 
 							</form:select></td> 
 							</td> 
-							<td class="tdLast"> 1:ใช้ในการคำนวน <br>  2: ไม่ใช้ในการคำนวน</td> 
+							<td class="tdLast"> 1:ใช้ในการคำนวณ <br>  2: ไม่ใช้ในการคำนวณ</td> 
 						</tr>	
 						<tr>
 							<td class="tdFirst"> จำนวนนักศึกษาระหว่่าง</td>
 							<td class="tdLast"> ระหว่าง  <form:input path="totalStudentFrom"  size="80"  cssClass="input"/>  -<form:input path="totalStudentTo"  size="80"  cssClass="input"/>  </td> 
-							<td class="tdLast"> กำหนดช่วงจำนวนนักศึกษากรณ๊ใช้นักศึกษาในการคำนวนคะแนน</td> 
+							<td class="tdLast"> กำหนดช่วงจำนวนนักศึกษากรณ๊ใช้นักศึกษาในการคำนวณคะแนน</td> 
 						</tr>						
 																				 			 			
 	 			</tbody>	 

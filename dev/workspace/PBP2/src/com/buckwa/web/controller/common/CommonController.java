@@ -71,7 +71,7 @@ public class CommonController {
 		}else if(BuckWaUtils.isRole("ROLE_USER")){
 			url = httpRequest.getContextPath() + "/pam/person/init.htm";
 		} else{
-			url = httpRequest.getContextPath() + "/anonymous.htm";
+			url = httpRequest.getContextPath() + "/preLogin.htm";
 		}
 		
 		logger.info(" ### URL by Role:"+url);
@@ -139,7 +139,7 @@ public class CommonController {
 	public ModelAndView sessionTimeout(HttpServletRequest httpRequest) {
 		logger.info(" ### in sessionTimeout");
 		ModelAndView mav = new ModelAndView();
-		String url = httpRequest.getContextPath() + "/anonymous.htm";
+		String url = httpRequest.getContextPath() + "/preLogin.htm";
 		mav.setView(new RedirectView(url));
 		//mav.setViewName("preLogin");
 		return mav;

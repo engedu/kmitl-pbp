@@ -38,7 +38,7 @@
 		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
 		   			<tr>
 		   				<td class="tdFirst"> ${status.index+1}   ${domain.name}</td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
 		   				<td class="tdFirst"> 
 	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/edit.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>"  >
 	                   		 Edit</a>

@@ -649,7 +649,16 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setTelNo(rs.getString("tel_no"));
 			domain.setEmail(rs.getString("email"));
 			domain.setWorkingStatus(rs.getString("working_status"));
-			domain.setPicture(rs.getString("picture"));
+			
+			String imagePath = rs.getString("picture");
+			if(imagePath==null||imagePath.length()==0){
+				
+				imagePath = "/project/pbp/profile_picture/NoPicture.jpg";
+			}
+			
+			domain.setPicture(imagePath);
+			
+		 
 			domain.setWorklineCode(rs.getString("workline_code"));
 			domain.setBirthdateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(domain.getBirthdate()));
 			domain.setUserId(rs.getLong("user_id"));
@@ -696,7 +705,15 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setEmployeeType(rs.getString("employee_type"));
 			domain.setMaxEducation(rs.getString("max_education"));
 			domain.setEmail(rs.getString("email"));
-			domain.setPicture(rs.getString("picture"));
+			
+			String imagePath = rs.getString("picture");
+			if(imagePath==null||imagePath.length()==0){
+				
+				imagePath = "/project/pbp/profile_picture/NoPicture.jpg";
+			}
+			
+			domain.setPicture(imagePath);
+			//domain.setPicture(rs.getString("picture"));
 			domain.setPersonType(rs.getString("person_type"));
 			domain.setStatus(rs.getString("status"));
 			domain.setDepartmentDesc(rs.getString("department_desc"));

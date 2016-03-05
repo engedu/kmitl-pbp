@@ -989,18 +989,19 @@ public class FacultyDaoImpl implements FacultyDao {
 	 
 	
 	@Override
-	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode) {
+	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
 		
 		for(com.buckwa.ws.newws.oxm.TeachTable tmp:teachTableList){ 
 			final com.buckwa.ws.newws.oxm.TeachTable finalTeachtable = tmp;  
 			
-			 logger.info(" ############ Check Leck or prac ---------- : "+finalTeachtable.getLectOrPrac() );
-			if(finalTeachtable.getTeacherId()==null||finalTeachtable.getSubjectId()==null||finalTeachtable.getSemester()==null||finalTeachtable.getLectOrPrac()==null){ 				
-				 logger.info(" ############ Found Null  Skipp----------- : "  );
+		//	 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+ " Total Student:"+finalTeachtable.getStudentTotal() );
+			if(finalTeachtable.getTeacherId()==null||finalTeachtable.getSubjectId()==null||finalTeachtable.getSemester()==null||finalTeachtable.getLectOrPrac()==null
+					||finalTeachtable.getStudentTotal()==null||finalTeachtable.getStudentTotal().intValue()==0){ 				
+				 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
 			}else{ 
 			// Check aready exist
-			final String academicYear = schoolUtil.getCurrentAcademicYear();
+			//final String academicYear = schoolUtil.getCurrentAcademicYear();
 			boolean isExist = isTeachtableWSExist(finalTeachtable,academicYear);
 			
 			if(!isExist){  
@@ -1018,7 +1019,7 @@ public class FacultyDaoImpl implements FacultyDao {
 					 getSubjectRequest.setSubjectId(tmp.getSubjectId());
 					 getSubjectRequest.setDegree(degree);
 					 getSubjectRequest.setDetail(true);
-					 logger.info(" ###########  SubjectId:"+tmp.getSubjectId());
+					// logger.info(" ###########  SubjectId:"+tmp.getSubjectId());
 					 
 					 
 						GetSubjectResponse returnObjSubject =(GetSubjectResponse)subjectServiceWSTemplate.marshalSendAndReceive(getSubjectRequest, new WebServiceMessageCallback() {
@@ -1027,7 +1028,7 @@ public class FacultyDaoImpl implements FacultyDao {
 									SOAPMessage soapMessageSubject = ((SaajSoapMessage)messageSubject).getSaajMessage();				 
 							       ByteArrayOutputStream out = new ByteArrayOutputStream();
 							      soapMessageSubject.writeTo(out);
-						           logger.info(" soapMessageSubject SOAP Request Payload: " + new String(out.toByteArray()));
+						        //   logger.info(" soapMessageSubject SOAP Request Payload: " + new String(out.toByteArray()));
 							         
 								} catch(Exception e) {
 									e.printStackTrace();
@@ -1348,8 +1349,13 @@ public class FacultyDaoImpl implements FacultyDao {
 			logger.info(" ###### specialP1:"+specialP1+"   specialP2:"+specialP2+"   totalStudent:"+totalStudent);
 			
 			
+//			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
+//					+ " and   total_student_to >= "+totalStudent+" AND total_student_from <="+totalStudent+ "  and k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
+
+
+			
 			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
-					+ " and   total_student_to >= "+totalStudent+" AND total_student_from <="+totalStudent+ "  and k.academic_year ='"+timetable.getYear()+"'";
+					+ " and    k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
 
 			
 			//String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"'" ; 
@@ -1528,21 +1534,23 @@ public class FacultyDaoImpl implements FacultyDao {
 					 
 			
 			
-			logger.info(" # sqltmp : "+sqltmp );	
+			logger.info(" # sqltmp Check Dup : "+sqltmp );	
 			Long found = this.jdbcTemplate.queryForLong(sqltmp);
 			logger.info(" ##### found lond:"+found);
 			if(found!=null&&found.intValue()>0){
 				returnValue = true;
 				 
-				logger.info(" #  Found Do noting !!! " );
+				logger.info(" #  Found Dup Do noting !!! " );
 			}else{
 				
-				logger.info(" #  Not Found Insert New !!! " );
+				logger.info(" #  Not Found Dup Insert New !!! " );
 			}
 			
 			}
 			
 		}catch(Exception ex){
+			logger.info(" #  Check Dup Exception Do noting !!! " );
+			returnValue =true;
 			ex.printStackTrace();
 		}
 		

@@ -75,24 +75,48 @@ public class PersonTimetableServiceImpl implements PersonTimeTableService {
 	
 	@Override	
 	public BuckWaResponse getTimeTableById(BuckWaRequest request) {
-		BuckWaResponse response = new BuckWaResponse();
-		
-	 
+		BuckWaResponse response = new BuckWaResponse(); 
 		try{				 
 			
-			String timetableId = (String)request.get("timetableId");
-		 
-			
-			TimeTableReport timeTableReport  =personTimetableDao.getTimeTableById(timetableId);
-		 
-			 response.addResponse("timeTableReport",timeTableReport);
- 	
+			String timetableId = (String)request.get("timetableId"); 
+			TimeTableReport timeTableReport  =personTimetableDao.getTimeTableById(timetableId); 
+			 response.addResponse("timeTableReport",timeTableReport); 
 		}catch(Exception ex){
 			ex.printStackTrace();
 			response.setStatus(BuckWaConstants.FAIL);
 			response.setErrorCode("E001");			
 		}
 	 
+		return response;
+	}
+	
+	
+	@Override	
+	public BuckWaResponse updateTimeTable(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse(); 
+		try{				 			
+			TimeTableReport timeTableReport = (TimeTableReport)request.get("timeTableReport"); 			  
+			personTimetableDao.updateTimeTable(timeTableReport);
+			response.setSuccessCode("S002");	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}	 
+		return response;
+	}
+	@Override	
+	public BuckWaResponse createTimeTable(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse(); 
+		try{				 			
+			TimeTableReport timeTableReport = (TimeTableReport)request.get("timeTableReport"); 			  
+			personTimetableDao.createTimeTable(timeTableReport);
+			response.setSuccessCode("S001");	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}	 
 		return response;
 	}
 	

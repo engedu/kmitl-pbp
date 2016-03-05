@@ -140,6 +140,15 @@ public class BuckWaUserDetailsService implements UserDetailsService {
 				  user.setProjectList(projectList);
 			  }
 		  */
+	       
+	       
+	       // Get First Last Name
+	       
+	       String sqlFirstLastName = "  select  CONCAT(CONCAT(p.thai_name,' '), p.thai_surname) AS firstLastName from person_pbp p where email= '"+username+"'";
+	       logger.info(" Get First Last SQL:"+sqlFirstLastName);
+	       String fl = jdbcTemplate.queryForObject(sqlFirstLastName,String.class);	
+	       logger.info(" Get First Last result:"+fl);
+	       user.setFirstLastName(fl);
         }catch(Exception ex){
         	  logger.info("Login Error, Not Found user:"+username);
         	ex.printStackTrace();

@@ -149,8 +149,7 @@ public class PersonProfileController {
 			String academicYear = academicYearUtil.getAcademicYear();
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
-			logger.info("viewUserProfile  username :"+user.getUsername());
-			logger.info("### facultyCodeFromContext :"+facultyCode);
+		 
 			
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
@@ -168,7 +167,7 @@ public class PersonProfileController {
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Person person = (Person) response.getResObj("person");
 				user.setFirstLastName(person.getThaiName()+" "+person.getThaiSurname());
-				List<Paper> paperList = (List<Paper>) response.getResObj("paperList");
+				//List<Paper> paperList = (List<Paper>) response.getResObj("paperList");
 				
 				// Set Date format
 				//person.setBirthdateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getBirthdate()));
@@ -181,7 +180,7 @@ public class PersonProfileController {
 				person.setEvaluateRound("1");
 				user.setPersonProfile(person);
 				mav.addObject("person", person);
-				mav.addObject("paperList", paperList);
+				//mav.addObject("paperList", paperList);
 				
 		 
 				 
@@ -201,100 +200,101 @@ public class PersonProfileController {
 				}	
 				
 				
-	 
-				
-				List<String> axisLabelList =new ArrayList();
-				List<Number> dataList = new ArrayList();
-				
-				BigDecimal data1 = null;				
-				List<PBPWorkType> pBPWorkTypeList = person.getpBPWorkTypeWrapper().getpBPWorkTypeList();				
-				int loop =0;
-				for(PBPWorkType typeTmp:pBPWorkTypeList){
-					logger.info(" loop:"+loop);
-					String tempLabel ="";
-					StringTokenizer st = new StringTokenizer(typeTmp.getName(), " ");
-					int numberOfSt =1;
-			        while (st.hasMoreElements()) { 			        
-			        	String stStr = st.nextElement().toString();
-			        	logger.info(" numberOfSt:"+numberOfSt+"  stStr:"+ stStr);
-			            if(numberOfSt==1){
-			            	tempLabel = stStr;
-			            }
-			            if(numberOfSt==2){
-			            	//axisLables = axisLables +" "
-			            	//st.nextElement();
-			            }
-			            numberOfSt++;
-			        }
-					
-			        axisLabelList.add(tempLabel);
-	
-					
-			        if(loop==0){
-			        	//data1 =typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP);
-			        	
-			        	data1 =typeTmp.getTotalInPercentCompareBaseWorkType().setScale(0,BigDecimal.ROUND_UP);
-			        }
-					
-					loop++;
-					//dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType() .multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP));
-					dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType()  .setScale(0,BigDecimal.ROUND_UP));		
-			
-				}				
-				dataList.add(data1);
-				
-				logger.info(" Data List :"+dataList);
-				logger.info(" Data List size :"+dataList.size());
-				if(dataList==null||dataList.size()==1){
-					 dataList = new ArrayList();
-					 dataList.add(new BigDecimal(0));
-					 dataList.add(new BigDecimal(0));
-					 dataList.add(new BigDecimal(0));
-					 dataList.add(new BigDecimal(0));
-					 dataList.add(new BigDecimal(0));
-				}
-				for(Number datax :dataList){
-					logger.info("  "+datax);
-				}
-
-			
-				
-		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
-		       RadarPlot plot2 = Plots.newRadarPlot(Data.newData(60, 25, 60, 25, 20,60));
-		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(0.76, 51.28,55,15.4, 5,0.76));
-		       
-		        Color plotColor = Color.newColor("CC3366");
-		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
-		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
-		        plot.setColor(plotColor);
-		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
-		        
-		        // Set Label
-		        plot.setLegend("คะแนน");
-		        plot2.setLegend("คะแนนสูงสุด");
-		        
-		        RadarChart chart = GCharts.newRadarChart(plot,plot2);
-		      //  chart.setTitle("����������ҹ", BLACK, 20);
-		        chart.setSize(500, 500);
-		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
-		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
-		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
-		        chart.addRadialAxisLabels(radialAxisLabels);
-		        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80,100));
-		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
-		        chart.addConcentricAxisLabels(contrentricAxisLabels);
-		        String url = chart.toURLString();		
-		        
-		 	
-				byte[] b = url.toString().getBytes("UTF-8");    //  
-				String newTxt = new String(b, "UTF-8");
-				
-				 
-		        logger.info(" radarURL :"+newTxt);
-		        
- 
-		      
-		        person.setRadarURL(newTxt)	;		
+//	 
+//				
+//				List<String> axisLabelList =new ArrayList();
+//				List<Number> dataList = new ArrayList();
+//				
+//				BigDecimal data1 = null;				
+//				List<PBPWorkType> pBPWorkTypeList = person.getpBPWorkTypeWrapper().getpBPWorkTypeList();				
+//				int loop =0;
+//				for(PBPWorkType typeTmp:pBPWorkTypeList){
+//					logger.info(" loop:"+loop);
+//					String tempLabel ="";
+//					StringTokenizer st = new StringTokenizer(typeTmp.getName(), " ");
+//					int numberOfSt =1;
+//			        while (st.hasMoreElements()) { 			        
+//			        	String stStr = st.nextElement().toString();
+//			        	logger.info(" numberOfSt:"+numberOfSt+"  stStr:"+ stStr);
+//			            if(numberOfSt==1){
+//			            	tempLabel = stStr;
+//			            }
+//			            if(numberOfSt==2){
+//			            	//axisLables = axisLables +" "
+//			            	//st.nextElement();
+//			            }
+//			            numberOfSt++;
+//			        }
+//					
+//			        axisLabelList.add(tempLabel);
+//	
+//					
+//			        if(loop==0){
+//			        	//data1 =typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP);
+//			        	
+//			        	data1 =typeTmp.getTotalInWorkType().setScale(0,BigDecimal.ROUND_UP);
+//			        }
+//					
+//					loop++;
+//					//dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType() .multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP));
+//					dataList.add(typeTmp.getTotalInWorkType()  .setScale(0,BigDecimal.ROUND_UP));		
+//			
+//				}				
+//				dataList.add(data1);
+//				
+//				logger.info(" Data List :"+dataList);
+//				logger.info(" Data List size :"+dataList.size());
+//				if(dataList==null||dataList.size()==1){
+//					 dataList = new ArrayList();
+//					 dataList.add(new BigDecimal(0));
+//					 dataList.add(new BigDecimal(0));
+//					 dataList.add(new BigDecimal(0));
+//					 dataList.add(new BigDecimal(0));
+//					 dataList.add(new BigDecimal(0));
+//				}
+//				for(Number datax :dataList){
+//					logger.info("  "+datax);
+//				}
+//
+//			
+//				
+//		        RadarPlot plot = Plots.newRadarPlot(Data.newData(60, 25, 60, 25, 20,60));
+//		      // RadarPlot plot2 = Plots.newRadarPlot(Data.newData(60, 25, 60, 25, 20,60));
+//		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(0.76, 51.28,55,15.4, 5,0.76));
+//		       
+//		        Color plotColor = Color.newColor("CC3366");
+//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
+//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
+//		        plot.setColor(plotColor);
+//		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
+//		        
+//		        // Set Label
+//		        plot.setLegend("คะแนน");
+//		       // plot2.setLegend("คะแนนสูงสุด");
+//		        
+//		      //  RadarChart chart = GCharts.newRadarChart(plot,plot2);
+//		        RadarChart chart = GCharts.newRadarChart(plot);
+//		      //  chart.setTitle("����������ҹ", BLACK, 20);
+//		        chart.setSize(500, 500);
+//		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
+//		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
+//		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
+//		        chart.addRadialAxisLabels(radialAxisLabels);
+//		        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80,100));
+//		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
+//		        chart.addConcentricAxisLabels(contrentricAxisLabels);
+//		        String url = chart.toURLString();		
+//		        
+//		 	
+//				byte[] b = url.toString().getBytes("UTF-8");    //  
+//				String newTxt = new String(b, "UTF-8");
+//				
+//				 
+//		        logger.info(" radarURL :"+newTxt);
+//		        
+// 
+//		      
+//		        person.setRadarURL(newTxt)	;		
 				
 				
 				

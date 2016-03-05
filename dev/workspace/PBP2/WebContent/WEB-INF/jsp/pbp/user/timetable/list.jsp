@@ -84,7 +84,7 @@
                          width: 100,
                      },
                      {
-                         field: "thaiName",
+                         field: "engName",
                          title: "ชื่อวิชา",
                          width: 250,
                      }
@@ -186,7 +186,7 @@
                                width: 100,
                            },
                            {
-                               field: "thaiName",
+                               field: "engName",
                                title: "ชื่อวิชา",
                                width: 250,
                            }

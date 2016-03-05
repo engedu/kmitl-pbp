@@ -53,8 +53,8 @@
 		<thead>
 			<tr> 
 				<th  class="thLast" width="200px;"   >   ภาระงาน      </th>
-				<th  class="thLast" width="200px;"  >   คะแนนรวม  %     </th>
-				<th  class="thLast" width="200px;"  >   คะแนนรวม  % เฉลี่ย    </th>
+				<th  class="thLast" width="200px;"  >   คะแนนรวม     </th>
+				<th  class="thLast" width="200px;"  >   คะแนนรวม   เฉลี่ย    </th>
 
              </tr>
              </thead>
@@ -64,7 +64,7 @@
 				 
 			 
 			<td class="tdLast"  >	<c:out value="${domain.shortDesc}"/> </td>
-			<td class="tdLast"  >	<c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </td>
+			<td class="tdLast"  >	<c:out value="${domain.totalInWorkType}"/> </td>
 			
 			<td class="tdLast"  >	<c:out value="${domain.totalInPercentCompareBaseWorkTypeAVG}"/> </td>
                
@@ -114,7 +114,7 @@
 				
 				<c:forEach items="${domain.pBPWorkTypeWrapper.pBPWorkTypeList}" var="domain2" varStatus="status">
 				<td class="tdBoth" style="font-size: 12px; width: 100px;"  > 
-					<c:out value="${domain2.totalInPercentCompareBaseWorkType}"/>
+					<c:out value="${domain2.totalInWorkType}"/>
 				</td>
 				</c:forEach>
 				<td  class="tdBoth" style="font-size: 14px; width: 100px; font-weight: bold;"  > 
@@ -129,7 +129,7 @@
 					รวม 
 				</td> 
 			  <c:forEach items="${department.pBPWorkTypeList}" var="domain" varStatus="status">  
-				<td class="tdBoth" style="font-size: 14px; width: 100px; font-weight: bold;"  > 	<c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </td> 
+				<td class="tdBoth" style="font-size: 14px; width: 100px; font-weight: bold;"  > 	<c:out value="${domain.totalInWorkType}"/> </td> 
                </c:forEach>
                
                	 <td class="tdLast"  > 	 

@@ -40,7 +40,7 @@
 		   		<c:forEach items="${domain.academicKPIList}" var="domain2" varStatus="status2">  
 		   			<tr>
 		   				<td class="tdFirst">    ${domain2.name}</td>
-		   				<td class="tdFirst">${domain2.mark} ชั่วโมงภาระงาน/ ${domain2.unitDesc}</td> 
+		   				<td class="tdFirst">${domain2.mark} คะแนน/ ${domain2.unitDesc}</td> 
 		   			</tr> 	           
 		       </c:forEach>   
 		       

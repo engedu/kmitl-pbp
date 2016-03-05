@@ -13,7 +13,9 @@
          
          <sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
               <li class=""><a href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/init.htm"  >ประเภทภาระงาน</a></li>
-              <li class="" ><a href="<%=request.getContextPath()%>/admin/pbp/academicKPI/init.htm">ภาระงานประจำปี</a></li>          
+              <li class="" ><a href="<%=request.getContextPath()%>/admin/pbp/academicKPI/init.htm">ภาระงานประจำปี</a></li> 
+               <li class="" ><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
+                       
           </sec:authorize>
          
           <sec:authorize ifNotGranted="ROLE_ADMIN">	
@@ -23,7 +25,7 @@
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/pam/person/initWorkImport.htm">นำเข้าผลงาน</a></li> 
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm">ผลงานประจำปี</a></li>
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/anonymous.htm">กฎระเบียบ</a></li>
-	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/message/init.htm">ข้อความ</a></li>
+	        <!--  <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/message/init.htm">ข้อความ</a></li>-->
  	          
 	          <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
            <a href="#">รายงานคะแนน</a><a href="#" class="flyout-toggle"></a>
@@ -33,15 +35,9 @@
                <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/workTypeBarChart.htm">ระดับคะแนนแต่ละด้านในภาควิชา</a></li>
             </ul> 
           </li><!-- END Flyout Menu -->    
-	          
-	          
-	          <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
-           <a href="#">ตารางสอน</a><a href="#" class="flyout-toggle"></a>
-            <ul class="flyout"><!-- Flyout Menu -->
-              <li class="has-flyout"><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect="> ตารางสอนประจำปี</a></li>
-              <li class="has-flyout"><a href="<%=request.getContextPath()%>/personTimeTable/teachShare.htm">กำหนดวิชาสอนร่วม</a></li> 
-            </ul> 
-          </li><!-- END Flyout Menu -->  
+	 
+          
+            <li class=""><span class="lsf-icon colororange" title="home"></span><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect=">ตารางสอนประจำปี</a></li>
           
          
          
@@ -51,9 +47,10 @@
 		           <a href="#">หัวหน้าภาควิชา </a><a href="#" class="flyout-toggle"></a>
 		            <ul class="flyout"><!-- Flyout Menu -->
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm">อนุมัติผลงาน</a></li>
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>	
+		             
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
-		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 	 
+		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 
+		                <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>		 
 
 		            </ul> 
 		          </li>  
@@ -121,16 +118,20 @@
  
                    
            <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
-           <a href="#">นำเข้าข้อมูลและคำนวน </a><a href="#" class="flyout-toggle"></a>
+           <a href="#">นำเข้าข้อมูลและคำนวณ </a><a href="#" class="flyout-toggle"></a>
            
            
             <ul class="flyout"><!-- Flyout Menu -->
            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
                 <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
-              <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวนคะแนน</a></li>
-              <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/assignKPIInit.htm">กำหนด kpi คณะ</a></li>
+              <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวณคะแนน</a></li>
+            <!--    <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/assignKPIInit.htm">กำหนด kpi คณะ</a></li>
  
-         <!--    <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/staffpartner/init.htm">สัดส่วนสตาฟ</a></li>  -->  
+           <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/staffpartner/init.htm">สัดส่วนสตาฟ</a></li>  -->  
+           
+           
+            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/exportUserFromReg/exportUser.htm?academicYear=${academicYearStr}">Download ข้อมูลบุคลากร สำนักทะเบียน</a></li>
+           
  
             </ul> 
           </li><!-- END Flyout Menu -->     
@@ -173,7 +174,7 @@
 			 </sec:authorize>         
 	          
 	           <sec:authorize ifAnyGranted="ROLE_USER">
-					  <sec:authentication property="principal.username" />	  
+					  <sec:authentication property="principal.firstLastName" />	  
 			 </sec:authorize>  
 			 
 			   

@@ -51,9 +51,16 @@
             </div> 
 	<table class="pbp-table">
 		<tbody>
-			<tr height="332px">
+			<tr height="410px">
 				<td width="30%" style="border-center: 1px solid white; margin-right: 1px;" valign="top" >
 		 			<img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2" width="90px;" height="100px;">
+				
+				<br><br><br><br>
+								<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editProfile.htm?personId=<c:out value="${person.personId}"/>"> 
+					
+					แก้ไขรูปประจำตัว 
+					
+					</a>
 				</td>
 		
 				<td valign="top" style="padding-left: 15px;" colspan="2">
@@ -105,11 +112,7 @@
 						 -->
 						 
 					 
-					<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editProfile.htm?personId=<c:out value="${person.personId}"/>"> 
-					
-					แก้ไขรูปประจำตัว >>
-					
-					</a>
+	
 					</td>
 				</tr>			
 			</table>
@@ -134,7 +137,7 @@
             		<!--  รอบที่   1  -->	
             			</c:if>
             		   
-							คะแนน รวม ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} 
+							คะแนน รวม  ${person.pBPWorkTypeWrapper.totalMark}
 				
 							 
 							 
@@ -148,13 +151,12 @@
             	</table>
              </div> 
             
-          <table class="pbp-table">
+          <table class="pbp-table" style="padding:0; margin: 0;">
 				<tbody>
             <td width="100%" style="border-center: 1px solid white;" valign="top">
-  		<iframe src=" <c:out value="${person.radarURL}"/>" width="520" height="320" marginwidth="0" marginheight="0" frameborder="no" scrolling="no"
-			style="background:#FFF;padding-bottom: 5px;">
-
- 		</iframe>
+  		 
+		        <div id="chart"></div>		    
+		    
 		</td>	
 		</tbody>
 		</table>
@@ -173,9 +175,9 @@
 		<thead>
 			<tr>
            		<th align="left">    <span class="lsf-icon colororange" title="list"></span>ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  </th>
-           		<th ><span class="lsf-icon colororange" title="upload"></span>
-           			 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/initWorkImport.htm">
-						<input value="นำเข้าผลงาน" class="btn btn-primary" type="button" onclick="#">
+           		<th > 
+           		<a rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">            			 
+						<input value="พิมพิ์รายงานประจำปี" class="btn btn-primary" type="button" onclick="#">
 						</a>
            		</th>
            	</tr>
@@ -195,13 +197,13 @@
   
  				<td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;"> 
 								<c:if test="${domain.compareBaseStatus=='UNDER'}">
-				  <span style="color: red;"><c:out value="${domain.totalInPercentCompareBaseWorkType}"/></span>
+				  <span style="color: red;"><c:out value="${domain.totalInWorkType}"/></span>
                  </c:if>
                   <c:if test="${domain.compareBaseStatus=='NORMAL'}">
-				<c:out value="${domain.totalInPercentCompareBaseWorkType}"/>
+				<c:out value="${domain.totalInWorkType}"/>
                  </c:if>
                 <c:if test="${domain.compareBaseStatus=='OVER'}">
-				  <span style="color:green;"> <c:out value="${domain.totalInPercentCompareBaseWorkType}"/></span>
+				  <span style="color:green;"> <c:out value="${domain.totalInWorkType}"/></span>
                  </c:if>
 				</td>		 
    
@@ -210,7 +212,7 @@
 			
 			<tr>
 				<th  class="thLast"  align="right">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
- 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} คะแนน </th>
+ 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalMark} คะแนน </th>
 			</tr>	
 			
 	 					
@@ -299,4 +301,63 @@
 	}
 	 
 </script>
+<script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "คะแนนประจำปี"
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "<%=request.getContextPath()%>/json/person/getRadarPlot",
+                            dataType: "json"
+                        }
+                    } 
+                },
+                seriesDefaults: {
+                    type: "radarLine"
+                },
+                series: [{
+                    name: "คะแนน",
+                    field: "axisValue"
+                }],
+                categoryAxis: {
+                    field: "axisName"
+                },
+                valueAxis: {
+                    labels: {
+                    	format: "{0}",
+                        visible: true,
+                    },
+                    min: 0,
+                    max: 1000
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= series.name #: #= value #"
+                }
+            });
+            
+          	 $("#grid").kendoGrid({     
+     		    
+     		    dataSource: {
+     		        transport: {
+     		            read: {
+     		                url:    "<%=request.getContextPath()%>/json/person/getRadarPlot",
+     		                dataType: "Json"
+     		            }
+     		        }
+     		    },
+     		    columns   : [
+     		        { field: "axisName", title: "ประเภทภาระงาน " },
+     		        { field: "axisValue", title: "คะแนน" }
+     		    ]
+     		});              
+            
+        }
 
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+       
+    </script>

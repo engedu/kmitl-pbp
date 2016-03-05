@@ -29,7 +29,7 @@
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
 				<td class="tdLast"> 
-				${academicKPI.mark} ชั่วโมงภาระงาน/ ${academicKPI.unitDesc}
+				${academicKPI.mark} คะแนน/ ${academicKPI.unitDesc}
 				 </td>
 			</tr>
 			<!-- 

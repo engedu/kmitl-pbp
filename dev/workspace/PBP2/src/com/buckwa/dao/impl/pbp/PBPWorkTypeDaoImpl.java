@@ -31,6 +31,7 @@ import com.buckwa.domain.pbp.MarkRankWrapper;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
 import com.buckwa.util.BuckwaNumberUtil;
 import com.buckwa.util.school.SchoolUtil;
@@ -278,18 +279,29 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										for(AcademicKPIAttribute attributeTmp:academicKPIAttributeList){
 											String isCalculate = attributeTmp.getIsCalculate();
 											//String isValidateNumber= attributeTmp.getIsCalculate();
+											
+		
+											
 											String attributeName = attributeTmp.getName();
 											
-											//logger.info("   attributeName  :"+attributeName +"  isCalculate:"+isCalculate ); 
+											logger.info("   attributeName  :"+attributeName +"  isCalculate:"+isCalculate ); 
 											
-										
+				if(attributeName!=null){
+												
+											 
 										String attributeValueName = attributeValueTmp.getName();
 										if(attributeName.equalsIgnoreCase(attributeValueName)){
 											if("Y".equalsIgnoreCase(isCalculate)){
 												logger.info(" attributeValueName:"+attributeValueName+"   Found is calculate Y , So set Y");
 												attributeValueTmp.setIsCalculate("Y");
+											}
+											}else{
+												logger.info(" attributeValueName:"+attributeValueName+"  Not equal with attributeName :"+attributeName);
+											}
+										
+										}else{
+											logger.info(" Found Attribute Name null");
 										}
-									 }
 										}
 									}
 									
@@ -343,7 +355,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					
 					if("APPROVED".equalsIgnoreCase(mappingStatus)){
 						
-						String calResultStr =" 15";
+						String calResultStr ="";
 						
 						//List<AcademicKPIAttribute>  academicKPIAttributeList  =mappingTmp.getAcademicKPIAttributeList();
 						List<AcademicKPIAttributeValue>  academicKPIAttributeValueList  =mappingTmp.getAcademicKPIAttributeValueList();
@@ -352,16 +364,18 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 						logger.info(" KPI Mark:"+kpiTmp.getMark()+" Multiply Value:"+kpiTmp.getMultiplyValue()); 
 						 
 						
-						calResultStr=calResultStr+ " X (" +kpiTmp.getMark()+" คะแนน KPI )";
+						
 						
 						BigDecimal multiplyValueBig = new BigDecimal(0.00);
 						
 						try{
 							multiplyValueBig = new BigDecimal(kpiTmp.getMultiplyValue());
+							multiplyValueBig.setScale(2);
 						}catch(Exception ex){
-							//
+							multiplyValueBig = new BigDecimal(1).setScale(2);
 						}
 						
+						calResultStr= " ("+multiplyValueBig+" ตัวคุณ )"+" X ("+kpiTmp.getMark()+" คะแนน KPI )";
 						
 						if(kpiTmp.getMultiplyValue()!=null&&multiplyValueBig.doubleValue()>0){
 							
@@ -438,32 +452,35 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					}
 					
 				 
-					BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+					//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
 					mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2)); 
+				 
 					
 					
 					
 					
-					mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
+					//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
 					totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2));
 				} 				
 			} 
 			
-			BigDecimal totalInPercentWorkType = totalInWorkType.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
-			logger.info("totalInPercentWorkType :"+totalInWorkType + "  compare  :"+limitBase + "  ---->"+totalInPercentWorkType+"  % " );
+		//	BigDecimal totalInPercentWorkType = totalInWorkType.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+		//	logger.info("totalInPercentWorkType :"+totalInWorkType + "  compare  :"+limitBase + "  ---->"+totalInPercentWorkType+"  % " );
 			tmp.setTotalInWorkType(totalInWorkType.setScale(2));
 			
-			tmp.setTotalInPercentWorkType(totalInPercentWorkType.setScale(2));
+			logger.info(" ## totalInWorkType name:"+tmp.getName()+"   "+totalInWorkType  );
+			
+			//tmp.setTotalInPercentWorkType(totalInPercentWorkType.setScale(2));
 			if(totalInWorkType.compareTo(minHour)==-1){
-				tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
+			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
 				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2));
 				tmp.setCompareBaseStatus("UNDER");
 			}else  if(totalInWorkType.compareTo(maxHour)==1){
-				tmp.setTotalInPercentCompareBaseWorkType ( tmp.getMaxPercent() .setScale(2));
+				//tmp.setTotalInPercentCompareBaseWorkType ( tmp.getMaxPercent() .setScale(2));
 				tmp.setTotalInWorkTypeCompareBase( tmp.getMinHour() .setScale(2));
 				tmp.setCompareBaseStatus("OVER");
 			}else {
-				tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
+			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
 				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2));
 				tmp.setCompareBaseStatus("NORMAL");
 			}
@@ -487,6 +504,9 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			 int employeeTypeGetSalary = Integer.parseInt(employeeType) -1;
 			pBPWorkTypeWrapper.setIncreaseSalaryRate(getIncreaseSalaryRate(totalPercentMarkComareBase,academicYear,employeeTypeGetSalary+"",round));
 			pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
+			
+			
+			//updateReportPerson(pBPWorkTypeList);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -693,12 +713,14 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		List<PBPWorkType> pBPWorkTypeList = finalPBPWorkTypeWrapper.getpBPWorkTypeList();
 		
+		
 		for(final PBPWorkType pBPWorkTypeTmp:pBPWorkTypeList){		
+			logger.info("  xxx:"+BeanUtils.getBeanString(pBPWorkTypeTmp));
 			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase()+" min_hour:"+pBPWorkTypeTmp.getMinHour());
 			jdbcTemplate.update(new PreparedStatementCreator() {  
 				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 					PreparedStatement ps = connection.prepareStatement("" +						
-							"  update  pbp_work_type set name =? ,min_percent=?,min_hour=?,max_percent=? ,max_hour=?,limit_base=? where work_type_id=? " +
+							"  update  pbp_work_type set name =? ,min_percent=?,min_hour=?,max_percent=? ,max_hour=?,limit_base=?,min_hour_cal=? , max_hour_cal=?  where work_type_id=? " +
 						 "", Statement.RETURN_GENERATED_KEYS);   
 					ps.setString(1,pBPWorkTypeTmp.getName());
 					ps.setBigDecimal(2,pBPWorkTypeTmp.getMinPercent());
@@ -706,9 +728,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					ps.setBigDecimal(4,pBPWorkTypeTmp.getMaxPercent());
 					ps.setBigDecimal(5,pBPWorkTypeTmp.getMaxHour());
 					ps.setBigDecimal(6,pBPWorkTypeTmp.getLimitBase());
-					ps.setLong(7, pBPWorkTypeTmp.getWorkTypeId());
+					ps.setBoolean(7,pBPWorkTypeTmp.isMinHourCal());
+					ps.setBoolean(8,pBPWorkTypeTmp.isMaxHourCal());
+					ps.setLong(9, pBPWorkTypeTmp.getWorkTypeId());
 				 
-				 
+					
 				
 					return ps;  
 					}
@@ -840,6 +864,9 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			domain.setAcademicYear(rs.getString("academic_year"));
 			domain.setLimitBase(rs.getBigDecimal("limit_base"));
 			domain.setFacultyCode(rs.getString("faculty_code"));
+			 
+			domain.setMinHourCal(rs.getBoolean("min_hour_cal"));
+			domain.setMaxHourCal(rs.getBoolean("max_hour_cal"));
 		 
 		return domain;
     }

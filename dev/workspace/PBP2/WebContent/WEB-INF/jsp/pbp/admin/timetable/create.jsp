@@ -7,11 +7,13 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
-<form:form modelAttribute="timeTableReport"	action="editTimeTable.htm" method="POST" name="mainForm"  enctype="multipart/form-data">  
+<form:form modelAttribute="timeTableReport"	action="createTimeTable.htm" method="POST" name="mainForm"  enctype="multipart/form-data">  
  <div class="post">
  
 		<div class="entry" style="text-align: left;">
-				 <div class="pbp-header" style=" color: black; "> แก้ไขข้อมูลตารางสอน ${user.first_name}  ${user.last_name} ประจำปีการศึกษา ${academicYearStr}</div>
+				 <div class="pbp-header" style=" color: black; "> เพิ่มตารางสอน ${user.first_name}  ${user.last_name} ประจำปีการศึกษา ${academicYearStr}</div>
+				 	  <div class="pbp-header" style=" color: black;">RegId: ${user.regId}  </div>
+	
 				 <div class="pbp-header" style=" color: black;">เทอม <c:out value="${timeTableReport.semester}" />/<c:out value="${timeTableReport.academicYear}" /></div>
 		<hr>
  		 <div class="pbptableWrapper">
@@ -107,35 +109,12 @@
 				 ex. 16:00:00 - 19:00:00
 				<span class="require">*</span> 
 				<form:errors path="teachTimeFromTo" cssClass="require" /></td>
-			</tr>	
-			
-			
-						<tr>
-				<td class="tdFirst">มีผู้ช่วยสอน(TA):</td>
-				<td class="tdLast">
-				
-				
-				 <form:radiobutton  path="isTA"  id="status0"  value="0" />มี
-				<form:radiobutton path="isTA" id="status1" value="1"   />ไม่มี
-				
-				</td>
-			</tr>			
-			
-
-						<tr>
-				<td class="tdFirst">Project Base Learning:</td>
-				<td class="tdLast">
-				 <form:radiobutton  path="isProjectBase"  id="status0"  value="0" />ไช่
-				<form:radiobutton path="isProjectBase" id="status1" value="1"   />ไม่ไช่
-				
-				</td>
-			</tr>			
-						
+			</tr>				
            </tbody>
            </table> 
             </div>			 
 			<div style="width: 90%; text-align: center;">
-			<a href="<%=request.getContextPath()%>/admin/timetable/viewTimeTable.htm?username=<c:out value="${user.username}"/>&semester=1" class="btn btn-primary" >ยกเลิก</a>
+			<a href="<%=request.getContextPath()%>/admin/timetable/viewTimeTable.htm?username=<c:out value="${user.username}"/>&semester=1" class="btn btn-primary" >ยกเยิก</a>
 			
 			&nbsp;	&nbsp;
 			<input 	value="<spring:message code="label.button.save"/>" class="btn btn-primary" type="submit" >

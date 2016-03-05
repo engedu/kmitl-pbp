@@ -61,7 +61,7 @@
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
 				<td class="tdLast"> 
-				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} ชั่วโมงภาระงาน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
+				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
 		 			<c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttributeValueList}" var="domain" varStatus="status">

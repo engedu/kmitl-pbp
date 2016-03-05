@@ -27,7 +27,9 @@ public class PBPWorkType extends BaseDomain{
     private BigDecimal totalInPercentCompareBaseWorkTypeAVG = new BigDecimal(0.0);
     private String compareBaseStatus;
     
-    
+    private boolean minHourCal;
+   
+    private boolean maxHourCal;
     
     public String getFacultyCode() {
 		return facultyCode;
@@ -164,7 +166,19 @@ public class PBPWorkType extends BaseDomain{
 	public void setCompareBaseStatus(String compareBaseStatus) {
 		this.compareBaseStatus = compareBaseStatus;
 	}
-    
+	public boolean isMinHourCal() {
+		return minHourCal;
+	}
+	public void setMinHourCal(boolean minHourCal) {
+		this.minHourCal = minHourCal;
+	}
+	public boolean isMaxHourCal() {
+		return maxHourCal;
+	}
+	public void setMaxHourCal(boolean maxHourCal) {
+		this.maxHourCal = maxHourCal;
+	}
+ 
  
     
     

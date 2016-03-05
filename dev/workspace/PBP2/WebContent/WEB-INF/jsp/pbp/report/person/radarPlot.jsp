@@ -14,30 +14,18 @@
 <% Person person = (Person) request.getAttribute("person"); %>
 <form:form modelAttribute="person" action="search.htm" method="POST" name="mainForm">
 <div class="post"> 
-<div class="entry"> 
-		<table class="pbp-table"> 
-		<thead>
-			<tr>
-				<th>
-				<span class="lsf-icon colororange" title="graph"></span>คะแนนประจำปี
-				</th>
-			</tr>
-		</thead>
-		<tr><td>
-			<!--   <a href="<%=request.getContextPath()%>/json/person/getRadarPlot">JSON Object</a> -->
-		    <div id="example">
+ 
+		    <div id="example" style="padding: 0;margin: 0;">
 		    <div class="demo-section k-content">
 		        <div id="chart"></div>
 		        <br>
 		         <div id="grid"></div>
 		    </div>
 			</div>
-		</td></tr>
-		</table>
  
     
-</div>
-</div></div>
+ 
+</div> 
 </form:form>
 <script>
         function createChart() {
@@ -69,7 +57,7 @@
                         visible: true,
                     },
                     min: 0,
-                    max: 60
+                    max: 1000
                 },
                 tooltip: {
                     visible: true,

@@ -3,6 +3,8 @@ package com.buckwa.domain.pbp.report;
 import java.io.Serializable;
 import java.util.List;
 
+import com.buckwa.domain.admin.User;
+import com.buckwa.domain.common.LovDetail;
 import com.buckwa.domain.pbp.AcademicYear;
 
 public class TimeTableReport implements Serializable{
@@ -34,7 +36,42 @@ public class TimeTableReport implements Serializable{
 	
 	private String teachTimeFromTo;
 	
+	private User user;
 	
+	private String isTA;
+	private String isProjectBase;
+	
+	
+	public String getIsTA() {
+		return isTA;
+	}
+
+
+	public void setIsTA(String isTA) {
+		this.isTA = isTA;
+	}
+
+
+	public String getIsProjectBase() {
+		return isProjectBase;
+	}
+
+
+	public void setIsProjectBase(String isProjectBase) {
+		this.isProjectBase = isProjectBase;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 	public String getTimetableId() {
 		return timetableId;
 	}
@@ -55,6 +92,10 @@ public class TimeTableReport implements Serializable{
 	
 	private String teacherId;
 
+	
+	private List<LovDetail> lecOrPracList;
+	private List<LovDetail> degreeLevelList;
+	private List<LovDetail> thaiShortDateList;
 	
 public String getTeachTimeFromTo() {
 	String returnstr = "";
@@ -315,6 +356,36 @@ public String getThaiName() {
 	}
 	public void setSemester(String semester) {
 		this.semester = semester;
+	}
+
+
+	public List<LovDetail> getLecOrPracList() {
+		return lecOrPracList;
+	}
+
+
+	public void setLecOrPracList(List<LovDetail> lecOrPracList) {
+		this.lecOrPracList = lecOrPracList;
+	}
+
+
+	public List<LovDetail> getDegreeLevelList() {
+		return degreeLevelList;
+	}
+
+
+	public void setDegreeLevelList(List<LovDetail> degreeLevelList) {
+		this.degreeLevelList = degreeLevelList;
+	}
+
+
+	public List<LovDetail> getThaiShortDateList() {
+		return thaiShortDateList;
+	}
+
+
+	public void setThaiShortDateList(List<LovDetail> thaiShortDateList) {
+		this.thaiShortDateList = thaiShortDateList;
 	}
 	
 	

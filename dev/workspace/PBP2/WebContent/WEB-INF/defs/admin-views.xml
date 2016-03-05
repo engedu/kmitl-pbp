@@ -133,6 +133,8 @@
  	<bean id="timeTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="timeTableList" /></bean>
  	<bean id="viewTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="viewTableList" /></bean>
   <bean id="editTimeTableList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="editTimeTableList" /></bean>
+  <bean id="createTimeTable"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="createTimeTable" /></bean>
+  
 	<!-- End User -->
 		
 </beans>

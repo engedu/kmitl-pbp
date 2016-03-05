@@ -377,7 +377,7 @@ public class HeadController {
 			        
 			        logger.info("typeTmp.getTotalInPercentCompareBaseWorkTypeAVG():"+typeTmp.getTotalInPercentCompareBaseWorkTypeAVG()+" data1:"+data1+"  maxPoint:"+ maxPoint);
 			     //   BigDecimal weight100  = typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(100)).setScale(2,BigDecimal.ROUND_UP).divide(maxPoint).setScale(2,BigDecimal.ROUND_UP);
-			        BigDecimal weight100AVG  = typeTmp.getTotalInPercentCompareBaseWorkTypeAVG().multiply(new BigDecimal(100)).divide(maxPoint,2, BigDecimal.ROUND_HALF_UP).setScale(0,BigDecimal.ROUND_UP);
+			      //  BigDecimal weight100AVG  = typeTmp.getTotalInPercentCompareBaseWorkTypeAVG().multiply(new BigDecimal(100)).divide(maxPoint,2, BigDecimal.ROUND_HALF_UP).setScale(0,BigDecimal.ROUND_UP);
  
 			     
 			      //  data1 =weight100;

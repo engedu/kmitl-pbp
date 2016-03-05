@@ -19,7 +19,7 @@
 		   	   	<thead>
 		   	   		<tr>
 		   	   		
-		   	   		<th  > <div class="pbp-header">  <span class="lsf-icon colororange" title="list"></span> รายละเอียดการคำนวนภาระงานด้าน ${academicKPIUserMappingWrapper.pBPWorkType.name} </div>  &nbsp;
+		   	   		<th  > <div class="pbp-header">  <span class="lsf-icon colororange" title="list"></span> รายละเอียดการคำนวณภาระงานด้าน ${academicKPIUserMappingWrapper.pBPWorkType.name} </div>  &nbsp;
  					
 					</th>
  
@@ -49,11 +49,12 @@
 	
 	     	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='APPROVED'}">
 	              <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.fromRegis=='Y'}">
+	               <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">     
 	              	 <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editKPIMapping.htm?kpiUserMappingId=<c:out value="${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}"/>"> 
-		   				    <input class="btn btn-primary" value="แก้ไข  KPI ที่ใช้คำนวน" type="button" > 
+		   				    <input class="btn btn-primary" value="แก้ไข  KPI ที่ใช้คำนวณ" type="button" > 
 <!-- 		   				    onclick="#" -->
 		   			 </a>	
-						            
+						   </c:if>         
 	              </c:if>
 
 			 </c:if>		 
@@ -64,12 +65,14 @@
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
 				<td class="tdLast"> 
-				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} ชั่วโมงภาระงาน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
+				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
 			
 			  <form:errors		path="errorDesc" cssClass="require" />
 		 			<c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttributeValueList}" var="domain" varStatus="status">
+				
+				 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">     
 						<tr>
 							<td class="tdFirst">
 							  <c:out  value="${domain.name}"/>
@@ -82,10 +85,28 @@
 		                     <span class="require">*</span>  
 							</td>
 						</tr>
+		</c:if>
 		
+		
+		 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status == 'APPROVED' }"> 
+		 						<tr>
+							<td class="tdFirst">
+							  <c:out  value="${domain.name}"/>
+		                    
+							</td>
+ 							<td class="tdFirst" style="text-align: left;"  > 
+ 							 
+		                    <input   name="academicKPIAttributeValueList[${status.index}].value" value="${domain.value}" style="width: 90%;"  readonly="readonly"/>
+		                     <input type="hidden"  name="academicKPIAttributeValueList[${status.index}].name" value="${domain.name}"  />
+		                     <span class="require">*</span>  
+							</td>
+						</tr>
+		 </c:if>
 					</c:forEach>
 				<tr>
-				<td class="tdFirst">การคำนวน:</td>
+				
+				
+				<td class="tdFirst">การคำนวณ:</td>
 				<td class="tdLast"> 
 				<c:out  value="${academicKPIUserMappingWrapper.academicKPIUserMapping.calResultStr}"/>
 				
@@ -195,7 +216,7 @@
     <br> 
  	<div  class="back_center">	 
 		 	 &nbsp;
-	<input class="btn btn-primary" value="ยกเลิก" type="button" onclick="init();">
+	<input class="btn btn-primary" value="ย้อนกลับ" type="button" onclick="initAfterApprove();">
 	
 	 &nbsp;
 	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='CREATE'}">
@@ -208,9 +229,6 @@
 	  <input class="btn btn-primary"	value="<spring:message code="label.button.save"/>" type="button" onclick="submitForm();" >
  
 	 </c:if>
-	 
-
-   
 	</div>    
     
     
@@ -226,6 +244,17 @@
 			form.method='POST';	
 			form.submit();				
 		}
+
+	}
+	
+	
+	function initAfterApprove (){
+		var form = document.forms['mainForm']; 
+ 
+			form.action ="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm"; 
+			form.method='GET';	
+			form.submit();				
+	 
 
 	}
 	function init (){

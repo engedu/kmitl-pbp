@@ -4,7 +4,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib  prefix="pg" uri="http://jsptags.com/tags/navigation/pager"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.buckwa.web.util.*" %>
@@ -56,7 +56,28 @@
 						</form:select> 
 				</td>	
 				
-				<td colspan="2"></td>
+				<td  >
+				   คณะ:  
+				
+				</td>
+				
+				<td>
+					<sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
+            		 <form:select path="facultyCode" disabled="true" > 
+							<form:options items="${user.facultyList}" itemValue="code" itemLabel="name"/>
+						</form:select> 	
+						<form:hidden path="facultyCode"/>
+				</sec:authorize>	
+				
+				<sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+				<sec:authorize ifAnyGranted="ROLE_ADMIN">	
+            		 <form:select path="facultyCode" > 
+							<form:options items="${user.facultyList}" itemValue="code" itemLabel="name" />
+						</form:select> 	
+				</sec:authorize>
+				</sec:authorize>				
+				
+				</td>
 				 
 				<!-- 
 	 
@@ -102,8 +123,8 @@
 							 <th class="thLast">คณะ</th>
 							 <th class="thLast">ภาควิชา</th>
 							 
+							 <th class="thLast">Reg. Id</th>
 							 <th class="thLast">ปีการศึกษา</th>
-							 
 							<th class="thLast">คารางสอน</th>
 							 
 						</tr>
@@ -143,7 +164,7 @@
 		 -->
 		 						<td class="tdLast"><c:out value="${domain.facultyDesc}" />&nbsp;</td>
 		 						<td class="tdLast"><c:out value="${domain.departmentDesc}" />&nbsp;</td>
-		 					
+		 					<td class="tdLast"><c:out value="${domain.regId}" />&nbsp;</td>
 		 						<td class="tdLast"><c:out value="${domain.academicYear}" />&nbsp;</td>
 								<td class="tdLast" align="center">
 								

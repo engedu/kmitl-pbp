@@ -18,17 +18,22 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buckwa.dao.intf.admin.LovHeaderDao;
 import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.admin.User;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.common.LovDetail;
 import com.buckwa.domain.common.PagingBean;
 import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.report.TimeTableReport;
 import com.buckwa.domain.validator.UserValidator;
+import com.buckwa.domain.validator.pbp.TimeTableValidator;
 import com.buckwa.service.intf.CommonService;
 import com.buckwa.service.intf.admin.AdminUserService;
 import com.buckwa.service.intf.admin.GroupService;
+import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.PersonTimeTableService;
 import com.buckwa.service.intf.util.PathUtil;
 import com.buckwa.util.BeanUtils;
@@ -41,8 +46,8 @@ import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
 
 @Controller
-@RequestMapping("/admin/timetable")
-@SessionAttributes(types = User.class)
+@RequestMapping("/admin/timetable") 
+@SessionAttributes({"user", "timeTableReport"} ) 
 public class TimeTableController {
 	
 	private static Logger logger = Logger.getLogger(TimeTableController.class);
@@ -66,6 +71,12 @@ public class TimeTableController {
 	
 	@Autowired
 	private PersonTimeTableService personTimeTableService;
+	
+	@Autowired
+	private LovHeaderDao lovHeaderDao;
+	
+	@Autowired
+	private FacultyService facultyService;	
 	
 	@RequestMapping("init.htm")
 	public ModelAndView init() {
@@ -106,14 +117,30 @@ public class TimeTableController {
 		user.setFacultyList(academicYearUtil.getFacultyList());
 		user.setFacultyCode(facultyCodeSelect);
 		
-		
+		BuckWaRequest request = new BuckWaRequest();
+		BuckWaResponse response =new BuckWaResponse();
+		String academicYear =schoolUtil.getCurrentAcademicYear();
+		request.put("academicYear",academicYear);
+		 
+		 response = facultyService.getFacultyListByAcademicYear(request);
+		if(response.getStatus()==BuckWaConstants.SUCCESS){	
+			 List<Faculty> facultyList = ( List<Faculty>)response.getResObj("facultyList");
+			 for(Faculty ftmp:facultyList){
+				 if(facultyCodeSelect.equalsIgnoreCase(ftmp.getCode())){
+					// user.setFacultyName(ftmp.getName()); 
+				 }
+				 
+			 }
+			 user.setFacultyList(facultyList);
+		}
 		// Search initial
 		int offset = 0;	
 		bean.setOffset(offset);				
-		BuckWaRequest request = new BuckWaRequest();
+		
 		request.put("pagingBean", bean);		
 		bean.put("user", user);
-		BuckWaResponse response = userService.getUserByOffset(request);
+		//BuckWaResponse response = userService.getUserByOffset(request);
+		 response = userService.getUserByFacultyCodeOffset(request);
 		if(response.getStatus()==BuckWaConstants.SUCCESS){			
 			PagingBean beanReturn = (PagingBean)response.getResObj("pagingBean");
 			mav.addObject("pagingBean", beanReturn);				
@@ -127,70 +154,7 @@ public class TimeTableController {
 		return mav;
 	}
 	
-	@RequestMapping(value="create.htm", method = RequestMethod.GET)
-	public ModelAndView initCreate() {
-		logger.info(" Start  ");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.ADMIN_INIT);
-		mav.setViewName("userCreate");
-		User user = new User();				
-		// 1. Get all Group		 		 	
-		user.setGroupList(commonService.getAllGroup()) ;
-		
-		BuckWaResponse response = userService.initCreateUser();
-		if(response.getStatus()==BuckWaConstants.SUCCESS){
-			Person person = (Person) response.getResObj("person");
-			user.setPerson(person);
-		}
-		
-		logger.info(" user:"+BeanUtils.getBeanString(user));
-		mav.addObject("user", user);	
-		return mav;
-	}
-	@RequestMapping(value="create.htm", method = RequestMethod.POST)
-	public ModelAndView submitCreate(@ModelAttribute User user, BindingResult result) {		
-		logger.info(" Start  ");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.ADMIN_INIT);
-		mav.setViewName("userCreate");
-		try{
-			logger.info(" User:"+BeanUtils.getBeanString(user));
-			new UserValidator().validate(user, result);			
-			if (result.hasErrors()) {
-				logger.info("  Validate Error");
-			}else {	
-				logger.info("  Validate Success , Do create User ");
-				
-				BuckWaUser buckwaUser = BuckWaUtils.getUserFromContext();
-				
-				user.getPerson().setBirthdate(BuckWaDateUtils.parseDate(user.getPerson().getBirthdateStr()));
-				user.getPerson().setWorkingDate(BuckWaDateUtils.parseDate(user.getPerson().getWorkingDateStr()));
-				user.getPerson().setAssignDate(BuckWaDateUtils.parseDate(user.getPerson().getAssignDateStr()));
-				user.getPerson().setRetireDate(BuckWaDateUtils.parseDate(user.getPerson().getRetireDateStr()));
-				user.getPerson().setEmail(user.getUsername());
-				user.getPerson().setCreateBy(buckwaUser.getUsername());
-				user.getPerson().setUpdateBy(buckwaUser.getUsername());
-				
-				BuckWaRequest request = new BuckWaRequest();
-				request.put("user", user);				 
-				BuckWaResponse response = userService.createUser(request);
-				if(response.getStatus()==BuckWaConstants.SUCCESS){
-					logger.info("Success");					
-					mav.addObject("user", user);
-					mav.addObject("successCode", response.getSuccessCode()); 
-					mav = gotoList(mav);
-				}else {
-					logger.info("  Fail !!!! :"+response.getErrorCode()+" : "+response.getErrorDesc());
-					mav.addObject("errorCode", response.getErrorCode()); 
-				}								
-			}								
-		}catch(Exception ex){
-			ex.printStackTrace();
-			mav.addObject("errorCode", "E001"); 
-		}
-		return mav;
-	}		
-	
+ 
 	@RequestMapping(value="search.htm" )
 	public ModelAndView search(HttpServletRequest httpRequest,@ModelAttribute User user) {
 		logger.info(" Start  ");
@@ -205,7 +169,7 @@ public class TimeTableController {
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("pagingBean", bean);		
 			bean.put("user", user);
-			BuckWaResponse response = userService.getUserByOffset(request);
+			BuckWaResponse response = userService.getUserByFacultyCodeOffset(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){			
 				PagingBean beanReturn = (PagingBean)response.getResObj("pagingBean");
 				mav.addObject("totalItems", beanReturn.getTotalItems());	
@@ -236,7 +200,7 @@ public class TimeTableController {
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("pagingBean", bean);		
 			bean.put("user", user);
-			BuckWaResponse response = userService.getUserByOffset(request);
+			BuckWaResponse response = userService.getUserByFacultyCodeOffset(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){			
 				PagingBean beanReturn = (PagingBean)response.getResObj("pagingBean");
 				mav.addObject("pagingBean", beanReturn);	
@@ -296,7 +260,7 @@ public class TimeTableController {
 				user.setTimeTableList2(timeTableList2);
 			}			
 			
-			
+			logger.info(" user regId:"+user.getRegId());
 			mav.addObject("user", user);				
 		}else {
 			logger.info("  Fail !!!! :"+response.getErrorCode()+" : "+response.getErrorDesc());
@@ -355,21 +319,128 @@ public class TimeTableController {
 	  
 			BuckWaResponse response = personTimeTableService.getTimeTableById(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				timeTableReport =  (TimeTableReport )response.getResObj("timeTableReport");
-	 	
+				timeTableReport =  (TimeTableReport )response.getResObj("timeTableReport");	 	
 			}
 			
 			logger.info(" ###  timeTableReport: "+BeanUtils.getBeanString(timeTableReport));
+
+			List<LovDetail> lecOrPracList = lovHeaderDao.getDetailListByCode(PAMConstants.LEC_OR_PRAC);
+			List<LovDetail> degreeLevelList = lovHeaderDao.getDetailListByCode(PAMConstants.DEGREE_LEVEL);
+			List<LovDetail> thaiShortDateList = lovHeaderDao.getDetailListByCode(PAMConstants.THAI_SHORT_DATE);
 			
-			
+			timeTableReport.setLecOrPracList(lecOrPracList);
+			timeTableReport.setDegreeLevelList(degreeLevelList);
+			timeTableReport.setThaiShortDateList(thaiShortDateList);
+			 
 			mav.addObject("timeTableReport", timeTableReport);	
+			 
 			mav.setViewName("editTimeTableList");
 		 
 			return mav;
 		}	
+
 		
+
+		@RequestMapping(value="editTimeTable.htm", method = RequestMethod.POST)
+		public ModelAndView editTimeTable(HttpServletRequest httpRequest,@ModelAttribute TimeTableReport timeTableReport, BindingResult result) {		
+			logger.info(" Start  ");
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("editTimeTableList");
+			try{				 
+				new TimeTableValidator().validate(timeTableReport, result);			
+				if (result.hasErrors()) {
+					logger.info("  Validate Error");
+					mav.setViewName("editTimeTableList");
+				}else {
+					logger.info("  Validate Success , Do Edit Time Table ");					
+					//BuckWaUser buckwaUser = BuckWaUtils.getUserFromContext();
+					BuckWaRequest request = new BuckWaRequest();
+					request.put("timeTableReport", timeTableReport);
+					BuckWaResponse response = personTimeTableService.updateTimeTable(request);
+					if(response.getStatus()==BuckWaConstants.SUCCESS){					
+						//mav.addObject("group", user);
+						mav.addObject("successCode", response.getSuccessCode()); 
+						User user =(User)  httpRequest.getSession().getAttribute("user");
+						mav = viewTimeTable(user.getUsername(),"1");
+					}else {					 
+						mav.addObject("errorCode", response.getErrorCode()); 
+						 
+					}
+				} 
+				
+			}catch(Exception ex){
+				ex.printStackTrace();
+				mav.addObject("errorCode", "E001"); 
+			}
+			return mav;
+		}	
 		
-	
+		@RequestMapping(value="createTimeTable.htm", method = RequestMethod.GET)
+		public ModelAndView createTimeTable(@RequestParam("username") String username,String semester) {	
+			logger.info(" Start  ");
+			ModelAndView mav = new ModelAndView();
+			String academicYear =schoolUtil.getCurrentAcademicYear();
+			TimeTableReport timeTableReport = new TimeTableReport();
+			timeTableReport.setSemester(semester);
+			timeTableReport.setAcademicYear(academicYear);
+			
+			BuckWaRequest request = new BuckWaRequest();
+			request.put("username", username);				
+			request.put("academicYear",academicYear);
+			BuckWaResponse response = userService.getUserByUsernameForEdit(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){			
+				User user = (User)response.getResObj("user");	
+				timeTableReport.setTeacherId(user.getRegId());
+				mav.addObject("user", user);	
+			}
+			
+			List<LovDetail> lecOrPracList = lovHeaderDao.getDetailListByCode(PAMConstants.LEC_OR_PRAC);
+			List<LovDetail> degreeLevelList = lovHeaderDao.getDetailListByCode(PAMConstants.DEGREE_LEVEL);
+			List<LovDetail> thaiShortDateList = lovHeaderDao.getDetailListByCode(PAMConstants.THAI_SHORT_DATE);
+			
+			timeTableReport.setLecOrPracList(lecOrPracList);
+			timeTableReport.setDegreeLevelList(degreeLevelList);
+			timeTableReport.setThaiShortDateList(thaiShortDateList);
+			 
+			mav.addObject("timeTableReport", timeTableReport);	
+			
+			mav.setViewName("createTimeTable");
+		 
+			return mav;
+		}		
+		@RequestMapping(value="createTimeTable.htm", method = RequestMethod.POST)
+		public ModelAndView createTimeTablePOST(HttpServletRequest httpRequest,@ModelAttribute TimeTableReport timeTableReport, BindingResult result) {	
+			logger.info(" Start  ");
+			ModelAndView mav = new ModelAndView();
+			try{				 
+				new TimeTableValidator().validate(timeTableReport, result);			
+				if (result.hasErrors()) {
+					logger.info("  Validate Error");
+					mav.setViewName("createTimeTable");
+				}else {
+					logger.info("  Validate Success , Do Edit Time Table ");					
+					//BuckWaUser buckwaUser = BuckWaUtils.getUserFromContext();
+					BuckWaRequest request = new BuckWaRequest();
+					request.put("timeTableReport", timeTableReport);
+					BuckWaResponse response = personTimeTableService.createTimeTable(request);
+					if(response.getStatus()==BuckWaConstants.SUCCESS){					
+						//mav.addObject("group", user);
+						mav.addObject("successCode", response.getSuccessCode()); 
+						User user =(User)  httpRequest.getSession().getAttribute("user");
+						mav = viewTimeTable(user.getUsername(),"1");
+					}else {					 
+						mav.addObject("errorCode", response.getErrorCode()); 
+						mav.setViewName("createTimeTable");
+					}
+				} 
+				
+			}catch(Exception ex){
+				ex.printStackTrace();
+				mav.addObject("errorCode", "E001"); 
+			}
+			return mav;
+		}	
+		
 	@RequestMapping(value="edit.htm", method = RequestMethod.GET)
 	public ModelAndView initEdit(@RequestParam("username") String username) {	
 		logger.info(" Start  ");

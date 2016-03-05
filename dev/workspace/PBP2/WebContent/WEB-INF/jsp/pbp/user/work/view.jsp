@@ -57,7 +57,7 @@
 						</c:forEach>  
 					</td>
 					 <td class="tdBoth" style="font-size: 8px; width: 300px;"  > 
-						<c:out value="${domain2.academicKPI.name}"/>    ${domain2.academicKPI.mark} ชั่วโมงภาระงาน/ ${domain2.academicKPI.unitDesc}  
+						<c:out value="${domain2.academicKPI.name}"/>    ${domain2.academicKPI.mark} คะแนน/ ${domain2.academicKPI.unitDesc}  
 					</td>
 					<td class="tdBoth" style="font-size: 12px; width: 50px;" >
 					<c:if test="${domain2.status=='CREATE'}">

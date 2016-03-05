@@ -16,8 +16,8 @@
 			<table class="pbp-table"> 
 		<thead>
 			<tr>
-           		<th colspan="7" align="left">    <span class="lsf-icon colororange" title="list"></span>ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  </td>
-           		<th colspan="2" ><span class="lsf-icon colororange" title="upload"></span>
+           		<th colspan="6" align="left">    <span class="lsf-icon colororange" title="list"></span>ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  </td>
+           		<th colspan="1" ><span class="lsf-icon colororange" title="upload"></span>
            			<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/initWorkImport.htm"> นำเข้าผลงาน</a>
            		</th>
            	</tr>
@@ -31,8 +31,10 @@
 				<th   class="thFirst" width="50px;">คะแนน </th>
  				<th   class="thFirst" width="50px;">รวม </th>
  				 
+ 				 <!-- 
  				<th   class="thFirst" style="width: 80px;">ฐานการคำนวณ </th>
  				<th   class="thFirst" style="width: 80px;">% เทียบฐาน </th>
+ 				 -->
 			</tr> 
 		</thead>		
 		<tbody>
@@ -63,7 +65,7 @@
 					 
 					
 					 <td class="tdBoth" style="font-size: 14px; width: 300px;"  > 
-						<c:out value="${domain2.academicKPI.name}"/>    ${domain2.academicKPI.mark} ชั่วโมงภาระงาน/ ${domain2.academicKPI.unitDesc}  
+						<c:out value="${domain2.academicKPI.name}"/>    ${domain2.academicKPI.mark} คะแนน/ ${domain2.academicKPI.unitDesc}  
 					</td>
 					
 					
@@ -115,23 +117,23 @@
 				</td>	
  
 				
-				  <td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;"> 
+<!-- 				  <td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;">  -->
 				
-				<c:out value="${domain.limitBase}"/>
+<%-- 				<c:out value="${domain.limitBase}"/> --%>
  
-				</td>	 
-				 <td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;">  
-				 				 <c:if test="${domain.compareBaseStatus=='UNDER'}">
-				  <span style="color: red;"><c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </span>
-                 </c:if>
-                  <c:if test="${domain.compareBaseStatus=='NORMAL'}">
-				<c:out value="${domain.totalInPercentCompareBaseWorkType}"/> 
-                 </c:if>
-                <c:if test="${domain.compareBaseStatus=='OVER'}">
-				  <span style="color:green;"> <c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </span>
-                 </c:if>
+<!-- 				</td>	  -->
+<!-- 				 <td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;">   -->
+<%-- 				 				 <c:if test="${domain.compareBaseStatus=='UNDER'}"> --%>
+<%-- 				  <span style="color: red;"><c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </span> --%>
+<%--                  </c:if> --%>
+<%--                   <c:if test="${domain.compareBaseStatus=='NORMAL'}"> --%>
+<%-- 				<c:out value="${domain.totalInPercentCompareBaseWorkType}"/>  --%>
+<%--                  </c:if> --%>
+<%--                 <c:if test="${domain.compareBaseStatus=='OVER'}"> --%>
+<%-- 				  <span style="color:green;"> <c:out value="${domain.totalInPercentCompareBaseWorkType}"/> </span> --%>
+<%--                  </c:if> --%>
 				
-				</td>	
+<!-- 				</td>	 -->
 			</tr> 
 			</c:forEach>
 			<tr>
@@ -146,25 +148,26 @@
             <table style="width: 100%;">
 			<tr>
 				<td   colspan="5" align="right">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</td>
- 				<td    colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalMark}    ชั่วโมง     &nbsp; &nbsp; </td>
+ 				<td    colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalMark}   คะแนน    &nbsp; &nbsp; </td>
 		<!--  		<td   colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalPercentMark} % </td>-->
 				
-				
+			<!--	
 				<td   colspan="5" align="right">   คะแนนรวมเทียบฐาน    &nbsp; &nbsp; &nbsp; &nbsp;</td>
-		<!--  		  <td    colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalMarkCompareBase}    ชั่วโมง     &nbsp; &nbsp; </td>-->
-				<td   colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} % </td>
+		  		  <td    colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalMarkCompareBase}    ชั่วโมง     &nbsp; &nbsp; </td>
+				<td   colspan="1" align="right">  ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase} % </td>-->
 			</tr>	
  
             </table>
             </div> 	
-            <!-- 
+             <!-- 
             <div class="pbp-header" style="text-align: center;"><span style="font-size:30px; color: rgb(112,146,190);">
              	ระดับคะแนน     &nbsp;  ${person.pBPWorkTypeWrapper.increaseSalaryRate}
             </div>   
-            -->         
+                    -->
             <div class="pbp-header" style="text-align: center;"><span style="font-size:30px; color: rgb(112,146,190);">
-             	ระดับคะแนน   &nbsp;  ${person.pBPWorkTypeWrapper.totalPercentMarkCompareBase}
+             	ระดับคะแนน   &nbsp;  ${person.pBPWorkTypeWrapper.totalMark}
             </div>		
+            
 		</div>
 		
 </div>

@@ -71,7 +71,7 @@
 						    	
 						    	</td>
 						    	<td>
-					 <span class="lsf-icon colororange" title="man"></span> &nbsp;<c:out value="${domain2.head.thaiName}"/>  <c:out value="${domain2.head.thaiSurname}"/>  
+					 <span class="lsf-icon colororange" title="man"></span> <c:out value="${domain2.head.email}"/> &nbsp;<c:out value="${domain2.head.thaiName}"/>  <c:out value="${domain2.head.thaiSurname}"/>  
 					  <a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/chainOfCommand/manageHead.htm?departmentId=<c:out value="${domain2.departmentId}"/>"><span class="lsf-icon colororange" title="gear"></span> </a><br>
 						    	
 						    	</td>

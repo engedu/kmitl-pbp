@@ -16,4 +16,8 @@ public interface PersonTimetableDao {
 	public TimeTableReport getTimeTableById(String timetableId  );
 	 
 	
+	public void updateTimeTable(TimeTableReport timeTableReport); 
+	public void createTimeTable(TimeTableReport timeTableReport); 
+	
+	
 }

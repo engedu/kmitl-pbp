@@ -56,7 +56,15 @@
 				</td>
 				 <td rowspan="2">
 					 
+					<sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	 
+					</sec:authorize> 
+				<sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+				<sec:authorize ifAnyGranted="ROLE_ADMIN">	
 					<input class="btn btn-primary" value="<spring:message code="label.button.search"/>" type="submit"> 
+				</sec:authorize>
+				</sec:authorize>					 
+					 
+					 
 				</td>
  
 			</tr> 
@@ -72,13 +80,13 @@
 			<tr>
 				<th rowspan="2"> ประเภทภาระงาน   </td>
 				<th colspan="2">ภาระงานคาดหวัง ต่อปี </td>
-				<!--<td rowspan="2">Sub  </td>  -->
-				<th rowspan="2">ฐานการคำนวณ  </td>
+				<!--<td rowspan="2">Sub  </td> 
+				<th rowspan="2">ฐานการคำนวณ  </td> -->
 			 <!--	<th rowspan="2">Delete  </td> -->
 			</tr>
 			<tr>
-				<th> ขั้นต่ำ   </td>
-				<th>ขั้นสูง </td>
+				<th> ขั้นต่ำ (คะแนน)&nbsp;/&nbsp;ใช้ในการคำนวณ</td>
+				<th>ขั้นสูง (คะแนน)&nbsp;/&nbsp;ใข้ในการคำนวณ</td>
 				 
 			</tr> 
 		</thead>
@@ -98,15 +106,36 @@
 			        
 			        -->
 				</td>
-				<td style=" "> 
-		 
-				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].minPercent" value="${domain.minPercent}"  /> % 
-				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].minHour" value="${domain.minHour}"  />  ชั่วโมง
-					 
+				<td style="text-align: center; "> 
+		  
+				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].minHour" value="${domain.minHour}"  />&nbsp;&nbsp;/&nbsp;&nbsp;
+				 
+				 				 <c:choose>
+    <c:when test="${domain.minHourCal}">
+     <input type="checkbox"  name="pBPWorkTypeList[${status.index}].minHourCal" value="${domain.minHourCal}"  checked="checked"/> 
+    </c:when>
+
+    <c:otherwise>
+       <input type="checkbox"  name="pBPWorkTypeList[${status.index}].minHourCal" value="${domain.minHourCal}"  /> 
+    </c:otherwise>
+</c:choose>
+  		 
 				</td>
-				<td style=" "> 
-				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].maxPercent" value="${domain.maxPercent}"  /> % 
-				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].maxHour" value="${domain.maxHour}"  />  ชั่วโมง 
+				<td style="text-align: center;"> 
+				  
+				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].maxHour" value="${domain.maxHour}"  />&nbsp;&nbsp;/&nbsp;&nbsp;
+				 
+				 <c:choose>
+    <c:when test="${domain.maxHourCal}">
+     <input type="checkbox"  name="pBPWorkTypeList[${status.index}].maxHourCal" value="${domain.maxHourCal}"  checked="checked"/> 
+    </c:when>
+
+    <c:otherwise>
+       <input type="checkbox"  name="pBPWorkTypeList[${status.index}].maxHourCal" value="${domain.maxHourCal}"  /> 
+    </c:otherwise>
+</c:choose>
+ 
+		 
 				</td>	
 				
 				<!-- 
@@ -114,15 +143,17 @@
 					<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/manageSub.htm?workTypeId=<c:out  value="${domain.workTypeId}"/>"  >
 												ManageSub
 												</a> 
+												
+												
 		 		
 		 		</td>
 		 		 -->
-		 		 
+		 		 <!-- 
 				<td style=" "> 
 				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].limitBase" value="${domain.limitBase}"  />  
 				   
 				</td>		 		 
-		 		<!-- 
+		 		
 				<td>					<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/delete.htm?pBPWorkTypeId=<c:out  value="${domain.workTypeId}"/>"
 												onclick="return confirmPage('ยืนยันการลบข้อมูล <c:out value="${domain.name}"/> ?')">
 												Delete

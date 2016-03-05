@@ -126,7 +126,7 @@ public class InstituteDaoImpl implements InstituteDao {
 				    	List<PBPWorkType> pBPWorkTypeListTotalMark	= personTmp.getpBPWorkTypeWrapper().getpBPWorkTypeList();				    	
 					      for(PBPWorkType totalMarkTmp:pBPWorkTypeListTotalMark){
 					    	  if(typeTmp.getWorkTypeId().intValue()==totalMarkTmp.getWorkTypeId().intValue()){ 
-									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());								 
+									totalMark = totalMark.add(totalMarkTmp.getTotalInWorkType());								 
 					    	  }					    	  
 					      }
 					      totalPerson++;  					       
@@ -138,11 +138,11 @@ public class InstituteDaoImpl implements InstituteDao {
 				     
 				     
 				   
-				     BigDecimal totalInPercentCompareBaseWorkTypeAVG = totalMark.divide(new BigDecimal(totalPerson) ,2, BigDecimal.ROUND_HALF_UP);
-				     logger.info(" ## Department Name :"+departmentx.getName()+"  totalmark:"+totalMark+"  totalperson:"+totalPerson+" AVG:"+totalInPercentCompareBaseWorkTypeAVG);
+				     BigDecimal TotalInWorkTypeAVG = totalMark.divide(new BigDecimal(totalPerson) ,2, BigDecimal.ROUND_HALF_UP);
+				     logger.info(" ## Department Name :"+departmentx.getName()+"  totalmark:"+totalMark+"  totalperson:"+totalPerson+" AVG:"+TotalInWorkTypeAVG);
 				     typeTmp.setTotalAllWorkType(totalMark); 
-				     typeTmp.setTotalInPercentCompareBaseWorkType(totalMark);
-				     typeTmp.setTotalInPercentCompareBaseWorkTypeAVG(totalInPercentCompareBaseWorkTypeAVG);
+				     typeTmp.setTotalInWorkType(totalMark);
+				   //  typeTmp.setTotalInWorkType(TotalInWorkTypeAVG);
 				 
 					}
 					
@@ -615,31 +615,31 @@ public class InstituteDaoImpl implements InstituteDao {
 						
 						
 						if(loop1==1){
-							depReport1.setMark1(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark1(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode1(tmp.getCode());
 							depReport1.setTypeName1(tmp.getShortDesc());
-							type1Sum = type1Sum.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+							type1Sum = type1Sum.add(tmp.getTotalInWorkType());
 						}else if(loop1==2){
-							depReport1.setMark2(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark2(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode2(tmp.getCode());
 							depReport1.setTypeName2(tmp.getShortDesc());
-							type2Sum = type2Sum.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+							type2Sum = type2Sum.add(tmp.getTotalInWorkType());
 						}else if(loop1==3){
-							depReport1.setMark3(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark3(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode3(tmp.getCode());
 							depReport1.setTypeName3(tmp.getShortDesc());
-							type3Sum = type3Sum.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+							type3Sum = type3Sum.add(tmp.getTotalInWorkType());
 						}else if(loop1==4){
-							depReport1.setMark4(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark4(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode4(tmp.getCode());
 							depReport1.setTypeName4(tmp.getShortDesc());
-							type4Sum = type4Sum.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+							type4Sum = type4Sum.add(tmp.getTotalInWorkType());
 						}
 						else if(loop1==5){
-							depReport1.setMark5(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
+							depReport1.setMark5(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode5(tmp.getCode());
 							depReport1.setTypeName5(tmp.getShortDesc());
-							type5Sum = type5Sum.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
+							type5Sum = type5Sum.add(tmp.getTotalInWorkType());
 						}
 						
 						
@@ -815,31 +815,31 @@ public class InstituteDaoImpl implements InstituteDao {
 					
 					
 					if(loop==1){
-						depReport2.setMark1(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark1(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode1(tmp.getCode());
 						depReport2.setTypeName1(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==2){
-						depReport2.setMark2(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark2(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode2(tmp.getCode());
 						depReport2.setTypeName2(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==3){
-						depReport2.setMark3(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark3(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode3(tmp.getCode());
 						depReport2.setTypeName3(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}else if(loop==4){
-						depReport2.setMark4(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark4(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode4(tmp.getCode());
 						depReport2.setTypeName4(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}
 					else if(loop==5){
-						depReport2.setMark5(tmp.getTotalInPercentCompareBaseWorkType()+"");
+						depReport2.setMark5(tmp.getTotalInWorkType()+"");
 						depReport2.setTypeCode5(tmp.getCode());
 						depReport2.setTypeName5(tmp.getShortDesc());
-						totalMarkBig = totalMarkBig.add(tmp.getTotalInPercentCompareBaseWorkType());
+						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}
 					
 					

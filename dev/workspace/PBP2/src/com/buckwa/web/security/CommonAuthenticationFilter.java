@@ -64,20 +64,11 @@ public class CommonAuthenticationFilter extends
 		}else{
 			password = password.trim();
 		}
-//		if(captcha==null){
-//			captcha = "";
-//		}
-		
-//		logger.info("Validate Captcha...");
-//		boolean validCaptcha = false;
-//		validCaptcha = captchaService.validateResponseForID(request.getSession().getId(),captcha);
-		
+ 
 		logger.info("User Name Login :"+username);
 		if(StringUtils.isBlank(username)||StringUtils.isBlank(password))
 			throw new BadCredentialsException("Invalid username/password");
-//		if(StringUtils.isBlank(username)||StringUtils.isBlank(password)||validCaptcha==false)
-//			throw new BadCredentialsException("Invalid username/password/captcha");
-			
+ 		
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 		HttpSession session = request.getSession(false);
 		if (session != null || getAllowSessionCreation()) {

@@ -11,6 +11,10 @@ public interface PersonTimeTableService {
 	public BuckWaResponse addShareSubject(BuckWaRequest request);
 	
 	public BuckWaResponse getTimeTableById(BuckWaRequest request);
+	
+	public BuckWaResponse updateTimeTable(BuckWaRequest request);
+	public BuckWaResponse createTimeTable(BuckWaRequest request);
+	
 	 
 }
 

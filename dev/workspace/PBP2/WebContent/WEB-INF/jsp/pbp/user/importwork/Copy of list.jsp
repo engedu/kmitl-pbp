@@ -40,7 +40,7 @@
 		   				 ${status.index+1}   ${domain.name}
 		   				</a>		   				 
 		   				 </td>
-		   				<td class="tdFirst">${domain.mark} ชั่วโมงภาระงาน/ ${domain.unitDesc}</td>
+		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
  	   				
 		   			</tr>
 		   			 	   			           
@@ -77,7 +77,7 @@
 		   				
 		   				 
 		   				 </td>
-		   				<td class="tdFirst">${domain2.mark} ชั่วโมงภาระงาน/ ${domain2.unitDesc}</td>
+		   				<td class="tdFirst">${domain2.mark} คะแนน/ ${domain2.unitDesc}</td>
  	   				
 		   			</tr>
 		   			 	   			           
