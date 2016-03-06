@@ -297,7 +297,9 @@ public class PersonProfileController {
 //		        person.setRadarURL(newTxt)	;		
 				
 				
-				
+
+				/**----- Set Session --- */
+				httpRequest.getSession().setAttribute("personProFileSession" , person);
 				
 				
 			} else {

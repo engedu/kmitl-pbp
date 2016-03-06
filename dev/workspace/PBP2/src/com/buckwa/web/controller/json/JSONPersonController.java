@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
-import com.buckwa.domain.pam.Paper;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.PBPWorkType;
@@ -32,7 +33,6 @@ import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 
 @RestController
 @RequestMapping("/person")
@@ -58,52 +58,63 @@ public class JSONPersonController {
 	private HeadService headService;
 
 	@RequestMapping(value = "/getRadarPlot", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<RadarPlotReport> radarPlot() {
+	public List<RadarPlotReport> radarPlot(HttpServletRequest httpRequest) {
 
 		List<RadarPlotReport> returnList = new ArrayList<RadarPlotReport>();
-		logger.info(" Start  academicYear:" + academicYearUtil.getAcademicYear());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("initPerson");
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.PERSON_INIT);
 		try {
 
 			String academicYear = academicYearUtil.getAcademicYear();
+			logger.info(" Start  academicYear:" + academicYear);
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("viewUserProfile  username :" + user.getUsername());
 
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
-			request.put("academicYear", academicYearUtil.getAcademicYear());
-			BuckWaResponse response = personProfileService.getByUsername(request);
+			request.put("academicYear", academicYear);
+			
+			BuckWaResponse response = new BuckWaResponse();
+			Person person = (Person) httpRequest.getSession().getAttribute("personProFileSession");
+			if(null == person){
+				response = personProfileService.getByUsername(request);
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					person = (Person) response.getResObj("person");
+
+					user.setFirstLastName(person.getThaiName() + " " + person.getThaiSurname());
+	 
+					person.setAcademicYear(academicYear);
+					person.setAcademicYearList(academicYearUtil.getAcademicYearList());
+					person.setEvaluateRound("1");
+					user.setPersonProfile(person);
+					mav.addObject("person", person);
+					 
+					String facultyCode = person.getFacultyCode();
+	
+					request.put("academicYear", academicYear);
+					request.put("userName", BuckWaUtils.getUserNameFromContext());
+					request.put("round", person.getEvaluateRound());
+					request.put("employeeType", person.getEmployeeTypeNo());
+					request.put("facultyCode", facultyCode);
+	
+					// response = pBPWorkTypeService.getByAcademicYear(request);
+					response = pBPWorkTypeService.getCalculateByAcademicYear(request);
+	
+					if (response.getStatus() == BuckWaConstants.SUCCESS) {
+						PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper) response.getResObj("pBPWorkTypeWrapper");
+						pBPWorkTypeWrapper.setAcademicYear(academicYear);
+						person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
+					}
+					
+				}else{
+					response.setStatus(BuckWaConstants.FAIL);
+				}
+			}else{
+				response.setStatus(BuckWaConstants.SUCCESS);
+			}
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
-				Person person = (Person) response.getResObj("person");
-				user.setFirstLastName(person.getThaiName() + " " + person.getThaiSurname());
-			 
-
- 
-				person.setAcademicYear(academicYear);
-				person.setAcademicYearList(academicYearUtil.getAcademicYearList());
-				person.setEvaluateRound("1");
-				user.setPersonProfile(person);
-				mav.addObject("person", person);
-				 
-				String facultyCode = person.getFacultyCode();
-
-				request.put("academicYear", academicYear);
-				request.put("userName", BuckWaUtils.getUserNameFromContext());
-				request.put("round", person.getEvaluateRound());
-				request.put("employeeType", person.getEmployeeTypeNo());
-				request.put("facultyCode", facultyCode);
-
-				// response = pBPWorkTypeService.getByAcademicYear(request);
-				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
-
-				if (response.getStatus() == BuckWaConstants.SUCCESS) {
-					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper) response.getResObj("pBPWorkTypeWrapper");
-					pBPWorkTypeWrapper.setAcademicYear(academicYear);
-					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
-				}
 
 				List<PBPWorkType> pBPWorkTypeList = person.getpBPWorkTypeWrapper().getpBPWorkTypeList();
 				int loop = 0;
