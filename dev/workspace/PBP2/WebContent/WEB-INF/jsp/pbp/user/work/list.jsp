@@ -22,7 +22,7 @@
            		</th>
            	</tr>
 			<tr>
-				<th  class="thLast" width="200px;">   ประเภทภาระงาน      </th>
+				<th  class="thLast" width="150px;">   ประเภทภาระงาน      </th>
 				<th   class="thFirst" width="110px;">งาน </th>
 				<th   class="thFirst" width="300px;">ภาระงาน/คะแนน </th>
 				<th   class="thFirst" width="50px;">สถานะ </th>	

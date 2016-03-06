@@ -11,10 +11,18 @@
 <form:form modelAttribute="academicKPIWrapper" action="edit.htm" method="POST" name="mainForm"> 	 
 <form:hidden path="academicYear"/>
 
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="pbp-page-header">
+           		 เลือกรายการภาระงานเพื่อนำเข้าผลงาน  
+        </h1>
+    </div>
+</div>
+
    <div class="row">
-   <div class="col-md-3 col-sm-2"></div>
-   <div class="col-md-6 col-sm-6">
-        <div class="panel panel-default">
+<!--    <div class="col-md-3 col-sm-2"></div> -->
+<!--    <div class="col-md-6 col-sm-6"> -->
+        <%-- <div class="panel panel-default">
           
    			<div class="panel-body">
               <div class="list-group">
@@ -31,29 +39,31 @@
               </c:forEach>
               </div>
             </div>
-   		</div>
-   		
-  </div>
+   		</div> --%>
+
+			<div id='pbp-tabmenu'>
+				<ul>
+				<c:forEach items="${academicKPIWrapper.pBPWorkTypeList}" var="domain5" varStatus="status5"> 
+               		<c:if test="${academicKPIWrapper.index == status5.count}"><li class="active"></c:if>
+               		<c:if test="${academicKPIWrapper.index != status5.count}"><li></c:if>
+	               		<a href="<%=request.getContextPath()%>/pam/person/listByWorktype.htm?workTypeCode=${domain5.code}&academicYear=${academicKPIWrapper.academicYear}&index=${status5.count}">
+	               		<span id="row[${status5.count}]" style="font-size: 18px; font-weight: bold;"><span class="lsf-icon colororange" title="list"></span>  ${domain5.name}</span></a>
+               		</li>
+              </c:forEach>
+				</ul>
+			</div>
   </div>
  
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-header" style="text-align: center; font-size: 25px;">
-                            เลือกรายการภาระงานเพื่อนำเข้าผลงาน <small></small>
-                        </h1>
-                    </div>
-                </div>
-                
     			<table class="pbp-table">
 		   	   	<thead>
-		   	   		<tr><th colspan="3">
-		   	   		<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>  ${academicKPIWrapper.pBPWorkType.name} </div> 
+<!-- 		   	   		<tr><th colspan="3"> -->
+<%-- 		   	   		<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>  ${academicKPIWrapper.pBPWorkType.name} </div>  --%>
 					
-					</th></tr>
+<!-- 					</th></tr> -->
 		   	   		<tr>
-		   	   			<th class="thFirst" width="500px;">ภาระงาน</th>
-		   	   			<th class="thFirst"  width="120px;">คะแนน</th>
- 						<th class="thFirst" width="200px;">หมายเหตุ</th>
+		   	   			<th class="thFirst" width="70%">ภาระงาน</th>
+		   	   			<th class="thFirst" width="20%">คะแนน</th>
+ 						<th class="thFirst" width="10%">หมายเหตุ</th>
 		   	   		</tr>
 		   	   	</thead>
 		   	   	

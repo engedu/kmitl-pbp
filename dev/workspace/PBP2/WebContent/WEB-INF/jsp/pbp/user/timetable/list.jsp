@@ -20,7 +20,7 @@
 <script type="text/javascript" src='<c:url value="/kendo/js/angular.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/kendo/js/kendo.all.min.js"/>'></script> 
  
- <div style=" width: 80%; padding-left: 0px;">
+ <div style=" width: 100%; padding-left: 0px;">
  <form:form modelAttribute="timetableReport" action="search.htm" method="POST" name="mainForm"> 
  <table class="pbp-table"> 
 		<thead><tr><th>
@@ -39,208 +39,12 @@
 		
       
  <div id="example">
-     <h4 style="color: rgb(255,164,67); font-weight: bold; text-align: center;">เทอม  1</h4>
+     <h4 style="color:#FD7A39; font-weight: bold; text-align: center;">ภาคการศึกษา  1</h4>
      <div id="grid"></div>
-
-     <script>
-         function onChange(arg) {
-             var selected = $.map(this.select(), function(item) {
-                 return $(item).text();
-             });
-
-         }
-
-         function onDataBound(arg) {
-         }
-
-         function onDataBinding(arg) {
-         }
-
-         $(document).ready(function () {
-             $("#grid").kendoGrid({
-                 dataSource: {
-                     transport: {
-                         read: {
-                             url: "<%=request.getContextPath()%>/json/personTimeTable/getTimeTable?academicYearSelect=<c:out value="${timetableReport.academicYearSelect}"/>&userName=<c:out value="${userName}"/>&semester=1",
-                             dataType: "json"
-                         }
-                     },
-                     pageSize: 70
-                 },
-     	        title: {
-    	            text: "ระดับคะแนนในภาควิชา"
-    	        },
-                 height: 400,                 
-                 change: onChange,
-                 dataBound: onDataBound,
-                 dataBinding: onDataBinding,
-                 selectable: "multiple cell",
-                 pageable: false,
-                 sortable: true,
-                 columns: [
-                     {
-                         field: "subjectCode",
-                         title: "รหัสวิชา",
-                         width: 100,
-                     },
-                     {
-                         field: "engName",
-                         title: "ชื่อวิชา",
-                         width: 250,
-                     }
-                     ,  
-                     {
-                         field: "lecOrPrac",
-                         title: "ป/ท",
-                         width: 80,
-                     }     
-                     ,  
-                     {
-                         field: "teachHr",
-                         title: "ชั่วโมงสอน",
-                         width: 80,
-                     } 
-                     ,  
-                     {
-                         field: "credit",
-                         title: "หน่วยกิต",
-                         width: 80,
-                     } 
-                     ,                    
-                     {
-                         field: "degreeStr",
-                         title: "ระดับ",
-                         width: 100,
-                     } 
-                     ,                    
-                     {
-                         field: "totalStudent",
-                         title: "จำนวนนักศึกษา",
-                         width: 100,
-                     } ,                    
-                     {
-                         field: "secNo",
-                         title: "Section",
-                         width: 100,
-                     } 
-                     ,                    
-                     {
-                         field: "teachDayStr",
-                         title: "วัน",
-                         width: 100,
-                     }
-                     ,                    
-                     {
-                         field: "teachTimeFromTo",
-                         title: "เวลา",
-                         width: 200,
-                     }
-                 ]
-             });
-         });
-     </script>
   
-    <h4 style="color: rgb(255,164,67); font-weight: bold;text-align: center;">เทอม  2</h4>
+  
+     <h4 style="color:#FD7A39; font-weight: bold; text-align: center;">ภาคการศึกษา  2</h4>
      <div id="grid2"></div>
-
- 
-     <script>
-         function onChange(arg) {
-             var selected = $.map(this.select(), function(item) {
-                 return $(item).text();
-             });
-
-         }
-
-         function onDataBound(arg) {
-         }
-
-         function onDataBinding(arg) {
-         }
-
-         $(document).ready(function () {
-             $("#grid2").kendoGrid({
-                 dataSource: {
-                     transport: {
-                         read: {
-                             url: "<%=request.getContextPath()%>/json/personTimeTable/getTimeTable?academicYearSelect=<c:out value="${timetableReport.academicYearSelect} "/>&userName=<c:out value="${userName}"/>&semester=2",
-                             dataType: "json"
-                         }
-                     },
-                     pageSize: 70
-                 },
-     	        title: {
-    	            text: "ระดับคะแนนในภาควิชา"
-    	        },
-                 height: 400,
-                 change: onChange,
-                 dataBound: onDataBound,
-                 dataBinding: onDataBinding,
-                 selectable: "multiple cell",
-                 pageable: false,
-                 sortable: true,
-                 columns: [
-                           {
-                               field: "subjectCode",
-                               title: "รหัสวิชา",
-                               width: 100,
-                           },
-                           {
-                               field: "engName",
-                               title: "ชื่อวิชา",
-                               width: 250,
-                           }
-                           ,  
-                           {
-                               field: "lecOrPrac",
-                               title: "ป/ท",
-                               width: 80,
-                           }     
-                           ,  
-                           {
-                               field: "teachHr",
-                               title: "ชั่วโมงสอน",
-                               width: 80,
-                           } 
-                           ,  
-                           {
-                               field: "credit",
-                               title: "หน่วยกิต",
-                               width: 80,
-                           } 
-                           ,                    
-                           {
-                               field: "degreeStr",
-                               title: "ระดับ",
-                               width: 100,
-                           } 
-                           ,                    
-                           {
-                               field: "totalStudent",
-                               title: "จำนวนนักศึกษา",
-                               width: 100,
-                           } ,                    
-                           {
-                               field: "secNo",
-                               title: "Section",
-                               width: 100,
-                           } 
-                           ,                    
-                           {
-                               field: "teachDayStr",
-                               title: "วัน",
-                               width: 100,
-                           }
-                           ,                    
-                           {
-                               field: "teachTimeFromTo",
-                               title: "เวลา",
-                               width: 200,
-                           }
-                       ]
-             });
-         });
-     </script>     
  
  </div>
  
@@ -262,4 +66,110 @@
 			form.method='GET';	
 			form.submit();
 		}
+		
+ $(document).ready(function () {
+	 
+	 
+	var _columns = [
+            {
+                field: "subjectCode",
+                title: "รหัสวิชา",
+                attributes:{ class:"text-center" } ,
+                width: 100
+            },
+            {
+                field: "engName",
+                title: "ชื่อวิชา",
+                width: 250
+            }
+            ,  
+            {
+                field: "lecOrPrac",
+                title: "ป/ท",
+                attributes:{ class:"text-center" } ,
+                width: 80
+            }     
+            ,  
+            {
+                field: "teachHr",
+                title: "ชั่วโมงสอน",
+                attributes:{ class:"text-right" } ,
+                width: 80
+            } 
+            ,  
+            {
+                field: "credit",
+                title: "หน่วยกิต",
+                attributes:{ class:"text-right" } ,
+                width: 80
+            } 
+            ,                    
+            {
+                field: "degreeStr",
+                title: "ระดับ",
+                attributes:{ class:"text-right" } ,
+                width: 100
+            } 
+            ,                    
+            {
+                field: "totalStudent",
+                title: "จำนวนนักศึกษา",
+                attributes:{ class:"text-right" } ,
+                width: 100
+            } ,                    
+            {
+                field: "secNo",
+                title: "Section",
+                attributes:{ class:"text-right" } ,
+                width: 100
+            } 
+            ,                    
+            {
+                field: "teachDayStr",
+                title: "วัน",
+                attributes:{ class:"text-left" } ,
+                width: 100
+            }
+        ];
+	
+	
+  
+   $("#grid").kendoGrid({
+       dataSource: {
+           transport: {
+               read: {
+                   url: "<%=request.getContextPath()%>/json/personTimeTable/getTimeTable?academicYearSelect=${timetableReport.academicYearSelect}&userName=${userName}&semester=1",
+                       dataType: "json"
+                   }
+               },
+               pageSize: 100
+           },
+        title: {
+           text: "ระดับคะแนนในภาควิชา"
+       },
+           selectable: "multiple cell",
+           pageable: false,
+           sortable: true,
+           columns: _columns
+   });
+   
+   $("#grid2").kendoGrid({
+       dataSource: {
+           transport: {
+               read: {
+                   url: "<%=request.getContextPath()%>/json/personTimeTable/getTimeTable?academicYearSelect=${timetableReport.academicYearSelect}&userName=${userName}&semester=2",
+                       dataType: "json"
+                   }
+               },
+               pageSize: 100
+           },
+        title: {
+           text: "ระดับคะแนนในภาควิชา"
+       },
+           selectable: "multiple cell",
+           pageable: false,
+           sortable: true,
+           columns: _columns
+    });
+ });
 </script>

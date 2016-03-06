@@ -15,11 +15,11 @@
 
 <section class="twelve columns">
  
-	<div class="ten columns">
+	<div class="">
  
-		<table class="pbp-table"  ">
+		<table class="pbp-table" >
 		<thead>
-			<tr><th colspan="3"></th></tr>
+<!-- 			<tr><th colspan="3"></th></tr> -->
 			<tr>
 				<th rowspan="2" class="thLast" width="250px;">   ประเภทภาระงาน ปีการศึกษา ${anonymousWrapper.academicYear}     </th>
 				<th colspan="2" class="thFirst">ภาระงานคาดหวัง ต่อปี </th>
