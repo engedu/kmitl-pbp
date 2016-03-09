@@ -41,7 +41,21 @@ public class TimeTableReport implements Serializable{
 	private String isTA;
 	private String isProjectBase;
 	
+	private String teachHrEdit;
 	
+	
+	
+	
+	public String getTeachHrEdit() {
+		return teachHrEdit;
+	}
+
+
+	public void setTeachHrEdit(String teachHrEdit) {
+		this.teachHrEdit = teachHrEdit;
+	}
+
+
 	public String getIsTA() {
 		return isTA;
 	}

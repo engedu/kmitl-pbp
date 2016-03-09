@@ -94,7 +94,7 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		try{
 		//String sql =" SELECT name FROM academic_unit where code='"+code+"' and academic_year='"+acedemicYear+"'";	
 			String sql =" SELECT name FROM academic_unit where code='"+code+"'" ;	
-		logger.info("  getMarkDescMyCode sql: "+sql);
+		//logger.info("  getMarkDescMyCode sql: "+sql);
 		 returnStr = (String)this.jdbcTemplate.queryForObject(	sql , String.class);
 		
 		}catch(org.springframework.dao.EmptyResultDataAccessException ex){

@@ -26,7 +26,7 @@
 		   	   	<thead>
 		   	   		<tr>
 		   	   		
-		   	   		<th  colspan="2">   แก้ไขตารางสอน   &nbsp;
+		   	   		<th  colspan="2">   เพิ่มไขตารางสอน   &nbsp;
  					
 					</th>
  					</tr>
@@ -65,8 +65,8 @@
 			</tr>
 						<tr>								
 				<td class="tdFirst">ชั่วโมงสอน:</td>
-				<td class="tdLast"><form:input cssClass="input" path="teachHr"/> <span class="require">*</span> 
-				<form:errors path="teachHr" cssClass="require" /></td>
+				<td class="tdLast"><form:input cssClass="input" path="teachHrEdit"/> <span class="require">*</span> 
+				<form:errors path="teachHrEdit" cssClass="require" /></td>
 			</tr>
 						<tr>
 				<td class="tdFirst">หน่วยกิต:</td>
@@ -105,10 +105,11 @@
 			</tr>			
 						<tr>
 				<td class="tdFirst">เวลา:</td>
-				<td class="tdLast"><form:input cssClass="input" path="teachTimeFromTo"/> 
+				<td class="tdLast"> From <form:input cssClass="input" path="teachTime1"/> <br>
+				To <form:input cssClass="input" path="teachTime2"/>
 				 ex. 16:00:00 - 19:00:00
 				<span class="require">*</span> 
-				<form:errors path="teachTimeFromTo" cssClass="require" /></td>
+				 </td>
 			</tr>				
            </tbody>
            </table> 

@@ -136,7 +136,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	
 	@Override
 	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType,String facultyCode) {
-		logger.info("  getCalculateByAcademicYear getByAcademicYear xx:"+academicYear+"userName :"+userName+" round:"+round+" employeeType:"+employeeType+" facultyCode:"+facultyCode);
+		logger.info("  ########### Start Call  userName :"+userName+" academicYear:"+academicYear+" round:"+round+" employeeType:"+employeeType+" facultyCode:"+facultyCode);
 		
 		
 		// Get Start ,End Date 
@@ -249,7 +249,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 									String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
 									List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
 									try{
-										logger.info(" sqlAttributeValue:"+sqlAttributeValue);
+										//logger.info(" sqlAttributeValue:"+sqlAttributeValue);
 										academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
 										logger.info(" Found Attribute list for Usermaping id :"+mappingTmp.getKpiUserMappingId()+" size:"+ academicKPIAttributeValueList.size());
 									}catch (org.springframework.dao.EmptyResultDataAccessException ex){
@@ -284,7 +284,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 											
 											String attributeName = attributeTmp.getName();
 											
-											logger.info("   attributeName  :"+attributeName +"  isCalculate:"+isCalculate ); 
+											//logger.info("   attributeName  :"+attributeName +"  isCalculate:"+isCalculate ); 
 											
 				if(attributeName!=null){
 												
@@ -292,11 +292,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										String attributeValueName = attributeValueTmp.getName();
 										if(attributeName.equalsIgnoreCase(attributeValueName)){
 											if("Y".equalsIgnoreCase(isCalculate)){
-												logger.info(" attributeValueName:"+attributeValueName+"   Found is calculate Y , So set Y");
+												//logger.info(" attributeValueName:"+attributeValueName+"   Found is calculate Y , So set Y");
 												attributeValueTmp.setIsCalculate("Y");
 											}
 											}else{
-												logger.info(" attributeValueName:"+attributeValueName+"  Not equal with attributeName :"+attributeName);
+												//logger.info(" attributeValueName:"+attributeValueName+"  Not equal with attributeName :"+attributeName);
 											}
 										
 										}else{
@@ -407,11 +407,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										
 										if("Y".equalsIgnoreCase(isCalculate)){
 									
-											logger.info(" Found    attributeName  :"+attributeValueName +"  isCalculate:"+isCalculate ); 
+										//	logger.info(" Found    attributeName  :"+attributeValueName +"  isCalculate:"+isCalculate ); 
 									//if(attributeName.equalsIgnoreCase(attributeValueName)){
 										
 										String attributeValueValue = attributeValueTmp.getValue();
-										logger.info(" Multiply Value :"+attributeValueValue); 
+										//logger.info(" Multiply Value :"+attributeValueValue); 
 										BigDecimal tmpBeforCall = totalMappingTmp;
 										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){
 											//logger.info(" ############ Found Ratio Attribute value:"+attributeValueValue);

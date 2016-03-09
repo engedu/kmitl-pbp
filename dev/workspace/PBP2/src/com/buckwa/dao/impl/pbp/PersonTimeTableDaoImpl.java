@@ -188,8 +188,13 @@ public class PersonTimeTableDaoImpl implements PersonTimetableDao {
 				+ ",degree=?"	
 				+ ",credit=?"	
 				+ ",student_total=?"	
-				+ ",section=?"				 
-				+ "  where time_table_cd=? ", domain.getSubjectCode(),
+				+ ",section=?"				
+				+ ",teach_time=?"	
+				+ ",teach_time2=?"	
+				+ ",teach_day=?"
+				+ ",lect_hr=?"
+				+ ",prac_hr=?"
+				+ "  where time_table_cd=? ", domain.getTimetableId(),
 				domain.getEngName(),
 				domain.getThaiName(),
 				domain.getLecOrPrac(),
@@ -197,6 +202,11 @@ public class PersonTimeTableDaoImpl implements PersonTimetableDao {
 				domain.getCredit(),
 				domain.getTotalStudent(),
 				domain.getSecNo(),
+				domain.getTeachTime1(),
+				domain.getTeachTime2(),
+				domain.getTeachDay(),
+				domain.getTeachHrEdit(),
+				domain.getTeachHrEdit(),
 				domain.getTimetableId()); 
 	
 	}
@@ -209,7 +219,7 @@ public class PersonTimeTableDaoImpl implements PersonTimetableDao {
 		jdbcTemplate.update(new PreparedStatementCreator() {  
 			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 				PreparedStatement ps = connection.prepareStatement("" +						
-						"  insert into time_table (subject_id, eng_name,thai_name,lect_or_prac,degree,credit,student_total,section,teacher_id,year,semester,teach_day) values (?,?,?,?, ?,?,?,?,?,?,?,?)" +
+						"  insert into time_table (subject_id, eng_name,thai_name,lect_or_prac,degree,credit,student_total,section,teacher_id,year,semester,teach_day,teach_time,teach_time2,lect_hr,prac_hr) values (?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?)" +
 					 "", Statement.RETURN_GENERATED_KEYS);   
 				ps.setString(1,finalDomain.getSubjectCode());
 				ps.setString(2,finalDomain.getEngName());
@@ -223,6 +233,10 @@ public class PersonTimeTableDaoImpl implements PersonTimetableDao {
 				ps.setString(10,finalDomain.getAcademicYear());	
 				ps.setString(11,finalDomain.getSemester());	
 				ps.setString(12,finalDomain.getTeachDay());	
+				ps.setString(13,finalDomain.getTeachTime1());	
+				ps.setString(14,finalDomain.getTeachTime2());	
+				ps.setString(15,finalDomain.getTeachHrEdit());
+				ps.setString(16,finalDomain.getTeachHrEdit());
 				return ps;  
 				}
 			}, 	keyHolder); 	
