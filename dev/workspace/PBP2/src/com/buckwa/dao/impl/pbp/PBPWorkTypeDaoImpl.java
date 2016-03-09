@@ -550,7 +550,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			
 			logger.info("  getIncreaseSalaryRate sql:"+sql);
 			
-			MarkRankWrapper markRankWrapper = new MarkRankWrapper();	 				
+		//	MarkRankWrapper markRankWrapper = new MarkRankWrapper();	 				
 			List<MarkRank> markRankList  = this.jdbcTemplate.query(sql,	new MarkRankMapper() );	
 			
 			for(MarkRank markRankTmp:markRankList){
