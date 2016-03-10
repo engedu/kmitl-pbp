@@ -36,23 +36,24 @@
 </div>
 </li>
    -->
- 			<li class="navigation-right" style="border: none;">    		
-		    		<sec:authorize ifAnyGranted="ROLE_USER">
-				  <a href="<%=request.getContextPath()%>/j_spring_security_logout">  ออกจากระบบ   </a>	  
-				 </sec:authorize>
-		  </li>	    		
 		<li class="navigation-right" style="border: none;">    		
-		 <sec:authorize ifAnyGranted="ROLE_USER">
+			 <sec:authorize ifAnyGranted="ROLE_USER">
 				  <sec:authentication property="principal.username" />	  
-		 </sec:authorize>
+			 </sec:authorize>
 		</li>
-	
 		
+		<li class="navigation-right" style="border: none;">    		
+    		<sec:authorize ifAnyGranted="ROLE_USER">
+			  <a href="<%=request.getContextPath()%>/j_spring_security_logout">  ออกจากระบบ   </a>	  
+			 </sec:authorize>
+	    </li>	    
+	    		
 		<li class="navigation-right"  style="border: none;">    		
-			   <sec:authorize ifNotGranted="ROLE_USER">	
-					<a href="<%=request.getContextPath()%>/preLogin.htm">  <spring:message code="label.login"/> </a> 
-				</sec:authorize>
-		</li>				
+		   <sec:authorize ifNotGranted="ROLE_USER">	
+				<a href="<%=request.getContextPath()%>/preLogin.htm">  <spring:message code="label.login"/> </a> 
+			</sec:authorize>
+		</li>	
+					
 	 			 
 
 </ul>

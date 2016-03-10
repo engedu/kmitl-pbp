@@ -20,9 +20,9 @@
 	              <tbody>
 	                  <tr>
 	                  	<td>
-	                        <label>ชื่อผู้เข้าใช้:</label>
+	                        <label><strong>ชื่อผู้เข้าใช้:</strong></label>
 	                        <input type="text" name="j_username" id="j_username" class="input"/>
-	                        <label>รหัสผ่าน:</label>
+	                        <label><strong>รหัสผ่าน:</strong></label>
 	                        <input type="password" name="j_password" id="j_password" class="input"/>
 	                        <center>
 	                        <input value="ตกลง" id="loginBtn" type="button" class="btn btn-primary"/>&nbsp;&nbsp;&nbsp;&nbsp;<input value="เคลียร์"

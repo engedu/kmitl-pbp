@@ -10,40 +10,42 @@
  
 <% Person person = (Person) request.getAttribute("person"); %>
 <form:form modelAttribute="person" action="search.htm" method="POST" name="mainForm">
-   <div class="row">
- 	<div class="one columns"></div>
- 	<div class="five columns">
+   <div class="row entry">
+<!--  	<div class="one columns"></div> -->
+ 	<div class="six columns">
  		 <div class="pbptableWrapper">
             <div class="pbp-header"> 
             	<table style="width: 100%;">
             		<tr>
             		
-            			<td width="70%;" style="text-align: center;"> 
-            			ข้อมูลส่วนตัว   &nbsp; 
-            		<form:select path="academicYear" cssStyle="width:60px;" > 
-							<form:options items="${person.academicYearList}" itemValue="name" itemLabel="name" />
-						</form:select> 
-						
-
+            			<td width="30%;" style="text-align: center;  vertical-align: middle; height: 50px;"> 
+            			ข้อมูลส่วนตัว  
             			</td>
-            			<td style="text-align: center;">
+            			<td style="text-align: center;  vertical-align: middle;">
+            			 ปีการศึกษา  &nbsp; 
+	            			<form:select path="academicYear" cssStyle="width:20%" > 
+								<form:options items="${person.academicYearList}" itemValue="name" itemLabel="name" />
+							</form:select> 
+						
+<!--             			</td> -->
+<!--             			<td style="text-align: center;  vertical-align: middle;"> -->
             			
-            			<sec:authentication var="principal" property="principal" />
+	            			<sec:authentication var="principal" property="principal" />
+	            			
+	            			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
+	            				 &nbsp;&nbsp;&nbsp;   รอบ  &nbsp; 
+	            				 <form:select path="evaluateRound"  cssStyle="width:20% " onchange="initAcademic();"> 
+									<form:options items="${person.evaluateRoundList}" itemValue="name" itemLabel="name" />
+								</form:select> 
+	            			</c:if>
+	            			
+<%-- 	            			 <c:if test="${principal.personProfile.employeeType != 'ข้าราชการ' }">   --%>
+	            			 
+<%-- 	            			</c:if> --%>
             			
-            			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
-            				 &nbsp;&nbsp;&nbsp;   รอบ  &nbsp; 
-            				 <form:select path="evaluateRound" > 
-							<form:options items="${person.evaluateRoundList}" itemValue="name" itemLabel="name" />
-						</form:select> 
-            			</c:if>
-            			
-            			 <c:if test="${principal.personProfile.employeeType != 'ข้าราชการ' }">  
-            			 
-            			</c:if>
-            			
-            			 	<a rel="notLoading" onclick="initAcademic();" > 
-							 <input value="ผลประเมิน" class="btn btn-primary" type="button" onclick="#">
-							</a>
+<!--             			 	<a rel="notLoading" onclick="initAcademic();" >  -->
+<!-- 							 <input value="ผลประเมิน" class="btn btn-primary" type="button" onclick="#"> -->
+<!-- 							</a> -->
             			
             			</td>
             		</tr>
@@ -52,72 +54,72 @@
 	<table class="pbp-table">
 		<tbody>
 			<tr height="410px">
-				<td width="30%" style="border-center: 1px solid white; margin-right: 1px;" valign="top" >
+				<td width="30%" style="border-center: 1px solid white; margin-right: 1px;" text-align: center; valign="top" >
 		 			<img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2" width="90px;" height="100px;">
 				
 				<br><br><br><br>
-								<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editProfile.htm?personId=<c:out value="${person.personId}"/>"> 
+					<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/editProfile.htm?personId=<c:out value="${person.personId}"/>"> 
 					
 					แก้ไขรูปประจำตัว 
 					
 					</a>
 				</td>
 		
-				<td valign="top" style="padding-left: 15px;" colspan="2">
-			<table width="100%"> 
-				<tr>
-					<td class="tdFirst">ชื่อสกุล (ไทย): ${person.titleName}  ${person.thaiName} ${person.thaiSurname}</td> 
-				</tr>
- 
-				<tr>
-					<td class="tdFirst">สังกัด:  ${person.facultyDesc}</td>
-					 
-				</tr>
-				<tr>
-					<td class="tdFirst">ส่วนงาน:${person.departmentDesc}</td>
-					 
-				</tr>
-				<tr>
-					<td class="tdFirst">ประเภท: ${person.employeeType}  </td>
-					 
-				</tr> 
-				<tr>
-					<td class="tdFirst">เลขที่อัตรา: ${person.rateNo}  </td>
-					 
-				</tr> 				
-				  <tr>				
-					<td class="tdFirst">ตำแหน่งงาน:  ${person.academicRank}</td>
-					 		 
-				</tr>	
-								  <tr>				
-					<td class="tdFirst">วุฒิการศึกษา: ${person.maxEducation}</td>
-					 		 
-				</tr>	
-				<tr>
+				<td valign="top" style="padding: 10px;" colspan="2">
+					<table width="100%" id="profile"> 
+						<tr>
+							<td class="tdFirst">ชื่อสกุล (ไทย): ${person.titleName}  ${person.thaiName} ${person.thaiSurname}</td> 
+						</tr>
+		 
+						<tr>
+							<td class="tdFirst">สังกัด:  ${person.facultyDesc}</td>
+							 
+						</tr>
+						<tr>
+							<td class="tdFirst">ส่วนงาน:${person.departmentDesc}</td>
+							 
+						</tr>
+						<tr>
+							<td class="tdFirst">ประเภท: ${person.employeeType}  </td>
+							 
+						</tr> 
+						<tr>
+							<td class="tdFirst">เลขที่อัตรา: ${person.rateNo}  </td>
+							 
+						</tr> 				
+						  <tr>				
+							<td class="tdFirst">ตำแหน่งงาน:  ${person.academicRank}</td>
+							 		 
+						</tr>	
+										  <tr>				
+							<td class="tdFirst">วุฒิการศึกษา: ${person.maxEducation}</td>
+							 		 
+						</tr>	
+						<tr>
+					
+							<td class="tdFirst">Email:${person.email}</td>
+							 
+		                </tr>
+		                
+		     
+		
+						
+										<tr>
+							<td align="center">
+		<!-- 						<input value="แก้ไข" class="btn btn-primary" type="button" onclick="edit();"> -->
+								&nbsp;
+								<br><br> 
+								<!-- 
+								<a href="#" onclick="detail();">More >></a>
+								 -->
+								 
+							 
 			
-					<td class="tdFirst">Email:${person.email}</td>
-					 
-                </tr>
-                
-     
-
-				
-								<tr>
-					<td align="center">
-<!-- 						<input value="แก้ไข" class="btn btn-primary" type="button" onclick="edit();"> -->
-						&nbsp;
-						<br><br> 
-						<!-- 
-						<a href="#" onclick="detail();">More >></a>
-						 -->
-						 
-					 
-	
-					</td>
-				</tr>			
-			</table>
-		</td>
-	</tr>			
+							</td>
+						</tr>			
+					</table>
+						</td>
+					</tr>			
 					
 				</tbody> 
 			</table> 
@@ -125,24 +127,17 @@
 	</div>
 <!-- 	</td>
  	<td valign="top"> -->
- 	<div class="five columns">
+ 	<div class="six columns">
  	 		 <div class="pbptableWrapper">
             <div class="pbp-header">
                 <table style="width: 100%;">
             		<tr>
-            			<td width="100%;">					
-	            			
-	            			
-	           			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
-            		<!--  รอบที่   1  -->	
-            			</c:if>
-            		   
-							คะแนน รวม  ${person.pBPWorkTypeWrapper.totalMark}
-				
-							 
-							 
-						</td>
-            			<td>
+							<td width="100%;" style="text-align: right; vertical-align: middle; height: 50px;">
+								<c:if
+									test="${principal.personProfile.employeeType == 'ข้าราชการ' }">
+									<!--  รอบที่   1  -->
+								</c:if> คะแนนรวม  = ${person.pBPWorkTypeWrapper.totalMark}</td>
+							<td>
             						   <a rel="notLoading" onclick="initAcademicWork();" > 
 							 	<input value="ดูรายละเอียดการประเมิน" class="btn btn-primary" type="button" onclick="#">
 								 </a>
@@ -183,7 +178,7 @@
            	</tr>
 			<tr>
 				<th  class="thLast" width="250px;">   ประเภทภาระงาน      </th> 		 
- 				<th   class="thFirst" style="width: 80px;">ระดับคะแนน </th> 				 
+ 				<th   class="thFirst" style="width: 80px;">ระดับคะแนน (คะแนน) </th> 				 
 			</tr> 
 		</thead>		
 		<tbody>
@@ -211,8 +206,8 @@
 			</c:forEach>
 			
 			<tr>
-				<th  class="thLast"  align="right">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
- 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalMark} คะแนน </th>
+				<th  class="thLast" style="text-align: right;">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
+ 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalMark} </th>
 			</tr>	
 			
 	 					

@@ -10,6 +10,8 @@
 
 <form:form modelAttribute="academicKPIWrapper" action="edit.htm" method="POST" name="mainForm"> 	 
 <form:hidden path="academicYear"/>
+<div class="post"> 
+<div class="entry">  
 
 <div class="row">
     <div class="col-md-12">
@@ -94,7 +96,10 @@
 		       </c:forEach>   
 		       
 		       	 </tbody>		   	   	
-			</table> 
+			</table>
+			
+	  </div>
+</div>		 
 </form:form>
  <script type="text/javascript">
     $(document).ready(function() {
