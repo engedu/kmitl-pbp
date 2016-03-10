@@ -195,11 +195,13 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		String sql =" select *  from pbp_work_type where academic_year ='"+academicYear+"' and faculty_code='"+facultyCode+"'" ;  
 		
-		logger.info(" getByAcademicYear sql:"+sql);
+		logger.info(" ### [1] pbp_work_type #### getByAcademicYear sql:"+sql);
 		
 		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	
 		
 		try{
+			
+		/**### [1] pbp_work_type ----*/	
 		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	 
 		for(PBPWorkType tmp:pBPWorkTypeList){
 			//String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
@@ -223,90 +225,62 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					
 					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" " +
 							" and academic_year='"+tmp.getAcademicYear()+"' and user_name='"+userName+"' and create_date BETWEEN '"+startTimeStamp+"' AND '"+endTimeStamp+"'"; 
-					//BETWEEN '2013-03-26 00:00:01' AND '2013-03-26 23:59:59'
-					logger.info(" sqlMap:"+sqlMap);
-					
-					List<AcademicKPIUserMapping>	academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
+					logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
+					List<AcademicKPIUserMapping> academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
 					
 					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
 						
 						logger.info(" Found academic_kpi_user_mapping for worktype code:"+tmp.getCode()+"  username :"+userName+" academicYear:"+academicYear+" list below ");
 						for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){
-							logger.info("  "+mappingTmp.getKpiUserMappingId());
-						}
-						
-						for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){
-							
-							String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
-							//logger.info(" sqlkpi:"+sqlkpi);
-							 
 							
 							try{
+								
+								String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
+								logger.info(" ### [3] academic_kpi --####");
 								 AcademicKPI  academicKPI  = this.jdbcTemplate.queryForObject(sqlkpi,	new AcademicKPIMapper() );
 								 mappingTmp.setAcademicKPI(academicKPI);
 								 
+								 	
+							 	logger.info(" ### [4] academic_kpi_attribute_value --####");
+								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
+								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+								try{
+									academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
+									logger.info(" Found Attribute list for Usermaping id :"+mappingTmp.getKpiUserMappingId()+" size:"+ academicKPIAttributeValueList.size());
+								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+									ex.printStackTrace();
+								} 
+								mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
 								 
-									String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
-									List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
-									try{
-										//logger.info(" sqlAttributeValue:"+sqlAttributeValue);
-										academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
-										logger.info(" Found Attribute list for Usermaping id :"+mappingTmp.getKpiUserMappingId()+" size:"+ academicKPIAttributeValueList.size());
-									}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-										ex.printStackTrace();
-									} 
-									
-								 
-									mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
-									
-									
-									
-								//	String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+mappingTmp.getAcademicKPICode()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
-									String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
-									
-									List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
-									try{
-										//logger.info(" sqlAttribute:"+sqlAttribute);
-										academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+								logger.info(" ### [5] academic_kpi_attribute --####");	
+								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+								try{
+									academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+									ex.printStackTrace();
+								} 									
+								
+								for(AcademicKPIAttributeValue attributeValueTmp: academicKPIAttributeValueList){
+									//logger.info("  Start set is calculate  attributeName  :"+attributeValueTmp.getName() ); 
+									for(AcademicKPIAttribute attributeTmp:academicKPIAttributeList){
+										String isCalculate = attributeTmp.getIsCalculate();
+										//String isValidateNumber= attributeTmp.getIsCalculate();
+										String attributeName = attributeTmp.getName();
 										
-									}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-										ex.printStackTrace();
-									} 									
-									
-									
-									for(AcademicKPIAttributeValue attributeValueTmp: academicKPIAttributeValueList){
-										//logger.info("  Start set is calculate  attributeName  :"+attributeValueTmp.getName() ); 
-										for(AcademicKPIAttribute attributeTmp:academicKPIAttributeList){
-											String isCalculate = attributeTmp.getIsCalculate();
-											//String isValidateNumber= attributeTmp.getIsCalculate();
-											
-		
-											
-											String attributeName = attributeTmp.getName();
-											
-											//logger.info("   attributeName  :"+attributeName +"  isCalculate:"+isCalculate ); 
-											
-				if(attributeName!=null){
-												
-											 
-										String attributeValueName = attributeValueTmp.getName();
-										if(attributeName.equalsIgnoreCase(attributeValueName)){
-											if("Y".equalsIgnoreCase(isCalculate)){
-												//logger.info(" attributeValueName:"+attributeValueName+"   Found is calculate Y , So set Y");
-												attributeValueTmp.setIsCalculate("Y");
+										if(attributeName!=null){
+											String attributeValueName = attributeValueTmp.getName();
+											if(attributeName.equalsIgnoreCase(attributeValueName)){
+												if("Y".equalsIgnoreCase(isCalculate)){
+													attributeValueTmp.setIsCalculate("Y");
+												}
 											}
-											}else{
-												//logger.info(" attributeValueName:"+attributeValueName+"  Not equal with attributeName :"+attributeName);
-											}
-										
 										}else{
 											logger.info(" Found Attribute Name null");
 										}
-										}
 									}
-									
-									
-									mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
+								}
+								mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
 								 
 							}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 								ex.printStackTrace();
@@ -329,6 +303,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		// Callculate 
 		
+		logger.info("  ##########  ##########   ##########  Start Calculate   ##########  ##########  ##########" );
+
 		BigDecimal totalMark = new BigDecimal(0.00);
 		BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
 		BigDecimal totalPercentMark = new BigDecimal(0.00);
