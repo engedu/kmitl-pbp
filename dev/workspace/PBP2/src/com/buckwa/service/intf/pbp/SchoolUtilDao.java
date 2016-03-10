@@ -1,5 +1,8 @@
 package com.buckwa.service.intf.pbp;
 
+import java.util.List;
+import java.util.Map;
+
 
 
 public interface SchoolUtilDao {
@@ -15,5 +18,7 @@ public interface SchoolUtilDao {
 	public String  getDepartmentByUserName(String userName,String academicYear );
 	public String  getRegIdFromUserName(String courseId ,String academicYear );
 	public String  getFacutyByUserName(String userName,String academicYear );
+
+	public List<Map<String, Object>> getAllMapUnitDesc();
 	
 }

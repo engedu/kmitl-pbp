@@ -1,7 +1,14 @@
 package com.buckwa.dao.impl.pbp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +20,10 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	public String getCurrentAcademicYear () {  
 			String currentAcademicYearSQL =" SELECT name FROM academic_year where year_status='Y' ";								 
@@ -101,10 +112,38 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 			ex.printStackTrace();
 		}
 	
-	return returnStr;
-}
+		return returnStr;
+	}
 	
-	 
+	public List<Map<String, Object>> getAllMapUnitDesc() {  
+		List<Map<String, Object>> map = new ArrayList<>();
+		try{
+			String sql =" SELECT code, name FROM academic_unit ";
+			map = jdbcTemplate.queryForList(sql);
+			
+		}catch(org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		}
+		return map;
+	}
+	
+	public static void main(String arg[]){
+		
+		ApplicationContext context =  new ClassPathXmlApplicationContext("jdbc_main_connect.xml");
+		SchoolUtilDaoImpl impl = new SchoolUtilDaoImpl();
+		impl.setJdbcTemplate( (JdbcTemplate) context.getBean("jdbcTemplateMain"));
+		
+		List<Map<String, Object>> mapList = impl.getAllMapUnitDesc();
+		
+		Map<Object, String> map = new HashMap<>();
+		for (Map<String, Object> m : mapList) {
+			map.put(m.get("code")+"", (String)m.get("name"));
+		}
+		
+		System.out.println(map.get("1"));
+		
+		
+	}
  
 }
 	

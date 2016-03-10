@@ -1,19 +1,25 @@
 package com.buckwa.util.school;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.buckwa.domain.validator.pam.KpiYearMappingValidator;
 import com.buckwa.service.intf.pbp.SchoolUtilDao;
-import com.buckwa.util.PAMConstants;
 
 @Service("schoolUtil") 
 public class SchoolUtil {
 	
 	@Autowired
 	private SchoolUtilDao schoolUtilDao;
+	
+	private static Map<String, String> UNIT_NAP;
+	
+	
 	private static Logger logger = Logger.getLogger(SchoolUtil.class);
 	public static String getYearLevelFromStudentCode(String studentCode,String academicYear ){
 		String returnValue ="0";
@@ -147,7 +153,12 @@ public class SchoolUtil {
 		String returnValue ="";
 		try{
 			
-			returnValue= schoolUtilDao.getUnitDescMyCode(code,academicYear);
+//			returnValue= schoolUtilDao.getUnitDescMyCode(code,academicYear);
+			
+			returnValue= getUNIT_NAP().get(code);
+			
+			logger.info("> UnitCode  : "+code+", UnitDesc  : "+returnValue);
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -187,17 +198,16 @@ public class SchoolUtil {
 		
 		return returnValue;
 	}
-	
- 
-	
-	public static void main(String arg[]){
-		
-		String studenCode ="53011468";
-		String academicYear ="2556";
-		
-		String yearLevel = getYearLevelFromStudentCode(studenCode,academicYear);
-		
-		logger.info(" ####### yearLevel:"+academicYear.substring(2, 4));
-		
+
+	public Map<String, String> getUNIT_NAP() {
+		if(null==UNIT_NAP){
+			List<Map<String, Object>> mapList = schoolUtilDao.getAllMapUnitDesc();
+			Map<String, String> map = new HashMap<>();
+			for (Map<String, Object> m : mapList) {
+				map.put(m.get("code")+"", (String)m.get("name"));
+			}
+			UNIT_NAP = map;
+		}
+		return UNIT_NAP;
 	}
 }
