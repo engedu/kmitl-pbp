@@ -43,6 +43,27 @@ public class AcademicYearServiceImpl implements AcademicYearService {
 		return response;
 	}
 	
+	@Override	
+	public BuckWaResponse getFullAcademicYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+
+				AcademicYearWrapper academicYearWrapper= ( AcademicYearWrapper)academicYearDao.getFullAcademicYear();
+				 
+				 response.addResponse("academicYearWrapper",academicYearWrapper);				
+			 
+
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}	
+	
 	
 	@Override
 	public BuckWaResponse getByAcademicYear(BuckWaRequest request) {

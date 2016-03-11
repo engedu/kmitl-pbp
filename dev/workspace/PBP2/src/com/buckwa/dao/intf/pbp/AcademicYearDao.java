@@ -10,6 +10,8 @@ public interface AcademicYearDao {
 	
 
 	public AcademicYearWrapper getCurrentAcademicYear( );
+	public AcademicYearWrapper getFullAcademicYear( );
+	
 	public AcademicYearWrapper getByAcademicYear (String academicYear) ;
 	
 	public AcademicYearWrapper  ajustYearIncrease();

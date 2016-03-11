@@ -81,7 +81,7 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		if(academicYear!=null){
 			
 			String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+currentAcademicYearStr+"'"   ;  
-			//logger.info(" sqlRound:"+sqlRound);
+			logger.info(" sqlRound:"+sqlRound);
 			List<AcademicYearEvaluateRound> academicYearEvaluateRoundList  = this.jdbcTemplate.query(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 			
 			for(AcademicYearEvaluateRound roundTmp: academicYearEvaluateRoundList){
@@ -113,6 +113,71 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		
 		return academicYearWrapper;
 	}
+	
+
+	@Override
+	public AcademicYearWrapper getFullAcademicYear( ) {		
+		
+		String yearThai = academicYearUtil.getSystemYearThai();
+		logger.info(" yearThai:"+yearThai);
+		String sql =" select *  from academic_year where year_status ='Y'" ; 
+		logger.info(" sql:"+sql);
+		AcademicYear academicYear = this.jdbcTemplate.queryForObject(sql,	new AcademicYearMapper() );				
+		AcademicYearWrapper academicYearWrapper = new AcademicYearWrapper();
+		academicYearWrapper.setAcademicYear(academicYear);
+		
+		long timeEnd = academicYear.getEndDate().getTime();
+		long systemTime = System.currentTimeMillis();
+		
+		if(timeEnd>systemTime){
+			academicYear.setCanEdit("N");
+		}else{
+			academicYear.setCanEdit("Y");
+		}
+	
+		
+		String currentAcademicYearStr = academicYear.getName();
+		int nextYear = Integer.parseInt(currentAcademicYearStr)+1;
+		int preYear = Integer.parseInt(currentAcademicYearStr)-1;
+		academicYearWrapper.setNextAcademicYear(nextYear+"");
+		academicYearWrapper.setPreviousAcademicYear(preYear+"");
+		
+		if(academicYear!=null){
+			
+			String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+currentAcademicYearStr+"'"   ;  
+			logger.info(" sqlRound:"+sqlRound);
+			List<AcademicYearEvaluateRound> academicYearEvaluateRoundList  = this.jdbcTemplate.query(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+			
+			for(AcademicYearEvaluateRound roundTmp: academicYearEvaluateRoundList){
+				long round1EndTime = roundTmp.getRound1EndDate().getTime();
+				 systemTime = System.currentTimeMillis();
+				
+				if(round1EndTime>systemTime){
+					roundTmp.setCanEditRound1("N");
+				}else{
+					roundTmp.setCanEditRound1("Y");
+				}
+				
+				if(roundTmp.getRound2EndDate()!=null){
+					roundTmp.setCanEditRound2("N");
+					long round2EndTime = roundTmp.getRound2EndDate().getTime();
+					if(round2EndTime<systemTime){
+						roundTmp.setCanEditRound2("Y");
+					}else{
+						roundTmp.setCanEditRound2("N");
+					}
+					
+				}
+			}
+			academicYearWrapper.setAcademicYearEvaluateRoundList(academicYearEvaluateRoundList);
+		}
+		
+	 
+		
+		
+		return academicYearWrapper;
+	}
+	
 	
 	@Override
 	public AcademicYearWrapper getByAcademicYear( final String academicYearStr) {		 	

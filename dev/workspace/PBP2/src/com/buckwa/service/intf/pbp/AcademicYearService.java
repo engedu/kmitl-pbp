@@ -6,6 +6,7 @@ import com.buckwa.domain.common.BuckWaResponse;
 
 public interface AcademicYearService {
 	public BuckWaResponse getCurrentAcademicYear(BuckWaRequest request);
+	public BuckWaResponse getFullAcademicYear(BuckWaRequest request);
 	public BuckWaResponse getByAcademicYear(BuckWaRequest request);
 	public  BuckWaResponse ajustYearIncrease(BuckWaRequest request);
 	public BuckWaResponse getByYear(BuckWaRequest request);

@@ -42,7 +42,7 @@ public class AcademicYearController {
 		mav.setViewName("academicYear");
 		try{
 			BuckWaRequest request = new BuckWaRequest();	 
-			BuckWaResponse response = academicYearService.getCurrentAcademicYear(request);
+			BuckWaResponse response = academicYearService.getFullAcademicYear(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				AcademicYearWrapper academicYearWrapper = (AcademicYearWrapper)response.getResObj("academicYearWrapper");
 				mav.addObject("academicYearWrapper", academicYearWrapper);	
