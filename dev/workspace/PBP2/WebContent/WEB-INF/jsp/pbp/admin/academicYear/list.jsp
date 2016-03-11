@@ -105,72 +105,7 @@
 		
 		<br><br>
 	
-		 <div class="pbptableWrapper">
-		 	<table class="pbp-table">
-		 		<thead>
-		 		<tr><th colspan="4">
-            		<div class="pbp-header"> รอบการประเมิน  ประจำปี  ${academicYearWrapper.academicYear.name}  </div>
-             	</th></tr>
-             	</thead>
-			
-				<tbody>
-				
-				<!--   
-				
-				<c:forEach items="${academicYearWrapper.academicYearEvaluateRoundList}" var="domain" varStatus="status">
-                     <tr style="border-top: 1px solid #e1e1e1;">
-					<td class="tdFirst">${domain.evaluateTypeDesc}</td>
-					
-					 <c:if test="${domain.evaluateType=='1'}"> 
-					<td class="tdFirst"   align="left">รอบ 1  &nbsp; 
-						${domain.round1StartDateShortThaiStr}    &nbsp; -  &nbsp; ${domain.round1EndDateShortThaiStr} 
-					</td>					 
-					<td class="tdFirst"   align="left">รอบ 2  &nbsp; 
-						${domain.round2StartDateShortThaiStr}   &nbsp; -  &nbsp; ${domain.round2EndDateShortThaiStr}   
-					</td>					 
-					 </c:if>
-					 
-					 <c:if test="${domain.evaluateType!='1'}"> 
-					 <td class="tdFirst" colspan="2" align="left">รอบ 1  &nbsp; 
-					 	${domain.round1StartDateShortThaiStr}   &nbsp; -  &nbsp; ${domain.round1EndDateShortThaiStr} 
-					 </td>
-					 </c:if> 
-				     <td>  
-				    
-				     	 <a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicYear/editDateEvaluateRound.htm?academicYear=<c:out value="${academicYearWrapper.academicYear.name}"/>&evaluateType=<c:out value="${domain.evaluateType}"/>"><span class="lsf-icon colororange" title="gear"></a>
-				      
-				     </td>					 
-					 
-					</tr>
-				</c:forEach>	 
-				 -->	
-	
-	
-					<c:forEach items="${academicYearWrapper.academicYearEvaluateRoundList}" var="domain" varStatus="status">
-                     <tr style="border-top: 1px solid #e1e1e1;"> 
-					 <c:if test="${domain.evaluateType!='1'}"> 
-					 
-					 <td class="tdFirst" colspan="3" align="left">  &nbsp; 
-					 	${domain.round1StartDateShortThaiStr}   &nbsp; -  &nbsp; ${domain.round1EndDateShortThaiStr} 
-					 </td>
-					 
-				     <td>  
-				    
-				     	 <a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicYear/editDateEvaluateRound.htm?academicYear=<c:out value="${academicYearWrapper.academicYear.name}"/>&evaluateType=<c:out value="${domain.evaluateType}"/>"><span class="lsf-icon colororange" title="gear"></a>
-				      
-				     </td>						 
-					 </c:if> 
-				 
-					 
-					</tr>
-				</c:forEach>				
-					 
-					
-				</tbody>				
  
-			</table>
-			 
-		</div> 
 	</div>
 </div>
 </form:form>
