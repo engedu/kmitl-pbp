@@ -104,7 +104,7 @@
              
 			<table style="width: 600px; margin-left: 15%;"> 
  	 					<tr>
-					<td class="tdFirst">แนบเอกสารประกอบการพิจรณา :  </td>
+					<td class="tdFirst">แนบเอกสารประกอบการพิจารณา :  </td>
 					<td class="tdLast">						
 						<form:input path="fileData" id="image" type="file" cssClass="input"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input class="btn btn-primary" value="&#3629;&#3633;&#3614;&#3650;&#3627;&#3621;&#3604;" type="button"

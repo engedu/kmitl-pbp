@@ -121,7 +121,7 @@
          <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">     
 			<table class="pbp-table">
  	 					<tr>
-					<td class="tdFirst">แนบเอกสารประกอบการพิจรณา :  </td>
+					<td class="tdFirst">แนบเอกสารประกอบการพิจารณา :  </td>
 					<td class="tdLast">						
 						<form:input path="fileData" id="image" type="file" cssClass="input"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='CREATE'}">
