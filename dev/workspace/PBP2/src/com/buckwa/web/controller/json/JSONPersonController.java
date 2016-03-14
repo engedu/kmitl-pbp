@@ -95,7 +95,7 @@ public class JSONPersonController {
 					request.put("academicYear", academicYear);
 					request.put("userName", BuckWaUtils.getUserNameFromContext());
 					request.put("round", person.getEvaluateRound());
-					request.put("employeeType", person.getEmployeeTypeNo());
+					request.put("employeeType", person.getEmployeeType());
 					request.put("facultyCode", facultyCode);
 	
 					// response = pBPWorkTypeService.getByAcademicYear(request);

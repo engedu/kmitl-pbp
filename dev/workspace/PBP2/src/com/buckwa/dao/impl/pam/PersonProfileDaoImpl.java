@@ -703,6 +703,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setThaiSurname(rs.getString("thai_surname"));
 			domain.setRateNo(rs.getString("rate_no"));
 			domain.setEmployeeType(rs.getString("employee_type"));
+			domain.setEmployeeTypeNo(rs.getString("employee_type")); // set for employeeType // FIXME
 			domain.setMaxEducation(rs.getString("max_education"));
 			domain.setEmail(rs.getString("email"));
 			

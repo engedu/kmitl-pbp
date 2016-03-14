@@ -329,8 +329,6 @@ public class PersonProfileController {
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.PERSON_INIT);
 		try {
 			
-
-			
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("viewUserProfile  username :"+user.getUsername());
 
@@ -376,8 +374,6 @@ public class PersonProfileController {
 					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
 				}	
 				
-				
-	 
 				
 				List<String> axisLabelList =new ArrayList();
 				List<Number> dataList = new ArrayList();
@@ -425,58 +421,57 @@ public class PersonProfileController {
 				}
 
 				
-		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
+//		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
 		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(80, 50, 50, 80, 60,80));
 		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(0.76, 51.28,55,15.4, 5,0.76));
 		       
-		        Color plotColor = Color.newColor("CC3366");
-		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
-		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
-		        plot.setColor(plotColor);
-		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
-		        RadarChart chart = GCharts.newRadarChart(plot);
+//		        Color plotColor = Color.newColor("CC3366");
+//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
+//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
+//		        plot.setColor(plotColor);
+//		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
+//		        RadarChart chart = GCharts.newRadarChart(plot);
 		      //  chart.setTitle("����������ҹ", BLACK, 20);
-		        chart.setSize(500, 500);
-		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
-		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
-		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
-		        chart.addRadialAxisLabels(radialAxisLabels);
-		        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80,100));
-		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
-		        chart.addConcentricAxisLabels(contrentricAxisLabels);
-		        String url = chart.toURLString();		
+//		        chart.setSize(500, 500);
+//		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
+//		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
+//		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
+//		        chart.addRadialAxisLabels(radialAxisLabels);
+//		        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80,100));
+//		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
+//		        chart.addConcentricAxisLabels(contrentricAxisLabels);
+//		        String url = chart.toURLString();		
 		        
 		 	
-				byte[] b = url.toString().getBytes("UTF-8");    //  
-				String newTxt = new String(b, "UTF-8");
+//				byte[] b = url.toString().getBytes("UTF-8");    //  
+//				String newTxt = new String(b, "UTF-8");
 				
 				 
-		        logger.info(" radarURL :"+newTxt);
-		        
-		       String radarURL = "http://chart.apis.google.com/chart?" +
-		        		"cht=r&" +
-		        		"chxt=y,x&" +
-		        		"chls=4,1,0&" +
-		        		"chco=CC3366&" +
-		        		"chs=400x400&" +
-		        		"chts=000000,20&" +
-		        		"chxr=0,0.0,100.0&" +
-		        		"chd=e:zMgAgAzMmZzM&" +
-		        		"chtt=&" +
-		        		"chxp=0,0,20,40,60,80,100&" +
-		        		"chxs=0,000000,12,1|1,000000,12,0&" +
-		        		"chxl=1:|�Ԫҡ��|�ҹ�Ѳ���Ԫҡ��|�ҹ�Ԩ��|�ҹ��ԡ���Ԫҡ��|�ҹ�ӹغ��ا��Ż&" +
-		        		"chm=s,CC3366,0,-1,12,0|s,FFFFFF,0,-1,8,0";
-		        
-		       
-		 
-		       logger.info(" radarURL Test :"+radarURL);
-		      
-		        person.setRadarURL(newTxt)	;		
-				
-				
-				
-				
+//		        logger.info(" radarURL :"+newTxt);
+//		        
+//		       String radarURL = "http://chart.apis.google.com/chart?" +
+//		        		"cht=r&" +
+//		        		"chxt=y,x&" +
+//		        		"chls=4,1,0&" +
+//		        		"chco=CC3366&" +
+//		        		"chs=400x400&" +
+//		        		"chts=000000,20&" +
+//		        		"chxr=0,0.0,100.0&" +
+//		        		"chd=e:zMgAgAzMmZzM&" +
+//		        		"chtt=&" +
+//		        		"chxp=0,0,20,40,60,80,100&" +
+//		        		"chxs=0,000000,12,1|1,000000,12,0&" +
+//		        		"chxl=1:|�Ԫҡ��|�ҹ�Ѳ���Ԫҡ��|�ҹ�Ԩ��|�ҹ��ԡ���Ԫҡ��|�ҹ�ӹغ��ا��Ż&" +
+//		        		"chm=s,CC3366,0,-1,12,0|s,FFFFFF,0,-1,8,0";
+//		        
+//		       
+//		 
+//		       logger.info(" radarURL Test :"+radarURL);
+//		      
+//		        person.setRadarURL(newTxt)	;		
+//				
+				/**----- Set Session --- */
+				httpRequest.getSession().setAttribute("personProFileSession" , person);
 				
 			}
 			else {
@@ -534,6 +529,9 @@ public class PersonProfileController {
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
 					pBPWorkTypeWrapper.setAcademicYear(selectAcademicYear);
 					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
+					/**----- Set Session --- */
+					httpRequest.getSession().setAttribute("personProFileSession" , person);
+					
 				}					
 				 
 			}
@@ -588,6 +586,9 @@ public class PersonProfileController {
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
 					pBPWorkTypeWrapper.setAcademicYear(selectAcademicYear);
 					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
+					/**----- Set Session --- */
+					httpRequest.getSession().setAttribute("personProFileSession" , person);
+					
 				}					
 				 
 			}
