@@ -141,20 +141,22 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		// Get Start ,End Date 
 		
-		//String evalType = "1";
+		String evalType = "1";
 		
-		//if(employeeType.equalsIgnoreCase("����Ҫ���")){
+		if(employeeType.equalsIgnoreCase("ข้าราชการ")){
+		//if(employeeType.equalsIgnoreCase("2")){
 			
-		//}else{
-		//	evalType ="2";
-		//}
+	 
+		}else{
+			evalType ="2";
+		}
 		
 		// ######## Start academic_year, academic_evaluate_round
-		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
+		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+evalType+"'"   ;  
 		logger.info(" sqlRound:"+sqlRound);
 		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 		
-		 //logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		 logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
 		 
 		 long startTime =0l;
 		 long endTime =0l;
@@ -162,7 +164,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		 Timestamp startTimeStamp = null;
 		 Timestamp endTimeStamp = null;
 		 
-		 if(employeeType.equalsIgnoreCase("1")){
+		 if(employeeType.equalsIgnoreCase("ข้าราชการ")){
 			 if("1".equalsIgnoreCase(round)){
 				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
 				 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
@@ -477,8 +479,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase(totalPercentMarkComareBase.setScale(2));
 			
 			// 1- Because mark_rank keep 0,1
-			 int employeeTypeGetSalary = Integer.parseInt(employeeType) -1;
-			pBPWorkTypeWrapper.setIncreaseSalaryRate(getIncreaseSalaryRate(totalPercentMarkComareBase,academicYear,employeeTypeGetSalary+"",round));
+			// int employeeTypeGetSalary = Integer.parseInt(employeeType) -1;
+			//pBPWorkTypeWrapper.setIncreaseSalaryRate(getIncreaseSalaryRate(totalPercentMarkComareBase,academicYear,employeeTypeGetSalary+"",round));
 			pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
 			
 			
