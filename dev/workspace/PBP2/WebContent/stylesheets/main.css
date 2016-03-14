@@ -849,11 +849,16 @@ ul.flyout li a, .nav-bar li ul li a {
 .td-detail{
 	margin: 0px;
 	padding: 0px;
+	border-right: 0px;
 }
 
 .btn{
 	font-size: 18px;
  	padding: 5px 20px;
+}
+
+.k-header{
+	text-align: center !important;	
 }
 
 /* #profile tbody tr td { */

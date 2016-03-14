@@ -38,8 +38,8 @@
 					<c:out value="${domain.thaiName}"/>  <c:out value="${domain.thaiSurname}"/>  
 	 
 				</td>
-				<td class="thLast" style="border-bottom: 1px solid #e1e1e1; "  colspan="2">  
-				<table class="pbp-table" ">
+				<td class="td-detail" style=""  colspan="2">  
+				<table class="pbp-table noshadow">
 					 <c:forEach items="${domain.academicKPIUserMappingList}" var="domain2" varStatus="status2">
 					<tr>
 					<td class="tdBoth" style="font-size: 12px;"  > 
@@ -57,7 +57,7 @@
 					</td>
 					</td>
  
-					<td class="tdBoth" style="font-size: 12px; width: 150px;" >
+					<td style="font-size: 12px; width: 150px;" >
 					<c:if test="${domain2.status=='CREATE'}">
 					 
 					  <a rel="notLoading" href="<%=request.getContextPath()%>/head/pbp/viewWork.htm?kpiUserMappingId=<c:out value="${domain2.kpiUserMappingId}"/>">  

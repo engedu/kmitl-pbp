@@ -132,7 +132,7 @@
             <div class="pbp-header">
                 <table style="width: 100%;">
             		<tr>
-							<td width="100%;" style="text-align: right; vertical-align: middle; height: 50px;">
+							<td width="100%;" style="text-align: right; vertical-align: middle; height: 50px; font-size: 22px;font-weight: bold;">
 								<c:if
 									test="${principal.personProfile.employeeType == 'ข้าราชการ' }">
 									<!--  รอบที่   1  -->
@@ -171,9 +171,9 @@
 			<tr>
            		<th align="left">    <span class="lsf-icon colororange" title="list"></span>ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  </th>
            		<th > 
-           		<a rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">            			 
-						<input value="พิมพิ์รายงานประจำปี" class="btn btn-primary" type="button" onclick="#">
-						</a>
+<%--            		<a rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">            			  --%>
+<!-- 						<input value="พิมพ์รายงานประจำปี" class="btn btn-primary" type="button" onclick="#"> -->
+<!-- 						</a> -->
            		</th>
            	</tr>
 			<tr>
@@ -206,8 +206,8 @@
 			</c:forEach>
 			
 			<tr>
-				<th  class="thLast" style="text-align: right;">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
- 				<th  class="thLast" colspan="1" style="text-align: center;">   ${person.pBPWorkTypeWrapper.totalMark} </th>
+				<th  class="thLast" style="text-align: right; font-size: 22px;">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
+ 				<th  class="thLast" colspan="1" style="text-align: center; font-size: 22px;">   ${person.pBPWorkTypeWrapper.totalMark} </th>
 			</tr>	
 			
 	 					
