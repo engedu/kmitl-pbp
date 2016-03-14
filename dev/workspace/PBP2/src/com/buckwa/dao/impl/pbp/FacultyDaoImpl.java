@@ -989,7 +989,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	 
 	
 	@Override
-	public void updateTeachTableWS(List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
+	public void updateTeachTableWS(int semester,List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
 		
 		for(com.buckwa.ws.newws.oxm.TeachTable tmp:teachTableList){ 
@@ -1170,7 +1170,8 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							academicKPIUserMapping.setStatus("APPROVED");
 							
-							academicKPIDao.importwork(academicKPIUserMapping);
+							//academicKPIDao.importwork(academicKPIUserMapping);
+							academicKPIDao.importworkTimeTable(semester,academicKPIUserMapping);
 							
 						}
 						

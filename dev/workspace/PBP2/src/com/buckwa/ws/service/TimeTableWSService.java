@@ -360,12 +360,12 @@ public class TimeTableWSService   {
 		//if(teacherIdStr!=null&&teacherIdStr.length()>0){
 		for(Teacher teacherTmp:teacherListIn){
 			//
-			if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
+			//if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
 			//	if(!"10518".equals(teacherTmp.getTeacherIdStr())){
 			//if(!"90508".equals(teacherTmp.getTeacherIdStr())){ // พัชรา
 				
 				
-			}else{
+			//}else{
 				
 				System.out.println("   ##################### FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ############");
 			    String facultyCode = teacherTmp.getFacultyCode();
@@ -394,11 +394,11 @@ public class TimeTableWSService   {
 				if(degree==2){
 				//	System.out.println(" ################################### Found degree 2 size :"+teachTableResponseList.size());
 				}
-				facultyDao.updateTeachTableWS(teachTableResponseList,degree,facultyCode,academicYear);;								
+				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);;								
 			}
 			
 
-		}	 // Debug User
+	//	}	 // Debug User
 		
 	}
 	
