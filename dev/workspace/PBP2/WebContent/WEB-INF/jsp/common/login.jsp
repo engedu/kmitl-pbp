@@ -12,7 +12,7 @@
 			<section class="twelve columns">
 			  <div class="four columns"></div>
 			  <div class="four columns">
-	            <div class="pbptableWrapper">
+	            <div class="pbp-login">
 				<table>
 	              <thead>
 	                  <tr><th><h4><center><span class="lsf-icon colororange" title="key"></span>เข้าสู่ระบบ</center></h4></th></tr>
@@ -36,7 +36,7 @@
 			  </div>
 			  <div class="four columns"></div>
 			</section>
-						<table style="height: 200px;" class="noshadow">
+<!-- 						<table style="height: 200px;" class="noshadow"> -->
 			
 			</table>
 	</div>

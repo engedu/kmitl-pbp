@@ -64,7 +64,7 @@
   font-feature-settings: "liga" 1, "dlig" 1;
 }
 
-body {background: #fafafa}
+body {background: #F5F7F8}
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td ,select
 {
@@ -268,7 +268,7 @@ ul.flyout li a:hover, .nav-bar li ul li a:hover { background: #f18d22; color: #f
 	background: #bcbcbc;
 	color: #fff;
 	font-family: THSarabun, 'Thai Sans Lite', sans-serif;
-/* 	position: fixed; */
+	position: fixed;
     bottom: 0px;
 }
 
@@ -833,7 +833,8 @@ ul.flyout li a, .nav-bar li ul li a {
 }
 
 .entry {
-	background: #fafafa;
+	background: rgb(245, 247, 248);
+/* 	background: #fafafa; */
 	padding-bottom: 20px;
 }
 
@@ -859,6 +860,10 @@ ul.flyout li a, .nav-bar li ul li a {
 
 .k-header{
 	text-align: center !important;	
+}
+
+.pbp-login {
+	padding-top: 5%;
 }
 
 /* #profile tbody tr td { */

@@ -18,7 +18,7 @@
             	<table style="width: 100%;">
             		<tr>
             		
-            			<td width="30%;" style="text-align: center;  vertical-align: middle; height: 50px;"> 
+            			<td width="30%;" style="text-align: center;  vertical-align: middle; height: 50px; font-size: 22px;font-weight: bold;"> 
             			ข้อมูลส่วนตัว  
             			</td>
             			<td style="text-align: center;  vertical-align: middle;">
@@ -54,7 +54,7 @@
 	<table class="pbp-table">
 		<tbody>
 			<tr height="410px">
-				<td width="30%" style="border-center: 1px solid white; margin-right: 1px;" text-align: center; valign="top" >
+				<td width="30%" style="border-center: 1px solid white; margin-right: 1px; text-align: center;" valign="top" >
 		 			<img src="<%=request.getContextPath()%>/servlet/Image?<c:out value="${person.picture}" />" class="img_border" border="2" width="90px;" height="100px;">
 				
 				<br><br><br><br>
