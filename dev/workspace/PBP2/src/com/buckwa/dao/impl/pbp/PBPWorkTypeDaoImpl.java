@@ -143,7 +143,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		String evalType = "1";
 		
-		if(employeeType.equalsIgnoreCase("ข้าราชการ")){
+		if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
 		//if(employeeType.equalsIgnoreCase("2")){
 			
 	 
@@ -164,7 +164,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		 Timestamp startTimeStamp = null;
 		 Timestamp endTimeStamp = null;
 		 
-		 if(employeeType.equalsIgnoreCase("ข้าราชการ")){
+		 if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
 			 if("1".equalsIgnoreCase(round)){
 				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
 				 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
