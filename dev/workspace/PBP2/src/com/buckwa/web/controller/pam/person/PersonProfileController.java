@@ -363,7 +363,8 @@ public class PersonProfileController {
 				request.put("academicYear",selectAcademicYear);
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",round);
-				request.put("employeeType",person.getEmployeeTypeNo());
+				//request.put("employeeType",person.getEmployeeTypeNo());
+				request.put("employeeType",person.getEmployeeType());
 				
 				request.put("facultyCode",person.getFacultyCode());
 				//response = pBPWorkTypeService.getByAcademicYear(request);
