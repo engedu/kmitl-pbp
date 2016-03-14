@@ -339,6 +339,7 @@ public class PersonProfileController {
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				person = (Person) response.getResObj("person");
+				person.setEvaluateRound(round);
 				
 				user.setFirstLastName(person.getThaiName()+" "+person.getThaiSurname());
 				List<Paper> paperList = (List<Paper>) response.getResObj("paperList");
