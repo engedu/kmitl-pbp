@@ -23,6 +23,7 @@ public class AcademicKPI extends BaseDomain {
 	private String specialP2;
 	private String specialP3;
 	private String specialP4;
+	private String specialP5;
 	private String totalStudentFrom;
 	private String totalStudentTo;
 
@@ -55,6 +56,14 @@ public class AcademicKPI extends BaseDomain {
 
 	public String getFacultyCode() {
 		return facultyCode;
+	}
+
+	public String getSpecialP5() {
+		return specialP5;
+	}
+
+	public void setSpecialP5(String specialP5) {
+		this.specialP5 = specialP5;
 	}
 
 	public void setFacultyCode(String facultyCode) {

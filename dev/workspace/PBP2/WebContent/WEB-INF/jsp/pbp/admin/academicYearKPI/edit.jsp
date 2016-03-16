@@ -192,7 +192,7 @@
 						<tr>
 							<td class="tdFirst"> Project Base Learning</td>
 							<td class="tdLast">  
-							<form:select path="specialP4"  >
+							<form:select path="specialP5"  >
 				     			 
 			     			 <form:option value="1" label="ไช่" />
 		     			 <form:option value="2" label="ไม่ไช่" />			     			 

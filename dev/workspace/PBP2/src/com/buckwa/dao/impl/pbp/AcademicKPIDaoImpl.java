@@ -452,7 +452,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			}, 	keyHolder); 	
 		final Long returnid =  keyHolder.getKey().longValue();	
 		
-		logger.info(" ######################### academic_kpi_return_id:"+returnid);
+		//logger.info(" ######################### academic_kpi_return_id:"+returnid);
 		
 		
 		List<AcademicKPIAttributeValue> academicKPIAttributeValueList =finalDomain.getAcademicKPIAttributeValueList();
@@ -469,7 +469,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 					ps.setString(4,finalDomain.getAcademicYear());	 
 					ps.setTimestamp(5, new Timestamp(createDateLong));
 					ps.setString(6, finalDomain.getFromSource());
-					logger.info(" insert  academic_kpi_attribute_value  with academic_kpi_user_mapping_id: "+returnid+"  with attribute name:"+tmp.getName()+"  value:"+tmp.getValue());
+					//logger.info(" insert  academic_kpi_attribute_value  with academic_kpi_user_mapping_id: "+returnid+"  with attribute name:"+tmp.getName()+"  value:"+tmp.getValue());
 					return ps;  
 					}
 				}, 	keyHolder); 				

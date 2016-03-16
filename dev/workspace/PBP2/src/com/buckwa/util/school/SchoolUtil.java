@@ -157,7 +157,7 @@ public class SchoolUtil {
 			
 			returnValue= getUNIT_NAP().get(code);
 			
-			logger.info("> UnitCode  : "+code+", UnitDesc  : "+returnValue);
+			//logger.info("> UnitCode  : "+code+", UnitDesc  : "+returnValue);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();

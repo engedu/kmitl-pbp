@@ -1161,7 +1161,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							logger.info(" ############################### Start Create KPI User Mapping #########################");
 							
-							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
+							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
 							 
 								
 							academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
@@ -1311,7 +1311,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							logger.info(" ############################### Start Create KPI User Mapping #########################");
 							
-							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPI(tmp,subject,"N",academicYear,facultyCode);
+							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,"N",academicYear,facultyCode);
 							
 							academicKPIUserMapping.setStatus("CREATED");
 							
@@ -1369,6 +1369,197 @@ public class FacultyDaoImpl implements FacultyDao {
 				if(academicKPIList!=null&&academicKPIList.size()>0){
 					
 					AcademicKPI zeroKPI = academicKPIList.get(0);
+					
+					
+					String userName =schoolUtil.getUserNameFromRegId(timetable.getTeacherId(),academicYear);
+					
+					
+					returnObj.setAcademicKPICode(zeroKPI.getCode());
+					returnObj.setAcademicYear(zeroKPI.getAcademicYear());
+					returnObj.setUserName(userName);
+					returnObj.setAcademicKPIId(zeroKPI.getAcademicKPIId());
+					returnObj.setWorkTypeCode(zeroKPI.getWorkTypeCode());
+					returnObj.setName(zeroKPI.getName());
+					returnObj.setRatio(100);
+					 
+					
+					//String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+zeroKPI.getCode()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+			
+					String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+zeroKPI.getAcademicKPIId()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+					
+					List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+					try{
+						logger.info(" sqlAttribute:"+sqlAttribute);
+						academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+						
+						logger.info(" ########## Found academicKPIAttributeList size: :"+academicKPIAttributeList.size());
+						
+						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+						
+						 for(AcademicKPIAttribute attTmp:academicKPIAttributeList ){	
+								logger.info(" ##### attTmp.getName():"+attTmp.getName());
+							 
+							 if("ชื่อวิชา".equalsIgnoreCase(attTmp.getName())){	
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 attTmp.setValue(subject.getSubjectTname());
+
+								
+								 attTmp.setIsCalculate("Y");
+								 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectTname());
+								 if( subject.getSubjectTname()==null|| subject.getSubjectTname().length()==0){
+									 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectEname());
+								 }
+								
+								 valueTmp.setName(attTmp.getName());
+								 
+								 academicKPIAttributeValueList.add(valueTmp);							 
+							 }
+							 if("หน่วยกิต".equalsIgnoreCase(attTmp.getName())){		
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 attTmp.setValue(subject.getCredit());
+								 attTmp.setIsCalculate("N");
+								 valueTmp.setValue(subject.getCredit());
+								 valueTmp.setName(attTmp.getName());
+								 
+								 academicKPIAttributeValueList.add(valueTmp);
+							 }
+							 if("จำนวนชั่วโมง".equalsIgnoreCase(attTmp.getName())){		
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 
+								 if("ท".equalsIgnoreCase(timetable.getLectOrPrac())){
+									 attTmp.setValue(subject.getLectHr());
+									 attTmp.setIsCalculate("Y");
+									 valueTmp.setValue(subject.getLectHr());
+									 valueTmp.setName(attTmp.getName());
+								 }else{
+									 attTmp.setValue(subject.getPracHr());
+									 attTmp.setIsCalculate("Y");
+									 valueTmp.setValue(subject.getPracHr());
+									 valueTmp.setName(attTmp.getName());								 
+								 }
+								 
+								 academicKPIAttributeValueList.add(valueTmp);
+							 }
+							 
+							 if("สัดส่วน(%)".equalsIgnoreCase(attTmp.getName())){	
+								
+								 
+								 if("Y".equals(finalIsCoTeach)){
+									 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+									 
+								     if(attTmp.getValue()==null){
+								    	 valueTmp.setValue("100");
+								     }else{
+								    	 valueTmp.setValue("50");
+								     }
+									 
+									 valueTmp.setName(attTmp.getName());
+									 attTmp.setIsCalculate("Y");
+									 academicKPIAttributeValueList.add(valueTmp);										 
+								 }
+						 
+							 }							 
+							 
+							
+						 }
+						 
+						 returnObj.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
+						
+						 logger.info("  academicKPIAttributeValueList size:"+academicKPIAttributeValueList);
+					}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+						ex.printStackTrace();
+					} 									 
+					
+					zeroKPI.setAcademicKPIAttributeList(academicKPIAttributeList);
+					
+					logger.info(" ########## KPI Zero:"+ BeanUtils.getBeanString(zeroKPI));
+				}
+				
+			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+				ex.printStackTrace();
+			} 
+			 
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnObj;
+		
+	}
+	
+	private AcademicKPIUserMapping getMatchingKPITeachTable(com.buckwa.ws.newws.oxm.TeachTable timetable, Subject subject,final String finalIsCoTeach,String academicYear,String facultyCode){
+		AcademicKPIUserMapping returnObj = new AcademicKPIUserMapping();;
+		
+		try{
+			
+			String specialP1 = timetable.getDegree()+"";
+			String specialP2 = timetable.getLectOrPrac();			
+			String totalStudent = "0";
+			if(timetable.getStudentTotal()==null){
+				
+			}else {
+				totalStudent = timetable.getStudentTotal()+"";
+			}
+			 
+			//logger.info(" ###### specialP1:"+specialP1+"   specialP2:"+specialP2+"   totalStudent:"+totalStudent);
+			
+			
+//			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
+//					+ " and   total_student_to >= "+totalStudent+" AND total_student_from <="+totalStudent+ "  and k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
+
+
+			
+			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
+					+ " and    k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
+
+			
+			//String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"'" ; 
+			logger.info(" sql sqlKPI:"+sqlKPI);
+			List<AcademicKPI> academicKPIList  =null;
+			
+			try{
+				academicKPIList = this.jdbcTemplate.query(sqlKPI,	new AcademicKPIMapper() );	
+				logger.info(" ########## Found Academic kpi list :"+academicKPIList);
+				if(academicKPIList!=null&&academicKPIList.size()>0){
+		 
+					// Add new for should kpi that use total student calculate
+					 
+					AcademicKPI zeroKPI  = academicKPIList.get(0);
+				 
+						for(AcademicKPI kpiTmp:academicKPIList){							
+							String isUseStudentCalculate =kpiTmp.getSpecialP4();
+							int studentTotalFromReg =timetable.getStudentTotal();
+							
+							//System.out.println(" TotalStudent From :"+kpiTmp.getTotalStudentFrom()+" totalStudentTo:"+kpiTmp.getTotalStudentTo()+"  isUseStudentCalculate:"+isUseStudentCalculate+"  studentTotalFromReg:"+studentTotalFromReg);
+							
+							if(kpiTmp.getTotalStudentFrom()!=null&&kpiTmp.getTotalStudentTo()!=null){
+								
+								try{
+									
+									int totalStudentFromInt  = Integer.parseInt(kpiTmp.getTotalStudentFrom());
+									int totalStudentToInt  = Integer.parseInt(kpiTmp.getTotalStudentTo());
+									
+									
+									
+									if(isUseStudentCalculate!=null&&isUseStudentCalculate.indexOf("1")!=-1){
+										if(studentTotalFromReg>=totalStudentFromInt&&studentTotalFromReg<=totalStudentToInt){
+											zeroKPI = kpiTmp;
+											break;
+										}
+									}
+									
+								}catch(Exception ex){
+									//ex.printStackTrace();
+								}
+								
+							}
+ 
+						}						
+					 
+					
+					
+					
+					
 					
 					
 					String userName =schoolUtil.getUserNameFromRegId(timetable.getTeacherId(),academicYear);
@@ -1773,6 +1964,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			domain.setFacultyCode(rs.getString("faculty_code"));
 			domain.setFromRegis(rs.getString("from_reg"));
 			//logger.info(" ###### Multiply Value:"+rs.getString("rule_code"));
+		 
 			
 			try{
 			domain.setUnitDesc(schoolUtil.getUnitDescMyCode(rs.getString("unit_code"), rs.getString("academic_year")));

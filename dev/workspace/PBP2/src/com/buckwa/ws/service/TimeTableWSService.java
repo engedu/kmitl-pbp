@@ -241,9 +241,9 @@ public class TimeTableWSService   {
 			
 			for(Faculty facttmp:facultyList){
 				// For Debug  Engineering
-				if(!"01".equals(facttmp.getFacultyId())){  
+				//if(!"01".equals(facttmp.getFacultyId())){  
 					
-				 }else{
+				// }else{
 					
 				String facultyCode = facttmp.getFacultyId();
 				
@@ -269,9 +269,9 @@ public class TimeTableWSService   {
 				for(Department deptmp:departmentList){					
 					//logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
 					
-					//if( !"07".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
+				//	if( !"05".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
 					//	logger.info(" #############  Skip Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-					//}else{
+				//	}else{
 						
 					//	logger.info(" #############  Work only on  Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
 					
@@ -315,10 +315,10 @@ public class TimeTableWSService   {
 
 					}
 					
-			}// debug Department
+			//}// debug Department
 				}
 				
-			}//Debug Faculty
+			//}//Debug Faculty
 	
 						
 			logger.info(" ########  Found Teacher Id Size:"+teacherIdList.size());
@@ -336,7 +336,7 @@ public class TimeTableWSService   {
 	 
 			
 			
-		//	}
+			}
 			 
 			 
 			 
@@ -362,7 +362,7 @@ public class TimeTableWSService   {
 			//
 			//if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
 			//	if(!"10518".equals(teacherTmp.getTeacherIdStr())){
-			//if(!"90508".equals(teacherTmp.getTeacherIdStr())){ // พัชรา
+			//if(!"10535".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
 				
 				
 			//}else{
@@ -398,7 +398,7 @@ public class TimeTableWSService   {
 			}
 			
 
-	//	}	 // Debug User
+		//}	 // Debug User
 		
 	}
 	
