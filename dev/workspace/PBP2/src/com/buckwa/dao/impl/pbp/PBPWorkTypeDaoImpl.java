@@ -312,6 +312,11 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		BigDecimal totalPercentMark = new BigDecimal(0.00);
 		BigDecimal totalPercentMarkComareBase = new BigDecimal(0.00);
 		
+//		BigDecimal totalMark = new BigDecimal(0.00);
+//		BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
+//		BigDecimal totalPercentMark = new BigDecimal(0.00);
+//		BigDecimal totalPercentMarkComareBase = new BigDecimal(0.00);
+//		
 		for(PBPWorkType tmp:pBPWorkTypeList){
 			BigDecimal maxMark =  tmp.getMaxHour();
 			BigDecimal limitBase = tmp.getLimitBase();

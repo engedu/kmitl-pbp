@@ -296,6 +296,8 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 				String facultyCode = facultyCodeReturnList.get(0);
 				result.setFacultyCode(facultyCode);
 				logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
+				
+				result.setAcademicYearList(academicYearUtil.getAcademicYearList());
 			}
 			
 		} catch (EmptyResultDataAccessException e) {

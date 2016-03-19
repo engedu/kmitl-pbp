@@ -6,32 +6,25 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
- 	
-
- 
-
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> 
 <% Person person = (Person) request.getAttribute("person"); %>
 <form:form modelAttribute="person" action="search.htm" method="POST" name="mainForm">
-<div class="post"> 
  
+<div class="post">  
 		    <div id="example" style="padding: 0;margin: 0;">
 		    <div class="demo-section k-content">
 		        <div id="chart"></div>
 		        <br>
 		         <div id="grid"></div>
 		    </div>
-			</div>
- 
-    
- 
+			</div> 
 </div> 
 </form:form>
 <script>
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "คะแนนประจำปี"
+                    text: "คะแนนประจำปี <c:out value="${person.thaiName}"/> <c:out value="${person.thaiSurname}"/>" 
                 },
                 dataSource: {
                     transport: {

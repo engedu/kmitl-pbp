@@ -34,7 +34,7 @@
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 
                <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/workTypeBarChart.htm">ระดับคะแนนแต่ละด้านในภาควิชา</a></li>
 <%--                <li class="has-flyout"><a href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">พิมพ์รายงานประจำปี</a></li> --%>
-               <li class="has-flyout"><a href="#">พิมพ์รายงานประจำปี</a></li>
+               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personYearReport/init.htm">พิมพ์รายงานประจำปี</a></li>
             </ul> 
           </li><!-- END Flyout Menu -->    
 	 

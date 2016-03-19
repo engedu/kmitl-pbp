@@ -295,5 +295,10 @@
    	<definition name="teachShareAddSuccess" extends="pbpUserLayout">     
       <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/staffPartner/teachShareAddSuccess.jsp"/>      
   	</definition> 	
+      
+   <definition name="personYearReportInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/user/yearReport/list.jsp"/>   
+   </definition>  	
+  	
   	
 </tiles-definitions>

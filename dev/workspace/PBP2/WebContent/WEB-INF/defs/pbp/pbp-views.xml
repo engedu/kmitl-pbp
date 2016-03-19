@@ -130,5 +130,6 @@
  	<bean id="personWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personWorkTypeBarchartInit" /></bean>		
 	 
 	 <bean id="personTimeTableInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personTimeTableInit" /></bean>
+	  <bean id="personYearReportInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personYearReportInit" /></bean>
 	 
 </beans>

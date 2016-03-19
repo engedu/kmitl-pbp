@@ -17,11 +17,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.buckwa.domain.BuckWaUser;
+import com.buckwa.web.util.AcademicYearUtil;
 
 public class BuckWaUserDetailsService implements UserDetailsService {
 	private static  Logger logger = Logger.getLogger(BuckWaUserDetailsService.class);
 	@Autowired
 	private JdbcTemplate jdbcTemplate;	
+	
+	
+	@Autowired
+	private AcademicYearUtil academicYearUtil;
+	
 	
     @Override
     public UserDetails loadUserByUsername(String username)        throws UsernameNotFoundException, DataAccessException {   

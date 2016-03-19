@@ -14,6 +14,12 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	private BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
 	private BigDecimal totalPercentMark = new BigDecimal(0.00);
 	private BigDecimal totalPercentMarkCompareBase = new BigDecimal(0.00);
+	
+	private BigDecimal totalMarkPredic = new BigDecimal(0.00);
+	private BigDecimal totalMarkCompareBasePredic = new BigDecimal(0.00);
+	private BigDecimal totalPercentMarkPredic = new BigDecimal(0.00);
+	private BigDecimal totalPercentMarkCompareBasePredic = new BigDecimal(0.00);
+	
 	private int increaseSalaryRate;
 	private List<AcademicYear> academicYearList;
 	
@@ -87,6 +93,31 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	}
 	public void setFacultyName(String facultyName) {
 		this.facultyName = facultyName;
+	}
+	public BigDecimal getTotalMarkPredic() {
+		return totalMarkPredic;
+	}
+	public void setTotalMarkPredic(BigDecimal totalMarkPredic) {
+		this.totalMarkPredic = totalMarkPredic;
+	}
+	public BigDecimal getTotalMarkCompareBasePredic() {
+		return totalMarkCompareBasePredic;
+	}
+	public void setTotalMarkCompareBasePredic(BigDecimal totalMarkCompareBasePredic) {
+		this.totalMarkCompareBasePredic = totalMarkCompareBasePredic;
+	}
+	public BigDecimal getTotalPercentMarkPredic() {
+		return totalPercentMarkPredic;
+	}
+	public void setTotalPercentMarkPredic(BigDecimal totalPercentMarkPredic) {
+		this.totalPercentMarkPredic = totalPercentMarkPredic;
+	}
+	public BigDecimal getTotalPercentMarkCompareBasePredic() {
+		return totalPercentMarkCompareBasePredic;
+	}
+	public void setTotalPercentMarkCompareBasePredic(
+			BigDecimal totalPercentMarkCompareBasePredic) {
+		this.totalPercentMarkCompareBasePredic = totalPercentMarkCompareBasePredic;
 	}
  
 	
