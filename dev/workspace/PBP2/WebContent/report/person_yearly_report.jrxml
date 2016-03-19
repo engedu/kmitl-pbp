@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kmutt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6669233-2a28-4f19-aab8-c5862aa95069">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1024"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="679" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="29" uuid="a6865f62-038d-4fbe-9ddf-15c669cf2ac5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[แบบประเมินผลงานทางวิชาการเพื่อประกอบการพิจารณาการขึ้นเงินเดือนข้าราชการ
+สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="555" height="16" uuid="7f9991cf-235e-4937-a965-e0b6800f54ce">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1.ประวัติบุคลากร]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="50" height="16" uuid="61c3d560-5f47-403e-8f67-0f60c207f7d2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ชื่อ–สกุล]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="107" width="64" height="16" uuid="d35a00e5-8b2e-443c-b55e-2fc5ac9a4cb0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[อัตราเลขที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="64" height="16" uuid="e2924479-abad-4e54-bc33-2941223f3c9c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[วุฒิการศึกษา]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="139" width="115" height="16" uuid="3f40ae55-de6e-43c7-825f-36931ef90a1f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เริ่มปฏิบัติราชการเมื่อวันที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="91" width="50" height="16" uuid="592c945f-5fb7-4d9d-b5ce-4c7fddadaee9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ตำแหน่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="107" width="50" height="16" uuid="d39b52bb-d415-4e4a-80a4-1b67b7146642">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สังกัด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="139" width="80" height="16" uuid="ae202231-e688-449e-921f-3c468babb071">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[รวมอายุการปฏิบัติราชการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="139" width="20" height="16" uuid="09673cbf-5278-40e0-b106-35e5ab313ef6">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ปี]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="139" width="30" height="16" uuid="7061fbef-dfd4-4368-8ac5-c635def355e9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เดือน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="107" width="64" height="16" uuid="eaf1fc57-e499-46a7-b501-0f7e05662ecf">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[อัตราเงินเดือน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="107" width="25" height="16" uuid="368de9bd-7365-4076-9329-f247ac052005">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[บาท]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="123" width="25" height="16" uuid="6fddbe4a-9ac2-4c99-a339-b2f2bfc52fa2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[อายุ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="123" width="25" height="16" uuid="4f5b0a78-335c-467d-9dc6-63a80eaa6062">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ปี]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="139" width="25" height="16" uuid="95a1c423-9c4c-4375-80c8-d1d9ddd26ae6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เดือน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="139" width="26" height="16" uuid="cdb1f803-4747-4603-b324-90363c7584f0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[พ.ศ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="555" height="16" uuid="d063fecd-5383-40bb-a7dd-ec8fa75f349e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[2. ผลงานที่ปฏิบัติในรอบประเมินที่ผ่านมา]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="196" width="140" height="16" uuid="fecb1c20-22a3-4926-a816-3ef2e4e3d553">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-ผลงานด้านวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="212" width="80" height="16" uuid="f2261872-97fa-41e9-9c40-96e6f5c1bfe7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="228" width="178" height="16" uuid="a1d7af5c-2324-46a0-9afa-9a662ffbf457">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[00002345    Artificial Intelligent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="228" width="80" height="16" uuid="0eb76ac8-f743-4482-9130-396f25df9865">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[135]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="212" width="80" height="16" uuid="291ee7c2-b0e2-44a8-8f2f-8ac700a4f641">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="264" width="54" height="16" uuid="dd2ebf3a-5faa-4df7-b282-4629a37a77ad">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="358" width="54" height="16" uuid="8fcea512-54db-44b0-a238-04d204278078">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="322" width="80" height="16" uuid="0304d5aa-0acd-4892-95e6-fabf996c53e0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[500]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="306" width="80" height="16" uuid="6372cf8e-2baf-4645-a98a-26c6fe3abc15">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="322" width="179" height="16" uuid="8944cf31-615e-4204-81e9-ae84ee49b6c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[แต่งตำราเรียน คอมพิวเตอร์เบื้องต้น]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="306" width="80" height="16" uuid="1929f0c1-a133-441f-adab-08211d24b82b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="170" height="16" uuid="ab075a05-4e39-4810-a769-5e1d5ecb1243">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-ผลงานด้านพัฒนาวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="456" width="54" height="16" uuid="6ff6caa9-0aed-4ce5-bd24-3c7f77835fc1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="420" width="80" height="16" uuid="68430f3d-5b6a-4d3d-879f-c94e5feb3cab">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[135]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="404" width="80" height="16" uuid="9cd0d829-8f79-4fb2-8a23-3235a08d6278">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="420" width="190" height="16" uuid="64080cb7-656c-4849-a692-7ed45e6c61db">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[00002345    Artificial Intelligent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="404" width="80" height="16" uuid="00582111-4eca-4d1d-8579-b8c84645deb5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="388" width="178" height="16" uuid="240baf97-cbd4-45bf-b280-2a1c65b26311">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-ผลงานด้านวิจัยหรือสร้างสรรค์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="490" width="170" height="16" uuid="98e6b3bf-568b-4e04-85b7-c69cb7a5f573">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-ผลงานด้านบริการวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="604" width="80" height="16" uuid="30db96a2-f925-4bd9-ae5d-1075a4c7f0c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="558" width="54" height="16" uuid="f681688a-e0d9-4ef4-8504-e532e798a165">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="656" width="54" height="16" uuid="94222762-71d5-417c-a3c4-6f38d2bf00e3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="588" width="310" height="16" uuid="7ed936aa-9603-4502-90be-e503e9c8ac79">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-ผลงานด้านทำนุบำรุงศิลปะ วัฒนธรรม หรือสร้างชื่อเสียงให้กับสถาบันฯ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="604" width="80" height="16" uuid="ef0ac697-4e11-49db-9158-8773c476d925">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="620" width="80" height="16" uuid="e4f989b0-7119-48fc-8114-e607af54e689">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[135]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="522" width="80" height="16" uuid="ca40f01b-bbf7-428d-9ea5-b477b69c2e74">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[135]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="522" width="178" height="16" uuid="9de218c6-e5d2-446b-b376-f4a234b80846">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[00002345    Artificial Intelligent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="620" width="155" height="16" uuid="674fed9e-2953-4ea8-8d21-b367d94b74ab">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[00002345    Artificial Intelligent ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="506" width="80" height="16" uuid="52d6291b-1114-4b40-9755-7f8646e133dc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="506" width="80" height="16" uuid="a0c56d38-78bd-42f9-b353-f2df9dce1cc4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="244" width="178" height="16" uuid="b30232e6-9620-4c8e-8f25-17725b1e5f34">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="244" width="80" height="16" uuid="703011db-92ba-4753-b0b4-4eea98c4ece9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="338" width="80" height="16" uuid="9f868f56-7937-4f3e-9a17-6c295c63a5c4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="338" width="178" height="16" uuid="aa5f09da-fb59-4b24-b217-5c6978b1599f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="436" width="80" height="16" uuid="4ad4ea94-482c-41d9-81d6-1779bd144dd8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="436" width="178" height="16" uuid="277c0695-ec99-479c-a240-faa4487d092a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="538" width="178" height="16" uuid="6c7a5b3e-b297-4b7d-ac2a-4edd793b41e0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="538" width="80" height="16" uuid="e3056089-52e6-4020-a230-9bbece0f2c7f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="636" width="179" height="16" uuid="f9931ce6-c3ed-4281-8306-49d5684523a8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="636" width="81" height="16" uuid="8fe539e7-eef6-49e8-84cf-85d99f9d5566">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="29" width="555" height="16" uuid="a3572559-8db9-48bd-a460-b44cd78293ec"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ณ วันที่ "+"1 เมษายน  พ.ศ. 2559"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="45" width="555" height="16" uuid="23a23143-d69f-46ca-87ab-36fdbc6dad59"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รอบประเมิน "+"1 สิงหาคม 2558"+" – "+"31 ธันวาคม 2558"+" (ปีการศึกษา)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="304">
+			<staticText>
+				<reportElement x="0" y="26" width="150" height="16" uuid="93e31420-4bbb-4e36-9454-ee04a7d97a95">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมด้านพัฒนาวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="120" height="16" uuid="5ba546c1-c4a8-471b-8855-4e4ba77b99fc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมด้านวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="58" width="140" height="16" uuid="1000d03c-69b0-4625-ae20-d00d9e333822">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมด้านบริการวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="170" height="16" uuid="09a345c3-bf2c-49b0-a93c-cba983c3e461">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมด้านวิจัยหรือสร้างสรรค์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="190" height="16" uuid="eb294d6d-71c5-482b-854d-9b57c857447d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมด้านทำนุบำรุงศิลปะ วัฒนธรรม หรือสร้างชื่อเสียงให้กับสถาบันฯ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="94" width="90" height="16" uuid="a30f26bf-3619-4a9a-b945-07792d4c0be4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คะแนนรวมทุกด้าน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="80" height="16" uuid="457be636-8d66-428c-999b-271f2e6bb05d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผลงานเพิ่มเติม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="221" width="80" height="16" uuid="0e3c4f9e-825a-4208-ae08-6bdf7220f47a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้ปฏิบัติงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="251" width="80" height="16" uuid="7fdef5c4-5701-43cf-bb0c-6c5c25f2fadd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ผู้มอบหมายงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="10" width="100" height="16" uuid="9456d69f-4f4b-40e3-b811-dfdbeba7f78b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="26" width="100" height="16" uuid="2dfb01c9-0d6e-479e-aa17-0397f6f6ba31">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="42" width="100" height="16" uuid="33e5eccd-6efb-4098-bf93-d9e64256a33b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="58" width="100" height="16" uuid="eb2f92e0-9998-4dae-8f7c-b88470b686c5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="74" width="100" height="16" uuid="1fa0192c-7900-484e-9ce2-dcd813a9a097">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="94" width="100" height="16" uuid="73632f1a-be51-49e3-92bd-c8a39ad0bb96">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="136" width="550" height="16" uuid="448693ad-8e23-45b3-92cc-c83bf0c0695a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="152" width="550" height="16" uuid="d0ff7b66-acd8-48b4-99e5-083eed4a54fa">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="184" width="550" height="16" uuid="d23019c0-0242-4534-afe5-89d39aa65795">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="168" width="550" height="16" uuid="f8e9231a-1ea2-49f3-92b2-ab999ef2b52e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="221" width="80" height="16" uuid="7d2aa2aa-0547-40ea-b2c2-c8be8d3b2971">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="251" width="80" height="16" uuid="0112d5df-3d1e-46e8-b430-5be0ac337095">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Dotted"/>
+				</box>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

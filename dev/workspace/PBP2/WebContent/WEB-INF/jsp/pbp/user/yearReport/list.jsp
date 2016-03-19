@@ -35,7 +35,8 @@
             			
             			</td>
             			<td abbr="center">
-            			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพิ์</a> 
+<%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพิ์</a>  --%>
+            			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/report/printReportYear.htm?fileCode=59"> พิมพิ์</a> 
             			</td>
             		</tr>
             	</table>

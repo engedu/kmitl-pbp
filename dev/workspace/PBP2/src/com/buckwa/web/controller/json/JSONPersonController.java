@@ -76,8 +76,9 @@ public class JSONPersonController {
 			request.put("academicYear", academicYear);
 			
 			BuckWaResponse response = new BuckWaResponse();
-			Person person = (Person) httpRequest.getSession().getAttribute("personProFileSession");
-			if(null == person){
+//			Person person = (Person) httpRequest.getSession().getAttribute("personProFileSession");
+			Person person = new Person();
+//			if(null == person){
 				response = personProfileService.getByUsername(request);
 				if (response.getStatus() == BuckWaConstants.SUCCESS) {
 					person = (Person) response.getResObj("person");
@@ -110,9 +111,9 @@ public class JSONPersonController {
 				}else{
 					response.setStatus(BuckWaConstants.FAIL);
 				}
-			}else{
-				response.setStatus(BuckWaConstants.SUCCESS);
-			}
+//			}else{
+//				response.setStatus(BuckWaConstants.SUCCESS);
+//			}
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 
