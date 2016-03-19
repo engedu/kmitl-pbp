@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="kmutt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6669233-2a28-4f19-aab8-c5862aa95069">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.2396694214876032"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1024"/>
+	<property name="ireport.y" value="17"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="fullName" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -566,7 +568,7 @@
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ณ วันที่ "+"1 เมษายน  พ.ศ. 2559"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ณ วันที่ "+$P{reportDate}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="45" width="555" height="16" uuid="23a23143-d69f-46ca-87ab-36fdbc6dad59"/>
@@ -574,6 +576,13 @@
 					<font fontName="Angsana New" size="12" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["รอบประเมิน "+"1 สิงหาคม 2558"+" – "+"31 ธันวาคม 2558"+" (ปีการศึกษา)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="91" width="185" height="16" uuid="076cbe0c-fab7-4c83-82dc-ba270ba3c85a"/>
+				<textElement>
+					<font fontName="Angsana New" size="12" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fullName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
