@@ -12,6 +12,7 @@ public class PersonYearReport implements Serializable{
 	private String academicYearSelect;
 	private String academicYear;	
 	private Person person;
+	private int evaluateRound;
 	
 	
 	public List<AcademicYear> getAcademicYearList() {
@@ -37,6 +38,12 @@ public class PersonYearReport implements Serializable{
 	}
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	public int getEvaluateRound() {
+		return evaluateRound;
+	}
+	public void setEvaluateRound(int evaluateRound) {
+		this.evaluateRound = evaluateRound;
 	}
 	
 	
