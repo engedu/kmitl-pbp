@@ -1,10 +1,8 @@
 package com.buckwa.web.controller.pbp.report;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.internet.MimeUtility;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -26,7 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.MaternityLeave;
-import com.buckwa.util.BuckWaConstants;
+import com.buckwa.util.BuckWaDateUtils;
 
 @Controller
 @RequestMapping("/report")
@@ -55,8 +52,8 @@ public class ReportYearPersonController{
 			
 //			}
 			
-//			params.put("todayDate", BuckWaDateUtils.getCurrentDateTime());
-//			params.put("thaiName", StringUtils.trimToEmpty(person.getThaiName()));
+			params.put("reportDate", "1 June 2559");
+			params.put("fullName", "Test Peak ");
 //			params.put("thaiSurname", StringUtils.trimToEmpty(person.getThaiSurname()));
 //			params.put("position", StringUtils.trimToEmpty(person.getPosition()));
 //			params.put("workline", StringUtils.trimToEmpty(person.getWorkLine()));
@@ -66,12 +63,12 @@ public class ReportYearPersonController{
 			// debug
 			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JREmptyDataSource());
 			
-			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
+//			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			
-//			JRExporter exporter = new JRPdfExporter();
-//			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
-//			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-//			exporter.exportReport();
+			JRExporter exporter = new JRPdfExporter();
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.exportReport();
 			outputStream.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -164,7 +161,7 @@ public class ReportYearPersonController{
 
 
 //		JasperPrint jasperPrint = JasperFillManager.fillReport(inputJasperFile, params , new JREmptyDataSource());
-//		
+		
 //		httpResponse.setContentType(REPORT_CONTENT_TYPE);
 //		// Check For IE OR NOT for Encoder fileName !
 //		String user_agent = httpRequest.getHeader("user-agent");
