@@ -441,6 +441,52 @@ public class HeadController {
 		return mav;
 	}	
 	
+	
+	
+	@RequestMapping(value="markDepartmentRecalInit.htm", method = RequestMethod.GET)
+	public ModelAndView markDepartmentRecalInit() {
+		logger.info(" Start  ");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("markDepartmentRecal");
+		try{
+			BuckWaRequest request = new BuckWaRequest(); 			 
+			String headUserName = BuckWaUtils.getUserNameFromContext();
+			String academicYear =schoolUtil.getCurrentAcademicYear();	
+			String departmentName =schoolUtil.getDepartmentByUserName(headUserName, academicYear);
+			mav.addObject("departmentName",departmentName);
+			mav.addObject("academicYear",academicYear);
+ 			  
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}		
+	
+	@RequestMapping(value="markDepartmentRecal.htm", method = RequestMethod.GET)
+	public ModelAndView markDepartmentRecal() {
+		logger.info(" Start  ");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("markDepartmentRecal");
+		try{
+			BuckWaRequest request = new BuckWaRequest(); 			 
+			String headUserName = BuckWaUtils.getUserNameFromContext();
+			String academicYear =schoolUtil.getCurrentAcademicYear();	
+			String departmentName =schoolUtil.getDepartmentByUserName(headUserName, academicYear);
+ 			request.put("departmentName",departmentName);
+			request.put("headUserName",headUserName);
+			request.put("academicYear",academicYear);
+			request.put("status",""); 
+			BuckWaResponse response = headService.markDepartmentRecal(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				mav.addObject("successCode", response.getSuccessCode()); 
+			}				  
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}	
 	@RequestMapping(value="replyMessage.htm", method = RequestMethod.POST)
 	public ModelAndView replyMessage(HttpServletRequest httpRequest, @ModelAttribute AcademicKPIUserMappingWrapper academicKPIUserMappingWrapper , BindingResult result) {
 		ModelAndView mav = new ModelAndView();

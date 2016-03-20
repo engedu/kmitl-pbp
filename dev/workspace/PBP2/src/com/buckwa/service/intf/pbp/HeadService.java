@@ -13,5 +13,7 @@ public interface HeadService {
 	public BuckWaResponse saveDepartmentReportSummary(BuckWaRequest request);
 	
 	public BuckWaResponse getReportWorkTypeDepartment(BuckWaRequest request);
+	public BuckWaResponse markDepartmentRecal(BuckWaRequest request);
+	
 }
 

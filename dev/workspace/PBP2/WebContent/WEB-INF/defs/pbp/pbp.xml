@@ -142,7 +142,16 @@
        <definition name="markDepartment" extends="pbpUserLayout">     
      	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/markDepartment.jsp"/>      
   		</definition>   
-  
+       <definition name="viewWork" extends="pbpUserLayout">     
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/view.jsp"/>      
+  		</definition>    
+       <definition name="markDepartment" extends="pbpUserLayout">     
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/markDepartment.jsp"/>      
+  		</definition>  
+       <definition name="markDepartmentRecal" extends="pbpUserLayout">     
+     	 <put-attribute name="main"   value="/WEB-INF/jsp/pbp/head/work/recal.jsp"/>      
+  		</definition>    		
+  		
   
   <!--  End Head -->
   

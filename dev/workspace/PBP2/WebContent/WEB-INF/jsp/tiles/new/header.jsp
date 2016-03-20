@@ -49,11 +49,11 @@
 		           <a href="#">หัวหน้าภาควิชา </a><a href="#" class="flyout-toggle"></a>
 		            <ul class="flyout"><!-- Flyout Menu -->
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm">อนุมัติผลงาน</a></li>
-		             
+		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">Re-Calculate</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 
 		                <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>		 
-
+   						
 		            </ul> 
 		          </li>  
 		 </sec:authorize>        
