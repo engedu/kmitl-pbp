@@ -19,7 +19,7 @@
             		<tr>
      
             			<td style="text-align: center;  vertical-align: middle; font-size: 22px;font-weight: bold;">
-              		พิมพิ์รายงานประจำปีการศึกษา  
+              		พิมพ์รายงานประจำปีการศึกษา  
            		
  	            			<form:select path="academicYearSelect" cssStyle="width:20%" > 
 								<form:options items="${personYearReport.academicYearList}" itemValue="name" itemLabel="name" />
@@ -35,8 +35,8 @@
             			
             			</td>
             			<td abbr="center">
-<%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพิ์</a>  --%>
-            			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/report/printReportYear.htm?fileCode=59"> พิมพิ์</a> 
+<%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพ์</a>  --%>
+            			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/report/printReportYear.htm?fileCode=59"> พิมพ์</a> 
             			</td>
             		</tr>
             	</table>
