@@ -57,7 +57,15 @@
             	            to: 100,
             	            color: "#f99"
             	        }]
-        	        },
+        	        }
+        	        
+        	        ,valueAxis:  {
+        	            plotBands: [
+        	                        { from: 890, to: 900, color: "red" }
+        	                    ]
+        	                }
+        	        ,
+        	        
                     tooltip: {
                         visible: true,
                         template: "#= series.name #: #= value #"
