@@ -6,21 +6,19 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-
- 
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> 
 <form:form modelAttribute="academicKPIUserMappingWrapper" action="search.htm" method="POST" name="mainForm">
+
+<h1 id="exampleTitle"> 
+            <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
+            <strong> ผลงานบุคลากร  ${academicKPIUserMappingWrapper.department.name}    ประจำปี  ${academicKPIUserMappingWrapper.academicYear} </strong>  
+        
+            </h1> 
+
 <div class="post"> 
 <div class="entry">  
  		 <div class="pbptableWrapper">
-            <div class="pbp-header">
-            <table style="width: 100%;">
-            	<tr>
-            		<td width="90%" align="left">    ผลงานบุคลากร  ${academicKPIUserMappingWrapper.department.name}    ประจำปี  ${academicKPIUserMappingWrapper.academicYear}   </td>
-   
-            	</tr>
-            </table>
-            </div> 
+ 
 			<table class="pbp-table"> 
 		<thead>   
 			<tr>

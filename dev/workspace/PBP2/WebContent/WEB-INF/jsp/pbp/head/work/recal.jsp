@@ -8,28 +8,18 @@
 <%@ page import="com.buckwa.domain.*"%>
 <%@ page import="java.util.*"%>
 
-<form:form   	method="POST" name="mainForm" enctype="multipart/form-data">		
-<div class="post">
+<form:form   	method="POST" name="mainForm" enctype="multipart/form-data">	
+
+<h1 id="exampleTitle"> 
+            <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
+            <strong> คำนวณคะแนนภาควิชา    ${departmentName}   ปีการศึกษา  ${academicYearStr}</strong>  
+        
+            </h1> 	
  
-	<div class="entry">
-	
-		 <div class="pbptableWrapper">
              
-			
-			<table class="pbp-table">
-				<thead><tr><th colspan="3">
-				<div class="pbp-header"><span class="lsf-icon colororange" title="list"></span>คำนวณคะแนนภาควิชา    ${departmentName}   ปีการศึกษา  ${academicYearStr} </div>
-				</th></tr>
-				
-			<tr>
-			 
-				<th   class="thFirst">คำนวณ </th>
-		 		<th   class="thFirst" >หมายเหตุ </th>
-			</tr> 				
-				
-				
-				
-				</thead>
+	<div style="margin-left: 10%;">		
+			<table class="pbp-table" style="width: 60%;"> 
+		 
 				<tbody>
 					<tr>
 				 
@@ -39,7 +29,7 @@
 					 </a> 
 						 
 					</td> 
-					<td class="tdFirst" style="text-align: center;" rowspan="3"> ระบบจะทำการ ปรับปรุงข้อมูลคะแนนบุคลากรทั้งหมดของภาควิชา<br>
+					<td class="tdFirst" style="text-align: left;"  > <strong>ระบบจะทำการ ปรับปรุงข้อมูลคะแนนบุคลากรทั้งหมดของภาควิชา </strong><br>
 				 
 					</td>
 					
@@ -47,10 +37,7 @@
 		 				
 				</tbody> 
 			</table> 
-		</div>		
- 
-	</div>
-</div>
+ </div>
 </form:form>
 <script>
 	

@@ -293,7 +293,8 @@ public class HeadController {
 					    	  if(typeTmp.getWorkTypeId().intValue()==totalMarkTmp.getWorkTypeId().intValue()){ 
 					  			
 						 
-									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
+									//totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
+									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentWorkType());
 								 
 					    	  }
 					    	  
