@@ -1,5 +1,7 @@
 package com.buckwa.service.impl.pbp;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -13,6 +15,7 @@ import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.domain.pbp.report.RadarPlotReport;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 
@@ -64,6 +67,27 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	 
 		return response;
 	}
+	
+	@Override	
+	public BuckWaResponse getRadarPlotPersonMark(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String username = (String)request.get("username");
+			String academicYear = (String)request.get("academicYear");
+			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMark(username,academicYear);
+		 
+			 response.addResponse("radarPlotReportList",radarPlotReportList);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+		
 	
 	
 	@Override	

@@ -1,8 +1,11 @@
 package com.buckwa.dao.intf.pbp;
 
+import java.util.List;
+
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.domain.pbp.report.RadarPlotReport;
 
 public interface PBPWorkTypeDao {
 	
@@ -28,4 +31,8 @@ public interface PBPWorkTypeDao {
 	
 	public PBPWorkType getByCodeAcademicFacultyCode(String code,String academicYear,String facultyCode);
 	public PBPWorkTypeWrapper getByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode);
+	
+	
+	public List<RadarPlotReport> getRadarPlotPersonMark( String userName,String academicYear);
+	
 }

@@ -63,9 +63,9 @@
 					
 <!-- 					</th></tr> -->
 		   	   		<tr>
-		   	   			<th class="thFirst" width="70%">ภาระงาน</th>
-		   	   			<th class="thFirst" width="20%">คะแนน</th>
- 						<th class="thFirst" width="10%">หมายเหตุ</th>
+		   	   			<th class="thFirst" width="60%">ภาระงาน</th>
+		   	   			<th class="thFirst" width="15%">คะแนน</th>
+ 						<th class="thFirst" width="20%">หมายเหตุ</th>
 		   	   		</tr>
 		   	   	</thead>
 		   	   	
@@ -83,13 +83,13 @@
 		   				 </c:if>				 
 		   				 </td>
 		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
- 	   					<td class="tdFirst">
+ 	   					<td class="tdFirst" style="text-align: left;">
  	   					 ${domain.description}
- 	   					<!--  
+ 	   					  
 								    <c:if test="${domain.fromRegis == 'Y' }">  	 
-						        ระบบดึงข้อมูลตารางสอนอัตโนมัติจาก สำนักทะเบียน
+						<span style="color: red;">*</span>ตารางสอนอัตโนมัติจาก สำนักทะเบียน
 								    </c:if > 	   					
--->
+ 
 						 </td>
 		   			</tr>
 		   			 	   			           

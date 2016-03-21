@@ -27,6 +27,12 @@ public class PBPWorkType extends BaseDomain{
     private BigDecimal totalInPercentCompareBaseWorkTypeAVG = new BigDecimal(0.0);
     private String compareBaseStatus;
     
+    
+	private BigDecimal totalInWorkType_E = new BigDecimal(0.0);
+	private BigDecimal totalInWorkTypeCompareBase_E = new BigDecimal(0.0);
+    private BigDecimal totalInPercentWorkType_E = new BigDecimal(0.0);
+    private BigDecimal totalInPercentCompareBaseWorkType_E = new BigDecimal(0.0);
+    
     private boolean minHourCal;
    
     private boolean maxHourCal;
@@ -65,7 +71,33 @@ public class PBPWorkType extends BaseDomain{
 
     
     
-    public BigDecimal getTotalInPercentWorkType() {
+    public BigDecimal getTotalInPercentCompareBaseWorkType_E() {
+		return totalInPercentCompareBaseWorkType_E;
+	}
+	public void setTotalInPercentCompareBaseWorkType_E(
+			BigDecimal totalInPercentCompareBaseWorkType_E) {
+		this.totalInPercentCompareBaseWorkType_E = totalInPercentCompareBaseWorkType_E;
+	}
+	public BigDecimal getTotalInWorkType_E() {
+		return totalInWorkType_E;
+	}
+	public void setTotalInWorkType_E(BigDecimal totalInWorkType_E) {
+		this.totalInWorkType_E = totalInWorkType_E;
+	}
+	public BigDecimal getTotalInWorkTypeCompareBase_E() {
+		return totalInWorkTypeCompareBase_E;
+	}
+	public void setTotalInWorkTypeCompareBase_E(
+			BigDecimal totalInWorkTypeCompareBase_E) {
+		this.totalInWorkTypeCompareBase_E = totalInWorkTypeCompareBase_E;
+	}
+	public BigDecimal getTotalInPercentWorkType_E() {
+		return totalInPercentWorkType_E;
+	}
+	public void setTotalInPercentWorkType_E(BigDecimal totalInPercentWorkType_E) {
+		this.totalInPercentWorkType_E = totalInPercentWorkType_E;
+	}
+	public BigDecimal getTotalInPercentWorkType() {
 		return totalInPercentWorkType;
 	}
 	public void setTotalInPercentWorkType(BigDecimal totalInPercentWorkType) {

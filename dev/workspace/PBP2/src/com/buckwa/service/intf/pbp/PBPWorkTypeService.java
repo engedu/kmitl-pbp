@@ -24,6 +24,9 @@ public interface PBPWorkTypeService {
 	public BuckWaResponse getByCodeAcademicFacultyCode(BuckWaRequest request);
 	
 	public BuckWaResponse getByAcademicYearFacultyCode(BuckWaRequest request);
+	
+	public BuckWaResponse getRadarPlotPersonMark(BuckWaRequest request);
+	 
 	 
 }
 

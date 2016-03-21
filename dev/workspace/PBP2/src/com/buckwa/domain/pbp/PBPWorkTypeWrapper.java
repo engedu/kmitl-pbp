@@ -9,11 +9,21 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	
 	private List<PBPWorkType> pBPWorkTypeList;
 	private String academicYear;
+ 
+	private String userName;
+	private String round; 
+	private String employeeType; 
+	private String facultyCode;
 	
 	private BigDecimal totalMark = new BigDecimal(0.00);
 	private BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
 	private BigDecimal totalPercentMark = new BigDecimal(0.00);
 	private BigDecimal totalPercentMarkCompareBase = new BigDecimal(0.00);
+	
+	private BigDecimal totalMark_E = new BigDecimal(0.00);
+	private BigDecimal totalMarkCompareBase_E = new BigDecimal(0.00);
+	private BigDecimal totalPercentMark_E = new BigDecimal(0.00);
+	private BigDecimal totalPercentMarkCompareBase_E = new BigDecimal(0.00);
 	
 	private BigDecimal totalMarkPredic = new BigDecimal(0.00);
 	private BigDecimal totalMarkCompareBasePredic = new BigDecimal(0.00);
@@ -118,6 +128,55 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	public void setTotalPercentMarkCompareBasePredic(
 			BigDecimal totalPercentMarkCompareBasePredic) {
 		this.totalPercentMarkCompareBasePredic = totalPercentMarkCompareBasePredic;
+	}
+	public BigDecimal getTotalMark_E() {
+		return totalMark_E;
+	}
+	public void setTotalMark_E(BigDecimal totalMark_E) {
+		this.totalMark_E = totalMark_E;
+	}
+	public BigDecimal getTotalMarkCompareBase_E() {
+		return totalMarkCompareBase_E;
+	}
+	public void setTotalMarkCompareBase_E(BigDecimal totalMarkCompareBase_E) {
+		this.totalMarkCompareBase_E = totalMarkCompareBase_E;
+	}
+	public BigDecimal getTotalPercentMark_E() {
+		return totalPercentMark_E;
+	}
+	public void setTotalPercentMark_E(BigDecimal totalPercentMark_E) {
+		this.totalPercentMark_E = totalPercentMark_E;
+	}
+	public BigDecimal getTotalPercentMarkCompareBase_E() {
+		return totalPercentMarkCompareBase_E;
+	}
+	public void setTotalPercentMarkCompareBase_E(
+			BigDecimal totalPercentMarkCompareBase_E) {
+		this.totalPercentMarkCompareBase_E = totalPercentMarkCompareBase_E;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getRound() {
+		return round;
+	}
+	public void setRound(String round) {
+		this.round = round;
+	}
+	public String getEmployeeType() {
+		return employeeType;
+	}
+	public void setEmployeeType(String employeeType) {
+		this.employeeType = employeeType;
+	}
+	public String getFacultyCode() {
+		return facultyCode;
+	}
+	public void setFacultyCode(String facultyCode) {
+		this.facultyCode = facultyCode;
 	}
  
 	
