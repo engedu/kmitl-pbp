@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import com.buckwa.dao.intf.pbp.PBPWorkTypeDao;
 import com.buckwa.domain.pbp.AcademicKPI;
+import com.buckwa.domain.pbp.AcademicKPIAttachFile;
 import com.buckwa.domain.pbp.AcademicKPIAttribute;
 import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
 import com.buckwa.domain.pbp.AcademicKPIUserMapping;
@@ -29,6 +30,7 @@ import com.buckwa.domain.pbp.MarkRank;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.domain.pbp.ReportPbp;
 import com.buckwa.domain.pbp.report.RadarPlotReport;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
@@ -556,7 +558,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	} 
 	
 	
-	public void updateReportPerson ( PBPWorkTypeWrapper pBPWorkTypeWrapper){
+	public int updateReportPerson ( PBPWorkTypeWrapper pBPWorkTypeWrapper){
 		int returnValue = 0;
 		try{
 			final PBPWorkTypeWrapper finalTmp = pBPWorkTypeWrapper;
@@ -584,18 +586,18 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			String workTypeName5 = "";
 	 
 			
-			BigDecimal mark_1 = new BigDecimal(0.00);
-			BigDecimal mark_2 = new BigDecimal(0.00);
-			BigDecimal mark_3 = new BigDecimal(0.00);
-			BigDecimal mark_4 = new BigDecimal(0.00);
-			BigDecimal mark_5 = new BigDecimal(0.00);
+			 BigDecimal mark_1 = new BigDecimal(0.00);
+			 BigDecimal mark_2 = new BigDecimal(0.00);
+			 BigDecimal mark_3 = new BigDecimal(0.00);
+			 BigDecimal mark_4 = new BigDecimal(0.00);
+			 BigDecimal mark_5 = new BigDecimal(0.00);
 			
 			
-			BigDecimal mark_E_1 = new BigDecimal(0.00);
-			BigDecimal mark_E_2 = new BigDecimal(0.00);
-			BigDecimal mark_E_3 = new BigDecimal(0.00);
-			BigDecimal mark_E_4 = new BigDecimal(0.00);
-			BigDecimal mark_E_5 = new BigDecimal(0.00);		
+			 BigDecimal mark_E_1 = new BigDecimal(0.00);
+			 BigDecimal mark_E_2 = new BigDecimal(0.00);
+			 BigDecimal mark_E_3 = new BigDecimal(0.00);
+			 BigDecimal mark_E_4 = new BigDecimal(0.00);
+			 BigDecimal mark_E_5 = new BigDecimal(0.00);		
 			
 			
 			for(PBPWorkType workTypeTmp:workTypeList){
@@ -678,6 +680,29 @@ CREATE TABLE  `pbp2`.`report_person` (
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 			 */
+			final BigDecimal m1  = mark_1;
+			final BigDecimal m2  = mark_2;
+			final BigDecimal m3  = mark_3;
+			final BigDecimal m4  = mark_4;
+			final BigDecimal m5  = mark_5;
+			
+			final String wtCode1  = workTypeCode1;
+			final String wtCode2  = workTypeCode2;
+			final String wtCode3  = workTypeCode3;
+			final String wtCode4  = workTypeCode4;
+			final String wtCode5  = workTypeCode5;
+			
+			final String wotName1  = workTypeName1;
+			final String wotName2  = workTypeName2;
+			final String wotName3  = workTypeName3;
+			final String wotName4  = workTypeName4;
+			final String wotName5  = workTypeName5;
+			
+			final BigDecimal mE_1  = mark_E_1;
+			final BigDecimal mE_2  = mark_E_2;
+			final BigDecimal mE_3  = mark_E_3;
+			final BigDecimal mE_4  = mark_E_4;
+			final BigDecimal mE_5  = mark_E_5;
 			
 			jdbcTemplate.update(new PreparedStatementCreator() {  
 				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
@@ -709,32 +734,35 @@ CREATE TABLE  `pbp2`.`report_person` (
 							+ "e_mark_5,"
 							+ "e_mark_total"
 						 
-							+ ")   values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
+							+ ")   values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
 						 "", Statement.RETURN_GENERATED_KEYS);   
 					
 					
 					ps.setString(1,academicYear);
 					ps.setString(2,userName);
 					ps.setString(3,round);
-					ps.setString(4,depReport2.getDepartmentCode());
-					ps.setString(5,depReport2.getDepartmentName());
-					ps.setString(6,depReport2.getTypeCode1());
-					ps.setString(7,depReport2.getTypeName1());
-					ps.setString(8,depReport2.getTypeCode2());
+					ps.setString(4,m1+"");
+					ps.setString(5,m2+"");
+					ps.setString(6,m3+"");
+					ps.setString(7,m4+"");
+					ps.setString(8,m5+"");
 					ps.setString(9,finalTmp.getTotalMark()+"");
-					ps.setString(10,depReport2.getTypeCode3());
-					ps.setString(11,depReport2.getTypeName3());
-					ps.setString(12,depReport2.getTypeCode4());
-					ps.setString(13,depReport2.getTypeName4());
-					ps.setString(14,depReport2.getTypeCode5());
-					ps.setString(15,depReport2.getTypeName5());
-					ps.setString(16,depReport2.getMark1());
-					ps.setString(17,depReport2.getMark2());
-					ps.setString(18,depReport2.getMark3());
-					ps.setString(19,depReport2.getMark4());
-					ps.setString(20,depReport2.getMark5());
-					ps.setString(21,depReport2.getMarkTotal());
-					ps.setString(22,depReport2.getPersonName());
+					ps.setString(10,wtCode1);
+					ps.setString(11,wotName1);
+					ps.setString(12,wtCode2);
+					ps.setString(13,wotName2);
+					ps.setString(14,wtCode3);
+					ps.setString(15,wotName3);
+					ps.setString(16,wtCode4);
+					ps.setString(17,wotName4);
+					ps.setString(18,wtCode5);
+					ps.setString(19,wotName5);
+					ps.setString(20,mE_1+"");
+					ps.setString(21,mE_2+"");
+					ps.setString(22,mE_3+"");
+					ps.setString(23,mE_4+"");
+					ps.setString(24,mE_5+"");
+					ps.setString(25,finalTmp.getTotalMark_E().toString());
 					 
 					 
 					return ps;  
@@ -1231,6 +1259,40 @@ CREATE TABLE  `pbp2`.`report_person` (
 			domain.setEvaluateType(rs.getString("evaluate_type"));
 			domain.setEvaluateTypeDesc(rs.getString("evaluate_type_desc"));
 			
+		return domain;
+    }
+	}
+	
+	private class ReportPbpMapper implements RowMapper<ReportPbp> {  					
+        @Override
+		public ReportPbp mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	ReportPbp domain = new ReportPbp(); 
+        	domain.setAcademic_year(rs.getString("academic_year"));
+        	domain.setUsername(rs.getString("username"));
+        	domain.setRound(rs.getString("round"));
+        	domain.setMark_1(rs.getString("mark_1"));
+        	domain.setMark_2(rs.getString("mark_2"));
+        	domain.setMark_3(rs.getString("mark_3"));
+        	domain.setMark_4(rs.getString("mark_4"));
+        	domain.setMark_5(rs.getString("mark_5"));
+        	domain.setMark_total(rs.getString("mark_total"));
+        	domain.setWork_type_code1(rs.getString("work_type_code1"));
+        	domain.setWork_type_name1(rs.getString("work_type_name1"));
+        	domain.setWork_type_code2(rs.getString("work_type_code2"));
+        	domain.setWork_type_name2(rs.getString("work_type_name2"));
+        	domain.setWork_type_code3(rs.getString("work_type_code3"));
+        	domain.setWork_type_name3(rs.getString("work_type_name3"));
+        	domain.setWork_type_code4(rs.getString("work_type_code4"));
+        	domain.setWork_type_name4(rs.getString("work_type_name4"));
+        	domain.setWork_type_code5(rs.getString("work_type_code5"));
+        	domain.setWork_type_name5(rs.getString("work_type_name5"));						
+        	domain.setE_mark_1(rs.getString("e_mark_1"));
+        	domain.setE_mark_2(rs.getString("e_mark_2"));
+        	domain.setE_mark_3(rs.getString("e_mark_3"));
+        	domain.setE_mark_4(rs.getString("e_mark_4"));
+        	domain.setE_mark_5(rs.getString("e_mark_5"));
+        	domain.setE_mark_total(rs.getString("e_mark_total"));
+		 
 		return domain;
     }
 	}
