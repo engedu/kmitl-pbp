@@ -572,9 +572,69 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			
 			List<PBPWorkType> workTypeList =finalTmp.getpBPWorkTypeList();
 			
+			String workTypeCode1 = "";
+			String workTypeName1 = "";
+			String workTypeCode2 = "";
+			String workTypeName2 = "";
+			String workTypeCode3 = "";
+			String workTypeName3 = "";
+			String workTypeCode4 = "";
+			String workTypeName4 = "";
+			String workTypeCode5 = "";
+			String workTypeName5 = "";
+	 
+			
+			BigDecimal mark_1 = new BigDecimal(0.00);
+			BigDecimal mark_2 = new BigDecimal(0.00);
+			BigDecimal mark_3 = new BigDecimal(0.00);
+			BigDecimal mark_4 = new BigDecimal(0.00);
+			BigDecimal mark_5 = new BigDecimal(0.00);
+			
+			
+			BigDecimal mark_E_1 = new BigDecimal(0.00);
+			BigDecimal mark_E_2 = new BigDecimal(0.00);
+			BigDecimal mark_E_3 = new BigDecimal(0.00);
+			BigDecimal mark_E_4 = new BigDecimal(0.00);
+			BigDecimal mark_E_5 = new BigDecimal(0.00);		
+			
+			
 			for(PBPWorkType workTypeTmp:workTypeList){
 				
-				workTypeTmp.getTotalInWorkType();
+				String workTypeCode  = workTypeTmp.getCode();
+				String workTypeName = workTypeTmp.getName();
+				BigDecimal mark = workTypeTmp.getTotalInWorkType();
+				BigDecimal e_mark = workTypeTmp.getTotalInWorkType_E();
+				
+				
+				if("1".equals(workTypeCode)){
+					mark_1 = mark;
+					mark_E_1 = e_mark;
+					workTypeCode1 = workTypeCode;
+					workTypeName1= workTypeName;
+				}else if("2".equals(workTypeCode)){
+					mark_2 = mark;
+					mark_E_2 = e_mark;
+					workTypeCode2 = workTypeCode;
+					workTypeName2= workTypeName;
+				}else if("3".equals(workTypeCode)){
+					mark_3 = mark;
+					mark_E_3 = e_mark;
+					workTypeCode3 = workTypeCode;
+					workTypeName3= workTypeName;
+				}else if("4".equals(workTypeCode)){
+					mark_4 = mark;
+					mark_E_4 = e_mark;
+					workTypeCode4 = workTypeCode;
+					workTypeName4= workTypeName;
+				}else if("5".equals(workTypeCode)){
+					mark_5 = mark;
+					mark_E_5 = e_mark;
+					workTypeCode5 = workTypeCode;
+					workTypeName5= workTypeName;
+				}
+				
+				
+			
 				
 			}
 			
@@ -647,8 +707,8 @@ CREATE TABLE  `pbp2`.`report_person` (
 							+ "e_mark_3,"
 							+ "e_mark_4,"
 							+ "e_mark_5,"
-							+ "e_mark_total,"
-							+ "person_name"
+							+ "e_mark_total"
+						 
 							+ ")   values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
 						 "", Statement.RETURN_GENERATED_KEYS);   
 					
@@ -661,7 +721,7 @@ CREATE TABLE  `pbp2`.`report_person` (
 					ps.setString(6,depReport2.getTypeCode1());
 					ps.setString(7,depReport2.getTypeName1());
 					ps.setString(8,depReport2.getTypeCode2());
-					ps.setString(9,depReport2.getTypeName2());
+					ps.setString(9,finalTmp.getTotalMark()+"");
 					ps.setString(10,depReport2.getTypeCode3());
 					ps.setString(11,depReport2.getTypeName3());
 					ps.setString(12,depReport2.getTypeCode4());
