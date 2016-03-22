@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="person_yearly_report_sumwork" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="8b688613-8009-4ce5-8ce4-dea56e379f1d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="sumWorkTitle" class="java.lang.String"/>
+	<field name="sumPoint" class="java.lang.String"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="401" height="20" isPrintWhenDetailOverflows="true" uuid="14cef734-6e52-4bfc-81f6-4f1ee6b66f0b"/>
+				<textElement markup="none">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumWorkTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="401" y="0" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="51fd0833-4d4f-4dba-85c8-5e14772afcb7"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPoint}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

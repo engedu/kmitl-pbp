@@ -21,22 +21,22 @@
             			<td style="text-align: center;  vertical-align: middle; font-size: 22px;font-weight: bold;">
               		พิมพ์รายงานประจำปีการศึกษา  
            		
- 	            			<form:select path="academicYearSelect" cssStyle="width:20%" > 
+ 	            			<form:select path="academicYearSelect" cssStyle="width:20%" id="academicYear"> 
 								<form:options items="${personYearReport.academicYearList}" itemValue="name" itemLabel="name" />
 							</form:select>     
  
  	            			<c:if test="${person.employeeType == 'ข้าราชการ' }">  
 	            				 &nbsp;&nbsp;&nbsp;   รอบ  &nbsp; 
-	            				 <form:select path="evaluateRound"  cssStyle="width:20% " onchange="initAcademic();"> 
+	            				 <form:select path="evaluateRound"  cssStyle="width:20% " id="evaluateRound"> 
 									<form:options items="${person.evaluateRoundList}" itemValue="name" itemLabel="name" />
 								</form:select> 
 	            			</c:if> 
  
             			
             			</td>
-            			<td abbr="center">
+            			<td abbr="center">academicYearSelect : ${academicYearSelect}
 <%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพ์</a>  --%>
-            			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/report/printReportYear.htm?fileCode=59"> พิมพ์</a> 
+            			<a class="btn btn-primary"  rel="notLoading" onclick="onPrint()"> พิมพ์</a> 
             			</td>
             		</tr>
             	</table>
@@ -45,6 +45,9 @@
  
 </form:form>
 <script type="text/javascript">
-	
-
+	 function onPrint(){
+		 var year = $("#academicYear").val();
+		 var round = $("#evaluateRound").val();
+		 window.location = '<%=request.getContextPath()%>/report/printReportYear.htm?year='+year+'&round'+round;
+	 }
 </script>

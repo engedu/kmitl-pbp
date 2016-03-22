@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PersonReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="60" rightMargin="20" topMargin="40" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="f6669233-2a28-4f19-aab8-c5862aa95069">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PersonReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="60" rightMargin="20" topMargin="40" bottomMargin="20" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="f6669233-2a28-4f19-aab8-c5862aa95069">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="229"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="reportDate" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="fullName" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="fromDate" class="java.lang.String" isForPrompting="false"/>
@@ -27,14 +27,13 @@
 	</queryString>
 	<field name="workGroup" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
+	<field name="sumWorkTitle" class="java.lang.String"/>
 	<field name="sumPoint" class="java.lang.String"/>
-	<field name="workList" class="java.util.List"/>
-	<field name="reportList" class="java.util.Collection"/>
 	<variable name="sumPointAll" class="java.lang.String">
 		<variableExpression><![CDATA["5000.00"]]></variableExpression>
 	</variable>
 	<title>
-		<band height="223" splitType="Stretch">
+		<band height="245" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="91" width="515" height="20" uuid="7f9991cf-235e-4937-a965-e0b6800f54ce">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -267,41 +266,35 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sumWorkMonth}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="1" y="223" width="514" height="22" uuid="e8e039f5-2315-4d63-9161-cd8707c37ff1"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "person_yearly_report_detail.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</title>
 	<detail>
-		<band height="79">
-			<frame>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="515" height="79" isPrintWhenDetailOverflows="true" uuid="0552ef0e-99e0-4d76-9885-bd1c8cbc85cd"/>
-				<subreport isUsingCache="false" runToBottom="false">
-					<reportElement stretchType="RelativeToBandHeight" x="14" y="21" width="501" height="57" isPrintWhenDetailOverflows="true" uuid="e9de37e9-42c9-4220-892c-4c8bfb5f5873"/>
-					<subreportParameter name="sumPoint">
-						<subreportParameterExpression><![CDATA[$F{sumPoint}]]></subreportParameterExpression>
-					</subreportParameter>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{workList})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "person_yearly_report_detail.jasper"]]></subreportExpression>
-				</subreport>
-				<textField>
-					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="515" height="20" isPrintWhenDetailOverflows="true" uuid="2d2ca7a6-38af-4c51-9104-b7ec08911b13"/>
-					<textElement markup="none">
-						<font fontName="Angsana New" size="14" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["- "+$F{title}]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-		<band height="25">
-			<subreport isUsingCache="false" runToBottom="false">
-				<reportElement positionType="Float" x="0" y="0" width="515" height="25" isPrintWhenDetailOverflows="true" uuid="ea3c814b-62cf-40a4-a212-a30d9b528c1b"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{reportList})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "person_yearly_report_sumwork.jasper"]]></subreportExpression>
-			</subreport>
+		<band height="20">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="408" height="20" isPrintWhenDetailOverflows="true" uuid="2d2ca7a6-38af-4c51-9104-b7ec08911b13"/>
+				<textElement markup="none">
+					<font fontName="Angsana New" size="14" isBold="false" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumWorkTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="410" y="0" width="107" height="20" isPrintWhenDetailOverflows="true" uuid="ca436def-2afb-49cd-952b-3aa7851a5efa"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sumPoint}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="191">
+	<pageFooter>
+		<band height="210">
 			<staticText>
-				<reportElement x="328" y="0" width="90" height="20" uuid="a30f26bf-3619-4a9a-b945-07792d4c0be4">
+				<reportElement x="318" y="0" width="90" height="20" uuid="a30f26bf-3619-4a9a-b945-07792d4c0be4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -310,14 +303,14 @@
 				<text><![CDATA[คะแนนรวมทุกด้าน]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="418" y="0" width="100" height="20" uuid="b7c239f6-4546-4a94-a2b5-3d235cc874bf"/>
+				<reportElement x="408" y="0" width="107" height="20" uuid="b7c239f6-4546-4a94-a2b5-3d235cc874bf"/>
 				<textElement textAlignment="Center" markup="none">
 					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumPointAll}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="3" y="20" width="80" height="20" uuid="457be636-8d66-428c-999b-271f2e6bb05d">
+				<reportElement x="0" y="20" width="80" height="20" uuid="457be636-8d66-428c-999b-271f2e6bb05d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -326,27 +319,12 @@
 				<text><![CDATA[ผลงานเพิ่มเติม]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="40" width="515" height="20" uuid="ff57272b-9ea1-4891-86b7-b77ace208afd"/>
+				<reportElement x="0" y="40" width="515" height="20" uuid="ff57272b-9ea1-4891-86b7-b77ace208afd"/>
 				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[.............................................................................................................................................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="81" width="515" height="20" uuid="3ab28b7b-e784-4990-828c-2882b6798406"/>
-				<textElement verticalAlignment="Bottom"/>
-				<text><![CDATA[.............................................................................................................................................................................]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="60" width="515" height="20" uuid="e79b687f-af2f-4181-a878-2fe8e8466a3e"/>
-				<textElement verticalAlignment="Bottom"/>
-				<text><![CDATA[.............................................................................................................................................................................]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="101" width="515" height="20" uuid="2f52b7f5-5cc0-47d7-a87f-ba66aa31f041"/>
-				<textElement verticalAlignment="Bottom"/>
-				<text><![CDATA[.............................................................................................................................................................................]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="414" y="139" width="80" height="20" uuid="0e3c4f9e-825a-4208-ae08-6bdf7220f47a">
+				<reportElement x="411" y="143" width="80" height="20" uuid="0e3c4f9e-825a-4208-ae08-6bdf7220f47a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -355,7 +333,12 @@
 				<text><![CDATA[ผู้ปฏิบัติงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="413" y="171" width="80" height="20" uuid="7fdef5c4-5701-43cf-bb0c-6c5c25f2fadd">
+				<reportElement x="0" y="81" width="515" height="20" uuid="3ab28b7b-e784-4990-828c-2882b6798406"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[.............................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="175" width="80" height="20" uuid="7fdef5c4-5701-43cf-bb0c-6c5c25f2fadd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -364,15 +347,25 @@
 				<text><![CDATA[ผู้มอบหมายงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="138" width="124" height="20" uuid="2cbbe4e3-3c87-4bca-9f1d-0269ab362e6f"/>
+				<reportElement x="286" y="142" width="124" height="20" uuid="2cbbe4e3-3c87-4bca-9f1d-0269ab362e6f"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<text><![CDATA[.............................................................................................................................................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="288" y="169" width="124" height="20" uuid="bf894dc3-7171-4a34-bb25-f355bd5e6dc0"/>
+				<reportElement x="0" y="60" width="515" height="20" uuid="e79b687f-af2f-4181-a878-2fe8e8466a3e"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[.............................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="173" width="124" height="20" uuid="bf894dc3-7171-4a34-bb25-f355bd5e6dc0"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<text><![CDATA[.............................................................................................................................................................................]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="515" height="20" uuid="2f52b7f5-5cc0-47d7-a87f-ba66aa31f041"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[.............................................................................................................................................................................]]></text>
+			</staticText>
 		</band>
-	</columnFooter>
+	</pageFooter>
 </jasperReport>
