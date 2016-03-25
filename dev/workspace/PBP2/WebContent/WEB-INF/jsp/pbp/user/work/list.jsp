@@ -21,37 +21,22 @@
 			<table class="pbp-table"> 
 		<thead>
 			<tr>
-           		<th colspan="5" align="left">    <span class="lsf-icon colororange" title="list"></span>
+           		<th colspan="7" align="left">    <span class="lsf-icon colororange" title="list"></span>
            		
            		ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  
                		
            		
            		</td>
-           		<th colspan="2" ><span class="lsf-icon colororange" title="upload"></span>
-           			<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/initWorkImport.htm" style="color: white;"> นำเข้าผลงาน</a>
-           		</th>
+           	 
            	</tr> 
 			<tr>
 				<th  class="thLast" width="200px">ประเภทภาระงาน     </th>
-				<th   class="thFirst" width="380px">งาน </th>
+				<th   class="thFirst" width="280px">งาน </th>
 				<th   class="thFirst" width="450px">ภาระงาน/คะแนน </th>
 				<th   class="thFirst" width="65px">สถานะ </th>	
-				<th   class="thFirst" width="65px">สัดส่วน </th>
-				<th   class="thFirst" width="65px">คะแนน </th>
+				<th   class="thFirst" width="65px">สัดส่วน </th>			 
+				<th   class="thFirst" width="100px">คะแนน </th>
  				<th   class="thFirst" width="65px">รวม </th>
- 				
-<!-- 				<th  class="thLast" width="15%">   ประเภทภาระงาน      </th>
-				<th   class="thFirst" width="30%">งาน </th>
-				<th   class="thFirst" width="35%">ภาระงาน/คะแนน </th>
-				<th   class="thFirst" width="5%">สถานะ </th>	
-				<th   class="thFirst" width="5%">สัดส่วน </th>
-				<th   class="thFirst" width="5%">คะแนน </th>
- 				<th   class="thFirst" width="5%">รวม </th> -->
- 				 
- 				 <!-- 
- 				<th   class="thFirst" style="width: 80px;">ฐานการคำนวณ </th>
- 				<th   class="thFirst" style="width: 80px;">% เทียบฐาน </th>
- 				 -->
 			</tr> 
 		</thead>		
 		<tbody>
@@ -67,7 +52,7 @@
 					<table class="pbp-table noshadow">
 					 <c:forEach items="${domain.academicKPIUserMappingList}" var="domain2" varStatus="status2">
 						<tr>
-						<td class="" width="380px"> 
+						<td class="" width="280px"> 
 						     <c:forEach items="${domain2.academicKPIAttributeValueList}" var="domain3" varStatus="status3">
 						      <c:if test="${status3.index==0}">
 						         <a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/viewImportWork.htm?kpiUserMappingId=<c:out value="${domain2.kpiUserMappingId}"/>"> <c:out value="${domain3.value}"/></a>
@@ -111,9 +96,16 @@
 						</td>					
 						
 	
-						 <td class="" width="65px"> 
-							<c:out value="${domain2.totalInMapping}"/>   
+						 <td class="" width="100px" style="text-align: left;"> 
+							<c:out value="${domain2.totalInMapping}"/>   |
+							 <c:if test="${domain2.status=='APPROVED'}">
+							    <span style="color: green; font-weight: bold;"><c:out value="${domain2.totalInMapping}"/>  </span>
+							  </c:if> 
+							   <c:if test="${domain2.status!='APPROVED'}">
+							   <span style="color: red;">0.00</span>
+							 </c:if>
 						</td>
+	 
 					</tr>
 					</c:forEach>
 					

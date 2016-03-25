@@ -75,7 +75,8 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 			
 			String username = (String)request.get("username");
 			String academicYear = (String)request.get("academicYear");
-			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMark(username,academicYear);
+			String round = (String)request.get("round");
+			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMark(username,academicYear,round);
 		 
 			 response.addResponse("radarPlotReportList",radarPlotReportList);
  	
@@ -87,7 +88,27 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	 
 		return response;
 	}
-		
+	@Override	
+	public BuckWaResponse getRadarPlotPersonMarkE(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String username = (String)request.get("username");
+			String academicYear = (String)request.get("academicYear");
+			String round = (String)request.get("round");
+			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMarkE(username,academicYear,round);
+		 
+			 response.addResponse("radarPlotReportList",radarPlotReportList);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+				
 	
 	
 	@Override	
@@ -113,6 +134,32 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	 
 		return response;
 	}
+	
+
+	@Override	
+	public BuckWaResponse getExsistCalculateByAcademicYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+			String userName = (String)request.get("userName");
+			String round = (String)request.get("round");
+			String employeeType = (String)request.get("employeeType");
+			String facultyCode = (String)request.get("facultyCode");
+			
+			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getExsistCalculateByAcademicYear(academicYear,userName,round,employeeType,facultyCode);
+		 
+			 response.addResponse("pBPWorkTypeWrapper",pBPWorkTypeWrapper);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
 	
 	
 	@Override	

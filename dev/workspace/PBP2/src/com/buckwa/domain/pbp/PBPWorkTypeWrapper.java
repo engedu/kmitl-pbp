@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.buckwa.domain.BaseDomain;
+import com.buckwa.domain.pbp.report.RadarPlotReport;
 
 public class PBPWorkTypeWrapper  extends BaseDomain{
 	
@@ -37,6 +38,16 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	private String facultyCodeSelect;
 	private String facultyName;
 	
+	private List<RadarPlotReport>  radarPlotReportList;
+	
+	
+	
+	public List<RadarPlotReport> getRadarPlotReportList() {
+		return radarPlotReportList;
+	}
+	public void setRadarPlotReportList(List<RadarPlotReport> radarPlotReportList) {
+		this.radarPlotReportList = radarPlotReportList;
+	}
 	public List<PBPWorkType> getpBPWorkTypeList() {
 		return pBPWorkTypeList;
 	}

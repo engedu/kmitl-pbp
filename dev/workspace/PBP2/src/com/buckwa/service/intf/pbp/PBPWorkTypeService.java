@@ -9,6 +9,7 @@ public interface PBPWorkTypeService {
 	 
 	
 	public BuckWaResponse getCalculateByAcademicYear(BuckWaRequest request);
+	public BuckWaResponse getExsistCalculateByAcademicYear(BuckWaRequest request);
 	
 	public BuckWaResponse create(BuckWaRequest request);
 	public BuckWaResponse addNew(BuckWaRequest request);
@@ -26,7 +27,8 @@ public interface PBPWorkTypeService {
 	public BuckWaResponse getByAcademicYearFacultyCode(BuckWaRequest request);
 	
 	public BuckWaResponse getRadarPlotPersonMark(BuckWaRequest request);
-	 
+	
+	public BuckWaResponse getRadarPlotPersonMarkE(BuckWaRequest request);
 	 
 }
 

@@ -15,6 +15,10 @@ public interface PBPWorkTypeDao {
 	
 	public PBPWorkTypeWrapper getCalculateByAcademicYear(String academicYear,String userName,String round,String employeeType,String facultyCode); 
 	
+	
+	public PBPWorkTypeWrapper getExsistCalculateByAcademicYear(String academicYear,String userName,String round,String employeeType,String facultyCode);
+	
+	
 	public boolean isExist(PBPWorkType domain);
 	public void create(PBPWorkType domain);
 	public void addNew(PBPWorkType domain);
@@ -33,6 +37,6 @@ public interface PBPWorkTypeDao {
 	public PBPWorkTypeWrapper getByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode);
 	
 	
-	public List<RadarPlotReport> getRadarPlotPersonMark( String userName,String academicYear);
-	
+	public List<RadarPlotReport> getRadarPlotPersonMark( String userName,String academicYear,String round);
+	public List<RadarPlotReport> getRadarPlotPersonMarkE( String userName,String academicYear,String round);
 }

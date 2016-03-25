@@ -129,18 +129,53 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	}
 
 	@Override
-	public List<RadarPlotReport> getRadarPlotPersonMark( String username,String academicYear) {			
+	public List<RadarPlotReport> getRadarPlotPersonMark( String username,String academicYear,String round) {			
 		List<RadarPlotReport> radarPlotList = new ArrayList();
 		
-		//String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"' and faculty_code='"+facultyCode+"'" ;   
-		String sql =" ";
-		logger.info("  getByAcademicYearAndFactulty sql:"+sql); 
-		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	 
+		String sql =" select *  from report_person where academic_year ='"+academicYear+"' and round="+round+" and username='"+username+"'" ;   
+		//String sql =" ";
+		logger.info("  getRadarPlotPersonMark sql:"+sql); 
+		  	 
 		try{
 			
-			List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	 
-			pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
-		
+			ReportPbp reportPbp  = this.jdbcTemplate.queryForObject(sql,	new ReportPbpMapper() );	
+			
+			RadarPlotReport r1 = new RadarPlotReport();
+			r1.setAxisName(reportPbp.getWork_type_name1());
+			r1.setAxisValue(reportPbp.getMark_1());
+			r1.setAxisName2(reportPbp.getWork_type_name1());
+			r1.setAxisValue2(reportPbp.getE_mark_1());
+			
+			RadarPlotReport r2 = new RadarPlotReport();
+			r2.setAxisName(reportPbp.getWork_type_name2());
+			r2.setAxisValue(reportPbp.getMark_2());
+			r2.setAxisName2(reportPbp.getWork_type_name2());
+			r2.setAxisValue2(reportPbp.getE_mark_2());
+			
+			RadarPlotReport r3 = new RadarPlotReport();
+			r3.setAxisName(reportPbp.getWork_type_name3());
+			r3.setAxisValue(reportPbp.getMark_3());
+			r3.setAxisName2(reportPbp.getWork_type_name3());
+			r3.setAxisValue2(reportPbp.getE_mark_3());
+			
+			RadarPlotReport r4 = new RadarPlotReport();
+			r4.setAxisName(reportPbp.getWork_type_name4());
+			r4.setAxisValue(reportPbp.getMark_4());
+			r4.setAxisName2(reportPbp.getWork_type_name4());
+			r4.setAxisValue2(reportPbp.getE_mark_4());
+			
+			RadarPlotReport r5 = new RadarPlotReport();
+			r5.setAxisName(reportPbp.getWork_type_name5());
+			r5.setAxisValue(reportPbp.getMark_5());
+			r5.setAxisName2(reportPbp.getWork_type_name5());
+			r5.setAxisValue2(reportPbp.getE_mark_5());
+			
+			radarPlotList.add(r1);
+			radarPlotList.add(r2);
+			radarPlotList.add(r3);
+			radarPlotList.add(r4);
+			radarPlotList.add(r5);
+			 
 		
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -149,7 +184,131 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	}
 	
 	
+	 
+	private PBPWorkTypeWrapper  getExcistPersonMark( String username,String academicYear,String round) {	
+		
+		PBPWorkTypeWrapper pbpWorkTypeWrapper = new PBPWorkTypeWrapper();
+		pbpWorkTypeWrapper.setUserName(username);
+		pbpWorkTypeWrapper.setAcademicYear(academicYear);
+		pbpWorkTypeWrapper.setRound(round);
+		List<RadarPlotReport> radarPlotList = new ArrayList();
+		
+		String sql =" select *  from report_person where academic_year ='"+academicYear+"' and round="+round+" and username='"+username+"'" ;   
+		//String sql =" ";
+		logger.info("  getRadarPlotPersonMark sql:"+sql); 
+		  	 
+		try{
+			
+			ReportPbp reportPbp  = this.jdbcTemplate.queryForObject(sql,	new ReportPbpMapper() );	
+			
+			RadarPlotReport r1 = new RadarPlotReport();
+			r1.setAxisName(reportPbp.getWork_type_name1());
+			r1.setAxisValue(reportPbp.getMark_1());
+			r1.setAxisName2(reportPbp.getWork_type_name1());
+			r1.setAxisValue2(reportPbp.getE_mark_1());
+			
+			RadarPlotReport r2 = new RadarPlotReport();
+			r2.setAxisName(reportPbp.getWork_type_name2());
+			r2.setAxisValue(reportPbp.getMark_2());
+			r2.setAxisName2(reportPbp.getWork_type_name2());
+			r2.setAxisValue2(reportPbp.getE_mark_2());
+			
+			RadarPlotReport r3 = new RadarPlotReport();
+			r3.setAxisName(reportPbp.getWork_type_name3());
+			r3.setAxisValue(reportPbp.getMark_3());
+			r3.setAxisName2(reportPbp.getWork_type_name3());
+			r3.setAxisValue2(reportPbp.getE_mark_3());
+			
+			RadarPlotReport r4 = new RadarPlotReport();
+			r4.setAxisName(reportPbp.getWork_type_name4());
+			r4.setAxisValue(reportPbp.getMark_4());
+			r4.setAxisName2(reportPbp.getWork_type_name4());
+			r4.setAxisValue2(reportPbp.getE_mark_4());
+			
+			RadarPlotReport r5 = new RadarPlotReport();
+			r5.setAxisName(reportPbp.getWork_type_name5());
+			r5.setAxisValue(reportPbp.getMark_5());
+			r5.setAxisName2(reportPbp.getWork_type_name5());
+			r5.setAxisValue2(reportPbp.getE_mark_5());
+			
+			radarPlotList.add(r1);
+			radarPlotList.add(r2);
+			radarPlotList.add(r3);
+			radarPlotList.add(r4);
+			radarPlotList.add(r5);
+			
+			pbpWorkTypeWrapper.setTotalMark(new BigDecimal(reportPbp.getMark_total()));
+			pbpWorkTypeWrapper.setTotalMark_E(new BigDecimal(reportPbp.getE_mark_total()));
+			
+			pbpWorkTypeWrapper.setRadarPlotReportList(radarPlotList);
+			 
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return pbpWorkTypeWrapper;
+	}
 	
+	
+	@Override
+	public List<RadarPlotReport> getRadarPlotPersonMarkE( String username,String academicYear,String round) {			
+		List<RadarPlotReport> radarPlotList = new ArrayList();
+		
+		String sql =" select *  from report_person where academic_year ='"+academicYear+"' and round="+round+" and username='"+username+"'" ;   
+		//String sql =" ";
+		logger.info("  getRadarPlotPersonMark sql:"+sql); 
+		  	 
+		try{
+			
+			ReportPbp reportPbp  = this.jdbcTemplate.queryForObject(sql,	new ReportPbpMapper() );	
+			
+			RadarPlotReport r1 = new RadarPlotReport();
+			r1.setAxisName(reportPbp.getWork_type_name1());
+			r1.setAxisValue(reportPbp.getE_mark_1());
+			
+			RadarPlotReport r2 = new RadarPlotReport();
+			r2.setAxisName(reportPbp.getWork_type_name2());
+			r2.setAxisValue(reportPbp.getE_mark_2());
+			
+			RadarPlotReport r3 = new RadarPlotReport();
+			r3.setAxisName(reportPbp.getWork_type_name3());
+			r3.setAxisValue(reportPbp.getE_mark_3());
+			
+			RadarPlotReport r4 = new RadarPlotReport();
+			r4.setAxisName(reportPbp.getWork_type_name4());
+			r4.setAxisValue(reportPbp.getE_mark_4());
+			
+			RadarPlotReport r5 = new RadarPlotReport();
+			r5.setAxisName(reportPbp.getWork_type_name5());
+			r5.setAxisValue(reportPbp.getE_mark_5());
+			
+			radarPlotList.add(r1);
+			radarPlotList.add(r2);
+			radarPlotList.add(r3);
+			radarPlotList.add(r4);
+			radarPlotList.add(r5);
+			 
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return radarPlotList;
+	}
+	
+	
+		
+	
+	@Override
+	public PBPWorkTypeWrapper getExsistCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType,String facultyCode) {
+		logger.info("  ########### Start Call  userName :"+userName+" academicYear:"+academicYear+" round:"+round+" employeeType:"+employeeType+" facultyCode:"+facultyCode);
+		PBPWorkTypeWrapper pbpWorkTypeWrapper = new PBPWorkTypeWrapper();
+		
+		pbpWorkTypeWrapper =getExcistPersonMark(userName, academicYear, round);
+	 
+		
+		
+		return pbpWorkTypeWrapper;
+	}
 	
 	@Override
 	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType,String facultyCode) {
@@ -221,7 +380,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		pBPWorkTypeWrapper.setAcademicYear(academicYear);
 		pBPWorkTypeWrapper.setUserName(userName);
-		pBPWorkTypeWrapper.setRound(sqlRound);
+		pBPWorkTypeWrapper.setRound(round);
 		pBPWorkTypeWrapper.setEmployeeType(employeeType);
 		pBPWorkTypeWrapper.setFacultyCode(facultyCode);
 		

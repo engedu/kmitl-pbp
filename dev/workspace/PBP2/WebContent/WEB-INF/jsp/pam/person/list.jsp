@@ -132,11 +132,18 @@
             <div class="pbp-header">
                 <table style="width: 100%;">
             		<tr>
+            		
 							<td width="100%;" style="text-align: right; vertical-align: middle; height: 50px; font-size: 22px;font-weight: bold;">
 								<c:if
 									test="${principal.personProfile.employeeType == 'ข้าราชการ' }">
 									<!--  รอบที่   1  -->
 								</c:if> คะแนนรวม  = ${person.pBPWorkTypeWrapper.totalMark}</td>
+							<td>
+         						   <a rel="notLoading" onclick="recalculate();" > 
+							 	<input value="Re-Calculate" class="btn btn-primary" type="button" onclick="#">
+								 </a>							
+							</td>
+								
 							<td>
             						   <a rel="notLoading" onclick="initAcademicWork();" > 
 							 	<input value="ดูรายละเอียดการประเมิน" class="btn btn-primary" type="button" onclick="#">
@@ -167,46 +174,38 @@
             <div class="pbp-header">		
             	
 		<table class="pbp-table">
-		<thead>
-			<tr>
-           		<th align="left">    <span class="lsf-icon colororange" title="list"></span>ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  </th>
-           		<th > 
-<%--            		<a rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">            			  --%>
-<!-- 						<input value="พิมพ์รายงานประจำปี" class="btn btn-primary" type="button" onclick="#"> -->
-<!-- 						</a> -->
-           		</th>
-           	</tr>
+		<thead> 
 			<tr>
 				<th  class="thLast" width="250px;">   ประเภทภาระงาน      </th> 		 
- 				<th   class="thFirst" style="width: 80px;">ระดับคะแนน (คะแนน) </th> 				 
+ 				<th   class="thFirst" style="width: 80px;">ระดับคะแนนคาดการณ์ (คะแนน) </th> 	
+ 				<th   class="thFirst" style="width: 80px;">ระดับคะแนน (คะแนน) </th			 
 			</tr> 
 		</thead>		
 		<tbody>
-				<c:forEach items="${person.pBPWorkTypeWrapper.pBPWorkTypeList}" var="domain" varStatus="status">
+				<c:forEach items="${person.pBPWorkTypeWrapper.radarPlotReportList}" var="domain" varStatus="status">
 			<tr>
 				<td class="tdLast" style="border-bottom: 1px solid #e1e1e1;">			
-			       <input type="hidden" name="pBPWorkTypeList[${status.index}].workTypeId" value="${domain.workTypeId}" >
-					${status.index+1} <c:out value="${domain.name}"/>  
+			      
+					${status.index+1} <c:out value="${domain.axisName}"/>  
 	 
 				</td>
   
  				<td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;"> 
-								<c:if test="${domain.compareBaseStatus=='UNDER'}">
-				  <span style="color: red;"><c:out value="${domain.totalInWorkType}"/></span>
-                 </c:if>
-                  <c:if test="${domain.compareBaseStatus=='NORMAL'}">
-				<c:out value="${domain.totalInWorkType}"/>
-                 </c:if>
-                <c:if test="${domain.compareBaseStatus=='OVER'}">
-				  <span style="color:green;"> <c:out value="${domain.totalInWorkType}"/></span>
-                 </c:if>
+								 
+				   <c:out value="${domain.axisValue2}"/> 
+          
 				</td>		 
-   
+ 				<td class="thLast" style="border-bottom: 1px solid #e1e1e1; text-align: center; width: 50px;"> 
+								 
+				   <c:out value="${domain.axisValue}"/> 
+          
+				</td>	   
 			</tr> 
 			</c:forEach>
 			
 			<tr>
 				<th  class="thLast" style="text-align: right; font-size: 22px;">   คะแนนรวม    &nbsp; &nbsp; &nbsp; &nbsp;</th>
+				<th  class="thLast" colspan="1" style="text-align: center; font-size: 22px;">   ${person.pBPWorkTypeWrapper.totalMark_E} </th>
  				<th  class="thLast" colspan="1" style="text-align: center; font-size: 22px;">   ${person.pBPWorkTypeWrapper.totalMark} </th>
 			</tr>	
 			
@@ -294,6 +293,16 @@
 		
 		form.submit();
 	}
+	
+	
+	function recalculate(){
+		var form = document.forms['mainForm'];
+		form.action = "<%=request.getContextPath()%>/pam/person/recalculate.htm";
+		form.method = 'GET';
+ 
+		
+		form.submit();
+	}
 	 
 </script>
 <script>
@@ -305,7 +314,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "<%=request.getContextPath()%>/json/person/getRadarPlot",
+                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew",
                             dataType: "json"
                         }
                     } 
@@ -316,7 +325,12 @@
                 series: [{
                     name: "คะแนน",
                     field: "axisValue"
-                }],
+                },
+                {
+                    name: "คะแนนคาดการณ์",
+                    field: "axisValue2"
+                }                
+                ],
                 categoryAxis: {
                     field: "axisName"
                 },
@@ -333,6 +347,8 @@
                     template: "#= series.name #: #= value #"
                 }
             });
+            
+  
             
           	 $("#grid").kendoGrid({     
      		    
