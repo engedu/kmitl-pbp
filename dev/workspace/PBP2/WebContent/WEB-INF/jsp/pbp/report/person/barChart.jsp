@@ -50,13 +50,8 @@
         	        },
         	        valueAxis: {
         	            min: 0,
-        	            max: 4000,
-        	            majorUnit: 300,
-        	            plotBands: [{
-            	            from: 99,
-            	            to: 100,
-            	            color: "#f99"
-            	        }]
+        	            max: 2000,
+        	            majorUnit: 100
         	        }
         	        
         	        ,valueAxis:  {

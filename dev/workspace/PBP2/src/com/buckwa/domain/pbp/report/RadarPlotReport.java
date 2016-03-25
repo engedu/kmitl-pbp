@@ -11,6 +11,14 @@ public class RadarPlotReport implements Serializable{
 	private String axisName2;
 	private String axisValue2;
 	
+	private String mean;
+	
+	public String getMean() {
+		return mean;
+	}
+	public void setMean(String mean) {
+		this.mean = mean;
+	}
 	public String getAxisName() {
 		return axisName;
 	}

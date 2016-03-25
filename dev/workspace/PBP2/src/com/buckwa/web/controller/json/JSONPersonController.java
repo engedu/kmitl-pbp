@@ -333,6 +333,7 @@ public class JSONPersonController {
 
 								reportTmp.setOrderNo(loopx);
 								returnList.add(reportTmp);
+								reportTmp.setMean("333");
 								loopx++;
 							}
 
