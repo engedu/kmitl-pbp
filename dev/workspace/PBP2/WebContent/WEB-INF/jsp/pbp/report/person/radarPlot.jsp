@@ -29,7 +29,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "<%=request.getContextPath()%>/json/person/getRadarPlot",
+                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew",
                             dataType: "json"
                         }
                     } 
@@ -63,7 +63,7 @@
      		    dataSource: {
      		        transport: {
      		            read: {
-     		                url:    "<%=request.getContextPath()%>/json/person/getRadarPlot",
+     		                url:    "<%=request.getContextPath()%>/json/person/getRadarPlotNew",
      		                dataType: "Json"
      		            }
      		        }
