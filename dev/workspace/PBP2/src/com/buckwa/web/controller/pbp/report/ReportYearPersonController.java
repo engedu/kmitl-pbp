@@ -135,9 +135,7 @@ public class ReportYearPersonController{
 		
 		PersonReport personReport = new PersonReport();
 		Map<String, Object> workMap = new HashMap<String, Object>();
-		Map<String, Object> sumWorkMap = new HashMap<String, Object>();
 		List<Map> workList = new ArrayList<Map>();
-		List<Map> sumList = new ArrayList<Map>();
 		
 		personReport.setWorkGroup("1");
 		personReport.setTitle("ผลงานด้านวิชาการ");
@@ -146,17 +144,11 @@ public class ReportYearPersonController{
 		workMap.put("point", "100");
 		workList.add(workMap);
 		personReport.setWorkList(workList);
-		sumWorkMap.put("sumWorkTitle", "คะแนนรวมด้านวิชาการ");
-		sumWorkMap.put("sumPoint", personReport.getSumPoint());
-		sumList.add(sumWorkMap);
-		personReport.setReportList(sumList);
 		reportList.add(personReport);
 		
 		personReport = new PersonReport();
 		workMap = new HashMap<String, Object>();
-		sumWorkMap = new HashMap<String, Object>();
 		workList = new ArrayList<Map>();
-		sumList = new ArrayList<Map>();
 		personReport.setWorkGroup("2");
 		personReport.setTitle("ผลงานด้านพัฒนาวิชาการ");
 		personReport.setSumPoint("300");
@@ -164,73 +156,22 @@ public class ReportYearPersonController{
 		workMap.put("point", "300");
 		workList.add(workMap);
 		personReport.setWorkList(workList);
-		sumWorkMap.put("sumWorkTitle", "คะแนนรวมด้านพัฒนาวิชาการ");
-		sumWorkMap.put("sumPoint", personReport.getSumPoint());
-		sumList.add(sumWorkMap);
-		personReport.setReportList(sumList);
 		reportList.add(personReport);
 		
 		personReport = new PersonReport();
 		workMap = new HashMap<String, Object>();
-		sumWorkMap = new HashMap<String, Object>();
 		workList = new ArrayList<Map>();
-		sumList = new ArrayList<Map>();
 		personReport.setWorkGroup("3");
 		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์");
 		personReport.setSumPoint("500");
 		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
 		workMap.put("point", "200");
 		workList.add(workMap);
-		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		sumWorkMap.put("sumWorkTitle", "คะแนนรวมด้านวิจัยหรือสร้างสรรค์");
-		sumWorkMap.put("sumPoint", personReport.getSumPoint());
-		sumList.add(sumWorkMap);
-		personReport.setReportList(sumList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
 		workMap = new HashMap<String, Object>();
-		sumWorkMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		sumList = new ArrayList<Map>();
-		personReport.setWorkGroup("4");
-		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 4");
-		personReport.setSumPoint("500");
-		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
-		workMap.put("point", "200");
-		workList.add(workMap);
 		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
 		workMap.put("point", "300");
 		workList.add(workMap);
 		personReport.setWorkList(workList);
-		sumWorkMap.put("sumWorkTitle", "คะแนนรวมด้านวิจัยหรือสร้างสรรค์");
-		sumWorkMap.put("sumPoint", personReport.getSumPoint());
-		sumList.add(sumWorkMap);
-		personReport.setReportList(sumList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
-		workMap = new HashMap<String, Object>();
-		sumWorkMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		sumList = new ArrayList<Map>();
-		personReport.setWorkGroup("5");
-		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 5");
-		personReport.setSumPoint("500");
-		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
-		workMap.put("point", "200");
-		workList.add(workMap);
-		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		sumWorkMap.put("sumWorkTitle", "คะแนนรวมด้านวิจัยหรือสร้างสรรค์");
-		sumWorkMap.put("sumPoint", personReport.getSumPoint());
-		sumList.add(sumWorkMap);
-		personReport.setReportList(sumList);
 		reportList.add(personReport);
 		
 		return reportList;
@@ -241,7 +182,6 @@ public class ReportYearPersonController{
 		private String title;
 		private String sumPoint;
 		private List<Map> workList;
-		private List<Map> reportList;
 		public String getWorkGroup() {
 			return workGroup;
 		}
@@ -265,13 +205,7 @@ public class ReportYearPersonController{
 		}
 		public void setWorkList(List<Map> workList) {
 			this.workList = workList;
-		}
-		public List<Map> getReportList() {
-			return reportList;
-		}
-		public void setReportList(List<Map> reportList) {
-			this.reportList = reportList;
-		}
+		} 
 	}
 	
 	public static void main(String[] args) {
@@ -311,13 +245,10 @@ public class ReportYearPersonController{
 			
 		String reportFile = "J:\\WORK\\KMITL_WORK\\PBP2\\WebContent\\report\\person_yearly_report.jrxml";
 		String subDetailFileName = "J:\\WORK\\KMITL_WORK\\PBP2\\WebContent\\report\\person_yearly_report_detail.jrxml";
-		String sumDetailFileName = "J:\\WORK\\KMITL_WORK\\PBP2\\WebContent\\report\\person_yearly_report_sumwork.jrxml";
 		try{
 			JasperReport report = JasperCompileManager.compileReport(reportFile);
 			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
-			JasperReport reportSumDetail = JasperCompileManager.compileReport(sumDetailFileName);
-			params.put("reportDetail", reportDetail);
-			params.put("reportSumDetail", reportSumDetail);
+			params.put("subreportParameter", reportDetail);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, new JRBeanCollectionDataSource(getReportData()));
 			
 			JasperViewer.viewReport(jasperPrint, false);
