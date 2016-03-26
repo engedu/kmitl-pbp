@@ -174,6 +174,38 @@ public class ReportYearPersonController{
 		personReport.setWorkList(workList);
 		reportList.add(personReport);
 		
+		personReport = new PersonReport();
+		workMap = new HashMap<String, Object>();
+		workList = new ArrayList<Map>();
+		personReport.setWorkGroup("4");
+		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 4");
+		personReport.setSumPoint("500");
+		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
+		workMap.put("point", "200");
+		workList.add(workMap);
+		workMap = new HashMap<String, Object>();
+		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
+		workMap.put("point", "300");
+		workList.add(workMap);
+		personReport.setWorkList(workList);
+		reportList.add(personReport);
+		
+		personReport = new PersonReport();
+		workMap = new HashMap<String, Object>();
+		workList = new ArrayList<Map>();
+		personReport.setWorkGroup("5");
+		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 5");
+		personReport.setSumPoint("500");
+		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
+		workMap.put("point", "200");
+		workList.add(workMap);
+		workMap = new HashMap<String, Object>();
+		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
+		workMap.put("point", "300");
+		workList.add(workMap);
+		personReport.setWorkList(workList);
+		reportList.add(personReport);
+		
 		return reportList;
 	}
 	
