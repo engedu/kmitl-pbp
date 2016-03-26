@@ -88,10 +88,11 @@ public class ReportYearPersonController{
 					+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
 					+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
 			
-			
 			Date todayDate = new Date();
-			int age = todayDate.getYear() - person.getBirthdate().getYear();
-			
+			String age = "-";
+			if(null!=person.getBirthdate()){
+				age = todayDate.getYear() - person.getBirthdate().getYear() + "";
+			}
 			params.put("reportDate", reportDate);
 			params.put("fullName", person.getTitleName()+" "+person.getThaiName()+" "+person.getThaiSurname());
 			params.put("fromDate", reportFrom);
@@ -117,9 +118,13 @@ public class ReportYearPersonController{
 			params.put("reportList", getReportData());
 			
 			String reportFile = "report//person_yearly_report.jasper";
+			String subDetailFileName = "report//person_yearly_report_detail.jrxml";
 			String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
 			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(getReportData()));
+			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
+			params.put("subreportParameter", reportDetail);
+			
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			
 			outputStream.close();
