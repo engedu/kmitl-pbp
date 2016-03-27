@@ -1,6 +1,5 @@
 package com.buckwa.web.controller.pbp.report;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,12 +33,7 @@ import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.MaternityLeave;
 import com.buckwa.domain.pam.Person;
-import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
-import com.buckwa.domain.pbp.AcademicKPIUserMapping;
-import com.buckwa.domain.pbp.PBPWorkType;
-import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.service.intf.pam.PersonProfileService;
-import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 
@@ -54,9 +47,6 @@ public class ReportYearPersonController{
 	@Autowired
 	private PersonProfileService personProfileService;
 	
-	@Autowired
-	private PBPWorkTypeService pbpWorkTypeService;
-	
 	@RequestMapping(value="/printReportYear.htm", method = RequestMethod.GET)
 	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 //		Person person = null;
@@ -68,9 +58,6 @@ public class ReportYearPersonController{
 			
 			String year = httpRequest.getParameter("year");
 			String round = httpRequest.getParameter("round");
-			if(round==null){
-				round ="1";
-			}
 			
 			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			httpResponse.setHeader("Content-Disposition", "attachment; filename=Person_Report.pdf");
@@ -83,36 +70,11 @@ public class ReportYearPersonController{
 			request.put("username", user.getUsername());
 			request.put("academicYear", year);
 			
-
 			Person person = new Person();
 			response = personProfileService.getByUsername(request);
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				person = (Person) response.getResObj("person");
 			}
-			
-			
-			String facultyCode = person.getFacultyCode();
-			 
-			request.put("userName",BuckWaUtils.getUserNameFromContext());
-			request.put("round",round);
-			request.put("employeeType",person.getEmployeeTypeNo());
-			request.put("facultyCode",facultyCode);
-			
-			response = pbpWorkTypeService.getCalculateByAcademicYear(request);
-		 
-			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
-				pBPWorkTypeWrapper.setAcademicYear(year);
-				person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper); 
-				
-				
-				List<PersonReport>  reportList =getPersonReportList(pBPWorkTypeWrapper);
-				
-				
-			}	
-			
-			
-			
 			
 			String reportDate = new SimpleDateFormat("d").format(new Date())
 				+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
@@ -141,34 +103,37 @@ public class ReportYearPersonController{
 			params.put("unit", person.getFacultyDesc());
 			params.put("degree", person.getMaxEducation());
 			params.put("age",  age); 
-			params.put("startWorkDay", person.getWorkingDate()==null?"-":person.getWorkingDate().getDay());
-			params.put("startWorkMonth",person.getWorkingDate()==null?"-":person.getWorkingDate().getMonth());
-			params.put("startWorkYear",person.getWorkingDate()==null?"-": person.getWorkingDate().getYear());
 			
-//			int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
-//			int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
-//			wyear = wyear<0? 0:wyear;
-//			wmont = wmont<0? 0:wmont;
-			params.put("sumWorkYear", "-");
-			params.put("sumWorkMonth", "-");
+			if(null!=person.getWorkingDate()){
+				params.put("startWorkDay", person.getWorkingDate().getDay());
+				params.put("startWorkMonth",person.getWorkingDate().getMonth());
+				params.put("startWorkYear", person.getWorkingDate().getYear());
+				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
+				int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
+				wyear = wyear<0? 0:wyear;
+				wmont = wmont<0? 0:wmont;
+				params.put("sumWorkYear", wyear);
+				params.put("sumWorkMonth", wmont);
+			}else{
+				params.put("startWorkDay","-");
+				params.put("startWorkMonth","-");
+				params.put("startWorkYear", "-");
+				params.put("sumWorkYear", "-");
+				params.put("sumWorkMonth", "-");
+			}
 			
 			params.put("moreWorkReport", "");
-			params.put("reportList", getReportData());
+//			params.put("reportList", getReportData());
 			
 			String reportFile = "report//person_yearly_report.jasper";
-			String subDetailFileName = "report//person_yearly_report_detail.jrxml";
-			//String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
-			String inputFile = httpRequest.getSession().getServletContext().getRealPath("report//person_yearly_report.jasper");
+			String subDetailFileName = "//report//person_yearly_report_detail.jasper";
+			String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
+//			String subDetailFile = httpRequest.getSession().getServletContext().getRealPath(subDetailFileName);
 			
-			ServletContext servletContext = httpRequest.getSession().getServletContext();
-			logger.info("servletContext :" + servletContext);
-			String relativeWebPath = "report/person_yearly_report.jasper";
-			String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
-			logger.info("absoluteDiskPath :" + absoluteDiskPath);
-			 
-			logger.info("inputFile :" + inputFile);
+			String fullPath = httpRequest.getSession().getServletContext().getRealPath("report\\");
+			params.put("SUBREPORT_DIR", fullPath);
 			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile, params, new JRBeanCollectionDataSource(getReportData()));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(getReportData()));
 			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
 			params.put("subreportParameter", reportDetail);
 			
@@ -180,138 +145,6 @@ public class ReportYearPersonController{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-	
-	
-	private List<PersonReport> getPersonReportList(PBPWorkTypeWrapper pBPWorkTypeWrapper){
-		
-		 
-		 
-			List<PBPWorkType> workTypeList =pBPWorkTypeWrapper.getpBPWorkTypeList();
-			
-			
-			List<PersonReport> personReportList = new ArrayList();
-			
-			for(PBPWorkType  tmp:workTypeList){
-				
-				String worktypeCode =tmp.getCode();
-				String worktypeName = tmp.getName();
-				BigDecimal totalInworktype =tmp.getTotalInWorkType();
-				
-				
-				
-				
-				
-				if("1".equals(worktypeCode)){						
-					PersonReport personReport = new PersonReport();						
-					List<Map> workList = new ArrayList<Map>();				
-					personReport.setWorkGroup(worktypeCode);
-					personReport.setTitle(worktypeName);
-					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
-					for(AcademicKPIUserMapping mappingTmp:mappingList){							
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
-						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
-						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
-						Map<String, Object> workMap = new HashMap<String, Object>();
-						workMap.put("work", attributeTmp.getValue());
-						workMap.put("point", totalMark);
-						workList.add(workMap);							
-					}						
-					personReport.setWorkList(workList);
-					personReportList.add(personReport);
-				}else if("2".equals(worktypeCode)){
-					
-					PersonReport personReport = new PersonReport();						
-					List<Map> workList = new ArrayList<Map>();				
-					personReport.setWorkGroup(worktypeCode);
-					personReport.setTitle(worktypeName);
-					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
-					for(AcademicKPIUserMapping mappingTmp:mappingList){							
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
-						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
-						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
-						Map<String, Object> workMap = new HashMap<String, Object>();
-						workMap.put("work", attributeTmp.getValue());
-						workMap.put("point", totalMark);
-						workList.add(workMap);							
-					}						
-					personReport.setWorkList(workList);						
-					personReportList.add(personReport);
-					
-				}else if("3".equals(worktypeCode)){
-					
-					PersonReport personReport = new PersonReport();						
-					List<Map> workList = new ArrayList<Map>();				
-					personReport.setWorkGroup(worktypeCode);
-					personReport.setTitle(worktypeName);
-					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
-					for(AcademicKPIUserMapping mappingTmp:mappingList){							
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
-						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
-						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
-						Map<String, Object> workMap = new HashMap<String, Object>();
-						workMap.put("work", attributeTmp.getValue());
-						workMap.put("point", totalMark);
-						workList.add(workMap);							
-					}						
-					personReport.setWorkList(workList);						
-					personReportList.add(personReport);
-					
-				}else if("4".equals(worktypeCode)){
-					
-					PersonReport personReport = new PersonReport();						
-					List<Map> workList = new ArrayList<Map>();				
-					personReport.setWorkGroup(worktypeCode);
-					personReport.setTitle(worktypeName);
-					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
-					for(AcademicKPIUserMapping mappingTmp:mappingList){							
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
-						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
-						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
-						Map<String, Object> workMap = new HashMap<String, Object>();
-						workMap.put("work", attributeTmp.getValue());
-						workMap.put("point", totalMark);
-						workList.add(workMap);							
-					}						
-					personReport.setWorkList(workList);						
-					personReportList.add(personReport);
-					
-				}else if("5".equals(worktypeCode)){
-					
-					PersonReport personReport = new PersonReport();						
-					List<Map> workList = new ArrayList<Map>();				
-					personReport.setWorkGroup(worktypeCode);
-					personReport.setTitle(worktypeName);
-					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
-					for(AcademicKPIUserMapping mappingTmp:mappingList){							
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
-						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
-						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
-						Map<String, Object> workMap = new HashMap<String, Object>();
-						workMap.put("work", attributeTmp.getValue());
-						workMap.put("point", totalMark);
-						workList.add(workMap);							
-					}						
-					personReport.setWorkList(workList);						
-					personReportList.add(personReport);
-					
-				}
-			}
-		 
-		
-		 
-		 return personReportList;
-		
 	}
 	
 	public static List<PersonReport> getReportData() {
