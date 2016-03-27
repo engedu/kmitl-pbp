@@ -68,6 +68,9 @@ public class ReportYearPersonController{
 			
 			String year = httpRequest.getParameter("year");
 			String round = httpRequest.getParameter("round");
+			if(round==null){
+				round ="1";
+			}
 			
 			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			httpResponse.setHeader("Content-Disposition", "attachment; filename=Person_Report.pdf");
@@ -102,29 +105,9 @@ public class ReportYearPersonController{
 				pBPWorkTypeWrapper.setAcademicYear(year);
 				person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper); 
 				
-				List<PBPWorkType> workTypeList =pBPWorkTypeWrapper.getpBPWorkTypeList();
 				
-				for(PBPWorkType  tmp:workTypeList){
-					
-					String worktypeCode =tmp.getCode();
-					String worktypeName = tmp.getName();
-					BigDecimal totalInworktype =tmp.getTotalInWorkType();
-					System.out.println(" worktypeCode:Name ==>"+worktypeCode+":"+worktypeName+" :"+totalInworktype);
-					
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();
-					
-					for(AcademicKPIUserMapping mappingTmp:mappingList){
-						
-						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
-						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);
-						
-						System.out.println(" VAlue:"+attributeTmp.getValue());
-					}
-					
-					
-					 
-					
-				}
+				List<PersonReport>  reportList =getPersonReportList(pBPWorkTypeWrapper);
+				
 				
 			}	
 			
@@ -197,6 +180,138 @@ public class ReportYearPersonController{
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	
+	private List<PersonReport> getPersonReportList(PBPWorkTypeWrapper pBPWorkTypeWrapper){
+		
+		 
+		 
+			List<PBPWorkType> workTypeList =pBPWorkTypeWrapper.getpBPWorkTypeList();
+			
+			
+			List<PersonReport> personReportList = new ArrayList();
+			
+			for(PBPWorkType  tmp:workTypeList){
+				
+				String worktypeCode =tmp.getCode();
+				String worktypeName = tmp.getName();
+				BigDecimal totalInworktype =tmp.getTotalInWorkType();
+				
+				
+				
+				
+				
+				if("1".equals(worktypeCode)){						
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){							
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
+						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+						Map<String, Object> workMap = new HashMap<String, Object>();
+						workMap.put("work", attributeTmp.getValue());
+						workMap.put("point", totalMark);
+						workList.add(workMap);							
+					}						
+					personReport.setWorkList(workList);
+					personReportList.add(personReport);
+				}else if("2".equals(worktypeCode)){
+					
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){							
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
+						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+						Map<String, Object> workMap = new HashMap<String, Object>();
+						workMap.put("work", attributeTmp.getValue());
+						workMap.put("point", totalMark);
+						workList.add(workMap);							
+					}						
+					personReport.setWorkList(workList);						
+					personReportList.add(personReport);
+					
+				}else if("3".equals(worktypeCode)){
+					
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){							
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
+						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+						Map<String, Object> workMap = new HashMap<String, Object>();
+						workMap.put("work", attributeTmp.getValue());
+						workMap.put("point", totalMark);
+						workList.add(workMap);							
+					}						
+					personReport.setWorkList(workList);						
+					personReportList.add(personReport);
+					
+				}else if("4".equals(worktypeCode)){
+					
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){							
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
+						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+						Map<String, Object> workMap = new HashMap<String, Object>();
+						workMap.put("work", attributeTmp.getValue());
+						workMap.put("point", totalMark);
+						workList.add(workMap);							
+					}						
+					personReport.setWorkList(workList);						
+					personReportList.add(personReport);
+					
+				}else if("5".equals(worktypeCode)){
+					
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){							
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);							
+						BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+						System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+						Map<String, Object> workMap = new HashMap<String, Object>();
+						workMap.put("work", attributeTmp.getValue());
+						workMap.put("point", totalMark);
+						workList.add(workMap);							
+					}						
+					personReport.setWorkList(workList);						
+					personReportList.add(personReport);
+					
+				}
+			}
+		 
+		
+		 
+		 return personReportList;
+		
 	}
 	
 	public static List<PersonReport> getReportData() {
