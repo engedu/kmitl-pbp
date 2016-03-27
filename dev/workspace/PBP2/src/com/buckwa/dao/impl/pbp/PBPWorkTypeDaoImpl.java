@@ -489,6 +489,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		// Callculate 
 		
 		logger.info("  ##########  ##########   ##########  Start Calculate   ##########  ##########  ##########" );
+	 
 
 		BigDecimal totalMark = new BigDecimal(0.00);
 		BigDecimal totalMarkCompareBase = new BigDecimal(0.00);

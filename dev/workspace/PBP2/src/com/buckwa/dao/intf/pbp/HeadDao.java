@@ -17,5 +17,8 @@ public interface HeadDao {
 	
 	public List<DepartmentWorkTypeReport> getReportWorkTypeDepartment(String worktype, Department dep);
 	
+	public String getDepartmentMean( String academicYear ,String facultyCode,String departmentCode);
+	
+	
 	
 }

@@ -57,6 +57,21 @@ public class HeadDaoImpl implements HeadDao {
 	
 	@Autowired
 	private FacultyDao  facultyDao;
+	
+	
+	
+	@Override
+	public String getDepartmentMean( String academicYear ,String facultyCode,String departmentCode) {	 
+ 
+		
+		String sql =" select  ROUND( AVG(mark_total),2 ) from report_worktype_department where faculty_code ='"+facultyCode+"' and department_code='"+departmentCode+"' and academic_year="+academicYear;
+		logger.info("  getDepartmentMean sql:"+sql);
+		String returnStr = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+		logger.info("  returnStr:"+returnStr);
+		
+	    return returnStr;
+		 
+	}
  
 	@Override
 	public AcademicKPIUserMappingWrapper getByHeadAcademicYear( String headUserName ,String academicYear,String status) {	 
@@ -523,6 +538,10 @@ public class HeadDaoImpl implements HeadDao {
 			
 			department.setAcademicPersonList(academicPersonList); 
 		}
+		
+		
+		//Recal Mean
+		
 		 
 		
 		return department;
@@ -603,7 +622,6 @@ public class HeadDaoImpl implements HeadDao {
 				+ " and academic_year="+department.getAcademicYear() /*+" order by person_name ";*/ +"  order by CAST(mark_total AS DECIMAL(9,2))  desc "   ;  
 		logger.info(" getWorkTypeReportDepartmentSQL:"+getWorkTypeReportDepartmentSQL);
 		returnList  = this.jdbcTemplate.query(getWorkTypeReportDepartmentSQL,	new DepartmentWorkTypeReportMapper() );	
-  
 		
 		return returnList;
 	}

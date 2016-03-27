@@ -119,6 +119,30 @@ public class SchoolUtil {
 		
 	}
 	
+	
+	public   String getFacultyCodeByFacultyName(String name,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getFacultyCodeByFacultyName(name,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	public   String getDepartmentCodeByDepartmentName(String name,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getDepartmentCodeByDepartmentName(name,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
 	public   String getDepartmentByUserName(String userName,String academicYear){
 		String returnValue ="";
 		try{

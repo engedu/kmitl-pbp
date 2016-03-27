@@ -15,5 +15,7 @@ public interface HeadService {
 	public BuckWaResponse getReportWorkTypeDepartment(BuckWaRequest request);
 	public BuckWaResponse markDepartmentRecal(BuckWaRequest request);
 	
+	
+	public BuckWaResponse getDepartmentMean(BuckWaRequest request);
 }
 

@@ -13,7 +13,7 @@
 <body> 
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
-            <strong>ระดับคะแนนในภาควิชา    ${departmentName} 
+            <strong>ระดับคะแนนในภาควิชา    ${departmentName}  
         <!--     <a href="<%=request.getContextPath()%>/json/person/getBarchart">JSON Object</a> -->
             </h1> 
   <div id="example">
@@ -22,7 +22,15 @@
       <!-- <div id="grid"></div>  -->  
     </div>
     <script>
+    
+    function shortLabels(value){
+    	console.log(value);
+        return value;
+    }
+    
         function createChart() {
+        	var start = ${mean};
+            var end = start+10;
         	 $("#chart").kendoChart({
                  dataSource: {
                      transport: {
@@ -35,7 +43,7 @@
                  },
           
         	        title: {
-        	            text: "ระดับคะแนนในภาควิชา"
+        	            text: "ระดับคะแนน ค่าเฉลี่ย ${mean}"
         	        },
         	        series: [{
         	            type: "column",
@@ -56,9 +64,12 @@
         	        
         	        ,valueAxis:  {
         	            plotBands: [
-        	                        { from: 890, to: 900, color: "red" }
+        	                        { from: start, to: end, color: "red" }
         	                    ]
         	                }
+	        	        ,labels: {
+	        	            template: "#= shortLabels(value) #"
+	        	         }
         	        ,
         	        
                     tooltip: {

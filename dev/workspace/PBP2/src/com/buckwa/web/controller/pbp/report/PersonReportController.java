@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buckwa.domain.common.BuckWaRequest;
+import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pam.Person;
+import com.buckwa.service.intf.pbp.HeadService;
+import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
  
@@ -18,6 +23,11 @@ public class PersonReportController {
 	
 	@Autowired
 	private SchoolUtil schoolUtil;
+	
+	@Autowired
+	private HeadService headService;
+	
+	
 
 	
 	
@@ -39,7 +49,33 @@ public class PersonReportController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+			String userName = BuckWaUtils.getUserNameFromContext();
+			String facultyName = schoolUtil.getFacutyByUserName(userName, academicYear);
+			String departmentName = schoolUtil.getDepartmentByUserName(userName, academicYear);
+			
+			String facultyCode = schoolUtil.getFacultyCodeByFacultyName(facultyName, academicYear);
+			String departmentCode  = schoolUtil.getDepartmentCodeByDepartmentName(departmentName, academicYear);
+			
+			
+		    mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(userName,academicYear));	
+		    
+		     
+		    // Get Mean Value (faculty_code,department_code,academic_year)
+			 
+			BuckWaRequest request = new BuckWaRequest();
+			request.put("academicYear", academicYear);
+			request.put("facultyCode", facultyCode);
+			request.put("departmentCode", departmentCode);
+			
+			BuckWaResponse response =headService.getDepartmentMean(request);
+		 
+			if (response.getStatus() == BuckWaConstants.SUCCESS) {
+				String mean = (String) response.getResObj("meanValue");
+				logger.info(" mean value = "+mean);
+				mav.addObject("mean", mean);	
+			}
+		    
+		    
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

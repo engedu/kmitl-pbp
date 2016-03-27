@@ -54,7 +54,34 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 			 ex.printStackTrace();
 		 }
 	     return userName;
-}
+	}
+	
+	public String getDepartmentCodeByDepartmentName (String  departmentName,String academicYear) {  
+		 String code = null;		 
+		 try{
+		String sql =" select code from department where name ='"+departmentName+"' and academic_year="+academicYear;	
+		logger.info("  getDepartmentCodeByDepartmentName sql: "+sql);
+		code = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return code;
+	}
+	
+	public String getFacultyCodeByFacultyName (String  facultyName,String academicYear) {  
+		 String code = null;		 
+		 try{
+		 
+		String sql =" select code from faculty where name ='"+facultyName+"' and academic_year="+academicYear;	
+		logger.info("  getFacultyCodeByFacultyName sql: "+sql);
+		code = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return code;
+	}
 	
 	
 	public String getFacutyByUserName (String  regId,String academicYear) {  
