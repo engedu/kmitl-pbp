@@ -34,10 +34,17 @@
  
             			
             			</td>
-            			<td abbr="center">academicYearSelect : ${academicYearSelect}
+            			<td abbr="center"> ${academicYearSelect}
 <%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพ์</a>  --%>
-            			<a class="btn btn-primary"  rel="notLoading" onclick="onPrint()"> พิมพ์</a> 
+            			<a class="btn btn-primary"  rel="notLoading" onclick="onPrint()"> Download</a> 
             			</td>
+            		</tr>
+            		<tr>
+            		 <td colspan="2" style="font-size: 25px; text-align: center;">
+            		 <br><br>
+            		   ระบบจะบันทึก File ลงที่ Folder download ของแต่ละ Browser
+            		 </td>
+            		
             		</tr>
             	</table>
             </div> 

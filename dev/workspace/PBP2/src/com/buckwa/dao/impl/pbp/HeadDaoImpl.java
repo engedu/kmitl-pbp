@@ -788,6 +788,10 @@ public class HeadDaoImpl implements HeadDao {
 
 		
 		for(AcademicPerson academicPerson :academicPersonList){
+			
+			try{
+				
+
 			String thaiFirstLast = academicPerson.getThaiName()+" "+academicPerson.getThaiSurname() ;
 			
 			pbpWorkTypeList =academicPerson.getpBPWorkTypeWrapper().getpBPWorkTypeList();
@@ -937,7 +941,9 @@ public class HeadDaoImpl implements HeadDao {
 			
 	 
 			
-			
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
 		}
 		
 		

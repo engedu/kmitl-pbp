@@ -25,7 +25,7 @@
 				 
 					<td class="tdLast"  style="text-align: center;" >	 
 					 <a rel="notLoading" href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecal.htm">  
-								 <input class="btn btn-primary" value="Re-Calculate" type="button"   /> 
+								 <input class="btn btn-primary" value="คำนวณคะแนนให้เป็นปัจจุบัน" type="button"   /> 
 					 </a> 
 						 
 					</td> 

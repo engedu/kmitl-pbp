@@ -1,6 +1,7 @@
 package com.buckwa.dao.impl.pbp;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Repository;
 
 import com.buckwa.dao.intf.pbp.PBPWorkTypeDao;
 import com.buckwa.domain.pbp.AcademicKPI;
-import com.buckwa.domain.pbp.AcademicKPIAttachFile;
 import com.buckwa.domain.pbp.AcademicKPIAttribute;
 import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
 import com.buckwa.domain.pbp.AcademicKPIUserMapping;
@@ -560,6 +560,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
  											try{
 											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));											
 											}catch(Exception ex){
+												
+												logger.info("  Exception #############   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
 												ex.printStackTrace();
 											}
 											calResultStr=calResultStr+ " X (" +attributeValueValue+" "+attributeValueName+")";
@@ -632,13 +634,13 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 								
 							}
 								logger.info("  Call Str: "+calResultStr);
-								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2));	
+								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
 								updateCallResultStr(mappingTmp);
 														
 								//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
-								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2));   
+								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));   
 								//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
-								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2));
+								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));
 						
 						
 						
@@ -654,54 +656,54 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			
 		//	BigDecimal totalInPercentWorkType = totalInWorkType.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
 		//	logger.info("totalInPercentWorkType :"+totalInWorkType + "  compare  :"+limitBase + "  ---->"+totalInPercentWorkType+"  % " );
-			tmp.setTotalInWorkType(totalInWorkType.setScale(2));
-			tmp.setTotalInWorkType_E(totalInWorkType_E.setScale(2));
+			tmp.setTotalInWorkType(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+			tmp.setTotalInWorkType_E(totalInWorkType_E.setScale(2,RoundingMode.HALF_UP));
 			
 			logger.info(" ## totalInWorkType name:"+tmp.getName()+"   "+totalInWorkType  );
 			
 			//tmp.setTotalInPercentWorkType(totalInPercentWorkType.setScale(2));
 			if(totalInWorkType.compareTo(minHour)==-1){
 			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
-				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2));
+				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
 				tmp.setCompareBaseStatus("UNDER");
 			}else  if(totalInWorkType.compareTo(maxHour)==1){
 				//tmp.setTotalInPercentCompareBaseWorkType ( tmp.getMaxPercent() .setScale(2));
-				tmp.setTotalInWorkTypeCompareBase( tmp.getMinHour() .setScale(2));
+				tmp.setTotalInWorkTypeCompareBase( tmp.getMinHour() .setScale(2,RoundingMode.HALF_UP));
 				tmp.setCompareBaseStatus("OVER");
 			}else {
 			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
-				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2));
+				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
 				tmp.setCompareBaseStatus("NORMAL");
 			}
 			
 			tmp.setTotalInWorkTypeCompareBase_E(totalInWorkType_E.setScale(2));
 			
-			totalPercentMark =totalPercentMark.add(tmp.getTotalInPercentWorkType().setScale(2));
-			totalPercentMarkComareBase =totalPercentMarkComareBase.add(tmp.getTotalInPercentCompareBaseWorkType().setScale(2));
-			totalMark = totalMark.add(totalInWorkType.setScale(2));
-			totalMarkCompareBase =totalMarkCompareBase.add(tmp.getTotalInWorkTypeCompareBase().setScale(2));
+			totalPercentMark =totalPercentMark.add(tmp.getTotalInPercentWorkType().setScale(2,RoundingMode.HALF_UP));
+			totalPercentMarkComareBase =totalPercentMarkComareBase.add(tmp.getTotalInPercentCompareBaseWorkType().setScale(2,RoundingMode.HALF_UP));
+			totalMark = totalMark.add(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+			totalMarkCompareBase =totalMarkCompareBase.add(tmp.getTotalInWorkTypeCompareBase().setScale(2,RoundingMode.HALF_UP));
 			
 			
 			totalPercentMark_E =totalPercentMark_E.add(tmp.getTotalInPercentWorkType_E().setScale(2));
-			totalPercentMarkComareBase_E =totalPercentMarkComareBase_E.add(tmp.getTotalInPercentCompareBaseWorkType_E().setScale(2));
-			totalMark_E = totalMark_E.add(totalInWorkType_E.setScale(2));
-			totalMarkCompareBase_E =totalMarkCompareBase_E.add(tmp.getTotalInWorkTypeCompareBase_E().setScale(2));
+			totalPercentMarkComareBase_E =totalPercentMarkComareBase_E.add(tmp.getTotalInPercentCompareBaseWorkType_E().setScale(2,RoundingMode.HALF_UP));
+			totalMark_E = totalMark_E.add(totalInWorkType_E.setScale(2,RoundingMode.HALF_UP));
+			totalMarkCompareBase_E =totalMarkCompareBase_E.add(tmp.getTotalInWorkTypeCompareBase_E().setScale(2,RoundingMode.HALF_UP));
 			
 			logger.info(" total Mark:"+totalMark);
 		} 
 		
 			//BigDecimal totalPercentMark = totalMark.multiply(new BigDecimal(100)).divide(maxMark,2,RoundingMode.HALF_UP); 
 			logger.info(" totalPercentMark  :"+totalPercentMark);
-			pBPWorkTypeWrapper.setTotalMark(totalMark.setScale(2));
+			pBPWorkTypeWrapper.setTotalMark(totalMark.setScale(2,RoundingMode.HALF_UP));
 			pBPWorkTypeWrapper.setTotalMarkCompareBase(totalMarkCompareBase);
-			pBPWorkTypeWrapper.setTotalPercentMark(totalPercentMark.setScale(2));
-			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase(totalPercentMarkComareBase.setScale(2));
+			pBPWorkTypeWrapper.setTotalPercentMark(totalPercentMark.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase(totalPercentMarkComareBase.setScale(2,RoundingMode.HALF_UP));
 			
 			
-			pBPWorkTypeWrapper.setTotalMark_E(totalMark_E.setScale(2));
+			pBPWorkTypeWrapper.setTotalMark_E(totalMark_E.setScale(2,RoundingMode.HALF_UP));
 			pBPWorkTypeWrapper.setTotalMarkCompareBase_E(totalMarkCompareBase_E);
-			pBPWorkTypeWrapper.setTotalPercentMark_E(totalPercentMark_E.setScale(2));
-			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase_E(totalPercentMarkComareBase_E.setScale(2));
+			pBPWorkTypeWrapper.setTotalPercentMark_E(totalPercentMark_E.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase_E(totalPercentMarkComareBase_E.setScale(2,RoundingMode.HALF_UP));
 			
 			// 1- Because mark_rank keep 0,1
 			// int employeeTypeGetSalary = Integer.parseInt(employeeType) -1;

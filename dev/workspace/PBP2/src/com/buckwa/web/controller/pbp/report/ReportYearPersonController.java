@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -103,25 +104,34 @@ public class ReportYearPersonController{
 			params.put("unit", person.getFacultyDesc());
 			params.put("degree", person.getMaxEducation());
 			params.put("age",  age); 
-			params.put("startWorkDay", person.getWorkingDate().getDay());
-			params.put("startWorkMonth",person.getWorkingDate().getMonth());
-			params.put("startWorkYear", person.getWorkingDate().getYear());
+			params.put("startWorkDay", person.getWorkingDate()==null?"-":person.getWorkingDate().getDay());
+			params.put("startWorkMonth",person.getWorkingDate()==null?"-":person.getWorkingDate().getMonth());
+			params.put("startWorkYear",person.getWorkingDate()==null?"-": person.getWorkingDate().getYear());
 			
-			int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
-			int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
-			wyear = wyear<0? 0:wyear;
-			wmont = wmont<0? 0:wmont;
-			params.put("sumWorkYear", wyear);
-			params.put("sumWorkMonth", wmont);
+//			int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
+//			int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
+//			wyear = wyear<0? 0:wyear;
+//			wmont = wmont<0? 0:wmont;
+			params.put("sumWorkYear", "-");
+			params.put("sumWorkMonth", "-");
 			
 			params.put("moreWorkReport", "");
 			params.put("reportList", getReportData());
 			
 			String reportFile = "report//person_yearly_report.jasper";
 			String subDetailFileName = "report//person_yearly_report_detail.jrxml";
-			String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
+			//String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
+			String inputFile = httpRequest.getSession().getServletContext().getRealPath("report//person_yearly_report.jasper");
 			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(getReportData()));
+			ServletContext servletContext = httpRequest.getSession().getServletContext();
+			logger.info("servletContext :" + servletContext);
+			String relativeWebPath = "report/person_yearly_report.jasper";
+			String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+			logger.info("absoluteDiskPath :" + absoluteDiskPath);
+			 
+			logger.info("inputFile :" + inputFile);
+			
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile, params, new JRBeanCollectionDataSource(getReportData()));
 			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
 			params.put("subreportParameter", reportDetail);
 			

@@ -286,19 +286,21 @@ public class HeadController {
 				    	
 				    	if(pBPWorkTypeListTotalMark!=null){
 				    		
-				    	}
-					      for(PBPWorkType totalMarkTmp:pBPWorkTypeListTotalMark){
-					    	//  System.out.print(" totalMarkTmp id:"+totalMarkTmp.getWorkTypeId());
-					    	  
-					    	  if(typeTmp.getWorkTypeId().intValue()==totalMarkTmp.getWorkTypeId().intValue()){ 
-					  			
-						 
-									//totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
-									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentWorkType());
+						      for(PBPWorkType totalMarkTmp:pBPWorkTypeListTotalMark){
+							    	//  System.out.print(" totalMarkTmp id:"+totalMarkTmp.getWorkTypeId());
+							    	  
+							    	  if(typeTmp.getWorkTypeId().intValue()==totalMarkTmp.getWorkTypeId().intValue()){ 
+							  			
 								 
-					    	  }
-					    	  
-					      }
+											//totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
+											totalMark = totalMark.add(totalMarkTmp.getTotalInPercentWorkType());
+										 
+							    	  }
+							    	  
+							      }				    		
+				    		
+				    	}
+
 					      totalPerson++;  
 					       
 				     }
@@ -464,30 +466,255 @@ public class HeadController {
 		return mav;
 	}		
 	
+//	@RequestMapping(value="markDepartmentRecal.htm", method = RequestMethod.GET)
+//	public ModelAndView markDepartmentRecal() {
+//		logger.info(" Start  ");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("markDepartmentRecal");
+//		try{
+//			BuckWaRequest request = new BuckWaRequest(); 			 
+//			String headUserName = BuckWaUtils.getUserNameFromContext();
+//			String academicYear =schoolUtil.getCurrentAcademicYear();	
+//			String departmentName =schoolUtil.getDepartmentByUserName(headUserName, academicYear);
+// 			request.put("departmentName",departmentName);
+//			request.put("headUserName",headUserName);
+//			request.put("academicYear",academicYear);
+//			request.put("status",""); 
+//			BuckWaResponse response = headService.markDepartmentRecal(request);
+//			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+//				mav.addObject("successCode", response.getSuccessCode()); 
+//			}				  
+//		}catch(Exception ex){
+//			ex.printStackTrace();
+//			mav.addObject("errorCode", "E001"); 
+//		}
+//		return mav;
+//	}	
+	
 	@RequestMapping(value="markDepartmentRecal.htm", method = RequestMethod.GET)
 	public ModelAndView markDepartmentRecal() {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("markDepartmentRecal");
 		try{
-			BuckWaRequest request = new BuckWaRequest(); 			 
+			BuckWaRequest request = new BuckWaRequest(); 
+			 
 			String headUserName = BuckWaUtils.getUserNameFromContext();
-			String academicYear =schoolUtil.getCurrentAcademicYear();	
-			String departmentName =schoolUtil.getDepartmentByUserName(headUserName, academicYear);
- 			request.put("departmentName",departmentName);
+			String academicYear =schoolUtil.getCurrentAcademicYear();
+			
 			request.put("headUserName",headUserName);
 			request.put("academicYear",academicYear);
 			request.put("status",""); 
-			BuckWaResponse response = headService.markDepartmentRecal(request);
+			BuckWaResponse response = headService.getDepartmentMark(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
-				mav.addObject("successCode", response.getSuccessCode()); 
-			}				  
+				Department department = (Department)response.getResObj("department"); 
+				department.setAcademicYear(academicYear);
+				 request = new BuckWaRequest(); 
+				 String facultyCode =department.getFacultyCode();
+				request.put("academicYear",academicYear);
+				request.put("facultyCode",facultyCode);
+				 //response = pBPWorkTypeService.getByAcademicYear(request);
+				 response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
+				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
+					List<PBPWorkType> pBPWorkTypeList = pBPWorkTypeWrapper.getpBPWorkTypeList();
+					
+					
+					for(PBPWorkType typeTmp:pBPWorkTypeList){
+					 
+						String shortDesc ="";
+						StringTokenizer st = new StringTokenizer(typeTmp.getName(), " ");
+						int numberOfSt =1;
+				        while (st.hasMoreElements()) { 
+				        
+				        	String stStr = st.nextElement().toString();
+				        	logger.info(" numberOfSt:"+numberOfSt+"  stStr:"+ stStr);
+				            if(numberOfSt==1){
+				            	shortDesc = stStr;
+				            }
+				            if(numberOfSt==2){
+				            	//axisLables = axisLables +" "
+				            	//st.nextElement();
+				            }
+				            numberOfSt++;
+				        } 	
+				        
+				        typeTmp.setShortDesc(shortDesc);
+				        
+				        
+				 
+				        // Sum total mark
+				     List<AcademicPerson>  academicPersonListMark = department.getAcademicPersonList();
+				     BigDecimal totalMark = new BigDecimal(0.00);
+				     int totalPerson =0;
+				     for(AcademicPerson personTmp: academicPersonListMark){
+				    	 
+				    	List<PBPWorkType> pBPWorkTypeListTotalMark	= personTmp.getpBPWorkTypeWrapper().getpBPWorkTypeList();
+				    	
+				    	if(pBPWorkTypeListTotalMark!=null){
+				    		
+				    	
+					      for(PBPWorkType totalMarkTmp:pBPWorkTypeListTotalMark){
+					    	//  System.out.print(" totalMarkTmp id:"+totalMarkTmp.getWorkTypeId());
+					    	  
+					    	  if(typeTmp.getWorkTypeId().intValue()==totalMarkTmp.getWorkTypeId().intValue()){ 
+					  			
+						 
+									//totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
+									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentWorkType());
+								 
+					    	  }
+					    	  
+					      }
+					      
+				    	}
+					      totalPerson++;  
+					       
+				     }
+				     
+				     
+				     if(totalPerson==0){
+				    	 totalPerson=1;
+				     }
+				     logger.info(" totalmark:"+totalMark+"  totalperson:"+totalPerson);
+				     BigDecimal totalInPercentCompareBaseWorkTypeAVG = totalMark.divide(new BigDecimal(totalPerson) ,2, BigDecimal.ROUND_HALF_UP);
+ 
+				     typeTmp.setTotalAllWorkType(totalMark); 
+				     typeTmp.setTotalInPercentCompareBaseWorkType(totalMark);
+				     typeTmp.setTotalInPercentCompareBaseWorkTypeAVG(totalInPercentCompareBaseWorkTypeAVG);
+				 
+					}
+					
+					department.setpBPWorkTypeList(pBPWorkTypeList);
+					
+					// Save Department Summary to DB
+					
+					
+					request.put("academicYear",academicYear);
+					request.put("facultyCode",department.getFacultyCode());
+					response =  facultyService.getFacultyByCodeAndYear(request);
+					if(response.getStatus()==BuckWaConstants.SUCCESS){	
+						Faculty faculty = (Faculty)response.getResObj("faculty");  
+						logger.info(" #### Faculty:"+ BeanUtils.getBeanString(faculty));
+						department.setFaculty(faculty);
+						
+						request.put("department",department);
+						headService.saveDepartmentReportSummary(request);
+					}
+					 
+				}	 
+				 
+				
+				
+				List<String> axisLabelList =new ArrayList();
+				List<Number> dataList = new ArrayList();				
+				BigDecimal data1 = null;				
+				List<PBPWorkType> pBPWorkTypeList = department.getpBPWorkTypeList();		
+				
+				
+				List<BigDecimal> pointList  = new ArrayList();
+				for(PBPWorkType typeTmp:pBPWorkTypeList){
+		 
+					//pointList.add(typeTmp.getTotalInPercentCompareBaseWorkType()) ;
+					pointList.add(typeTmp.getTotalInPercentCompareBaseWorkTypeAVG()) ;
+		 
+			
+				}
+				
+				BigDecimal maxPoint =Collections.max(pointList);
+				
+				
+				int loop =0;
+				for(PBPWorkType typeTmp:pBPWorkTypeList){
+					logger.info(" loop:"+loop);
+					String tempLabel ="";
+					StringTokenizer st = new StringTokenizer(typeTmp.getName(), " ");
+					int numberOfSt =1;
+			        while (st.hasMoreElements()) { 			        
+			        	String stStr = st.nextElement().toString();
+			        	logger.info(" numberOfSt:"+numberOfSt+"  stStr:"+ stStr);
+			            if(numberOfSt==1){
+			            	tempLabel = stStr;
+			            }
+			            if(numberOfSt==2){
+			            	//axisLables = axisLables +" "
+			            	//st.nextElement();
+			            }
+			            numberOfSt++;
+			        }
+					
+			        axisLabelList.add(tempLabel);
+			        
+			        logger.info("typeTmp.getTotalInPercentCompareBaseWorkTypeAVG():"+typeTmp.getTotalInPercentCompareBaseWorkTypeAVG()+" data1:"+data1+"  maxPoint:"+ maxPoint);
+			     //   BigDecimal weight100  = typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(100)).setScale(2,BigDecimal.ROUND_UP).divide(maxPoint).setScale(2,BigDecimal.ROUND_UP);
+			      //  BigDecimal weight100AVG  = typeTmp.getTotalInPercentCompareBaseWorkTypeAVG().multiply(new BigDecimal(100)).divide(maxPoint,2, BigDecimal.ROUND_HALF_UP).setScale(0,BigDecimal.ROUND_UP);
+ 
+			     
+			      //  data1 =weight100;
+			      //  data1 =weight100AVG;
+			        data1=typeTmp.getTotalInPercentCompareBaseWorkTypeAVG();
+			       
+			        // if(loop==0){
+			        //	data1 =typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP);
+			       // }
+					
+					loop++;
+					//dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType() .multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP));
+							
+					dataList.add(data1);
+				}
+				
+			
+				
+				
+				logger.info(" Data List Value  ");
+				for(Number datax :dataList){
+					logger.info("    "+datax);
+				}
+				
+			   	 
+				
+		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
+		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(80, 50, 50, 80, 60,80));
+		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(0.76, 51.28,55,15.4, 5,0.76));
+		       
+		        Color plotColor = Color.newColor("CC3366");
+		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
+		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
+		        plot.setColor(plotColor);
+		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
+		        RadarChart chart = GCharts.newRadarChart(plot);
+		      //  chart.setTitle("����������ҹ", BLACK, 20);
+		        chart.setSize(500, 500);
+		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
+		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
+		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
+		        chart.addRadialAxisLabels(radialAxisLabels);
+		         AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80, 100));
+		       
+		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
+		        chart.addConcentricAxisLabels(contrentricAxisLabels);
+		        String url = chart.toURLString();				
+				
+				 
+		        logger.info(" radarURL :"+url); 
+		       
+		      
+		        department.setRadarURL(url)	;	 
+				
+				mav.addObject("department", department);	
+			}
+			
+			//response.setSuccessCode("S100");	
+			mav.addObject("successCode", "S100"); 
 		}catch(Exception ex){
 			ex.printStackTrace();
 			mav.addObject("errorCode", "E001"); 
 		}
 		return mav;
-	}	
+	}		
+	
+	
 	@RequestMapping(value="replyMessage.htm", method = RequestMethod.POST)
 	public ModelAndView replyMessage(HttpServletRequest httpRequest, @ModelAttribute AcademicKPIUserMappingWrapper academicKPIUserMappingWrapper , BindingResult result) {
 		ModelAndView mav = new ModelAndView();

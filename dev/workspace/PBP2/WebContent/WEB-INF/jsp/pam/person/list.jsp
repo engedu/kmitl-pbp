@@ -140,7 +140,7 @@
 								</c:if> คะแนนรวม  = ${person.pBPWorkTypeWrapper.totalMark}</td>
 							<td>
          						   <a rel="notLoading" onclick="recalculate();" > 
-							 	<input value="Re-Calculate" class="btn btn-primary" type="button" onclick="#">
+							 	<input value="คำนวณคะแนนให้เป็นปัจจุบัน" class="btn btn-primary" type="button" onclick="#">
 								 </a>							
 							</td>
 								
@@ -315,6 +315,7 @@
                     transport: {
                         read: {
                             url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew",
+                            cache: false,
                             dataType: "json"
                         }
                     } 
@@ -323,11 +324,11 @@
                     type: "radarLine"
                 },
                 series: [{
-                    name: "คะแนน",
+                    name: "คะแนนรวมอนุมัติ",
                     field: "axisValue"
                 },
                 {
-                    name: "คะแนนคาดการณ์",
+                    name: "คะแนนรวมรออนุมัติ",
                     field: "axisValue2"
                 }                
                 ],

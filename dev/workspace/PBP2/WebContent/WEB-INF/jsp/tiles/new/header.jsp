@@ -34,7 +34,7 @@
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 
                <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/workTypeBarChart.htm">ระดับคะแนนแต่ละด้านในภาควิชา</a></li>
 <%--                <li class="has-flyout"><a href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59">พิมพ์รายงานประจำปี</a></li> --%>
-               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personYearReport/init.htm?academicYearSelect=">พิมพ์รายงานประจำปี</a></li>
+               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personYearReport/init.htm?academicYearSelect=">Download รายงานประจำปี</a></li>
             </ul> 
           </li><!-- END Flyout Menu -->    
 	 
@@ -49,7 +49,7 @@
 		           <a href="#">หัวหน้าภาควิชา </a><a href="#" class="flyout-toggle"></a>
 		            <ul class="flyout"><!-- Flyout Menu -->
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm">อนุมัติผลงาน</a></li>
-		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">Re-Calculate</a></li>	
+		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">คำนวณคะแนนให้เป็นปัจจุบัน</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 
 		                <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>		 
