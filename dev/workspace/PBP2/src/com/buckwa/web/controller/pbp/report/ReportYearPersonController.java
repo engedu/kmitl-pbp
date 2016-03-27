@@ -72,13 +72,13 @@ public class ReportYearPersonController{
 				round ="1";
 			}
 			
-			ServletOutputStream outputStream = httpResponse.getOutputStream();
-			httpResponse.setHeader("Content-Disposition", "attachment; filename=Person_Report.pdf");
-			httpResponse.setContentType("application/pdf");
-			
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("username :" + user.getUsername());
 			logger.info("year :" + year);
+			
+			ServletOutputStream outputStream = httpResponse.getOutputStream();
+			httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
+			httpResponse.setContentType("application/pdf");
 
 			request.put("username", user.getUsername());
 			request.put("academicYear", year);
@@ -105,6 +105,10 @@ public class ReportYearPersonController{
 			String sumPoint5 = "0";
 			String sumPointAll = "0";
 			
+			Date todayDate = new Date();
+			String reportFrom = "-";
+			String reportTo = "-";
+			
 			response = pbpWorkTypeService.getCalculateByAcademicYear(request);
 			List<PersonReport>  reportList = new ArrayList<ReportYearPersonController.PersonReport>();
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
@@ -119,22 +123,29 @@ public class ReportYearPersonController{
 				sumPoint5 = getSumPoint(reportList,"5");
 				
 				sumPointAll = getSumPoint(reportList,"ALL");
+				
+				Date startRoundDate = pBPWorkTypeWrapper.getStartRoundDate();
+				Date endRoundDate = pBPWorkTypeWrapper.getEndRoundDate();
+				
+				if(null!= startRoundDate){
+					reportFrom = new SimpleDateFormat("d").format(startRoundDate)
+						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(startRoundDate)
+						+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(startRoundDate);
+				}
+				
+				if(null!= endRoundDate){
+					reportTo = new SimpleDateFormat("d").format(endRoundDate)
+						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(endRoundDate)
+						+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(endRoundDate);
+				}
+				
 			}	
 			
+			String reportDate = new SimpleDateFormat("d").format(todayDate)
+					+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(todayDate)
+					+ " พ.ศ. " + new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(todayDate);
+					
 			
-			String reportDate = new SimpleDateFormat("d").format(new Date())
-				+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-				+ " พ.ศ. " + new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-				
-			String reportFrom= new SimpleDateFormat("d").format(new Date())
-					+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-					+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-			
-			String reportTo = new SimpleDateFormat("d").format(new Date())
-					+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-					+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-			
-			Date todayDate = new Date();
 			String age = "-";
 			if(null!=person.getBirthdate()){
 				age = todayDate.getYear() - person.getBirthdate().getYear() + "";
@@ -179,18 +190,15 @@ public class ReportYearPersonController{
 			
 			params.put("sumPointAll", sumPointAll);
 			
-			String reportFile = "report//person_yearly_report.jasper";
-			String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
+			String reportPath = PAMConstants.rbApp.getString("report.path");		
+			String reportFile =  reportPath+"person_yearly_report.jasper";	
+			String subReportFileName = reportPath+"person_yearly_report_detail.jrxml";	
 			
-			String fullPath = httpRequest.getSession().getServletContext().getRealPath("report\\");
-			params.put("SUBREPORT_DIR", fullPath);
+			params.put("SUBREPORT_DIR", reportPath);
 			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(reportList));
-			 
-			logger.info("inputFile :" + inputFile);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile, params, new JRBeanCollectionDataSource(reportList));
+			JasperReport reportDetail = JasperCompileManager.compileReport(subReportFileName);
 			
-			String subDetailFileName = PAMConstants.rbApp.getString("report.person_yearly_report_detail");			
-			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
 			params.put("subreportParameter", reportDetail);
 			
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
