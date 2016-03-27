@@ -1,5 +1,6 @@
 package com.buckwa.web.controller.pbp.report;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +35,12 @@ import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.MaternityLeave;
 import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
+import com.buckwa.domain.pbp.AcademicKPIUserMapping;
+import com.buckwa.domain.pbp.PBPWorkType;
+import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.service.intf.pam.PersonProfileService;
+import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 
@@ -47,6 +53,9 @@ public class ReportYearPersonController{
 	
 	@Autowired
 	private PersonProfileService personProfileService;
+	
+	@Autowired
+	private PBPWorkTypeService pbpWorkTypeService;
 	
 	@RequestMapping(value="/printReportYear.htm", method = RequestMethod.GET)
 	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
@@ -71,11 +80,56 @@ public class ReportYearPersonController{
 			request.put("username", user.getUsername());
 			request.put("academicYear", year);
 			
+
 			Person person = new Person();
 			response = personProfileService.getByUsername(request);
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				person = (Person) response.getResObj("person");
 			}
+			
+			
+			String facultyCode = person.getFacultyCode();
+			 
+			request.put("userName",BuckWaUtils.getUserNameFromContext());
+			request.put("round",round);
+			request.put("employeeType",person.getEmployeeTypeNo());
+			request.put("facultyCode",facultyCode);
+			
+			response = pbpWorkTypeService.getCalculateByAcademicYear(request);
+		 
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
+				pBPWorkTypeWrapper.setAcademicYear(year);
+				person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper); 
+				
+				List<PBPWorkType> workTypeList =pBPWorkTypeWrapper.getpBPWorkTypeList();
+				
+				for(PBPWorkType  tmp:workTypeList){
+					
+					String worktypeCode =tmp.getCode();
+					String worktypeName = tmp.getName();
+					BigDecimal totalInworktype =tmp.getTotalInWorkType();
+					System.out.println(" worktypeCode:Name ==>"+worktypeCode+":"+worktypeName+" :"+totalInworktype);
+					
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();
+					
+					for(AcademicKPIUserMapping mappingTmp:mappingList){
+						
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);
+						
+						System.out.println(" VAlue:"+attributeTmp.getValue());
+					}
+					
+					
+					 
+					
+				}
+				
+			}	
+			
+			
+			
 			
 			String reportDate = new SimpleDateFormat("d").format(new Date())
 				+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
