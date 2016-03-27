@@ -1,6 +1,7 @@
 package com.buckwa.domain.pbp;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import com.buckwa.domain.BaseDomain;
@@ -40,8 +41,23 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	
 	private List<RadarPlotReport>  radarPlotReportList;
 	
+	private Date startRoundDate;
+	private Date endRoundDate;
 	
 	
+	 
+	public Date getStartRoundDate() {
+		return startRoundDate;
+	}
+	public void setStartRoundDate(Date startRoundDate) {
+		this.startRoundDate = startRoundDate;
+	}
+	public Date getEndRoundDate() {
+		return endRoundDate;
+	}
+	public void setEndRoundDate(Date endRoundDate) {
+		this.endRoundDate = endRoundDate;
+	}
 	public List<RadarPlotReport> getRadarPlotReportList() {
 		return radarPlotReportList;
 	}

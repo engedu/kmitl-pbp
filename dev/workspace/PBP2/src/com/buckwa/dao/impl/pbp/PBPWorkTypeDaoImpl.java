@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -383,6 +384,9 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		pBPWorkTypeWrapper.setRound(round);
 		pBPWorkTypeWrapper.setEmployeeType(employeeType);
 		pBPWorkTypeWrapper.setFacultyCode(facultyCode);
+		
+		pBPWorkTypeWrapper.setStartRoundDate(new Date(startTimeStamp.getTime()));
+		pBPWorkTypeWrapper.setEndRoundDate(new Date(endTimeStamp.getTime()));
 		
 		try{
 			
