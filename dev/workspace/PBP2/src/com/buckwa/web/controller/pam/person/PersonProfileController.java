@@ -196,7 +196,7 @@ public class PersonProfileController {
 
 
 				/**----- Set Session --- */
-				httpRequest.getSession().setAttribute("personProFileSession" , person);
+				//httpRequest.getSession().setAttribute("personProFileSession" , person);
 				
 				
 			} else {
@@ -302,153 +302,60 @@ public class PersonProfileController {
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.PERSON_INIT);
 		try {
 			
+			String academicYear = academicYearUtil.getAcademicYear();
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
-			logger.info("viewUserProfile  username :"+user.getUsername());
-
+			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
+		 
+			
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
-			request.put("academicYear", selectAcademicYear);
+			request.put("academicYear", academicYearUtil.getAcademicYear());
 			BuckWaResponse response = personProfileService.getByUsername(request);
+			
+			
+            TimeTableReport timetableReport = new TimeTableReport();
+            timetableReport.setAcademicYearList(academicYearUtil.getAcademicYearList()); 
+            timetableReport.setAcademicYear(academicYear);
+            timetableReport.setAcademicYearSelect(academicYear); 
+			mav.addObject("academicYearSelect", academicYear);
+			
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				person = (Person) response.getResObj("person");
-				person.setEvaluateRound(round);
-				
 				user.setFirstLastName(person.getThaiName()+" "+person.getThaiSurname());
-				List<Paper> paperList = (List<Paper>) response.getResObj("paperList");
+ 
 				
-				// Set Date format
-				//person.setBirthdateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getBirthdate()));
-				//person.setWorkingDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getWorkingDate()));
-				//person.setAssignDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getAssignDate()));
-				//person.setRetireDateStr(BuckWaDateUtils.get_current_ddMMMMyyyy_thai_from_date(person.getRetireDate()));
-				
-				person.setAcademicYear(selectAcademicYear);
+				person.setAcademicYear(academicYear);
 				person.setAcademicYearList(academicYearUtil.getAcademicYearList());
-				
+				person.setEvaluateRound(round);
 				user.setPersonProfile(person);
 				mav.addObject("person", person);
-				mav.addObject("paperList", paperList);
+			 
 				
 		 
 				 
-				request.put("academicYear",selectAcademicYear);
+				request.put("academicYear",academicYear);
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",round);
-				//request.put("employeeType",person.getEmployeeTypeNo());
-				request.put("employeeType",person.getEmployeeType());
+				request.put("employeeType",person.getEmployeeTypeNo());
+				request.put("facultyCode",facultyCode);
 				
-				request.put("facultyCode",person.getFacultyCode());
-				//response = pBPWorkTypeService.getByAcademicYear(request);
-				response = pBPWorkTypeService.getCalculateByAcademicYear(request);
+				 
+				response = pBPWorkTypeService.getExsistCalculateByAcademicYear(request);
 				
 				if(response.getStatus()==BuckWaConstants.SUCCESS){	
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
-					pBPWorkTypeWrapper.setAcademicYear(selectAcademicYear);
+					pBPWorkTypeWrapper.setAcademicYear(academicYear);
 					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
 				}	
 				
-				
-				List<String> axisLabelList =new ArrayList();
-				List<Number> dataList = new ArrayList();
-				
-				BigDecimal data1 = null;				
-				List<PBPWorkType> pBPWorkTypeList = person.getpBPWorkTypeWrapper().getpBPWorkTypeList();				
-				int loop =0;
-				for(PBPWorkType typeTmp:pBPWorkTypeList){
-					logger.info(" loop:"+loop);
-					String tempLabel ="";
-					StringTokenizer st = new StringTokenizer(typeTmp.getName(), " ");
-					int numberOfSt =1;
-			        while (st.hasMoreElements()) { 			        
-			        	String stStr = st.nextElement().toString();
-			        	logger.info(" numberOfSt:"+numberOfSt+"  stStr:"+ stStr);
-			            if(numberOfSt==1){
-			            	tempLabel = stStr;
-			            }
-			            if(numberOfSt==2){
-			            	//axisLables = axisLables +" "
-			            	//st.nextElement();
-			            }
-			            numberOfSt++;
-			        }
-					
-			        axisLabelList.add(tempLabel);
-	
-					
-			        if(loop==0){
-			        	//data1 =typeTmp.getTotalInPercentCompareBaseWorkType().multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP);
-			        	
-			        	data1 =typeTmp.getTotalInPercentCompareBaseWorkType().setScale(0,BigDecimal.ROUND_UP);
-			        }
-					
-					loop++;
-					//dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType() .multiply(new BigDecimal(2)).setScale(0,BigDecimal.ROUND_UP));
-					dataList.add(typeTmp.getTotalInPercentCompareBaseWorkType()  .setScale(0,BigDecimal.ROUND_UP));		
-			
-				}				
-				dataList.add(data1);
-				
-				logger.info(" Data List ");
-				for(Number datax :dataList){
-					logger.info("  "+datax);
-				}
 
-				
-//		        RadarPlot plot = Plots.newRadarPlot(Data.newData(dataList));
-		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(80, 50, 50, 80, 60,80));
-		       // RadarPlot plot = Plots.newRadarPlot(Data.newData(0.76, 51.28,55,15.4, 5,0.76));
-		       
-//		        Color plotColor = Color.newColor("CC3366");
-//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 5);
-//		        plot.addShapeMarkers(Shape.SQUARE, plotColor, 3);
-//		        plot.setColor(plotColor);
-//		        plot.setLineStyle(LineStyle.newLineStyle(2, 1, 0));
-//		        RadarChart chart = GCharts.newRadarChart(plot);
-		      //  chart.setTitle("����������ҹ", BLACK, 20);
-//		        chart.setSize(500, 500);
-//		       // RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
-//		        RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels(axisLabelList);
-//		        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
-//		        chart.addRadialAxisLabels(radialAxisLabels);
-//		        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80,100));
-//		        contrentricAxisLabels.setAxisStyle(AxisStyle.newAxisStyle(BLACK, 12, AxisTextAlignment.RIGHT));
-//		        chart.addConcentricAxisLabels(contrentricAxisLabels);
-//		        String url = chart.toURLString();		
-		        
-		 	
-//				byte[] b = url.toString().getBytes("UTF-8");    //  
-//				String newTxt = new String(b, "UTF-8");
-				
-				 
-//		        logger.info(" radarURL :"+newTxt);
-//		        
-//		       String radarURL = "http://chart.apis.google.com/chart?" +
-//		        		"cht=r&" +
-//		        		"chxt=y,x&" +
-//		        		"chls=4,1,0&" +
-//		        		"chco=CC3366&" +
-//		        		"chs=400x400&" +
-//		        		"chts=000000,20&" +
-//		        		"chxr=0,0.0,100.0&" +
-//		        		"chd=e:zMgAgAzMmZzM&" +
-//		        		"chtt=&" +
-//		        		"chxp=0,0,20,40,60,80,100&" +
-//		        		"chxs=0,000000,12,1|1,000000,12,0&" +
-//		        		"chxl=1:|�Ԫҡ��|�ҹ�Ѳ���Ԫҡ��|�ҹ�Ԩ��|�ҹ��ԡ���Ԫҡ��|�ҹ�ӹغ��ا��Ż&" +
-//		        		"chm=s,CC3366,0,-1,12,0|s,FFFFFF,0,-1,8,0";
-//		        
-//		       
-//		 
-//		       logger.info(" radarURL Test :"+radarURL);
-//		      
-//		        person.setRadarURL(newTxt)	;		
-//				
+
 				/**----- Set Session --- */
-				httpRequest.getSession().setAttribute("personProFileSession" , person);
+				//httpRequest.getSession().setAttribute("personProFileSession" , person);
 				
-			}
-			else {
+				
+			} else {
 				logger.info("  Fail !!!! :"+response.getErrorCode()+" : "+response.getErrorDesc());
 				mav.addObject("errorCode", response.getErrorCode());
 			}
@@ -459,7 +366,6 @@ public class PersonProfileController {
 			ex.printStackTrace();
 			mav.addObject(BuckWaConstants.ERROR_CODE, BuckWaConstants.ERROR_E001);
 		}
-
 		return mav;
 	}
 	

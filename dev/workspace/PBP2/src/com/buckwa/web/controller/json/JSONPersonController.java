@@ -58,9 +58,9 @@ public class JSONPersonController {
 	private HeadService headService;
 	
 	
-	@RequestMapping(value = "/getRadarPlotNew", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<RadarPlotReport> radarPlotNew(HttpServletRequest httpRequest) {
-
+	@RequestMapping(value = "/getRadarPlotNew/{round}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<RadarPlotReport> radarPlotNew(HttpServletRequest httpRequest,@PathVariable String round) {
+	 
 		List<RadarPlotReport> returnList = new ArrayList<RadarPlotReport>();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("initPerson");
@@ -70,7 +70,7 @@ public class JSONPersonController {
 			String academicYear = academicYearUtil.getAcademicYear();
 			logger.info(" Start  academicYear:" + academicYear);
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
-			logger.info("viewUserProfile  username :" + user.getUsername());
+			logger.info("radarPlotNew  username :" + user.getUsername()+ " academicYear:"+academicYear+" round :"+round);
 
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
@@ -88,7 +88,7 @@ public class JSONPersonController {
 	 
 					person.setAcademicYear(academicYear);
 					person.setAcademicYearList(academicYearUtil.getAcademicYearList());
-					person.setEvaluateRound("1");
+					person.setEvaluateRound(round);
 					user.setPersonProfile(person);
 					mav.addObject("person", person);
 					 

@@ -19,7 +19,7 @@
             		<tr>
             		
             			<td width="30%;" style="text-align: center;  vertical-align: middle; height: 50px; font-size: 22px;font-weight: bold;"> 
-            			ข้อมูลส่วนตัว  
+            			ข้อมูลส่วนตัว   
             			</td>
             			<td style="text-align: center;  vertical-align: middle;">
             			 ปีการศึกษา  &nbsp; 
@@ -314,7 +314,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew",
+                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew/${person.evaluateRound}",
                             cache: false,
                             dataType: "json"
                         }
