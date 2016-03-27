@@ -137,18 +137,14 @@
 								<c:if
 									test="${principal.personProfile.employeeType == 'ข้าราชการ' }">
 									<!--  รอบที่   1  -->
-								</c:if> คะแนนรวม  = ${person.pBPWorkTypeWrapper.totalMark}</td>
+								</c:if> คะแนนรวมอนุมัติ  = ${person.pBPWorkTypeWrapper.totalMark}</td>
 							<td>
          						   <a rel="notLoading" onclick="recalculate();" > 
 							 	<input value="คำนวณคะแนนให้เป็นปัจจุบัน" class="btn btn-primary" type="button" onclick="#">
 								 </a>							
 							</td>
 								
-							<td>
-            						   <a rel="notLoading" onclick="initAcademicWork();" > 
-							 	<input value="ดูรายละเอียดการประเมิน" class="btn btn-primary" type="button" onclick="#">
-								 </a>
-            			 </td>
+		 
             		</tr>
             	</table>
              </div> 

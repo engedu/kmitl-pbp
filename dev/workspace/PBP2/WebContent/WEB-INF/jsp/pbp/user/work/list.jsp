@@ -35,7 +35,10 @@
 				<th   class="thFirst" width="450px">ภาระงาน/คะแนน </th>
 				<th   class="thFirst" width="65px">สถานะ </th>	
 				<th   class="thFirst" width="65px">สัดส่วน </th>			 
-				<th   class="thFirst" width="100px">คะแนน </th>
+				<th   class="thFirst" width="150px">คะแนน
+				  <br>
+				  ก่อนอนุมัติ | หลังอนุมัติ
+				 </th>
  				<th   class="thFirst" width="65px">รวม </th>
 			</tr> 
 		</thead>		
@@ -96,7 +99,7 @@
 						</td>					
 						
 	
-						 <td class="" width="100px" style="text-align: left;"> 
+						 <td class="" width="150px" style="text-align: center;"> 
 							<c:out value="${domain2.totalInMapping}"/>   |
 							 <c:if test="${domain2.status=='APPROVED'}">
 							    <span style="color: green; font-weight: bold;"><c:out value="${domain2.totalInMapping}"/>  </span>

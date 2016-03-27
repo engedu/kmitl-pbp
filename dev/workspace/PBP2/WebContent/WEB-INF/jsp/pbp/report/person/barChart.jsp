@@ -30,7 +30,7 @@
     
         function createChart() {
         	var start = ${mean};
-            var end = start+10;
+            var end = start+4;
         	 $("#chart").kendoChart({
                  dataSource: {
                      transport: {
