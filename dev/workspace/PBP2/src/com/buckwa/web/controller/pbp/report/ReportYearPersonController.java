@@ -1,5 +1,6 @@
 package com.buckwa.web.controller.pbp.report;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,9 +34,15 @@ import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.MaternityLeave;
 import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
+import com.buckwa.domain.pbp.AcademicKPIUserMapping;
+import com.buckwa.domain.pbp.PBPWorkType;
+import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.service.intf.pam.PersonProfileService;
+import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
+import com.buckwa.util.PAMConstants;
 
 @Controller
 @RequestMapping("/report")
@@ -46,6 +53,9 @@ public class ReportYearPersonController{
 	
 	@Autowired
 	private PersonProfileService personProfileService;
+	
+	@Autowired
+	private PBPWorkTypeService pbpWorkTypeService;
 	
 	@RequestMapping(value="/printReportYear.htm", method = RequestMethod.GET)
 	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
@@ -58,6 +68,9 @@ public class ReportYearPersonController{
 			
 			String year = httpRequest.getParameter("year");
 			String round = httpRequest.getParameter("round");
+			if(round==null){
+				round ="1";
+			}
 			
 			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			httpResponse.setHeader("Content-Disposition", "attachment; filename=Person_Report.pdf");
@@ -70,11 +83,44 @@ public class ReportYearPersonController{
 			request.put("username", user.getUsername());
 			request.put("academicYear", year);
 			
+
 			Person person = new Person();
 			response = personProfileService.getByUsername(request);
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				person = (Person) response.getResObj("person");
 			}
+			
+			
+			String facultyCode = person.getFacultyCode();
+			 
+			request.put("userName",BuckWaUtils.getUserNameFromContext());
+			request.put("round",round);
+			request.put("employeeType",person.getEmployeeTypeNo());
+			request.put("facultyCode",facultyCode);
+			
+			String sumPoint1 = "0";
+			String sumPoint2 = "0";
+			String sumPoint3 = "0";
+			String sumPoint4 = "0";
+			String sumPoint5 = "0";
+			String sumPointAll = "0";
+			
+			response = pbpWorkTypeService.getCalculateByAcademicYear(request);
+			List<PersonReport>  reportList = new ArrayList<ReportYearPersonController.PersonReport>();
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
+				pBPWorkTypeWrapper.setAcademicYear(year);
+				person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper); 
+				reportList =getPersonReportList(pBPWorkTypeWrapper);
+				sumPoint1 = getSumPoint(reportList,"1");
+				sumPoint2 = getSumPoint(reportList,"2");
+				sumPoint3 = getSumPoint(reportList,"3");
+				sumPoint4 = getSumPoint(reportList,"4");
+				sumPoint5 = getSumPoint(reportList,"5");
+				
+				sumPointAll = getSumPoint(reportList,"ALL");
+			}	
+			
 			
 			String reportDate = new SimpleDateFormat("d").format(new Date())
 				+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
@@ -99,11 +145,10 @@ public class ReportYearPersonController{
 			params.put("toDate", reportTo);
 			params.put("position", person.getAcademicRank());
 			params.put("salaryNo", person.getRateNo());
-			params.put("salary", "40,000");
 			params.put("unit", person.getFacultyDesc());
 			params.put("degree", person.getMaxEducation());
 			params.put("age",  age); 
-			
+
 			if(null!=person.getWorkingDate()){
 				params.put("startWorkDay", person.getWorkingDate().getDay());
 				params.put("startWorkMonth",person.getWorkingDate().getMonth());
@@ -123,17 +168,28 @@ public class ReportYearPersonController{
 			}
 			
 			params.put("moreWorkReport", "");
-//			params.put("reportList", getReportData());
+			
+			
+			//-- sumpoint ---
+			params.put("sumPoint1", sumPoint1);
+			params.put("sumPoint2", sumPoint2);
+			params.put("sumPoint3", sumPoint3);
+			params.put("sumPoint4", sumPoint4);
+			params.put("sumPoint5", sumPoint5);
+			
+			params.put("sumPointAll", sumPointAll);
 			
 			String reportFile = "report//person_yearly_report.jasper";
-			String subDetailFileName = "//report//person_yearly_report_detail.jasper";
 			String inputFile = httpRequest.getSession().getServletContext().getRealPath(reportFile);
-//			String subDetailFile = httpRequest.getSession().getServletContext().getRealPath(subDetailFileName);
 			
 			String fullPath = httpRequest.getSession().getServletContext().getRealPath("report\\");
 			params.put("SUBREPORT_DIR", fullPath);
 			
-			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(getReportData()));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(inputFile, params, new JRBeanCollectionDataSource(reportList));
+			 
+			logger.info("inputFile :" + inputFile);
+			
+			String subDetailFileName = PAMConstants.rbApp.getString("report.person_yearly_report_detail");			
 			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
 			params.put("subreportParameter", reportDetail);
 			
@@ -147,83 +203,56 @@ public class ReportYearPersonController{
 		}
 	}
 	
-	public static List<PersonReport> getReportData() {
-		List<PersonReport> reportList = new ArrayList<PersonReport>(); 
+	
+	private String getSumPoint(List<PersonReport> reportList, String type){
+		BigDecimal sum = BigDecimal.ZERO;
+		for (PersonReport personReport : reportList) {
+			String worktypeCode = personReport.getWorkGroup();
+			if(type.equals(worktypeCode)){		
+				return personReport.getSumPoint();
+			}
+			sum = sum.add(new BigDecimal(personReport.getSumPoint()));
+		}
+		return sum.toString();
+	}
+	
+
+
+	private List<PersonReport> getPersonReportList(PBPWorkTypeWrapper pBPWorkTypeWrapper){
+		 
+			List<PBPWorkType> workTypeList =pBPWorkTypeWrapper.getpBPWorkTypeList();
+			List<PersonReport> personReportList = new ArrayList();
+			
+			for(PBPWorkType  tmp:workTypeList){
+				
+				String worktypeCode =tmp.getCode();
+				String worktypeName = tmp.getName();
+				BigDecimal totalInworktype =tmp.getTotalInWorkType();
+				
+					PersonReport personReport = new PersonReport();						
+					List<Map> workList = new ArrayList<Map>();				
+					personReport.setWorkGroup(worktypeCode);
+					personReport.setTitle(worktypeName);
+					personReport.setSumPoint(totalInworktype+"");												
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					for(AcademicKPIUserMapping mappingTmp:mappingList){			
+						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
+						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);
+						if("APPROVED".equals(attributeTmp.getStatus())){
+							BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
+							System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
+							Map<String, Object> workMap = new HashMap<String, Object>();
+							workMap.put("work", attributeTmp.getValue());
+							workMap.put("point", totalMark);
+							workList.add(workMap);							
+						}
+					}						
+					personReport.setWorkList(workList);
+					personReportList.add(personReport);
+			}
+		 
+		 return personReportList;
 		
-		PersonReport personReport = new PersonReport();
-		Map<String, Object> workMap = new HashMap<String, Object>();
-		List<Map> workList = new ArrayList<Map>();
-		
-		personReport.setWorkGroup("1");
-		personReport.setTitle("ผลงานด้านวิชาการ");
-		personReport.setSumPoint("100");
-		workMap.put("work", "00002345   Artificial Intelligent");
-		workMap.put("point", "100");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
-		workMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		personReport.setWorkGroup("2");
-		personReport.setTitle("ผลงานด้านพัฒนาวิชาการ");
-		personReport.setSumPoint("300");
-		workMap.put("work", "00002345   แต่งตำราเรียน คอมพิวเตอร์เบื้องต้น");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
-		workMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		personReport.setWorkGroup("3");
-		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์");
-		personReport.setSumPoint("500");
-		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
-		workMap.put("point", "200");
-		workList.add(workMap);
-		workMap = new HashMap<String, Object>();
-		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
-		workMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		personReport.setWorkGroup("4");
-		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 4");
-		personReport.setSumPoint("500");
-		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
-		workMap.put("point", "200");
-		workList.add(workMap);
-		workMap = new HashMap<String, Object>();
-		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		reportList.add(personReport);
-		
-		personReport = new PersonReport();
-		workMap = new HashMap<String, Object>();
-		workList = new ArrayList<Map>();
-		personReport.setWorkGroup("5");
-		personReport.setTitle("ผลงานด้านวิจัยหรือสร้างสรรค์ 5");
-		personReport.setSumPoint("500");
-		workMap.put("work", "00009999   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 2");
-		workMap.put("point", "200");
-		workList.add(workMap);
-		workMap = new HashMap<String, Object>();
-		workMap.put("work", "00001111   แต่งตำราเรียน ด้านวิจัยหรือสร้างสรรค์ 1");
-		workMap.put("point", "300");
-		workList.add(workMap);
-		personReport.setWorkList(workList);
-		reportList.add(personReport);
-		
-		return reportList;
 	}
 	
 	public static class PersonReport{
@@ -231,6 +260,7 @@ public class ReportYearPersonController{
 		private String title;
 		private String sumPoint;
 		private List<Map> workList;
+		
 		public String getWorkGroup() {
 			return workGroup;
 		}
@@ -255,56 +285,6 @@ public class ReportYearPersonController{
 		public void setWorkList(List<Map> workList) {
 			this.workList = workList;
 		} 
-	}
-	
-	public static void main(String[] args) {
-		
-		String reportDate = new SimpleDateFormat("d").format(new Date())
-				+" "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-				+ " พ.ศ. " + new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-				
-			String reportFrom= new SimpleDateFormat("d").format(new Date())
-					+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-					+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-			
-			String reportTo = new SimpleDateFormat("d").format(new Date())
-					+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(new Date())
-					+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(new Date());
-			
-			Date todayDate = new Date();
-			
-			Map<String, Object> params = new HashMap<String, Object>();
-			
-			params.put("reportDate", reportDate);
-			params.put("fullName", "Mr. Test Report");
-			params.put("fromDate", reportFrom);
-			params.put("toDate", reportTo);
-			params.put("position", "AAAAAAAAAAA");
-			params.put("salaryNo", "123456789");
-			params.put("salary", "40,000");
-			params.put("unit", "ZZZZZZZZZZ");
-			params.put("degree", "XXXXXXXXX");
-			params.put("age",  "25"); 
-			params.put("startWorkDay", "20");
-			params.put("startWorkMonth","March");
-			params.put("startWorkYear", "2016");
-			params.put("sumWorkYear", "5");
-			params.put("sumWorkMonth", "3");
-			params.put("moreWorkReport", "");
-			
-		String reportFile = "J:\\WORK\\KMITL_WORK\\PBP2\\WebContent\\report\\person_yearly_report.jrxml";
-		String subDetailFileName = "J:\\WORK\\KMITL_WORK\\PBP2\\WebContent\\report\\person_yearly_report_detail.jrxml";
-		try{
-			JasperReport report = JasperCompileManager.compileReport(reportFile);
-			JasperReport reportDetail = JasperCompileManager.compileReport(subDetailFileName);
-			params.put("subreportParameter", reportDetail);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, new JRBeanCollectionDataSource(getReportData()));
-			
-			JasperViewer.viewReport(jasperPrint, false);
-			
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
 	}
 	
 }
