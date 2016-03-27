@@ -238,7 +238,7 @@ public class ReportYearPersonController{
 					for(AcademicKPIUserMapping mappingTmp:mappingList){			
 						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
 						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);
-						if("APPROVED".equals(attributeTmp.getStatus())){
+						if("APPROVED".equals(mappingTmp.getStatus())){
 							BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
 							System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
 							Map<String, Object> workMap = new HashMap<String, Object>();
