@@ -386,7 +386,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		
 		try{
 			
-		/**### [1] pbp_work_type ----*/	
+		///**### [1] pbp_work_type ----*/	
 		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	 
 		for(PBPWorkType tmp:pBPWorkTypeList){
 			//String sqlSub =" select *  from pbp_work_type_sub  where work_type_id ="+tmp.getWorkTypeId(); 
@@ -410,7 +410,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					
 					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" " +
 							" and academic_year='"+tmp.getAcademicYear()+"' and user_name='"+userName+"' and create_date BETWEEN '"+startTimeStamp+"' AND '"+endTimeStamp+"'"; 
-					logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
+					//logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
 					List<AcademicKPIUserMapping> academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
 					
 					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
@@ -421,12 +421,12 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 							try{
 								
 								String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
-								logger.info(" ### [3] academic_kpi --####");
+								//logger.info(" ### [3] academic_kpi --####");
 								 AcademicKPI  academicKPI  = this.jdbcTemplate.queryForObject(sqlkpi,	new AcademicKPIMapper() );
 								 mappingTmp.setAcademicKPI(academicKPI);
 								 
 								 	
-							 	logger.info(" ### [4] academic_kpi_attribute_value --####");
+							 	//logger.info(" ### [4] academic_kpi_attribute_value --####");
 								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
 								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
 								try{
@@ -437,7 +437,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 								} 
 								mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
 								 
-								logger.info(" ### [5] academic_kpi_attribute --####");	
+								//logger.info(" ### [5] academic_kpi_attribute --####");	
 								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
 								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 								try{
