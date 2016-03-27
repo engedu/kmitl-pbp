@@ -89,8 +89,70 @@ public class PersonReportController {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		try{
-			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+	 
+		String academicYear =schoolUtil.getCurrentAcademicYear();
+		String userName = BuckWaUtils.getUserNameFromContext();
+		String facultyName = schoolUtil.getFacutyByUserName(userName, academicYear);
+		String departmentName = schoolUtil.getDepartmentByUserName(userName, academicYear);
+		
+		String facultyCode = schoolUtil.getFacultyCodeByFacultyName(facultyName, academicYear);
+		String departmentCode  = schoolUtil.getDepartmentCodeByDepartmentName(departmentName, academicYear);
+		
+		
+	    mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(userName,academicYear));	
+		
+		
+	    // Get Mean Value (faculty_code,department_code,academic_year)
+	    String mean1 ="";
+	    String mean2 ="";
+	    String mean3 ="";
+	    String mean4 ="";
+	    String mean5 ="";
+		 
+		BuckWaRequest request = new BuckWaRequest();
+		request.put("academicYear", academicYear);
+		request.put("facultyCode", facultyCode);
+		request.put("departmentCode", departmentCode);
+		
+		
+		
+		request.put("worktypeCode", "1");
+		BuckWaResponse response =headService.getDepartmentMeanByWorkTypeCode(request);	 
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			mean1 = (String) response.getResObj("meanValue");			 
+			mav.addObject("mean1", mean1);	
+		}
+		
+		request.put("worktypeCode", "2");
+		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			mean2 = (String) response.getResObj("meanValue");			 
+			mav.addObject("mean2", mean2);	
+		}	
+		
+		request.put("worktypeCode", "3");
+		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			mean3 = (String) response.getResObj("meanValue");			 
+			mav.addObject("mean3", mean3);	
+		}		
+		
+		request.put("worktypeCode", "4");
+		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			mean4 = (String) response.getResObj("meanValue");			 
+			mav.addObject("mean4", mean4);	
+		}		
+		
+		request.put("worktypeCode", "5");
+		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			mean5 = (String) response.getResObj("meanValue");			 
+			mav.addObject("mean5", mean5);	
+		}	
+		
+		
+		
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

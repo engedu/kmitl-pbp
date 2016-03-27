@@ -19,6 +19,8 @@ public interface HeadDao {
 	
 	public String getDepartmentMean( String academicYear ,String facultyCode,String departmentCode);
 	
+	public String getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode);
+	
 	
 	
 }

@@ -67,6 +67,7 @@
         	                        { from: start, to: end, color: "red" }
         	                    ]
         	                }
+        	        
 	        	        ,labels: {
 	        	            template: "#= shortLabels(value) #"
 	        	         }

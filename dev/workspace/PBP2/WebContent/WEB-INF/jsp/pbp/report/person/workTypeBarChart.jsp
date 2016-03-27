@@ -26,6 +26,8 @@
     </div>
     <script>
         function createChart1() {
+        	var start = ${mean1};
+            var end = start+3;
         	 $("#chart1").kendoChart({
                  dataSource: {
                      transport: {
@@ -37,7 +39,7 @@
           
                  },
         	        title: {
-        	            text: "ระดับคะแนนในภาควิชา ด้านวิชาการ"
+        	            text: "ระดับคะแนนในภาควิชา ด้านวิชาการ ค่่าเฉลี่ย  ${mean1}"
         	        },
         	        series: [{
         	            type: "column",
@@ -54,7 +56,13 @@
         	            min: 0,
         	            max: 1000,
         	            majorUnit: 100
-        	        },
+        	        } 
+        	        ,valueAxis:  {
+        	            plotBands: [
+        	                        { from: start, to: end, color: "red" }
+        	                    ]
+        	                }
+        	        ,
                     tooltip: {
                         visible: true,
                         template: "#= series.name #: #= value #"
@@ -64,6 +72,8 @@
             
         }
         function createChart2() {
+        	var start = ${mean2};
+            var end = start+3;
        	 $("#chart2").kendoChart({
                 dataSource: {
                     transport: {
@@ -75,7 +85,7 @@
            
                 },
        	        title: {
-       	            text: "ระดับคะแนนในภาควิชา ด้านงานพัฒนาวิชาการ"
+       	            text: "ระดับคะแนนในภาควิชา ด้านงานพัฒนาวิชาการ  ค่่าเฉลี่ย  ${mean2}"
        	        },
        	        series: [{
        	            type: "column",
@@ -92,7 +102,13 @@
 					min: 0,
 					max: 1000,
 					majorUnit: 100
-				},
+				}
+    	        ,valueAxis:  {
+    	            plotBands: [
+    	                        { from: start, to: end, color: "red" }
+    	                    ]
+    	                }
+    	        ,
                 tooltip: {
                     visible: true,
                     template: "#= series.name #: #= value #"
@@ -103,6 +119,8 @@
        }
 
         function createChart3() {
+        	var start = ${mean3};
+            var end = start+3;
           	 $("#chart3").kendoChart({
                    dataSource: {
                        transport: {
@@ -114,7 +132,7 @@
               
                    },
           	        title: {
-          	            text: "ระดับคะแนนในภาควิชา ด้านงานวิจัย"
+          	            text: "ระดับคะแนนในภาควิชา ด้านงานวิจัย   ค่่าเฉลี่ย  ${mean3}"
           	        },
           	        series: [{
           	            type: "column",
@@ -131,7 +149,13 @@
 						min: 0,
 						max: 1000,
 						majorUnit: 100
-					},
+					}
+        	        ,valueAxis:  {
+        	            plotBands: [
+        	                        { from: start, to: end, color: "red" }
+        	                    ]
+        	                }
+        	        ,
                     tooltip: {
                         visible: true,
                         template: "#= series.name #: #= value #"
@@ -142,6 +166,8 @@
           }
         
         function createChart4() {
+        	var start = ${mean4};
+            var end = start+3;
           	 $("#chart4").kendoChart({
                    dataSource: {
                        transport: {
@@ -153,7 +179,7 @@
                 
                    },
           	        title: {
-          	            text: "ระดับคะแนนในภาควิชา ด้านงานบริการวิชาการ"
+          	            text: "ระดับคะแนนในภาควิชา ด้านงานบริการวิชาการ   ค่่าเฉลี่ย  ${mean4}"
           	        },
           	        series: [{
           	            type: "column",
@@ -170,7 +196,13 @@
 						min: 0,
 						max: 1000,
 						majorUnit: 100
-					},
+					}
+        	        ,valueAxis:  {
+        	            plotBands: [
+        	                        { from: start, to: end, color: "red" }
+        	                    ]
+        	                }
+        	        ,
                     tooltip: {
                         visible: true,
                         template: "#= series.name #: #= value #"
@@ -181,6 +213,8 @@
           }
         
         function createChart5() {
+        	var start = ${mean5};
+            var end = start+3;
           	 $("#chart5").kendoChart({
                    dataSource: {
                        transport: {
@@ -192,7 +226,7 @@
             
                    },
           	        title: {
-          	            text: "ระดับคะแนนในภาควิชา ด้านงานทำนุบำรุงศิลป"
+          	            text: "ระดับคะแนนในภาควิชา ด้านงานทำนุบำรุงศิลป   ค่่าเฉลี่ย  ${mean5}"
           	        },
           	        series: [{
           	            type: "column",
@@ -209,7 +243,13 @@
 	          	    	min: 0,
 	          	    	max: 1000,
 	          	    	majorUnit: 100
-          	    	},
+          	    	}
+        	        ,valueAxis:  {
+        	            plotBands: [
+        	                        { from: start, to: end, color: "red" }
+        	                    ]
+        	                }
+        	        ,
                     tooltip: {
                         visible: true,
                         template: "#= series.name #: #= value #"

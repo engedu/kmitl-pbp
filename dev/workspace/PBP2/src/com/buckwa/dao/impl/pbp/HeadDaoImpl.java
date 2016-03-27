@@ -72,6 +72,33 @@ public class HeadDaoImpl implements HeadDao {
 	    return returnStr;
 		 
 	}
+	
+	@Override
+	public String getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode) {	 
+		
+		String markcolumn  ="";
+		if ("1".equals(worktypecode)) {
+			markcolumn ="mark_1";
+		} else if ("2".equals(worktypecode)) {
+			markcolumn ="mark_2";
+		} else if ("3".equals(worktypecode)) {
+			markcolumn ="mark_3";
+		} else if ("4".equals(worktypecode)) {
+			markcolumn ="mark_4";
+		} else if ("5".equals(worktypecode)) {
+			markcolumn ="mark_5";
+		}
+ 
+		
+		String sql =" select  ROUND( AVG("+markcolumn+"),2 ) from report_worktype_department where faculty_code ='"+facultyCode+"' and department_code='"+departmentCode+"' and academic_year="+academicYear;
+		logger.info("  getDepartmentMean sql:"+sql);
+		String returnStr = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+		logger.info("  returnStr:"+returnStr);
+		
+	    return returnStr;
+		 
+	}
+		
  
 	@Override
 	public AcademicKPIUserMappingWrapper getByHeadAcademicYear( String headUserName ,String academicYear,String status) {	 

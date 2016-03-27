@@ -17,5 +17,6 @@ public interface HeadService {
 	
 	
 	public BuckWaResponse getDepartmentMean(BuckWaRequest request);
+	public BuckWaResponse getDepartmentMeanByWorkTypeCode(BuckWaRequest request);
 }
 

@@ -185,6 +185,30 @@ public class HeadServiceImpl implements HeadService {
 	}
 	
 	
+	@Override	
+	public BuckWaResponse getDepartmentMeanByWorkTypeCode(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		
+		// String headUserName ,String academicYear,String status
+		try{				  
+			String academicYear = (String)request.get("academicYear");
+			String facultyCode = (String)request.get("facultyCode");
+			String departmentCode = (String)request.get("departmentCode");
+			String worktypecode = (String)request.get("worktypeCode");
+			
+			String meanValue= ( String)headDao.getDepartmentMeanByWorkTypeCode(academicYear, facultyCode,departmentCode,worktypecode);
+		 
+			 response.addResponse("meanValue",meanValue);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
 	
 	
 	@Override	
