@@ -281,7 +281,7 @@
 						<subreportParameterExpression><![CDATA[$F{sumPoint}]]></subreportParameterExpression>
 					</subreportParameter>
 					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{workList})]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\person_yearly_report_detail.jasper"]]></subreportExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/person_yearly_report_detail.jasper"]]></subreportExpression>
 				</subreport>
 				<textField>
 					<reportElement stretchType="RelativeToBandHeight" x="10" y="0" width="505" height="20" isPrintWhenDetailOverflows="true" uuid="2d2ca7a6-38af-4c51-9104-b7ec08911b13"/>
