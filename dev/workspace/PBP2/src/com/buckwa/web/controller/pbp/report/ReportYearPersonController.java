@@ -190,10 +190,12 @@ public class ReportYearPersonController{
 			
 			params.put("sumPointAll", sumPointAll);
 			
-			String reportPath = PAMConstants.rbApp.getString("report.path");		
+			String reportPath = PAMConstants.rbApp.getString("report.path");	
+			logger.info("reportPath :" + reportPath);
 			String reportFile =  reportPath+"person_yearly_report.jasper";	
+			logger.info("reportFile :" + reportFile);
 			String subReportFileName = reportPath+"person_yearly_report_detail.jrxml";	
-			
+			logger.info("subReportFileName :" + subReportFileName);
 			params.put("SUBREPORT_DIR", reportPath);
 			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile, params, new JRBeanCollectionDataSource(reportList));
