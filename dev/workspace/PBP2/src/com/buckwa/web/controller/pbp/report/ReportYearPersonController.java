@@ -1,12 +1,10 @@
 package com.buckwa.web.controller.pbp.report;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +22,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -168,47 +167,29 @@ public class ReportYearPersonController{
 			params.put("age",  age); 
 
 			if(null!=person.getWorkingDate()){
-				
-				String startDate = new SimpleDateFormat("d", new Locale("th", "TH")).format(person.getWorkingDate());
-				System.out.println(" total startDate:"+startDate);
-				params.put("startWorkDay", startDate);
-				
-				Date input = new Date();
-				Instant instant = input.toInstant();
-				ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
-				LocalDate date = zdt.toLocalDate();
-				
+				String startDayStr = new SimpleDateFormat("dd", new Locale("th", "TH")).format(person.getWorkingDate());
+				params.put("startWorkDay", startDayStr);
 				
 				String startMonthStr = new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(person.getWorkingDate());
 			//	params.put("startWorkMonth",person.getWorkingDate().getMonth());
 				params.put("startWorkMonth",startMonthStr);
 				
-				String workYearStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
+				String worintDateStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
 				//params.put("startWorkYear", person.getWorkingDate().getYear());
-				params.put("startWorkYear",workYearStr);
-				
-				String toDayStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(todayDate);
-				
-				String toDayMonthStr =  new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(todayDate);
-				
-				int todayInt = Integer.parseInt(toDayStr);
-				int workYearInt  = Integer.parseInt(workYearStr);
-				
-				int todayMonthInt = Integer.parseInt(new SimpleDateFormat("MM", new Locale("th", "TH")).format(todayDate));
-				int workDateMonthInt  = Integer.parseInt(new SimpleDateFormat("MM", new Locale("th", "TH")).format(person.getWorkingDate()));
-				
+				params.put("startWorkYear",worintDateStr);
 				 
- 				int wyear = todayInt - workYearInt;
-				int wmont = Math.abs(todayMonthInt - workDateMonthInt);
+// 				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
+//				int wmont = Math.abs(todayDate.getMonth() - person.getWorkingDate().getMonth());
+//				
+//				System.out.println(" total year:"+todayDate.getYear()+"-"+person.getWorkingDate().getYear()+"="+wyear);
+//				System.out.println(" total month:"+todayDate.getMonth()+"-"+person.getWorkingDate().getMonth()+"="+wmont);
+//				wyear = wyear<0? 0:wyear;
+//				wmont = wmont<0? 0:wmont;
 				
-				System.out.println(" total year:"+todayInt+"-"+workYearInt+"="+wyear);
-				System.out.println(" total month:"+todayMonthInt+"-"+workDateMonthInt+"="+wmont);
+				long[] dt = differenceBetweenDates(person.getWorkingDate(), new Date());
 				
-				
-				wyear = wyear<0? 0:wyear;
-				wmont = wmont<0? 0:wmont;
-				params.put("sumWorkYear", wyear);
-				params.put("sumWorkMonth", wmont);
+				params.put("sumWorkYear", dt[1]);
+				params.put("sumWorkMonth", dt[2]);
 			}else{
 				params.put("startWorkDay","-");
 				params.put("startWorkMonth","-");
@@ -244,13 +225,14 @@ public class ReportYearPersonController{
 			
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			
-			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round;
+			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round+".pdf";
 			
-			logger.info("Output File Name :" + fileName+".pdf");
+			logger.info("Output File Name :" + fileName);
 			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
 			httpResponse.setHeader("Content-Disposition", "attachment; filename="+fileName);
 			httpResponse.setContentType("application/pdf");
+//			httpResponse.setContentType("application/force-download");
 			
 			outputStream.close();
 			
@@ -291,7 +273,8 @@ public class ReportYearPersonController{
 					personReport.setWorkGroup(worktypeCode);
 					personReport.setTitle(worktypeName);
 					personReport.setSumPoint(totalInworktype+"");												
-					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();						
+					List<AcademicKPIUserMapping> mappingList =tmp.getAcademicKPIUserMappingList();	
+					int run = 1;
 					for(AcademicKPIUserMapping mappingTmp:mappingList){			
 						List<AcademicKPIAttributeValue> attributeList =	mappingTmp.getAcademicKPIAttributeValueList();
 						AcademicKPIAttributeValue attributeTmp =attributeList.get(0);
@@ -299,9 +282,10 @@ public class ReportYearPersonController{
 							BigDecimal totalMark =mappingTmp.getTotalInMapping();;							
 							System.out.println(" VAlue:"+attributeTmp.getValue()+ " Mark:"+totalMark);							
 							Map<String, Object> workMap = new HashMap<String, Object>();
-							workMap.put("work", attributeTmp.getValue());
+							workMap.put("work", run+". "+attributeTmp.getValue());
 							workMap.put("point", totalMark);
-							workList.add(workMap);							
+							workList.add(workMap);		
+							run++;
 						}
 					}						
 					personReport.setWorkList(workList);
@@ -344,5 +328,59 @@ public class ReportYearPersonController{
 		} 
 	}
 	
+	public static long[] differenceBetweenDates(Date fromDate, Date toDate) {
+	    Calendar startDate = Calendar.getInstance();
+	    startDate.setTime(fromDate);
+	    long years = 0;
+	    long months = 0;
+	    long days = 0;
+	    Calendar endDate = Calendar.getInstance();
+	    endDate.setTime(toDate);
+	    Calendar tmpdate = Calendar.getInstance();
+	    tmpdate.setTime(startDate.getTime());
+
+	    tmpdate.add(Calendar.YEAR, 1);
+	    while (tmpdate.compareTo(endDate) <= 0) {
+	        startDate.add(Calendar.YEAR, 1);
+	        tmpdate.add(Calendar.YEAR, 1);
+	        years++;
+	    }
+	    tmpdate.setTime(startDate.getTime());
+	    tmpdate.add(Calendar.MONTH, 1);
+	    while (tmpdate.compareTo(endDate) <= 0) {
+	        startDate.add(Calendar.MONTH, 1);
+	        tmpdate.add(Calendar.MONTH, 1);
+	        months++;
+	    }
+	    tmpdate.setTime(startDate.getTime());
+	    tmpdate.add(Calendar.DATE, 1);
+	    while (tmpdate.compareTo(endDate) <= 0) {
+	        startDate.add(Calendar.DATE, 1);
+	        tmpdate.add(Calendar.DATE, 1);
+	        days++;
+	    }
+	    return new long[]{days, months, years};
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		try {
+			Date d2 = DateUtils.parseDate("25/11/1996", new String[] {"dd/MM/yyyy"});
+//			Date d1 = DateUtils.truncate(new Date(), java.util.Calendar.DAY_OF_MONTH);
+			long[] dt = differenceBetweenDates(d2, new Date());
+			System.out.println(dt[0]);
+			System.out.println(dt[1]);
+			System.out.println(dt[2]);
+			
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
 }
 
