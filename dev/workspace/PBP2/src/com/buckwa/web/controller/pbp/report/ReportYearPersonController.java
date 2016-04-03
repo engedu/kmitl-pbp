@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.buckwa.domain.BuckWaUser;
@@ -58,7 +59,7 @@ public class ReportYearPersonController{
 	private PBPWorkTypeService pbpWorkTypeService;
 	
 	@RequestMapping(value="/printReportYear.htm", method = RequestMethod.GET)
-	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse,@RequestParam("round") String round) {
 //		Person person = null;
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
@@ -67,11 +68,17 @@ public class ReportYearPersonController{
 			BuckWaResponse response = null;
 			
 			String year = httpRequest.getParameter("year");
-			String round = httpRequest.getParameter("round");
-			if(round==null){
+			//String round = httpRequest.getParameter("round");
+			System.out.println(" #### Round :"+round);
+		 	 
+			try{				
+				Integer.parseInt(round);
+				
+			}catch(Exception ex){
 				round ="1";
+				
 			}
-			
+	 
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("username :" + user.getUsername());
 			logger.info("year :" + year);

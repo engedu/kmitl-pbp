@@ -1,15 +1,20 @@
 package com.buckwa.web.controller.pbp.report;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.Person;
+import com.buckwa.service.intf.pam.PersonProfileService;
 import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
@@ -27,16 +32,43 @@ public class PersonReportController {
 	@Autowired
 	private HeadService headService;
 	
-	
+	@Autowired
+	private PersonProfileService personProfileService;
 
 	
 	
-	@RequestMapping(value = "/init.htm", method = RequestMethod.GET)
-	public ModelAndView radarChart() {
+//	@RequestMapping(value = "/init.htm", method = RequestMethod.GET)
+//	public ModelAndView radarChart() {
+		
+		@RequestMapping(value="init.htm", method = RequestMethod.GET)
+		public ModelAndView radarChart(HttpServletRequest httpRequest ,@ModelAttribute Person person) {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
+		
+		try{
+		String selectAcademicYear = person.getAcademicYear();
+		String round = person.getEvaluateRound();
+		logger.info(" Start  academicYear:"+selectAcademicYear+"  round:"+round+" employeeType:"+person.getEmployeeType());
+		
+		BuckWaUser user = BuckWaUtils.getUserFromContext();
+		logger.info("viewUserProfile  username :"+user.getUsername());
+
+		BuckWaRequest request = new BuckWaRequest();
+		request.put("username", user.getUsername());
+		request.put("academicYear", selectAcademicYear);
+
+		BuckWaResponse response = personProfileService.getByUsername(request);
+
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			 person = (Person) response.getResObj("person");
+			 mav.addObject("user", person);	
+		}
+			 
 		//mav.addObject("user", new User());	
 		mav.setViewName("personReportInit");
+		}catch(Exception ex){
+			
+		}
 		logger.info(" End  ");
 		return mav;
 	}

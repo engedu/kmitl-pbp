@@ -9,21 +9,23 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> 
 <form:form modelAttribute="academicKPIUserMappingWrapper" action="search.htm" method="POST" name="mainForm">
 
+<div style="width: 80%; text-align: center; padding-left: 10%; font-size: 16px;">
+
+
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
             <strong> ผลงานบุคลากร  ${academicKPIUserMappingWrapper.department.name}    ประจำปี  ${academicKPIUserMappingWrapper.academicYear} </strong>  
         
             </h1> 
 
-<div class="post"> 
-<div class="entry">  
+   
  		 <div class="pbptableWrapper">
  
 			<table class="pbp-table"> 
 		<thead>   
 			<tr>
-				<th  class="thLast" width="200px;">   บุคลากร      </th>
-				<th   class="thFirst"> <span class="require">รออนุมัติ  (${academicKPIUserMappingWrapper.totalNotApprove}) </span></th> 
+				<th  class="thLast" width="200px;" >   บุคลากร      </th>
+				<th   class="thFirst" width="150px;"> <span class="require">รออนุมัติ  (${academicKPIUserMappingWrapper.totalNotApprove}) </span></th> 
 				<th   class="thFirst" width="150px;">อนุมัติแล้ว (${academicKPIUserMappingWrapper.totalApproved}) </th>
 				 <th   class="thFirst" width="150px;">รวม (${academicKPIUserMappingWrapper.total}) </th>
 			</tr> 
@@ -32,7 +34,7 @@
 		<tbody>
 				<c:forEach items="${academicKPIUserMappingWrapper.department.academicPersonList}" var="domain" varStatus="status">
 					<tr>
-						<td class="tdBoth"  >
+						<td class="tdBoth" style="text-align: center; font-size: 20px;" >
 							 <c:choose>
 							<c:when test="${domain.total==0}">
 								 <c:out value="${domain.thaiName}"/>  <c:out value="${domain.thaiSurname}"/> 
@@ -47,7 +49,7 @@
 						
 					
 						 </td>
-						<td class="tdBoth" align="center"  >  
+						<td class="tdBoth" style="text-align: center;" >
 						
 						
 							 <c:choose>
@@ -62,7 +64,7 @@
 							</c:otherwise>
 						</c:choose>
 						 </td> 
-					 	<td class="tdBoth" align="center"  > 
+					 	<td class="tdBoth" style="text-align: center;" >
 					 	
 							 <c:choose>
 							<c:when test="${domain.totalApproved==0}">
@@ -82,7 +84,7 @@
 					 	
 					 	
 					 	 </td>	 
-					 	<td class="tdBoth" align="center"  > <c:out value="${domain.total}"/>  </td>
+					 	<td class="tdBoth" style="text-align: center;" ><c:out value="${domain.total}"/>  </td>
 					</tr>	 
 			   </c:forEach> 
 		</tbody> 
@@ -90,9 +92,7 @@
 			</table>
 		</div>  
 
-		
-</div>
-</div>
+	</div>	
  
 </form:form>
 <script type="text/javascript">

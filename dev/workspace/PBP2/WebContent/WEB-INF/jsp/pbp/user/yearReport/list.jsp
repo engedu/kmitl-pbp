@@ -55,7 +55,7 @@
 	 function onPrint(){
 		 var year = $("#academicYear").val();
 		 var round = $("#evaluateRound").val();
-		 window.location = '<%=request.getContextPath()%>/report/printReportYear.htm?year='+year+'&round'+round;
+		 window.location = '<%=request.getContextPath()%>/report/printReportYear.htm?year='+year+'&round='+round;
 		  
 	 }
 </script>

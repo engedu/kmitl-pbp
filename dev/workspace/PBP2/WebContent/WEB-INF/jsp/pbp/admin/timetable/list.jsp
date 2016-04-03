@@ -125,7 +125,7 @@
 							 
 							 <th class="thLast">Reg. Id</th>
 							 <th class="thLast">ปีการศึกษา</th>
-							<th class="thLast">คารางสอน</th>
+							<th class="thLast">ตารางสอน</th>
 							 
 						</tr>
 					</thead>
