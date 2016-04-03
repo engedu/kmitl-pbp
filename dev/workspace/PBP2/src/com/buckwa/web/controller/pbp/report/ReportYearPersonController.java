@@ -1,6 +1,7 @@
 package com.buckwa.web.controller.pbp.report;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class ReportYearPersonController{
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			
+			httpResponse.setContentType("application/force-download");		
 			BuckWaRequest request = new BuckWaRequest();
 			BuckWaResponse response = null;
 			
@@ -223,18 +225,22 @@ public class ReportYearPersonController{
 			
 			params.put("subreportParameter", reportDetail);
 			
-			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
-			
 			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round+".pdf";
 			
-			logger.info("Output File Name :" + fileName);
-			ServletOutputStream outputStream = httpResponse.getOutputStream();
-			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
-			httpResponse.setHeader("Content-Disposition", "attachment; filename="+fileName);
-			httpResponse.setContentType("application/pdf");
-//			httpResponse.setContentType("application/force-download");
+			fileName = URLEncoder.encode(fileName);
+					
+			httpResponse.setCharacterEncoding("utf-8");
+			httpResponse.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
 			
-			outputStream.close();
+			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
+			
+			
+			logger.info("Output File Name :" + fileName);
+//			ServletOutputStream outputStream = httpResponse.getOutputStream();
+			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
+				
+			
+//			outputStream.close();
 			
 			
 		} catch (Exception ex) {
