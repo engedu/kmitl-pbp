@@ -268,6 +268,8 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 				"   p.department_desc, " +
 				"   p.title_name, " +
 				"   p.academic_rank, " +
+				"   p.working_date, " +
+				"   p.birth_date, " +
 				"   p.reg_id, " +
 				"   p.faculty_desc  " +
 				 
@@ -724,6 +726,9 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setAcademicRank(rs.getString("academic_rank"));
 			domain.setFacultyDesc(rs.getString("faculty_desc"));
 			domain.setRegId(rs.getString("reg_id"));
+			domain.setWorkingDate(rs.getDate("working_date"));
+			domain.setBirthdate(rs.getDate("birth_date"));
+			
 			logger.info(" ### picture:"+rs.getString("picture"));
          
 			return domain;

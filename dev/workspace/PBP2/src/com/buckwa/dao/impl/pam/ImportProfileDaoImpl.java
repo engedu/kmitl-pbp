@@ -180,13 +180,23 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 		sb.append( "  max_education,       " );
 		sb.append( "  email,       " );
 		sb.append( "  picture  ,    " );
+		
+		
+		sb.append( "  working_date,       " );
+		sb.append( "  birth_date,       " );
  
 		sb.append( "  create_by,      " );
 		sb.append( "  create_date,    " );
 		sb.append( "  update_by,      " );
 		sb.append( "  academic_year,       " );
-		sb.append( "  update_date,reg_id )   " );
-		sb.append( " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?,  " );
+		
+
+		
+		sb.append( "  update_date,       " );
+		sb.append( "  reg_id        " );
+		
+		
+		sb.append( " ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?,?,?,  " );
  
 		sb.append( " ?, CURRENT_TIMESTAMP, ?,?, CURRENT_TIMESTAMP,? ) " );
 
@@ -206,10 +216,15 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				ps.setString( 9 , person.getMaxEducation());
 				ps.setString( 10 , person.getEmail());
 				ps.setString( 11, person.getPicture());
-				ps.setString( 12, person.getCreateBy());
-				ps.setString( 13, person.getUpdateBy());
-				ps.setString( 14, currentAcademicYearFinal );
-				ps.setString( 15, person.getRegId() );
+				
+				System.out.println(" person.getWorkingDate():"+person.getWorkingDate()+"     person.getBirthdate():"+person.getBirthdate());
+				ps.setDate( 11, new java.sql.Date(person.getWorkingDate().getTime()));
+				ps.setDate( 12, new java.sql.Date(person.getBirthdate().getTime()));
+				
+				ps.setString( 13, person.getCreateBy());
+				ps.setString( 14, person.getUpdateBy());
+				ps.setString( 15, currentAcademicYearFinal );
+				ps.setString( 16, person.getRegId() );
 				return ps;  
 			}
 		};
@@ -374,6 +389,71 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 	}
 	
 	
+	
+	@Override
+	public void updatePBPNew(final Person person) {
+		logger.info(" <<<---- update pbp Person ---->>> ");
+		
+		final String currentAcademicYearFinal = schoolUtil.getCurrentAcademicYear();	 
+ 
+		
+	//	KeyHolder keyHolder = new GeneratedKeyHolder(); 
+		
+		final StringBuilder sb = new StringBuilder();
+		sb.append(" update person_pbp  set  ");
+		sb.append( "  faculty_desc =? ,       " );
+		sb.append( "  department_desc =?,       " );
+		sb.append( "  employee_type =?,       " );
+		sb.append( "  title_name =?,       " );
+		sb.append( "  thai_name =?,       " );
+		sb.append( "  thai_surname =?,       " );
+		sb.append( "  rate_no =?,       " );
+		sb.append( "  academic_rank =?,       " );
+		sb.append( "  max_education =?,       " );
+		sb.append( "  reg_id =?,       " ); 
+		sb.append( "  working_date =?,       " );
+		sb.append( "  birth_date =?       " );
+  
+		sb.append( "  where email =?  and academic_year=?   " );
+ 
+
+		PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(	sb.toString() , Statement.RETURN_GENERATED_KEYS);  
+				
+				ps.setString(1, person.getFacultyDesc()  );
+				ps.setString( 2 , person.getDepartmentDesc());
+				ps.setString( 3 , person.getEmployeeType());
+				ps.setString( 4 , person.getTitleName());
+				ps.setString( 5 , person.getThaiName());
+				ps.setString( 6 , person.getThaiSurname());
+				ps.setString( 7 , person.getRateNo());
+				 
+				ps.setString( 8 , person.getAcademicRank());
+				ps.setString( 9 , person.getMaxEducation());
+				ps.setString( 10, person.getRegId() );
+				ps.setDate( 11, new java.sql.Date(person.getWorkingDate().getTime()));
+				ps.setDate( 12, new java.sql.Date(person.getBirthdate().getTime()));
+				ps.setString( 13 , person.getEmail());
+				ps.setString( 14, currentAcademicYearFinal );
+	 
+	 
+				return ps;  
+			}
+		};
+		
+		Long returnId = null;
+		
+		jdbcTemplate.update(preparedStatementCreator); 	
+		
+		//if(null != keyHolder){
+		//	returnId = keyHolder.getKey().longValue();	
+		//}
+		
+		//return returnId;
+	}
+
+	
 	private static final String SQL_UPDATE_PERSON_PBP = 
 			" UPDATE person_pbp " +
 			" SET faculty_desc = ?, " +
@@ -384,6 +464,8 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 			"     rate_no = ?, " +
 			"     academic_rank = ?, " +
 			"     max_education = ?, " +  
+			"     working_date = ?, " + 
+			"     birth_date = ?, " + 
 			"     reg_id = ?, " + 
 			"     update_date = CURRENT_TIMESTAMP " +
 			" WHERE email = ? ";
@@ -400,6 +482,8 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				person.getAcademicRank(),
 				person.getMaxEducation() ,
 				person.getRegId() ,
+				person.getWorkingDate(),
+				person.getBirthdate(),
 				person.getEmail()
 				
 			});

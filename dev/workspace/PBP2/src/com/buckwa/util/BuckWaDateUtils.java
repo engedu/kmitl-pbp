@@ -299,6 +299,20 @@ public class BuckWaDateUtils {
 		}
 		return returnStr;
 	}
+	
+	
+	public static String get_MMddyyyy_thai_from_date(Date dateIn) {
+		String returnStr = "";
+		if (null != dateIn) {
+			SimpleDateFormat sdf_thai = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				returnStr = sdf_thai.format(dateIn);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return returnStr;
+	}
 
 	public static String get_ddmmyyyy_time_thai_from_date(Date dateIn) {
 		String returnStr = "";
@@ -474,6 +488,20 @@ public class BuckWaDateUtils {
 
 	public static Date parseDateTH(String dateStr) {
 		SimpleDateFormat ddmmyyy_sdf = new SimpleDateFormat("yyyy-MM-dd",
+				thaiLocale);
+		Date tmpDate = null;
+		try {
+			tmpDate = ddmmyyy_sdf.parse(dateStr);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return tmpDate;
+
+	}
+	
+	public static Date convertStr_MMddyyy_TH_to_Date(String dateStr) {
+		SimpleDateFormat ddmmyyy_sdf = new SimpleDateFormat("MM/dd/yyy",
 				thaiLocale);
 		Date tmpDate = null;
 		try {

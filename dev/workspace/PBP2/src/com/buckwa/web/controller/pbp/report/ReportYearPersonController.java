@@ -76,9 +76,7 @@ public class ReportYearPersonController{
 			logger.info("username :" + user.getUsername());
 			logger.info("year :" + year);
 			
-			ServletOutputStream outputStream = httpResponse.getOutputStream();
-			httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
-			httpResponse.setContentType("application/pdf");
+
 
 			request.put("username", user.getUsername());
 			request.put("academicYear", year);
@@ -163,8 +161,10 @@ public class ReportYearPersonController{
 			if(null!=person.getWorkingDate()){
 				params.put("startWorkDay", person.getWorkingDate().getDay());
 				params.put("startWorkMonth",person.getWorkingDate().getMonth());
-				params.put("startWorkYear", person.getWorkingDate().getYear());
-				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
+				String worintDateStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
+				//params.put("startWorkYear", person.getWorkingDate().getYear());
+				params.put("startWorkYear",worintDateStr);
+ 				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
 				int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
 				wyear = wyear<0? 0:wyear;
 				wmont = wmont<0? 0:wmont;
@@ -204,6 +204,14 @@ public class ReportYearPersonController{
 			params.put("subreportParameter", reportDetail);
 			
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
+			
+			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round;
+			
+			logger.info("Output File Name :" + fileName);
+			ServletOutputStream outputStream = httpResponse.getOutputStream();
+			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
+			httpResponse.setHeader("Content-Disposition", "attachment; filename="+fileName);
+			httpResponse.setContentType("application/pdf");
 			
 			outputStream.close();
 			

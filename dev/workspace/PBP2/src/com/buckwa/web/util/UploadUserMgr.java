@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -130,6 +131,12 @@ public class UploadUserMgr {
 			person.setCreateBy(userName );
 			person.setUpdateBy(userName);
 			
+			// working_date,birth_date  Column: 11,12
+			System.out.println(" working Date Str:"+getCellValue(r.getCell(11), 11));
+			person.setWorkingDate(BuckWaDateUtils.convertStr_MMddyyy_TH_to_Date(getCellValue(r.getCell(11), 11)));
+			person.setBirthdate(BuckWaDateUtils.convertStr_MMddyyy_TH_to_Date(getCellValue(r.getCell(12), 12)));
+			
+			
 			if(BeanUtils.isNotEmpty( person.getCitizenId())){
 				listSuccessPerson.add(person);
 			}else{
@@ -193,18 +200,27 @@ public class UploadUserMgr {
 			switch (c.getCellType()) {
 			
 			case Cell.CELL_TYPE_STRING:
-//				logger.info("## CELL : " + index + " : " + c.getStringCellValue());
+				logger.info("## CELL : " + index + " : " + c.getStringCellValue());
 				v = c.getStringCellValue();
 				break;
 			case Cell.CELL_TYPE_NUMERIC:
-//				logger.info("## CELL : " + index + " : " + c.getNumericCellValue());
-				v = String.valueOf( c.getNumericCellValue()) ;
+				
+
+				    if (HSSFDateUtil.isCellDateFormatted(c)) { 
+				           v=BuckWaDateUtils.get_MMddyyyy_thai_from_date(c.getDateCellValue()); 
+				    }else{
+				    	v = String.valueOf( c.getNumericCellValue()) ;
+				    }
+				 
+				    logger.info("## CELL : " + index + " : " + c.getNumericCellValue()+" after read:"+v);
+				
 				break;
 			default:
 //				logger.info("## CELL OTHER: " + index + " : " + c.getStringCellValue());
 				if(  DateUtil.isCellDateFormatted(c)){
 					Date d = c.getDateCellValue();
-					v = BuckWaDateUtils.get_ddmmyy_from_date(d);
+					v = BuckWaDateUtils.get_MMddyyyy_thai_from_date(d);
+					System.out.println(" Date Value :"+d);
 				}
 				break;
 			}
@@ -313,7 +329,8 @@ public class UploadUserMgr {
 						isPersonSucess = true;
 					}else{
 						logger.info("## importProfileDao.updatePBP");
-						importProfileDao.updatePBP(person);
+						//importProfileDao.updatePBP(person);
+						importProfileDao.updatePBPNew(person);
 						isPersonSucess = true;
 					}
 				}

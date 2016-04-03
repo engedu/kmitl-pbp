@@ -17,6 +17,8 @@ public interface ImportProfileDao {
 	public int findByUsername(String username);
 	public void update(Person person);
 	public void updatePBP(Person person);
+	public void updatePBPNew(Person person);
+	
 	
 	public Long createAcademicPerson(Person person);
 	public int findAcademicPersonByUsername(String username,String academicYear);
