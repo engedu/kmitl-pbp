@@ -160,12 +160,20 @@ public class ReportYearPersonController{
 
 			if(null!=person.getWorkingDate()){
 				params.put("startWorkDay", person.getWorkingDate().getDay());
-				params.put("startWorkMonth",person.getWorkingDate().getMonth());
+				
+				String startMonthStr = new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(person.getWorkingDate());
+			//	params.put("startWorkMonth",person.getWorkingDate().getMonth());
+				params.put("startWorkMonth",startMonthStr);
+				
 				String worintDateStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
 				//params.put("startWorkYear", person.getWorkingDate().getYear());
 				params.put("startWorkYear",worintDateStr);
+				 
  				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
-				int wmont = todayDate.getMonth() - person.getWorkingDate().getMonth();
+				int wmont = Math.abs(todayDate.getMonth() - person.getWorkingDate().getMonth());
+				
+				System.out.println(" total year:"+todayDate.getYear()+"-"+person.getWorkingDate().getYear()+"="+wyear);
+				System.out.println(" total month:"+todayDate.getMonth()+"-"+person.getWorkingDate().getMonth()+"="+wmont);
 				wyear = wyear<0? 0:wyear;
 				wmont = wmont<0? 0:wmont;
 				params.put("sumWorkYear", wyear);

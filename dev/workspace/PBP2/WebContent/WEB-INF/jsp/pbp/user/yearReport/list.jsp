@@ -36,7 +36,7 @@
             			</td>
             			<td abbr="center"> ${academicYearSelect}
 <%--             			<a class="btn btn-primary"  rel="notLoading" href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=59"> พิมพ์</a>  --%>
-            			<a class="btn btn-primary"  rel="notLoading" onclick="onPrint()"> Download</a> 
+            			<a class="btn btn-primary"  rel="notLoading" onclick="onPrint()" target="_blank"> Download</a> 
             			</td>
             		</tr>
             		<tr>
@@ -56,5 +56,6 @@
 		 var year = $("#academicYear").val();
 		 var round = $("#evaluateRound").val();
 		 window.location = '<%=request.getContextPath()%>/report/printReportYear.htm?year='+year+'&round'+round;
+		  
 	 }
 </script>
