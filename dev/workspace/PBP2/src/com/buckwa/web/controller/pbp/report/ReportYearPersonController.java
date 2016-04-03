@@ -2,6 +2,10 @@ package com.buckwa.web.controller.pbp.report;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,14 +17,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperViewer;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,21 +168,43 @@ public class ReportYearPersonController{
 			params.put("age",  age); 
 
 			if(null!=person.getWorkingDate()){
-				params.put("startWorkDay", person.getWorkingDate().getDay());
+				
+				String startDate = new SimpleDateFormat("d", new Locale("th", "TH")).format(person.getWorkingDate());
+				System.out.println(" total startDate:"+startDate);
+				params.put("startWorkDay", startDate);
+				
+				Date input = new Date();
+				Instant instant = input.toInstant();
+				ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+				LocalDate date = zdt.toLocalDate();
+				
 				
 				String startMonthStr = new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(person.getWorkingDate());
 			//	params.put("startWorkMonth",person.getWorkingDate().getMonth());
 				params.put("startWorkMonth",startMonthStr);
 				
-				String worintDateStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
+				String workYearStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(person.getWorkingDate());
 				//params.put("startWorkYear", person.getWorkingDate().getYear());
-				params.put("startWorkYear",worintDateStr);
-				 
- 				int wyear = todayDate.getYear() - person.getWorkingDate().getYear();
-				int wmont = Math.abs(todayDate.getMonth() - person.getWorkingDate().getMonth());
+				params.put("startWorkYear",workYearStr);
 				
-				System.out.println(" total year:"+todayDate.getYear()+"-"+person.getWorkingDate().getYear()+"="+wyear);
-				System.out.println(" total month:"+todayDate.getMonth()+"-"+person.getWorkingDate().getMonth()+"="+wmont);
+				String toDayStr =  new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(todayDate);
+				
+				String toDayMonthStr =  new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(todayDate);
+				
+				int todayInt = Integer.parseInt(toDayStr);
+				int workYearInt  = Integer.parseInt(workYearStr);
+				
+				int todayMonthInt = Integer.parseInt(new SimpleDateFormat("MM", new Locale("th", "TH")).format(todayDate));
+				int workDateMonthInt  = Integer.parseInt(new SimpleDateFormat("MM", new Locale("th", "TH")).format(person.getWorkingDate()));
+				
+				 
+ 				int wyear = todayInt - workYearInt;
+				int wmont = Math.abs(todayMonthInt - workDateMonthInt);
+				
+				System.out.println(" total year:"+todayInt+"-"+workYearInt+"="+wyear);
+				System.out.println(" total month:"+todayMonthInt+"-"+workDateMonthInt+"="+wmont);
+				
+				
 				wyear = wyear<0? 0:wyear;
 				wmont = wmont<0? 0:wmont;
 				params.put("sumWorkYear", wyear);
@@ -222,7 +246,7 @@ public class ReportYearPersonController{
 			
 			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round;
 			
-			logger.info("Output File Name :" + fileName);
+			logger.info("Output File Name :" + fileName+".pdf");
 			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
 			httpResponse.setHeader("Content-Disposition", "attachment; filename="+fileName);

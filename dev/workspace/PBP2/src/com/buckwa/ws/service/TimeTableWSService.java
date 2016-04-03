@@ -241,9 +241,9 @@ public class TimeTableWSService   {
 			
 			for(Faculty facttmp:facultyList){
 				// For Debug  Engineering
-				//if(!"01".equals(facttmp.getFacultyId())){  
+				if(!"05".equals(facttmp.getFacultyId())){  
 					
-				// }else{
+				 }else{
 					
 				String facultyCode = facttmp.getFacultyId();
 				
@@ -269,9 +269,9 @@ public class TimeTableWSService   {
 				for(Department deptmp:departmentList){					
 					//logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
 					
-				//	if( !"05".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
+					if( !"06".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
 					//	logger.info(" #############  Skip Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-				//	}else{
+					}else{
 						
 					//	logger.info(" #############  Work only on  Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
 					
@@ -315,10 +315,10 @@ public class TimeTableWSService   {
 
 					}
 					
-			//}// debug Department
+			}// debug Department
 				}
 				
-			//}//Debug Faculty
+			}//Debug Faculty
 	
 						
 			logger.info(" ########  Found Teacher Id Size:"+teacherIdList.size());
@@ -362,12 +362,12 @@ public class TimeTableWSService   {
 			//
 			//if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
 			//	if(!"10518".equals(teacherTmp.getTeacherIdStr())){
-			//if(!"10535".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
+			if(!"50113".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
 				
 				
-			//}else{
+			}else{
 				
-				System.out.println("   ##################### FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ############");
+				System.out.println("   ##################### FFFFFFFFFFFFFFFFFFFF50113 FFFFFFFFFFFFFFFFFFFFFFFFFF ############");
 			    String facultyCode = teacherTmp.getFacultyCode();
 				GetTeachTable teachTableRequest = new GetTeachTable();
 				teachTableRequest.setSemester(semester);
@@ -391,14 +391,14 @@ public class TimeTableWSService   {
 				
 				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 
 				
-				if(degree==2){
+				//if(degree==2){
 				//	System.out.println(" ################################### Found degree 2 size :"+teachTableResponseList.size());
-				}
+				//}
 				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);;								
 			}
 			
 
-		//}	 // Debug User
+		}	 // Debug User
 		
 	}
 	
