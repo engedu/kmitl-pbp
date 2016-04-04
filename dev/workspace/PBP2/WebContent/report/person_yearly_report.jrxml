@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.100000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="134"/>
+	<property name="ireport.y" value="416"/>
 	<parameter name="reportDate" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="fullName" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="fromDate" class="java.lang.String" isForPrompting="false"/>
@@ -401,7 +401,7 @@
 				<textFieldExpression><![CDATA[$P{sumPoint5}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="411" y="297" width="84" height="22" uuid="a6550ad4-541f-417e-90ac-c70b109868fa">
+				<reportElement x="183" y="299" width="58" height="22" uuid="a6550ad4-541f-417e-90ac-c70b109868fa">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
@@ -410,7 +410,7 @@
 				<text><![CDATA[ผู้ปฏิบัติงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="326" width="84" height="22" uuid="19f2e007-582a-4046-b33b-e6f621cd6aef">
+				<reportElement x="427" y="298" width="67" height="22" uuid="19f2e007-582a-4046-b33b-e6f621cd6aef">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
@@ -449,13 +449,13 @@
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="289" y="318" width="120" height="1" uuid="9c480166-a6a5-413d-9603-a33e9f59c052"/>
+				<reportElement x="48" y="321" width="120" height="1" uuid="9c480166-a6a5-413d-9603-a33e9f59c052"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#CCCCCC"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="288" y="347" width="120" height="1" uuid="ed7a27a4-b6ab-4958-8961-d80b6060f2cc"/>
+				<reportElement x="306" y="320" width="120" height="1" uuid="ed7a27a4-b6ab-4958-8961-d80b6060f2cc"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#CCCCCC"/>
 				</graphicElement>
@@ -468,6 +468,67 @@
 					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[คะแนนรวมด้านวิชาการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="300" width="27" height="22" uuid="2d8f64a6-ecb1-4492-9245-156f00b4eb5e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="299" width="27" height="22" uuid="db96b048-36f6-4e8b-850d-cd21ec4ddf68">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="324" width="134" height="20" uuid="049fb04a-8aa0-4875-85c5-eb3bd74a4480"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" isUnderline="false" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fullName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="322" width="27" height="22" uuid="7e98be95-c44c-4059-bf8f-81d4efe6bc3a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="322" width="27" height="22" uuid="c7dfacf8-a32c-46ea-9fdf-42b20ff028e7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[(]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="322" width="27" height="22" uuid="fa790161-2a5f-449c-a566-85c7995c7f9d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="322" width="27" height="22" uuid="2d209087-7656-4157-b7b9-4c14dbb6d1c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Angsana New" size="14" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[)]]></text>
 			</staticText>
 		</band>
 	</summary>
