@@ -27,7 +27,7 @@
     <script>
         function createChart1() {
         	var start = ${mean1};
-            var end = start+3;
+            var end = start+2;
         	 $("#chart1").kendoChart({
                  dataSource: {
                      transport: {
@@ -73,7 +73,7 @@
         }
         function createChart2() {
         	var start = ${mean2};
-            var end = start+3;
+            var end = start+2;
        	 $("#chart2").kendoChart({
                 dataSource: {
                     transport: {
@@ -120,7 +120,7 @@
 
         function createChart3() {
         	var start = ${mean3};
-            var end = start+3;
+            var end = start+2;
           	 $("#chart3").kendoChart({
                    dataSource: {
                        transport: {
@@ -167,7 +167,7 @@
         
         function createChart4() {
         	var start = ${mean4};
-            var end = start+3;
+            var end = start+2;
           	 $("#chart4").kendoChart({
                    dataSource: {
                        transport: {
@@ -214,7 +214,7 @@
         
         function createChart5() {
         	var start = ${mean5};
-            var end = start+3;
+            var end = start+2;
           	 $("#chart5").kendoChart({
                    dataSource: {
                        transport: {

@@ -426,7 +426,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 				domain.setUsername(rs.getString("username"));
 				domain.setPassword(rs.getString("password"));
 				domain.setEnabled(rs.getBoolean("enable"));
-				domain.setFirst_name(rs.getString("thai_name"));
+				domain.setFirst_name(rs.getString("thai_name").trim());
 				domain.setLast_name(rs.getString("thai_surname"));
 				domain.setAddress1(rs.getString("address1"));
 				domain.setAddress2(rs.getString("address2"));

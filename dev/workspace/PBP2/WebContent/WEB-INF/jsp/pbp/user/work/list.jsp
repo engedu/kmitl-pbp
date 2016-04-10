@@ -17,7 +17,7 @@
 	<div style="width: 50%; float: left; text-align: right;" >
   
             			 ปีการศึกษา  &nbsp; 
-	            			<form:select path="academicYear" cssStyle="width:20%" > 
+	            			<form:select path="academicYear" cssStyle="width:20%"  onchange="initAcademic();"> 
 								<form:options items="${person.academicYearList}" itemValue="name" itemLabel="name" />
 							</form:select> 
  
@@ -26,12 +26,11 @@
 	            			
 	            			<c:if test="${principal.personProfile.employeeType == 'ข้าราชการ' }">  
 	            				 &nbsp;&nbsp;&nbsp;   รอบ  &nbsp; 
-	            				 <form:select path="evaluateRound"  cssStyle="width:20%"> 
+	            				 <form:select path="evaluateRound"  cssStyle="width:20%" onchange="initAcademic();"> 
 									<form:options items="${person.evaluateRoundList}" itemValue="name" itemLabel="name" />
 								</form:select> 
 	            			</c:if>
-                              &nbsp; 
-                           <a class="btn btn-primary"  rel="notLoading" onclick="initAcademic()"> ค้นหา</a> 
+                          
             
 	 
 	 

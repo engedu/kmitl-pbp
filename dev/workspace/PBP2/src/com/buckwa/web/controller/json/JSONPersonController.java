@@ -321,9 +321,10 @@ public class JSONPersonController {
 
 							int loopx = 1;
 							for (DepartmentWorkTypeReport personTmp : reportWorkTypeDepartmentList) {
-								String tmpRegId = personTmp.getPersonName();
+								String personName = personTmp.getPersonName();
 								RadarPlotReport reportTmp = new RadarPlotReport();
-								if (!firstLast.equalsIgnoreCase(tmpRegId)) {
+								System.out.println(" firstLast :"+firstLast+"|   personName:"+personName);
+								if (!firstLast.equalsIgnoreCase(personName)) {
 									reportTmp.setAxisName(" ");
 								} else {
 									reportTmp.setAxisName(personTmp.getPersonName());

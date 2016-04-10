@@ -194,13 +194,13 @@
 							<td class="tdLast">  
 							<form:select path="specialP5"  >
 				     			 
-			     			 <form:option value="1" label="ไช่" />
-		     			 <form:option value="2" label="ไม่ไช่" />			     			 
+			     			 <form:option value="1" label="ใช่" />
+		     			 <form:option value="2" label="ไม่ใช่" />			     			 
 				     			 
 							</form:select></td> 							
 							
 							</td> 
-		 					<td class="tdLast"> 1: ไช่ <br> 2: ไม่ไช่</td>
+		 					<td class="tdLast"> 1: ใช่ <br> 2: ไม่ใช่</td>
 						</tr>								
 								
 						<tr>

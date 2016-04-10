@@ -70,6 +70,8 @@ public class TimeTableWSService   {
 	@Autowired
 	private WebServiceTemplate  teacherWSTemplate  ;
 	
+
+	
 	
 	@Autowired
 	private WebServiceTemplate  teachTableWSTemplate  ;
@@ -233,7 +235,7 @@ public class TimeTableWSService   {
 //			
 			
 
-			logger.info(" ################################# Start get Teacher From WS  ##########################");
+			
 			
 			List<String> teacherIdList = new ArrayList();
 			List<Teacher> teacherList  = new ArrayList();
@@ -241,11 +243,15 @@ public class TimeTableWSService   {
 			
 			for(Faculty facttmp:facultyList){
 				// For Debug  Engineering
-				if(!"05".equals(facttmp.getFacultyId())){  
+				
+				
+			//	if(!"03".equals(facttmp.getFacultyId())){  
 					
-				 }else{
+			//	 }else{
 					
+				 
 				String facultyCode = facttmp.getFacultyId();
+				logger.info(" ################################# Start get Teacher From WS  Faculty  "+facultyCode+":"+facttmp.getFacultyTname());	
 				
 				GetDepartmentList departmentRequest = new GetDepartmentList();
 				departmentRequest.setFacultyId(facttmp.getFacultyId());
@@ -269,12 +275,12 @@ public class TimeTableWSService   {
 				for(Department deptmp:departmentList){					
 					//logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
 					
-					if( !"06".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
+				//	if( !"11".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
 					//	logger.info(" #############  Skip Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-					}else{
+				//	}else{
 						
 					//	logger.info(" #############  Work only on  Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-					
+						logger.info(" ################################# Start get Teacher From WS  Department  "+deptmp.getDepartmentId()+":"+deptmp.getDepartmentName());	
 					GetTeacherList teacherRequest = new GetTeacherList();
 					teacherRequest.setFacultyId(facttmp.getFacultyId());
 					teacherRequest.setDepartmentId(deptmp.getDepartmentId());
@@ -311,16 +317,20 @@ public class TimeTableWSService   {
 							pbpTeacher.setFacultyCode(facultyCode);
 							pbpTeacher.setAcademicYear(academicYear);
 							teacherList.add(pbpTeacher);
+							pbpTeacher.setName(teacherListWSTmp.getTeacherTname());
 						}
 
 					}
 					
 			}// debug Department
-				}
+			 
 				
 			}//Debug Faculty
 	
-						
+					
+		//	}
+			 
+			
 			logger.info(" ########  Found Teacher Id Size:"+teacherIdList.size());
 			logger.info(" ########  Found Teacher Unique Id Size:"+teacherIdMap.size());
 			
@@ -336,12 +346,13 @@ public class TimeTableWSService   {
 	 
 			
 			
-			}
+		
 			 
 			 
-			 
-			logger.info(" ################################# Start get TimeTable From WS Semester 3 ##########################");
+			logger.info(" ################################# Start Recalculate ##########################");
 			
+			//recalculate(academicYear);
+			 
 			logger.info(" ---- End With Success---" );
 		}catch(Exception ex){
 			logger.info(" ---- End With Error---" );
@@ -357,17 +368,22 @@ public class TimeTableWSService   {
 		 
 		String academicYear = schoolUtil.getCurrentAcademicYear();
 		
+		logger.info(" ############ Start Insert TeachTable , academicYear="+academicYear );
+		
 		//if(teacherIdStr!=null&&teacherIdStr.length()>0){
+		
+		int loop =1;
 		for(Teacher teacherTmp:teacherListIn){
 			//
 			//if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
 			//	if(!"10518".equals(teacherTmp.getTeacherIdStr())){
-			if(!"50113".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
+		//	if(!"31110".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
 				
 				
-			}else{
+		//	}else{
 				
-				System.out.println("   ##################### FFFFFFFFFFFFFFFFFFFF50113 FFFFFFFFFFFFFFFFFFFFFFFFFF ############");
+		 
+			
 			    String facultyCode = teacherTmp.getFacultyCode();
 				GetTeachTable teachTableRequest = new GetTeachTable();
 				teachTableRequest.setSemester(semester);
@@ -380,7 +396,7 @@ public class TimeTableWSService   {
 						try {
 							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
 					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       soapMessageTeachTable.writeTo(out);
+					       //soapMessageTeachTable.writeTo(out);
 				           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
 					         
 						} catch(Exception e) {
@@ -391,14 +407,22 @@ public class TimeTableWSService   {
 				
 				List<TeachTable> teachTableResponseList =returnObjTeachTable.getTeachTable(); 
 				
-				//if(degree==2){
-				//	System.out.println(" ################################### Found degree 2 size :"+teachTableResponseList.size());
-				//}
-				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);;								
+				int teachSize = 0;
+				if(teachTableResponseList!=null&&teachTableResponseList.size()>0){
+					teachSize = teachTableResponseList.size();
+				}
+				
+				logger.info(" Semester:"+semester+" degree:"+degree+"  "+teacherTmp.getTeacherIdStr()+":"+teacherTmp.getName()+"  TeachTableSize:"+teachSize );
+		 
+				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);
+				 
+				
 			}
 			
 
-		}	 // Debug User
+		//}	 // Debug User
+		
+
 		
 	}
 	

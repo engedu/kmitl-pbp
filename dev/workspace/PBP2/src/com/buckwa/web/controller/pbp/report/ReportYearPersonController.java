@@ -159,7 +159,7 @@ public class ReportYearPersonController{
 				age = todayDate.getYear() - person.getBirthdate().getYear() + "";
 			}
 			params.put("reportDate", reportDate);
-			params.put("fullName", person.getTitleName()+" "+person.getThaiName()+" "+person.getThaiSurname());
+			params.put("fullName", person.getThaiName()+" "+person.getThaiSurname());
 			params.put("fromDate", reportFrom);
 			params.put("toDate", reportTo);
 			params.put("position", person.getAcademicRank());
@@ -169,7 +169,7 @@ public class ReportYearPersonController{
 			params.put("age",  age); 
 
 			if(null!=person.getWorkingDate()){
-				String startDayStr = new SimpleDateFormat("dd", new Locale("th", "TH")).format(person.getWorkingDate());
+				String startDayStr = new SimpleDateFormat("d", new Locale("th", "TH")).format(person.getWorkingDate());
 				params.put("startWorkDay", startDayStr);
 				
 				String startMonthStr = new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(person.getWorkingDate());
@@ -190,8 +190,8 @@ public class ReportYearPersonController{
 				
 				long[] dt = differenceBetweenDates(person.getWorkingDate(), new Date());
 				
-				params.put("sumWorkYear", dt[1]);
-				params.put("sumWorkMonth", dt[2]);
+				params.put("sumWorkYear", dt[2]);
+				params.put("sumWorkMonth", dt[1]);
 			}else{
 				params.put("startWorkDay","-");
 				params.put("startWorkMonth","-");

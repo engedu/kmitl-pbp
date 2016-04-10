@@ -180,7 +180,7 @@ public class InstituteDaoImpl implements InstituteDao {
 		
 		
  
-		
+	/*	
 		request.put("academicYear", academicYear);
 		BuckWaResponse response =facultyService.getAllFaculty(request);
 	 
@@ -566,7 +566,7 @@ public class InstituteDaoImpl implements InstituteDao {
 
 			
 		}
-		 
+		 */
 	}
 	
 	
@@ -932,20 +932,20 @@ public class InstituteDaoImpl implements InstituteDao {
 		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.department_desc) 	where p.email='"+headUserName+"'";
 		String sqlDepartment = " select * from department 	 where academic_year="+academicYear;
 
-		logger.info("  getDepartmentMark sqlDepartment:"+sqlDepartment);
+	//	logger.info("  getDepartmentMark sqlDepartment:"+sqlDepartment);
 		
 		try{
 			departmentList = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );	
 		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 			ex.printStackTrace();
-			logger.info(" sqlDepartment:"+sqlDepartment);
+			//logger.info(" sqlDepartment:"+sqlDepartment);
 		}
 		if(departmentList!=null&&departmentList.size()>0){ 
 			
 			for(Department department:departmentList){
 				// Get User belong to department 
 				String sqlacademicPerson = "  select * from person_pbp where department_desc ='"+department.getName()+"'   and  academic_year='"+academicYear+"'";
-				logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
+				//logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
 				List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlacademicPerson,	new AcademicPersonMapper() );  
 				
 				BigDecimal totalMark = new BigDecimal(0.00);
@@ -1030,7 +1030,7 @@ public class InstituteDaoImpl implements InstituteDao {
 			//domain.setEmployeeId(rs.getString("employee_id"));
 			//domain.setCitizenId(rs.getString("citizen_id"));
 			
-			domain.setThaiName(rs.getString("thai_name"));
+			domain.setThaiName(rs.getString("thai_name").trim());
 			domain.setThaiSurname(rs.getString("thai_surname"));
 	
 			domain.setEmail(rs.getString("email"));

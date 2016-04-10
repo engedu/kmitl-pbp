@@ -252,7 +252,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 		
 		  String SQL_GET_ALL_PBPL = 
 				" SELECT p.person_id, " +
-				"   p.thai_name, " +
+				"   trim(p.thai_name) as thai_name, " +
 				"   p.thai_surname, " +
 				"   p.rate_no, " +
 				"   p.employee_type, " +

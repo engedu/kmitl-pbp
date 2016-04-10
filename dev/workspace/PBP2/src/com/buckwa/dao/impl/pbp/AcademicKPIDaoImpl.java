@@ -382,16 +382,16 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 	 
 	@Override
 	public Long importworkTimeTable(int semester,AcademicKPIUserMapping domain) {
-		logger.info("  ########## importworkdomain : "+BeanUtils.getBeanString(domain));	
+	//	logger.info("  ########## importworkdomain : "+BeanUtils.getBeanString(domain));	
 		 
 		final AcademicKPIUserMapping finalDomain = domain;
 		String semesterStr = semester+"";
 		
 		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+finalDomain.getAcademicYear()+"' and evaluate_type='1'"   ;  
-		logger.info(" sqlRound:"+sqlRound);
+		//logger.info(" sqlRound:"+sqlRound);
 		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 		
-		 logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		// logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
 		 
 		 long startTime =0l;
 		 long endTime =0l;
@@ -416,7 +416,7 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 			 
 		 	
 			final long createDateLong = (startTime+endTime)/2;
-		 logger.info(" Start Time:"+startTime+" endTime:"+endTime+" createDateLong:"+createDateLong);
+		// logger.info(" Start Time:"+startTime+" endTime:"+endTime+" createDateLong:"+createDateLong);
 		 
 		
 		

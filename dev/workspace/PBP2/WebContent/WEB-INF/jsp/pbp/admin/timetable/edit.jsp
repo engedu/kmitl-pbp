@@ -126,8 +126,8 @@
 						<tr>
 				<td class="tdFirst">Project Base Learning:</td>
 				<td class="tdLast">
-				 <form:radiobutton  path="isProjectBase"  id="status0"  value="0" />ไช่
-				<form:radiobutton path="isProjectBase" id="status1" value="1"   />ไม่ไช่
+				 <form:radiobutton  path="isProjectBase"  id="status0"  value="0" />ใช่
+				<form:radiobutton path="isProjectBase" id="status1" value="1"   />ไม่ใช่
 				
 				</td>
 			</tr>			

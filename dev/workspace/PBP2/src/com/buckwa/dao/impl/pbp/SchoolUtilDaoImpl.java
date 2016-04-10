@@ -103,7 +103,7 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		 
 		 try{
 		String sql =" SELECT email FROM person_pbp where reg_id='"+regId+"' and academic_year="+academicYear;	
-		logger.info("  getUserNameFromRegId sql: "+sql);
+		//logger.info("  getUserNameFromRegId sql: "+sql);
 		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
 	 
 		 }catch(Exception ex){
@@ -117,7 +117,7 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		 
 		 try{
 		String sql =" SELECT reg_id FROM person_pbp where email='"+email+"' and academic_year="+academicYear;	
-		logger.info("  getRegIdFromUserName sql: "+sql);
+		//logger.info("  getRegIdFromUserName sql: "+sql);
 		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
 	 
 		 }catch(Exception ex){

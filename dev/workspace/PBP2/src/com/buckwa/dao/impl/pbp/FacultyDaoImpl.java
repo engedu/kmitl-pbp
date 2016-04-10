@@ -998,7 +998,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		//	 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+ " Total Student:"+finalTeachtable.getStudentTotal() );
 			if(finalTeachtable.getTeacherId()==null||finalTeachtable.getSubjectId()==null||finalTeachtable.getSemester()==null||finalTeachtable.getLectOrPrac()==null
 					||finalTeachtable.getStudentTotal()==null||finalTeachtable.getStudentTotal().intValue()==0){ 				
-				 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
+				// logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
 			}else{ 
 			// Check aready exist
 			//final String academicYear = schoolUtil.getCurrentAcademicYear();
@@ -1027,7 +1027,7 @@ public class FacultyDaoImpl implements FacultyDao {
 								try {
 									SOAPMessage soapMessageSubject = ((SaajSoapMessage)messageSubject).getSaajMessage();				 
 							       ByteArrayOutputStream out = new ByteArrayOutputStream();
-							      soapMessageSubject.writeTo(out);
+							     // soapMessageSubject.writeTo(out);
 						        //   logger.info(" soapMessageSubject SOAP Request Payload: " + new String(out.toByteArray()));
 							         
 								} catch(Exception e) {
@@ -1065,20 +1065,20 @@ public class FacultyDaoImpl implements FacultyDao {
 						if(getTeacherofSubjectResponse.getLect()!=null){
 							if(getTeacherofSubjectResponse.getLect().getTeacherId()!=null&&getTeacherofSubjectResponse.getLect().getTeacherId().size()>1){
 								
-								logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+" Found Lect List Size: "+getTeacherofSubjectResponse.getLect().getTeacherId().size()+" So  -----> Y");
+								//logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+" Found Lect List Size: "+getTeacherofSubjectResponse.getLect().getTeacherId().size()+" So  -----> Y");
 								isCoTeach="Y";
 							}							
 						}
 
 						//List<String> teacherIdPracList =getTeacherofSubjectResponse.getLect().getTeacherId();
 						//logger.info(" ## Teacher List :"+teacherIdList);
-						if(getTeacherofSubjectResponse.getPrac()!=null){
-							if(getTeacherofSubjectResponse.getPrac().getTeacherId()!=null&&getTeacherofSubjectResponse.getPrac().getTeacherId().size()>1){
-								isCoTeach="Y";
-								logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+"  Found Prac List Size: "+getTeacherofSubjectResponse.getPrac().getTeacherId().size()+" So  -----> Y");
-							}							
-						}	
-						
+//						if(getTeacherofSubjectResponse.getPrac()!=null){
+//							if(getTeacherofSubjectResponse.getPrac().getTeacherId()!=null&&getTeacherofSubjectResponse.getPrac().getTeacherId().size()>1){
+//								isCoTeach="Y";
+//								logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+"  Found Prac List Size: "+getTeacherofSubjectResponse.getPrac().getTeacherId().size()+" So  -----> Y");
+//							}							
+//						}	
+//						
 						
 						
 						
@@ -1090,7 +1090,7 @@ public class FacultyDaoImpl implements FacultyDao {
 						if(subJectListReturnList!=null&&subJectListReturnList.size()>0){
 							
 							if(subJectListReturnList.size()>1){
-								logger.info(" ############################################ Incorrect Size:"+ subJectListReturnList.size());
+							//	logger.info(" ############################################ Incorrect Size:"+ subJectListReturnList.size());
 							}
 							final Subject subject=subJectListReturnList.get(0);
 							
@@ -1098,7 +1098,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							//teachTableTmp.setEngName(subject.getSubjectEname());
 							//teachTableTmp.setCredit(subject.getCredit());
 							
-							
+							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach);
 							
 							//final int nexCode = generateCodeUtil.getNextDepartmentCode(academicYear);
 							KeyHolder keyHolder = new GeneratedKeyHolder(); 
@@ -1159,7 +1159,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							jdbcTemplate.update("commit");
 							
 							
-							logger.info(" ############################### Start Create KPI User Mapping #########################");
+							//logger.info(" ############################### Start Create KPI User Mapping #########################");
 							
 							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
 							 
@@ -1514,12 +1514,12 @@ public class FacultyDaoImpl implements FacultyDao {
 
 			
 			//String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"'" ; 
-			logger.info(" sql sqlKPI:"+sqlKPI);
+			//logger.info(" sql sqlKPI:"+sqlKPI);
 			List<AcademicKPI> academicKPIList  =null;
 			
 			try{
 				academicKPIList = this.jdbcTemplate.query(sqlKPI,	new AcademicKPIMapper() );	
-				logger.info(" ########## Found Academic kpi list :"+academicKPIList);
+				//logger.info(" ########## Found Academic kpi list :"+academicKPIList);
 				if(academicKPIList!=null&&academicKPIList.size()>0){
 		 
 					// Add new for should kpi that use total student calculate
@@ -1580,15 +1580,15 @@ public class FacultyDaoImpl implements FacultyDao {
 					
 					List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 					try{
-						logger.info(" sqlAttribute:"+sqlAttribute);
+						//logger.info(" sqlAttribute:"+sqlAttribute);
 						academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
 						
-						logger.info(" ########## Found academicKPIAttributeList size: :"+academicKPIAttributeList.size());
+						//logger.info(" ########## Found academicKPIAttributeList size: :"+academicKPIAttributeList.size());
 						
 						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
 						
 						 for(AcademicKPIAttribute attTmp:academicKPIAttributeList ){	
-								logger.info(" ##### attTmp.getName():"+attTmp.getName());
+							//	logger.info(" ##### attTmp.getName():"+attTmp.getName());
 							 
 							 if("ชื่อวิชา".equalsIgnoreCase(attTmp.getName())){	
 								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
@@ -1596,7 +1596,7 @@ public class FacultyDaoImpl implements FacultyDao {
 
 								
 								 attTmp.setIsCalculate("Y");
-								 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectTname());
+								 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectEname());
 								 if( subject.getSubjectTname()==null|| subject.getSubjectTname().length()==0){
 									 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectEname());
 								 }
@@ -1656,14 +1656,14 @@ public class FacultyDaoImpl implements FacultyDao {
 						 
 						 returnObj.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
 						
-						 logger.info("  academicKPIAttributeValueList size:"+academicKPIAttributeValueList);
+						// logger.info("  academicKPIAttributeValueList size:"+academicKPIAttributeValueList);
 					}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 						ex.printStackTrace();
 					} 									 
 					
 					zeroKPI.setAcademicKPIAttributeList(academicKPIAttributeList);
 					
-					logger.info(" ########## KPI Zero:"+ BeanUtils.getBeanString(zeroKPI));
+					//logger.info(" ########## KPI Zero:"+ BeanUtils.getBeanString(zeroKPI));
 				}
 				
 			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
@@ -1689,9 +1689,9 @@ public class FacultyDaoImpl implements FacultyDao {
 			Long found = this.jdbcTemplate.queryForLong(sqltmp);
 			if(found!=null&&found.intValue()>0){
 				returnValue = true;
-				logger.info(" Found Departement :"+departmentws.getDepartmentName()+"   , Do nothing !!");
+			//	logger.info(" Found Departement :"+departmentws.getDepartmentName()+"   , Do nothing !!");
 			}else{
-				logger.info(" Not Found Department :"+departmentws.getDepartmentName()+"   , Create New !!");
+			//	logger.info(" Not Found Department :"+departmentws.getDepartmentName()+"   , Create New !!");
 			}
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -1707,7 +1707,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			if(teachtablews.getTeacherId()==null||teachtablews.getSubjectId()==null||teachtablews.getSemester()==null||teachtablews.getLectOrPrac()==null){
 				returnValue=true;
 				
-				 logger.info(" ############ Found Null  isTeachtableWSExist : "+BeanUtils.getBeanString(teachtablews) );
+				// logger.info(" ############ Found Null  isTeachtableWSExist : "+BeanUtils.getBeanString(teachtablews) );
 			}else{
 			
 			String sqltmp = "select count(*) as totalItem  from time_table t  where  1=1 "
@@ -1726,22 +1726,22 @@ public class FacultyDaoImpl implements FacultyDao {
 					 
 			
 			
-			logger.info(" # sqltmp Check Dup : "+sqltmp );	
+			//logger.info(" # sqltmp Check Dup : "+sqltmp );	
 			Long found = this.jdbcTemplate.queryForLong(sqltmp);
-			logger.info(" ##### found lond:"+found);
+			//logger.info(" ##### found lond:"+found);
 			if(found!=null&&found.intValue()>0){
 				returnValue = true;
 				 
-				logger.info(" #  Found Dup Do noting !!! " );
+				//logger.info(" #  Found Dup Do noting !!! " );
 			}else{
 				
-				logger.info(" #  Not Found Dup Insert New !!! " );
+				//logger.info(" #  Not Found Dup Insert New !!! " );
 			}
 			
 			}
 			
 		}catch(Exception ex){
-			logger.info(" #  Check Dup Exception Do noting !!! " );
+			//logger.info(" #  Check Dup Exception Do noting !!! " );
 			returnValue =true;
 			ex.printStackTrace();
 		}
@@ -1925,7 +1925,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			//domain.setEmployeeId(rs.getString("employee_id"));
 			//domain.setCitizenId(rs.getString("citizen_id"));
 			
-			domain.setThaiName(rs.getString("thai_name"));
+			domain.setThaiName(rs.getString("thai_name").trim());
 			domain.setThaiSurname(rs.getString("thai_surname"));
 	
 			domain.setEmail(rs.getString("email"));

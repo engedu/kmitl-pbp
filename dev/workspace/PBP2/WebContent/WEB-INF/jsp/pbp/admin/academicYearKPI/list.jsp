@@ -118,16 +118,61 @@
 		   			<tr class="row1">
 		   				 <td class="tdFirst">    ${domain.name}</td>
 		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>
-		   				 <td class="tdFirst">    ${domain.description}</td>
+		   				 <td class="tdFirst">  
+		   				 
+		   			
+
+		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
+		   			 		  ${domain.description}
+		   				</c:if>
+		   				 <c:if test="${domain.fromRegis == 'Y' }">    
+		   				  นำเข้าจากสำนักทะเบียน
+		   				 </c:if>
+		   				   
+		   				   </td>
 		   				<td class="tdFirst"> 
+		   				<c:choose>
+		   				    <c:when test="${domain.fromRegis == 'Y' }"> 
+		   				    <sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
+		   				    
+		   				    </sec:authorize>
+		   				    <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/edit.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>"  >
+	                   		 Edit</a>		   				    
+		   				    </sec:authorize>
+						        
+						    </c:when>
+						    <c:otherwise>
 	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/edit.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>"  >
 	                   		 Edit</a>
+						    </c:otherwise>
+  						</c:choose>
+
 		   				</td>
-		   				<td class="tdLast"> 
+		   				
+
+		   				<td class="tdFirst"> 
+		   				<c:choose>
+		   				    <c:when test="${domain.fromRegis == 'Y' }"> 
+		   				    <sec:authorize ifAnyGranted="ROLE_ADMIN_FAC">	
+		   				    
+		   				    </sec:authorize>
+		   				    <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/delete.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>&workTypeCode=<c:out  value="${domain.workTypeCode}"/>&academicYear=<c:out  value="${domain.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>" 
+	                   		onclick="return confirmPage('ยืนยันการลบข้อมูล <c:out value="${domain.name}"/> ?')" >
+	                   		 Delete</a>	   				    
+		   				    </sec:authorize>
+						        
+						    </c:when>
+						    <c:otherwise>
 	                   		<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/academicKPI/delete.htm?academicKPIId=<c:out  value="${domain.academicKPIId}"/>&workTypeCode=<c:out  value="${domain.workTypeCode}"/>&academicYear=<c:out  value="${domain.academicYear}"/>&facultyCode=<c:out  value="${academicKPIWrapper.facultyCodeSelect}"/>" 
 	                   		onclick="return confirmPage('ยืนยันการลบข้อมูล <c:out value="${domain.name}"/> ?')" >
 	                   		 Delete</a>
-		   				</td>		
+						    </c:otherwise>
+  						</c:choose>
+
+		   				</td>
+ 	
 		   				<td class="tdFirst">   ${domain.orderNo}</td>				
 		   			</tr>
 		   			 	   			           

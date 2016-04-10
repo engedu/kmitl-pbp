@@ -347,7 +347,7 @@ CREATE TABLE  `pbp2`.`time_table` (
         	//domain.setTeacherName(rs.getString("full_name"));
         	
         	domain.setEngName(rs.getString("eng_name")==null?" ":rs.getString("eng_name"));
-        	domain.setThaiName(rs.getString("thai_name")==null?" ":rs.getString("thai_name"));
+        	domain.setThaiName(rs.getString("thai_name")==null?" ":rs.getString("thai_name").trim());
         	
         	//if(rs.getString("thai_name")==null||rs.getString("thai_name").trim().length()==0){
         	//	domain.setThaiName(rs.getString("eng_name")==null?" ":rs.getString("eng_name"));
@@ -377,7 +377,7 @@ CREATE TABLE  `pbp2`.`time_table` (
         @Override
 		public PersonReport mapRow(ResultSet rs, int rowNum) throws SQLException {
         	PersonReport domain = new PersonReport(); 
-        	domain.setThaiName(rs.getString("thai_name"));
+        	domain.setThaiName(rs.getString("thai_name").trim());
 			 domain.setThanSurName(rs.getString("thai_surname"));
 			 domain.setRegId(rs.getString("reg_id"));
 		return domain;

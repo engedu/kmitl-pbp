@@ -1051,7 +1051,7 @@ public class HeadDaoImpl implements HeadDao {
 			//domain.setEmployeeId(rs.getString("employee_id"));
 			//domain.setCitizenId(rs.getString("citizen_id"));
 			
-			domain.setThaiName(rs.getString("thai_name"));
+			domain.setThaiName(rs.getString("thai_name").trim());
 			domain.setThaiSurname(rs.getString("thai_surname"));
 	
 			domain.setEmail(rs.getString("email"));
