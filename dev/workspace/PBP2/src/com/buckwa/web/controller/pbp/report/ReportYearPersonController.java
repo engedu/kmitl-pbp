@@ -166,7 +166,8 @@ public class ReportYearPersonController{
 			params.put("salaryNo", person.getRateNo());
 			params.put("unit", person.getFacultyDesc());
 			params.put("degree", person.getMaxEducation());
-			params.put("age",  age); 
+			params.put("age",  age);
+			params.put("employeeType", person.getEmployeeType());
 
 			if(null!=person.getWorkingDate()){
 				String startDayStr = new SimpleDateFormat("d", new Locale("th", "TH")).format(person.getWorkingDate());

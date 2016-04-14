@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2016-04-14T14:56:22 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PersonReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="60" rightMargin="20" topMargin="40" bottomMargin="20" whenResourceMissingType="Empty" uuid="f6669233-2a28-4f19-aab8-c5862aa95069">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="ireport.zoom" value="1.100000000000001"/>
@@ -28,6 +30,7 @@
 	<parameter name="sumPoint4" class="java.lang.String"/>
 	<parameter name="sumPoint5" class="java.lang.String"/>
 	<parameter name="sumPointAll" class="java.lang.String"/>
+	<parameter name="employeeType" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
@@ -178,7 +181,7 @@
 				<textElement textAlignment="Center" markup="html">
 					<font fontName="Angsana New" size="16" isBold="true" pdfFontName="ANGSA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["แบบประเมินผลงานทางวิชาการเพื่อประกอบการพิจารณาการขึ้นเงินเดือนข้าราชการ"+
+				<textFieldExpression><![CDATA["แบบประเมินผลงานทางวิชาการเพื่อประกอบการพิจารณาการขึ้นเงินเดือน"+$P{employeeType}+
 "<br>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง "+
 "<br>ณ วันที่ "+$P{reportDate}+
 "<br>รอบประเมิน "+$P{fromDate}+" – "+$P{toDate}+" (ปีการศึกษา)"]]></textFieldExpression>
