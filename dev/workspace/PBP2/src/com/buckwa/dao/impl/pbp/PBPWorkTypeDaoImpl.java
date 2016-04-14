@@ -117,7 +117,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	
 	@Override
 	public PBPWorkTypeWrapper getByAcademicYearFacultyCode( String getByAcademicYear,String facultyCode) {		 		
-		String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"' and faculty_code='"+facultyCode+"'" ;   
+		String sql =" select *  from pbp_work_type where academic_year ='"+getByAcademicYear+"' and faculty_code='"+facultyCode+"' order by code" ;   
 		logger.info("  getByAcademicYearAndFactulty sql:"+sql); 
 		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	 
 		try{

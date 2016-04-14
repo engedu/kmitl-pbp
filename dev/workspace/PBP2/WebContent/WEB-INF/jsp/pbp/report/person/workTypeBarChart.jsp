@@ -28,6 +28,8 @@
         function createChart1() {
         	var start = ${mean1};
             var end = start+2;
+            var startMin = ${min1};
+            var endMin = startMin + 2;
         	 $("#chart1").kendoChart({
                  dataSource: {
                      transport: {
@@ -59,7 +61,8 @@
         	        } 
         	        ,valueAxis:  {
         	            plotBands: [
-        	                        { from: start, to: end, color: "red" }
+        	                        { from: start, to: end, color: "orange" },
+        	                        { from: startMin, to: endMin, color: "red" }
         	                    ]
         	                }
         	        ,
@@ -74,6 +77,8 @@
         function createChart2() {
         	var start = ${mean2};
             var end = start+2;
+			var startMin = ${min2};
+            var endMin = startMin + 2;
        	 $("#chart2").kendoChart({
                 dataSource: {
                     transport: {
@@ -105,7 +110,8 @@
 				}
     	        ,valueAxis:  {
     	            plotBands: [
-    	                        { from: start, to: end, color: "red" }
+    	                        { from: start, to: end, color: "orange" },
+        	                    { from: startMin, to: endMin, color: "red" }
     	                    ]
     	                }
     	        ,
@@ -121,6 +127,8 @@
         function createChart3() {
         	var start = ${mean3};
             var end = start+2;
+			var startMin = ${min3};
+            var endMin = startMin + 2;
           	 $("#chart3").kendoChart({
                    dataSource: {
                        transport: {
@@ -152,7 +160,8 @@
 					}
         	        ,valueAxis:  {
         	            plotBands: [
-        	                        { from: start, to: end, color: "red" }
+        	                        { from: start, to: end, color: "orange" },
+        	                        { from: startMin, to: endMin, color: "red" }
         	                    ]
         	                }
         	        ,
@@ -168,6 +177,8 @@
         function createChart4() {
         	var start = ${mean4};
             var end = start+2;
+			var startMin = ${min4};
+            var endMin = startMin + 2;
           	 $("#chart4").kendoChart({
                    dataSource: {
                        transport: {
@@ -199,7 +210,8 @@
 					}
         	        ,valueAxis:  {
         	            plotBands: [
-        	                        { from: start, to: end, color: "red" }
+        	                        { from: start, to: end, color: "orange" },
+        	                        { from: startMin, to: endMin, color: "red" }
         	                    ]
         	                }
         	        ,
@@ -215,6 +227,8 @@
         function createChart5() {
         	var start = ${mean5};
             var end = start+2;
+			var startMin = ${min5};
+            var endMin = startMin + 2;
           	 $("#chart5").kendoChart({
                    dataSource: {
                        transport: {
@@ -246,7 +260,8 @@
           	    	}
         	        ,valueAxis:  {
         	            plotBands: [
-        	                        { from: start, to: end, color: "red" }
+        	                        { from: start, to: end, color: "orange" },
+        	                        { from: startMin, to: endMin, color: "red" }
         	                    ]
         	                }
         	        ,

@@ -14,8 +14,11 @@ import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.PBPWorkType;
+import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.service.intf.pam.PersonProfileService;
 import com.buckwa.service.intf.pbp.HeadService;
+import com.buckwa.service.intf.pbp.PBPWorkTypeService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
@@ -35,7 +38,8 @@ public class PersonReportController {
 	@Autowired
 	private PersonProfileService personProfileService;
 
-	
+	@Autowired
+	private PBPWorkTypeService pBPWorkTypeService;
 	
 //	@RequestMapping(value = "/init.htm", method = RequestMethod.GET)
 //	public ModelAndView radarChart() {
@@ -184,6 +188,28 @@ public class PersonReportController {
 		}	
 		
 		
+		// Get Min Score
+		request.put("facultyCode",facultyCode);
+		request.put("academicYear",academicYear);
+		response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
+		String minText = "min";
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper) response.getResObj("pBPWorkTypeWrapper");
+			int i = 1;
+			for (PBPWorkType workType : pBPWorkTypeWrapper.getpBPWorkTypeList()) {
+				//if (workType.isMinHourCal()) {
+					mav.addObject(minText + i, workType.getMinHour());
+				//} else {
+				//	mav.addObject(minText + i, "0");
+				//}
+				i++;
+			}
+		} else {
+			// Add Default Value (0)
+			for (int i = 0; i <= 5; i++) {
+				mav.addObject(minText + i, "0");
+			}
+		}
 		
 		}catch(Exception ex){
 			ex.printStackTrace();
