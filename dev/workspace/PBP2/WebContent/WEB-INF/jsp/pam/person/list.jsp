@@ -174,7 +174,7 @@
 			<tr>
 				<th  class="thLast" width="250px;">   ประเภทภาระงาน      </th> 		 
  				<th   class="thFirst" style="width: 80px;">คะแนนรวมรออนุมัติ (คะแนน) </th> 	
- 				<th   class="thFirst" style="width: 80px;">คะแนนรวมอนุมัติ(คะแนน) </th			 
+ 				<th   class="thFirst" style="width: 80px;">คะแนนรวมอนุมัติ(คะแนน) </th>
 			</tr> 
 		</thead>		
 		<tbody>
