@@ -37,6 +37,10 @@ public interface FacultyService {
 	public BuckWaResponse getDepartmentByUserNameandYear(BuckWaRequest request);
 	
 	public BuckWaResponse getFacultyByUserNameandYear(BuckWaRequest request);
+	public BuckWaResponse getFacultyByDeanUserNameandYear(BuckWaRequest request);
+	
+	public BuckWaResponse getDepartmentByHeadUserNameandYear(BuckWaRequest request);
+	
 	
 	public BuckWaResponse getAllFaculty(BuckWaRequest request);
 	

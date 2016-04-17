@@ -44,7 +44,7 @@ public class DeanController {
 		request.put("username", user.getUsername());
 		request.put("academicYear", academicYearUtil.getAcademicYear());
 		
-		BuckWaResponse response  = facultyService.getFacultyByUserNameandYear(request);
+		BuckWaResponse response  = facultyService.getFacultyByDeanUserNameandYear(request);
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
 		    Faculty faculty = (Faculty)response.getResObj("faculty");
 		    mav.addObject("faculty", faculty); 

@@ -39,7 +39,7 @@ public class HeadReportController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		mav.addObject("departmentName", schoolUtil.getDepartmentByHeadUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -54,7 +54,7 @@ public class HeadReportController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("departmentName", schoolUtil.getDepartmentByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		mav.addObject("departmentName", schoolUtil.getDepartmentByHeadUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

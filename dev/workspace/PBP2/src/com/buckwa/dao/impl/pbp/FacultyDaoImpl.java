@@ -101,6 +101,8 @@ public class FacultyDaoImpl implements FacultyDao {
 				List<Department> departmentList  = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );
 				for(Department depTmp:departmentList){
 					depTmp.setHead (getHeadByDepartmentId(depTmp.getDepartmentId()+"",getByAcademicYear))  ;
+					//depTmp.setHead (getHeadByDepartmentDesc(depTmp.getDepartmentId()+"",getByAcademicYear,depTmp.getName()))  ;
+					
 				}
 				
 				facultyTmp.setDepartmentList(departmentList);
@@ -475,7 +477,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 	     AcademicPerson dean = null;
 	     
-	    String sql =" select * from person_pbp a 	     left join faculty f on(a.faculty_desc=f.name) 	     where  a.is_dean='Y'  and f.faculty_id="+facultyId+" and a.academic_year='"+academicYear+"'";
+	    String sql =" select * from person_pbp a 	     left join faculty f on(a.dean_faculty=f.name) 	     where  a.is_dean='Y'  and f.faculty_id="+facultyId+" and a.academic_year='"+academicYear+"'";
 	    
 	    logger.info(" getDeanByFacultyId sql:"+sql);
 	    
@@ -498,10 +500,25 @@ public class FacultyDaoImpl implements FacultyDao {
 	public AcademicPerson getHeadByDepartmentId(String departmentId,String academicYear) {
 		// TODO Auto-generated method stub
 		
+		
+		Department department = getDepartmentById(departmentId);
+		
+		 AcademicPerson head =getHeadByDepartmentDesc( academicYear,department.getName());
+	     
+ 
+	    logger.info(" Found Head :"+BeanUtils.getBeanString(head));
+		return head;
+	}
+	
+	
+ 
+	public AcademicPerson getHeadByDepartmentDesc( String academicYear,String departmentDesc) {
+		// TODO Auto-generated method stub
+		
 	     AcademicPerson dean = null;
 	     
-	    String sql =" select * from person_pbp a 	     left join department f on(a.department_desc=f.name) 	     where  a.is_head='Y'  and f.department_id="+departmentId+" and a.academic_year='"+academicYear+"'";
-	    logger.info(" getHeadByDepartmentId sql:"+sql);
+	    String sql =" select * from person_pbp a 	          where  a.is_head='Y'  and a.head_department='"+departmentDesc+"' and a.academic_year='"+academicYear+"'";
+	    logger.info(" getHeadByDepartmentDesc sql:"+sql);
 	    try{
 	    	
 	    	List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sql,	new AcademicPersonMapper() );
@@ -518,8 +535,9 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 	
 	
+	
 	@Override
-	public void assignDean(String oldDean,String newDean,String academicYear) {
+	public void assignDean(String oldDean,String newDean,String academicYear,String facultyDesc) {
 		// TODO Auto-generated method stub
  
 	    try{
@@ -540,7 +558,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			if (groupIdArray != null && groupIdArray.length > 0) {
 				for (int i = 0; i < groupIdArray.length; i++) {
 					String groupIdStr = groupIdArray[i];
-					this.jdbcTemplate .update( "insert into buckwausergroup (username, group_id) values (?, ?)", newDean, groupIdStr);
+					this.jdbcTemplate .update( "insert into buckwausergroup (username, group_id) values (?, ?)", oldDean, groupIdStr);
 				}
 			}
 	    }catch(Exception ex){
@@ -549,7 +567,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	    }
 	    
 	    try{
-	    	String newDeanSQL  ="update person_pbp set is_dean='Y' where email='" +newDean+"' and academic_year="+academicYear;
+	    	String newDeanSQL  ="update person_pbp set is_dean='Y' ,dean_faculty ='"+facultyDesc+"' where email='" +newDean+"' and academic_year="+academicYear;
 	    	logger.info(" newDeanSQL:"+newDeanSQL);
 			this.jdbcTemplate.update(newDeanSQL); 
 			
@@ -581,7 +599,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 	
 	@Override
-	public void assignHead(String oldDean,String newDean,String academicYear) {
+	public void assignHead(String oldDean,String newDean,String academicYear,String departmentDesc) {
 		// TODO Auto-generated method stub
  
 	    try{
@@ -605,7 +623,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			if (groupIdArray != null && groupIdArray.length > 0) {
 				for (int i = 0; i < groupIdArray.length; i++) {
 					String groupIdStr = groupIdArray[i];
-					this.jdbcTemplate .update( "insert into buckwausergroup (username, group_id) values (?, ?)", newDean, groupIdStr);
+					this.jdbcTemplate .update( "insert into buckwausergroup (username, group_id) values (?, ?)", oldDean, groupIdStr);
 				}
 			}
 	    }catch(Exception ex){	    	 
@@ -613,7 +631,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	    }
 	    
 	    try{
-	    	String newDeanSQL  ="update person_pbp set is_head='Y' where email='" +newDean+"' and academic_year="+academicYear;
+	    	String newDeanSQL  ="update person_pbp set is_head='Y' ,head_department ='"+departmentDesc+"' where email='" +newDean+"' and academic_year="+academicYear;
 	    	logger.info(" newHeadSQL:"+newDeanSQL);
 			this.jdbcTemplate.update(newDeanSQL); 
 	    }catch(Exception ex){	    	 
@@ -1841,6 +1859,19 @@ public class FacultyDaoImpl implements FacultyDao {
 		return department;
 	}
 	
+	@Override
+	public Department  getDepartmentByHeadUserName(String username,String academicYear) {	 
+		 	
+		String sqlDepartment =" select d.* from department d "+
+		" inner join person_pbp p on (d.name=p.head_department) "+
+		" where p.email='"+username+"' and d.academic_year="+academicYear +" and p.academic_year="+academicYear;		
+		
+		logger.info(" sqlDepartment:"+sqlDepartment);
+		Department  department   = this.jdbcTemplate.queryForObject(sqlDepartment,	new DepartmentMapper() ); 		 
+		return department;
+	}
+	
+	
 	
 	@Override
 	public Faculty  getFacultyByUserNameandYear(String username,String academicYear) {	 
@@ -1862,9 +1893,29 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 		return faculty;
 	}
+	@Override
+	public Faculty  getFacultyByDeanUserNameandYear(String username,String academicYear) {	 
+		 	
+		String facSQL =" select d.* from faculty d "+
+		" inner join person_pbp p on (d.name=p.dean_faculty) "+
+		" where p.email='"+username+"' and p.academic_year="+academicYear + "  and d.academic_year="+academicYear;		
+		logger.info(" facSQL:"+facSQL);
+		Faculty  faculty   = this.jdbcTemplate.queryForObject(facSQL,	new FacultyMapper() ); 	
+		
+		if(faculty!=null){
+			
+			String sqlDepartment =" select d.* from department d where  d.academic_year="+academicYear+"  and faculty_code="+faculty.getCode();	
+			
+			
+					List<Department>  departmentList   = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() ); 	
+					faculty.setDepartmentList(departmentList);;
+		}
+		
+		return faculty;
+	}
 	
 	
- 
+	
 
 	@Override
 	public void updateDepartment(Department department)  {

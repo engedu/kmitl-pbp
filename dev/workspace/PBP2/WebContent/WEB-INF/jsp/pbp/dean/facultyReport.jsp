@@ -65,7 +65,7 @@
                         visible: true,
                     },
                     min: 0,
-                    max: 60
+                    max: 6000
                 },
                 tooltip: {
                     visible: true,

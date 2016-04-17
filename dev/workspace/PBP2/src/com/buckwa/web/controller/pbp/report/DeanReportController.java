@@ -56,7 +56,7 @@ public class DeanReportController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("facultyName", schoolUtil.getFacutyByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -71,7 +71,7 @@ public class DeanReportController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-		mav.addObject("facultyName", schoolUtil.getFacutyByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
 		
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -87,7 +87,7 @@ public class DeanReportController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-			mav.addObject("facultyName", schoolUtil.getFacutyByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));
+			mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));
 			
 			WorkTypeCompareReport workTypeCompareReport = new WorkTypeCompareReport();
 			workTypeCompareReport.setType1(false);
@@ -116,7 +116,7 @@ public class DeanReportController {
 		
 		try {
 			String academicYear =schoolUtil.getCurrentAcademicYear();
-			mav.addObject("facultyName", schoolUtil.getFacutyByUserName(BuckWaUtils.getUserNameFromContext(),academicYear));
+			mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));
 			
 			BuckWaRequest request = new BuckWaRequest();
 
@@ -125,7 +125,7 @@ public class DeanReportController {
 
 			request.put("username", userName);
 			request.put("academicYear", academicYear);
-			BuckWaResponse response = facultyService.getFacultyByUserNameandYear(request);
+			BuckWaResponse response = facultyService.getFacultyByDeanUserNameandYear(request);
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Faculty faculty = (Faculty) response.getResObj("faculty");

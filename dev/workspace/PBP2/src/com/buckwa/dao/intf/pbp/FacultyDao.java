@@ -38,8 +38,8 @@ public interface FacultyDao {
 	public AcademicPerson getHeadByDepartmentId(String departmentId,String  academicYear );
 	
 	
-	public void assignDean(String oldDean,String newDean,String  academicYear );
-	public void assignHead(String oldDean,String newDean,String  academicYear );
+	public void assignDean(String oldDean,String newDean,String  academicYear,String facultyDesc );
+	public void assignHead(String oldDean,String newDean,String  academicYear ,String departmentDesc);
 	
 	
 	public AcademicPerson getPresident(String  academicYear );
@@ -55,8 +55,9 @@ public interface FacultyDao {
 	
 	public Faculty getFacultyByCodeAndYear(String facCode ,String academicYear);
 	public Department getDepartmentByUserName(String username,String academicYear );
+	public Department getDepartmentByHeadUserName(String username,String academicYear );
 	public Faculty getFacultyByUserNameandYear(String username,String academicYear );
-	
+	public Faculty getFacultyByDeanUserNameandYear(String username,String academicYear );
 	public List<Faculty> getAllFaculty(String academicYear);
 	
 	public void deleteTimeTableAndMapping(String academicYear);

@@ -455,7 +455,7 @@ public class HeadController {
 			BuckWaRequest request = new BuckWaRequest(); 			 
 			String headUserName = BuckWaUtils.getUserNameFromContext();
 			String academicYear =schoolUtil.getCurrentAcademicYear();	
-			String departmentName =schoolUtil.getDepartmentByUserName(headUserName, academicYear);
+			String departmentName =schoolUtil.getDepartmentByHeadUserName(headUserName, academicYear);
 			mav.addObject("departmentName",departmentName);
 			mav.addObject("academicYear",academicYear);
  			  

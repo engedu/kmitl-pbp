@@ -155,10 +155,34 @@ public class SchoolUtil {
 		
 	}
 	
+	public   String getDepartmentByHeadUserName(String userName,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getDepartmentByHeadUserName(userName,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
 	public   String getFacutyByUserName(String userName,String academicYear){
 		String returnValue ="";
 		try{
 			return schoolUtilDao.getFacutyByUserName(userName,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
+	public   String getFacutyByDeanUserName(String userName,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getFacutyByDeanUserName(userName,academicYear);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

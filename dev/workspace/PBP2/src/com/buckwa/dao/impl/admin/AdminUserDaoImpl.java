@@ -349,11 +349,11 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		
 		List<User> returnList = new ArrayList<User>();
 		StringBuffer sqltotalsb = new StringBuffer();
-		//sqltotalsb.append("  select count(*) as total_item  from  buckwauser u  ");
-		sqltotalsb.append("   select count(*) as total_item  from  buckwauser u ");
+		sqltotalsb.append("  select count(*) as total_item  from  buckwauser u  ");
+		//sqltotalsb.append("   select count(*) as total_item  from  buckwauser u ");
 		sqltotalsb.append("  left join person_pbp p on (u.username=p.email) ");		
 		sqltotalsb.append(" where 1=1 ");	
-		sqltotalsb.append(" and p.department_desc ='" + deptmp.getName()+"'");
+		//sqltotalsb.append(" and p.department_desc ='" + deptmp.getName()+"'");
 		sqltotalsb.append(" and p.academic_year ='" + user.getAcademicYear()+"'");
 		if (StringUtils.hasText(user.getUsername())) {
 			sqltotalsb.append(" and u.username like '%"+ StringEscapeUtils.escapeSql(user.getUsername().trim()) + "%'");
@@ -373,7 +373,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		sb.append("  left join person_pbp p on (u.username=p.email) ");		
 		 	
 		sb.append(" where 1=1 ");
-		sb.append(" and p.department_desc ='" + deptmp.getName()+"'");
+		//sb.append(" and p.department_desc ='" + deptmp.getName()+"'");
 		sb.append(" and p.academic_year ='" + user.getAcademicYear()+"'");
 		if (StringUtils.hasText(user.getUsername())) {	
 			sb.append(" and u.username like '%" + StringEscapeUtils.escapeSql(user.getUsername().trim())+ "%'");

@@ -55,7 +55,7 @@ public class JSONHeadController {
 
 			request.put("username", userName);
 			request.put("academicYear", academicYear);
-			BuckWaResponse response = facultyService.getDepartmentByUserNameandYear(request);
+			BuckWaResponse response = facultyService.getDepartmentByHeadUserNameandYear(request);
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Department department = (Department) response.getResObj("department");
@@ -121,7 +121,7 @@ public class JSONHeadController {
 
 			request.put("username", userName);
 			request.put("academicYear", academicYear);
-			BuckWaResponse response = facultyService.getDepartmentByUserNameandYear(request);
+			BuckWaResponse response = facultyService.getDepartmentByHeadUserNameandYear(request);
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Department department = (Department) response.getResObj("department");

@@ -149,6 +149,27 @@ public class FacultyServiceImpl implements FacultyService {
 		return response;
 	}
 	
+	
+	@Override	
+	public BuckWaResponse getDepartmentByHeadUserNameandYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String username = (String)request.get("username");
+			String academicYear = (String)request.get("academicYear");
+			Department department=  facultyDao.getDepartmentByHeadUserName(username,academicYear);
+		 
+			 response.addResponse("department",department);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
 	@Override	
 	public BuckWaResponse getFacultyByUserNameandYear(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
@@ -157,6 +178,26 @@ public class FacultyServiceImpl implements FacultyService {
 			String username = (String)request.get("username");
 			String academicYear = (String)request.get("academicYear");
 			Faculty faculty=  facultyDao.getFacultyByUserNameandYear(username,academicYear);
+		 
+			 response.addResponse("faculty",faculty);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	@Override	
+	public BuckWaResponse getFacultyByDeanUserNameandYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String username = (String)request.get("username");
+			String academicYear = (String)request.get("academicYear");
+			Faculty faculty=  facultyDao.getFacultyByDeanUserNameandYear(username,academicYear);
 		 
 			 response.addResponse("faculty",faculty);
  	
@@ -286,7 +327,9 @@ public class FacultyServiceImpl implements FacultyService {
 			String oldDean = (String)request.get("oldDean");
 			String newDean = (String)request.get("newDean");
 			String academicYear = (String)request.get("academicYear");
-			 facultyDao.assignDean(oldDean,newDean,academicYear);
+			String facultyDesc = (String)request.get("facultyDesc");
+			logger.info("assignDean  oldDean:"+oldDean+"  newDean:"+newDean+" department:"+facultyDesc);
+			 facultyDao.assignDean(oldDean,newDean,academicYear,facultyDesc);
 		 
 		 
  	
@@ -307,8 +350,9 @@ public class FacultyServiceImpl implements FacultyService {
 			String oldDean = (String)request.get("oldHead");
 			String newDean = (String)request.get("newHead");
 			String academicYear = (String)request.get("academicYear");
-			logger.info(" oldHead:"+oldDean+"  newHead:"+newDean);
-			 facultyDao.assignHead(oldDean,newDean,academicYear);
+			String departmentDesc = (String)request.get("departmentDesc");
+			logger.info(" oldHead:"+oldDean+"  newHead:"+newDean+" department:"+departmentDesc);
+			 facultyDao.assignHead(oldDean,newDean,academicYear,departmentDesc);
 		 
 		 
  	

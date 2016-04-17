@@ -16,9 +16,11 @@ public interface SchoolUtilDao {
 	
 	public String  getUserNameFromRegId(String courseId,String academicYear  );
 	public String  getDepartmentByUserName(String userName,String academicYear );
+	public String  getDepartmentByHeadUserName(String userName,String academicYear );
+	
 	public String  getRegIdFromUserName(String courseId ,String academicYear );
 	public String  getFacutyByUserName(String userName,String academicYear );
-
+	public String  getFacutyByDeanUserName(String userName,String academicYear );
 	public List<Map<String, Object>> getAllMapUnitDesc();
 	
 	public String getFacultyCodeByFacultyName (String  facultyName,String academicYear) ;

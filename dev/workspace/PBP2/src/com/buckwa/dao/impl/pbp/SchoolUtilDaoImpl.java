@@ -56,6 +56,19 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 	     return userName;
 	}
 	
+	public String getDepartmentByHeadUserName (String  regId,String academic_year) {  
+		 String userName = null;		 
+		 try{
+		String sql =" SELECT head_department FROM person_pbp where email like '%"+regId+"%' and academic_year="+academic_year;	
+		logger.info("  getDepartmentByUserName sql: "+sql);
+		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return userName;
+	}
+	
 	public String getDepartmentCodeByDepartmentName (String  departmentName,String academicYear) {  
 		 String code = null;		 
 		 try{
@@ -88,6 +101,19 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		 String userName = null;		 
 		 try{
 		String sql =" SELECT faculty_desc FROM person_pbp where email like '%"+regId+"%' and academic_year="+academicYear;	
+		logger.info("  getFacutyByUserName sql: "+sql);
+		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return userName;
+}
+	
+	public String getFacutyByDeanUserName (String  regId,String academicYear) {  
+		 String userName = null;		 
+		 try{
+		String sql =" SELECT dean_faculty FROM person_pbp where email like '%"+regId+"%' and academic_year="+academicYear;	
 		logger.info("  getFacutyByUserName sql: "+sql);
 		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
 	 

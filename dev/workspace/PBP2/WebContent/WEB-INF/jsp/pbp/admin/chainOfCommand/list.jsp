@@ -59,7 +59,7 @@
 						<td class="tdFirst" width="10%;">
 							<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/chainOfCommand/listByFaculty.htm?facultyId=<c:out value="${domain.facultyId}"/>"> <c:out value="${domain.name}"/>   </a>
 						</td>
-						<td class="tdFirst" width="10%;"><span class="lsf-icon colororange" title="man"></span> &nbsp;<c:out value="${domain.dean.thaiName}"/>  <c:out value="${domain.dean.thaiSurname}"/>   
+						<td class="tdFirst" width="10%;"><span class="lsf-icon colororange" title="man"></span> <c:out value="${domain.dean.email}"/> &nbsp;<c:out value="${domain.dean.thaiName}"/>  <c:out value="${domain.dean.thaiSurname}"/>   
 								<a rel="notLoading" href="<%=request.getContextPath()%>/admin/pbp/chainOfCommand/manageDean.htm?facultyId=<c:out value="${domain.facultyId}"/>"><span class="lsf-icon colororange" title="gear"></span></a></td>
 						<td class="tdFirst" width="20%;" colspan="2" > 
 						

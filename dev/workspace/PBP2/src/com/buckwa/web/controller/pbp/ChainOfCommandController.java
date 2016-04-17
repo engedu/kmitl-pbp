@@ -288,6 +288,7 @@ public class ChainOfCommandController {
 			request.put("oldDean",chainOfCommandWrapper.getOldDeanUserName());
 			request.put("newDean",userName);
 			request.put("academicYear",schoolUtil.getCurrentAcademicYear());
+			request.put("facultyDesc",chainOfCommandWrapper.getFaculty().getName());
 			BuckWaResponse response = facultyService.assignDean(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				
@@ -450,7 +451,7 @@ public class ChainOfCommandController {
 	
 	@RequestMapping(value="assignToHead.htm" )
 	public ModelAndView assignToHead(HttpServletRequest httpRequest,@RequestParam("userName") String userName ) {
-		logger.info(" Start userName: "+userName);
+
 		ModelAndView mav = new ModelAndView();		
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.ADMIN_INIT);
 		mav.setViewName("chainOfCommandManageHead");
@@ -462,10 +463,12 @@ public class ChainOfCommandController {
 			
 			BuckWaRequest request = new BuckWaRequest();
 			// Assign To Dean
+			logger.info(" Start userName: "+userName+" to  Department:"+chainOfCommandWrapper.getDepartment().getName());
 			logger.info(" oldHead:"+chainOfCommandWrapper.getOldHeadUserName()+"  newHead:"+userName);
 			request.put("oldHead",chainOfCommandWrapper.getOldHeadUserName());
 			request.put("newHead",userName);
 			request.put("academicYear",schoolUtil.getCurrentAcademicYear());
+			request.put("departmentDesc",chainOfCommandWrapper.getDepartment().getName());
 			BuckWaResponse response = facultyService.assignHead(request);
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				

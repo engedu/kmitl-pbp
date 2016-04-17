@@ -51,8 +51,8 @@
         	        },
         	        valueAxis: {
         	        	min: 0,
-        	        	max: 60,
-        	        	majorUnit: 10
+        	        	max: 10000,
+        	        	majorUnit: 500
        	        	},
                     tooltip: {
                         visible: true,
@@ -87,9 +87,9 @@
        	            }
        	        },
        	     	valueAxis: {
-	       	    	min: 0,
-	       	    	max: 25,
-	       	    	majorUnit: 5
+    	        	min: 0,
+    	        	max: 1000,
+    	        	majorUnit: 100
        	    	},
              tooltip: {
                  visible: true,
@@ -125,9 +125,9 @@
           	            }
           	        },
 	          	    valueAxis: {
-	          	    	min: 0,
-	          	    	max: 60,
-	          	    	majorUnit: 10
+        	        	min: 0,
+        	        	max: 1000,
+        	        	majorUnit: 100
           	    	},
                   tooltip: {
                       visible: true,
@@ -163,9 +163,9 @@
           	            }
           	        },
           	      	valueAxis: {
-	          	    	min: 0,
-	          	    	max: 25,
-	          	    	majorUnit: 5
+        	        	min: 0,
+        	        	max: 1000,
+        	        	majorUnit: 100
           	    	},
                   tooltip: {
                       visible: true,
@@ -201,9 +201,9 @@
           	            }
           	        },
           	      	valueAxis: {
-	          	    	min: 0,
-	          	    	max: 20,
-	          	    	majorUnit: 5
+        	        	min: 0,
+        	        	max: 1000,
+        	        	majorUnit: 100
           	    	},
                   tooltip: {
                       visible: true,
