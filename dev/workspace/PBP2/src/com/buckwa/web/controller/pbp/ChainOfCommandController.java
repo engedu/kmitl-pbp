@@ -301,7 +301,7 @@ public class ChainOfCommandController {
 					chainOfCommandWrapper.setOldDeanUserName(academicPerson.getEmail());
 					}
 				}	
-		 
+				response.setSuccessCode("S002");
 			} 
  					
 		}catch(Exception ex){
@@ -481,7 +481,7 @@ public class ChainOfCommandController {
 					chainOfCommandWrapper.setOldHeadUserName(academicPerson.getEmail());
 					}
 				}	
-		 
+				response.setSuccessCode("S002");
 			} 
  					
 		}catch(Exception ex){
