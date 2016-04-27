@@ -203,7 +203,9 @@ public class PBPWorkTypeController {
 	@RequestMapping(value="edit.htm", method = RequestMethod.POST)
 	public ModelAndView edit(@ModelAttribute PBPWorkTypeWrapper pBPWorkTypeWrapper, BindingResult result) {	
 		 String facultyCodeSelect =pBPWorkTypeWrapper.getFacultyCodeSelect();
-		 String academicYear = pBPWorkTypeWrapper.getAcademicYear();
+		// String academicYear = pBPWorkTypeWrapper.getAcademicYear();
+		 
+		 String academicYear = schoolUtil.getCurrentAcademicYear();
 		logger.info(" Start  facultyCodeSelect:"+facultyCodeSelect+" academicYear:"+academicYear);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.ADMIN_INIT);
@@ -211,7 +213,7 @@ public class PBPWorkTypeController {
 		try{			
 			new PBPWorkTypeValidator().validate(pBPWorkTypeWrapper, result);			
 			if (result.hasErrors()) {				
-				 
+				logger.info(" ############ Validate Error ###########");
 			}else {					
 				BuckWaRequest request = new BuckWaRequest();
 				request.put("pBPWorkTypeWrapper", pBPWorkTypeWrapper);

@@ -1146,7 +1146,7 @@ CREATE TABLE  `pbp2`.`report_person` (
 		
 		for(final PBPWorkType pBPWorkTypeTmp:pBPWorkTypeList){		
 			logger.info("  xxx:"+BeanUtils.getBeanString(pBPWorkTypeTmp));
-			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase()+" min_hour:"+pBPWorkTypeTmp.getMinHour());
+			logger.info("  pBPWorkTypeTmp id: "+pBPWorkTypeTmp.getWorkTypeId()+"academicYear:"+pBPWorkTypeTmp.getAcademicYear()+"facultyCode:"+finalPBPWorkTypeWrapper.getFacultyCodeSelect()+"  name:"+pBPWorkTypeTmp.getName()+" limit:"+pBPWorkTypeTmp.getLimitBase()+" min_hour:"+pBPWorkTypeTmp.getMinHour()+" worktypeId:"+pBPWorkTypeTmp.getWorkTypeId());
 			jdbcTemplate.update(new PreparedStatementCreator() {  
 				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
 					PreparedStatement ps = connection.prepareStatement("" +						
@@ -1157,7 +1157,9 @@ CREATE TABLE  `pbp2`.`report_person` (
 					ps.setBigDecimal(3,pBPWorkTypeTmp.getMinHour());
 					ps.setBigDecimal(4,pBPWorkTypeTmp.getMaxPercent());
 					ps.setBigDecimal(5,pBPWorkTypeTmp.getMaxHour());
-					ps.setBigDecimal(6,pBPWorkTypeTmp.getLimitBase());
+					//ps.setBigDecimal(6,pBPWorkTypeTmp.getLimitBase());
+					
+					ps.setBigDecimal(6,pBPWorkTypeTmp.getMaxHour());
 					ps.setBoolean(7,pBPWorkTypeTmp.isMinHourCal());
 					ps.setBoolean(8,pBPWorkTypeTmp.isMaxHourCal());
 					ps.setLong(9, pBPWorkTypeTmp.getWorkTypeId());

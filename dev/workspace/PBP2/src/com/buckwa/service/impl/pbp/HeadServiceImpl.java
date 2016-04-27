@@ -12,6 +12,7 @@ import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.AcademicKPIUserMappingWrapper;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
+import com.buckwa.domain.pbp.report.MinMaxBean;
 import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.util.BuckWaConstants;
 
@@ -196,9 +197,9 @@ public class HeadServiceImpl implements HeadService {
 			String departmentCode = (String)request.get("departmentCode");
 			String worktypecode = (String)request.get("worktypeCode");
 			
-			String meanValue= ( String)headDao.getDepartmentMeanByWorkTypeCode(academicYear, facultyCode,departmentCode,worktypecode);
+			MinMaxBean minMaxBean= ( MinMaxBean)headDao.getDepartmentMeanByWorkTypeCode(academicYear, facultyCode,departmentCode,worktypecode);
 		 
-			 response.addResponse("meanValue",meanValue);
+			 response.addResponse("minMaxBean",minMaxBean);
  	
 		}catch(Exception ex){
 			ex.printStackTrace();

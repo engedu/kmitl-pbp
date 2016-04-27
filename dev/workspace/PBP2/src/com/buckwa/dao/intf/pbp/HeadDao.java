@@ -5,6 +5,7 @@ import java.util.List;
 import com.buckwa.domain.pbp.AcademicKPIUserMappingWrapper;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
+import com.buckwa.domain.pbp.report.MinMaxBean;
 
 public interface HeadDao {
 	
@@ -19,7 +20,7 @@ public interface HeadDao {
 	
 	public String getDepartmentMean( String academicYear ,String facultyCode,String departmentCode);
 	
-	public String getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode);
+	public MinMaxBean getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode);
 	
 	
 	

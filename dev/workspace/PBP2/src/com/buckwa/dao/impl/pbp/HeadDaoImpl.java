@@ -31,11 +31,12 @@ import com.buckwa.domain.pbp.AcademicYearEvaluateRound;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.PBPWorkType;
+import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.domain.pbp.report.DepartmentReport;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
+import com.buckwa.domain.pbp.report.MinMaxBean;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
-import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolConstants;
 import com.buckwa.util.school.SchoolUtil;
 
@@ -74,7 +75,7 @@ public class HeadDaoImpl implements HeadDao {
 	}
 	
 	@Override
-	public String getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode) {	 
+	public MinMaxBean getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode) {	 
 		
 		String markcolumn  ="";
 		if ("1".equals(worktypecode)) {
@@ -89,15 +90,72 @@ public class HeadDaoImpl implements HeadDao {
 			markcolumn ="mark_5";
 		}
  
+		MinMaxBean minmaxBean = new MinMaxBean();
 		
 		String sql =" select  ROUND( AVG("+markcolumn+"),2 ) from report_worktype_department where faculty_code ='"+facultyCode+"' and department_code='"+departmentCode+"' and academic_year="+academicYear;
 		logger.info("  getDepartmentMean sql:"+sql);
 		String returnStr = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
 		logger.info("  returnStr:"+returnStr);
 		
-	    return returnStr;
+		minmaxBean.setMeanValue(returnStr);
+		
+		
+		
+		String sqlMinMax =" select *  from pbp_work_type where academic_year ='"+academicYear+"' and faculty_code='"+facultyCode+"' and code='"+worktypecode+"' " ;   
+		logger.info("  getByAcademicYearAndFactulty sql:"+sql); 
+		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	 
+		try{
+			PBPWorkType pbpWorkType  = this.jdbcTemplate.queryForObject(sqlMinMax,	new PBPWorkTypeMapper() );	 
+			if(pbpWorkType.isMinHourCal()){
+				minmaxBean.setMinValue(pbpWorkType.getMinHour()+"");
+				minmaxBean.setMinDesc(pbpWorkType.getMinHour()+"");
+			}else{
+				minmaxBean.setMinValue("-2");
+				minmaxBean.setMinDesc("-");
+			}
+			
+			if(pbpWorkType.isMaxHourCal()){
+				minmaxBean.setMaxValue(pbpWorkType.getMaxHour()+"");
+				minmaxBean.setMaxDesc(pbpWorkType.getMaxHour()+"");
+			}else{
+				minmaxBean.setMaxValue("-2");
+				minmaxBean.setMaxDesc("-");
+			}
+			
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		
+		
+	    return minmaxBean;
 		 
 	}
+	
+	private class PBPWorkTypeMapper implements RowMapper<PBPWorkType> {   						
+        @Override
+		public PBPWorkType mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	PBPWorkType domain = new PBPWorkType(); 
+        	domain.setWorkTypeId(rs.getLong("work_type_id"));
+			domain.setCode(rs.getString("code"));
+			domain.setName(rs.getString("name"));
+			domain.setDescription(rs.getString("description"));
+			domain.setMinPercent(rs.getBigDecimal("min_percent"));
+			domain.setMinHour(rs.getBigDecimal("min_hour"));
+			domain.setMaxPercent(rs.getBigDecimal("max_percent"));
+			domain.setMaxHour(rs.getBigDecimal("max_hour"));
+			domain.setAcademicYear(rs.getString("academic_year"));
+			domain.setLimitBase(rs.getBigDecimal("limit_base"));
+			domain.setFacultyCode(rs.getString("faculty_code"));
+			 
+			domain.setMinHourCal(rs.getBoolean("min_hour_cal"));
+			domain.setMaxHourCal(rs.getBoolean("max_hour_cal"));
+		 
+		return domain;
+    }
+	}
+	
 		
  
 	@Override

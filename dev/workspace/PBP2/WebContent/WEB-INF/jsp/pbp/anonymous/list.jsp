@@ -47,14 +47,36 @@
 				</td>
 				<td class="tdLast">
 				
+				
+
+		   
+		   <c:if test="${domain.minHourCal}">
+				
 		  <c:out value="${domain.minPercent}"/>
 		   <c:out value="${domain.minHour}"/>
- 
+		   </c:if>
+		   
+		   <c:if test="${not domain.minHourCal}">
+		   -
+		   </c:if> 
 					  
 				</td>
+				
 				<td class="tdFirst"> 
+				
+				
+
+				
+				
+		   <c:if test="${domain.maxHourCal}">
 				<c:out value="${domain.maxPercent}"/>
 				<c:out value="${domain.maxHour}"/>
+		   </c:if>
+		   
+		   <c:if test="${not domain.maxHourCal}">
+		   -
+		   </c:if> 				
+				
   
 				</td>	 
 			</tr> 

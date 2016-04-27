@@ -131,6 +131,19 @@ public class SchoolUtil {
 		return returnValue;
 		
 	}
+	
+	public   String getFacultyCodeByDepartmentName(String name,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getFacultyCodeByDepartmentName(name,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
 	public   String getDepartmentCodeByDepartmentName(String name,String academicYear){
 		String returnValue ="";
 		try{

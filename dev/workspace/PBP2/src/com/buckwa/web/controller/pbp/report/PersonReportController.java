@@ -16,6 +16,7 @@ import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.domain.pbp.report.MinMaxBean;
 import com.buckwa.service.intf.pam.PersonProfileService;
 import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.service.intf.pbp.PBPWorkTypeService;
@@ -155,36 +156,64 @@ public class PersonReportController {
 		request.put("worktypeCode", "1");
 		BuckWaResponse response =headService.getDepartmentMeanByWorkTypeCode(request);	 
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
-			mean1 = (String) response.getResObj("meanValue");			 
-			mav.addObject("mean1", mean1);	
+			MinMaxBean minMaxBean = (MinMaxBean) response.getResObj("minMaxBean");		
+			
+			mav.addObject("mean1", minMaxBean.getMeanValue());	
+			mav.addObject("minValue1", minMaxBean.getMinValue());	
+			mav.addObject("maxValue1", minMaxBean.getMaxValue());	
+			mav.addObject("minDesc1", minMaxBean.getMinDesc());	
+			mav.addObject("maxDesc1", minMaxBean.getMaxDesc());			 
+		 
 		}
 		
 		request.put("worktypeCode", "2");
 		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
-			mean2 = (String) response.getResObj("meanValue");			 
-			mav.addObject("mean2", mean2);	
+			MinMaxBean minMaxBean = (MinMaxBean) response.getResObj("minMaxBean");		
+			
+			mav.addObject("mean2", minMaxBean.getMeanValue());	
+			mav.addObject("minValue2", minMaxBean.getMinValue());	
+			mav.addObject("maxValue2", minMaxBean.getMaxValue());	
+			mav.addObject("minDesc2", minMaxBean.getMinDesc());	
+			mav.addObject("maxDesc2", minMaxBean.getMaxDesc());		
 		}	
 		
 		request.put("worktypeCode", "3");
 		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
-			mean3 = (String) response.getResObj("meanValue");			 
-			mav.addObject("mean3", mean3);	
+			MinMaxBean minMaxBean = (MinMaxBean) response.getResObj("minMaxBean");		
+			
+			mav.addObject("mean3", minMaxBean.getMeanValue());	
+			mav.addObject("minValue3", minMaxBean.getMinValue());	
+			mav.addObject("maxValue3", minMaxBean.getMaxValue());	
+			mav.addObject("minDesc3", minMaxBean.getMinDesc());	
+			mav.addObject("maxDesc3", minMaxBean.getMaxDesc());		
 		}		
 		
 		request.put("worktypeCode", "4");
 		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
-			mean4 = (String) response.getResObj("meanValue");			 
-			mav.addObject("mean4", mean4);	
+			MinMaxBean minMaxBean = (MinMaxBean) response.getResObj("minMaxBean");		
+			
+			mav.addObject("mean4", minMaxBean.getMeanValue());	
+			mav.addObject("minValue4", minMaxBean.getMinValue());	
+			mav.addObject("maxValue4", minMaxBean.getMaxValue());	
+			mav.addObject("minDesc4", minMaxBean.getMinDesc());	
+			mav.addObject("maxDesc4", minMaxBean.getMaxDesc());		
 		}		
 		
 		request.put("worktypeCode", "5");
 		response =headService.getDepartmentMeanByWorkTypeCode(request);	 
 		if (response.getStatus() == BuckWaConstants.SUCCESS) {
-			mean5 = (String) response.getResObj("meanValue");			 
-			mav.addObject("mean5", mean5);	
+			MinMaxBean minMaxBean = (MinMaxBean) response.getResObj("minMaxBean");		
+			
+			mav.addObject("mean5", minMaxBean.getMeanValue());	
+			mav.addObject("minValue5", minMaxBean.getMinValue());	
+			mav.addObject("maxValue5", minMaxBean.getMaxValue());
+			mav.addObject("minDesc5", minMaxBean.getMinDesc());	
+			mav.addObject("maxDesc5", minMaxBean.getMaxDesc());		
+			
+		
 		}	
 		
 		

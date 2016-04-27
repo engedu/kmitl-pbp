@@ -24,6 +24,8 @@ public interface SchoolUtilDao {
 	public List<Map<String, Object>> getAllMapUnitDesc();
 	
 	public String getFacultyCodeByFacultyName (String  facultyName,String academicYear) ;
+	public String getFacultyCodeByDepartmentName (String  facultyName,String academicYear) ;
+	
 	public String getDepartmentCodeByDepartmentName (String  departmentName,String academicYear);
 	
 }
