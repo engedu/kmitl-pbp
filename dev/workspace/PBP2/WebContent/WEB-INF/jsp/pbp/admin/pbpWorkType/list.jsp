@@ -107,35 +107,17 @@
 			        -->
 				</td>
 				<td style="text-align: center; "> 
-		  
+		 
 				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].minHour" value="${domain.minHour}"  />&nbsp;&nbsp;/&nbsp;&nbsp;
-				 
-				 				 <c:choose>
-    <c:when test="${domain.minHourCal}">
-     <input type="checkbox"  name="pBPWorkTypeList[${status.index}].minHourCal" value="${domain.minHourCal}"  checked="checked"/> 
-    </c:when>
-
-    <c:otherwise>
-       <input type="checkbox"  name="pBPWorkTypeList[${status.index}].minHourCal" value="${domain.minHourCal}"  /> 
-    </c:otherwise>
-</c:choose>
+				  <form:checkbox path="pBPWorkTypeList[${status.index}].minHourCal"/>
+	 
   		 
 				</td>
 				<td style="text-align: center;"> 
 				  
 				 <input style="width: 50px;"  name="pBPWorkTypeList[${status.index}].maxHour" value="${domain.maxHour}"  />&nbsp;&nbsp;/&nbsp;&nbsp;
-				 
-				 <c:choose>
-    <c:when test="${domain.maxHourCal}">
-     <input type="checkbox"  name="pBPWorkTypeList[${status.index}].maxHourCal" value="${domain.maxHourCal}"  checked="checked"/> 
-    </c:when>
-
-    <c:otherwise>
-       <input type="checkbox"  name="pBPWorkTypeList[${status.index}].maxHourCal" value="${domain.maxHourCal}"  /> 
-    </c:otherwise>
-</c:choose>
+				  <form:checkbox path="pBPWorkTypeList[${status.index}].maxHourCal"/>
  
-		 
 				</td>	
 				
 				<!-- 

@@ -245,9 +245,9 @@ public class TimeTableWSService   {
 				// For Debug  Engineering
 				
 				
-			//	if(!"03".equals(facttmp.getFacultyId())){  
+				if(!"01".equals(facttmp.getFacultyId())){  
 					
-			//	 }else{
+				 }else{
 					
 				 
 				String facultyCode = facttmp.getFacultyId();
@@ -275,9 +275,9 @@ public class TimeTableWSService   {
 				for(Department deptmp:departmentList){					
 					//logger.info(deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
 					
-				//	if( !"11".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
+					if( !"12".equals(deptmp.getDepartmentId())){  // 05: com, 12:สาระสนเทศ
 					//	logger.info(" #############  Skip Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
-				//	}else{
+					}else{
 						
 					//	logger.info(" #############  Work only on  Department :"+deptmp.getDepartmentId()+ ":"+deptmp.getDepartmentEname()); 
 						logger.info(" ################################# Start get Teacher From WS  Department  "+deptmp.getDepartmentId()+":"+deptmp.getDepartmentName());	
@@ -328,8 +328,10 @@ public class TimeTableWSService   {
 			}//Debug Faculty
 	
 					
-		//	}
+			}
 			 
+			}
+			
 			
 			logger.info(" ########  Found Teacher Id Size:"+teacherIdList.size());
 			logger.info(" ########  Found Teacher Unique Id Size:"+teacherIdMap.size());
@@ -375,12 +377,12 @@ public class TimeTableWSService   {
 		int loop =1;
 		for(Teacher teacherTmp:teacherListIn){
 			//
-			//if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
+			if(!"11215".equals(teacherTmp.getTeacherIdStr())){ // ktpitak
 			//	if(!"10518".equals(teacherTmp.getTeacherIdStr())){
 		//	if(!"31110".equals(teacherTmp.getTeacherIdStr())){ // อำนาจ
 				
 				
-		//	}else{
+			}else{
 				
 		 
 			
@@ -420,7 +422,7 @@ public class TimeTableWSService   {
 			}
 			
 
-		//}	 // Debug User
+		}	 // Debug User
 		
 
 		

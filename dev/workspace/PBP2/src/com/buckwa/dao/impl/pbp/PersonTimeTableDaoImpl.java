@@ -367,6 +367,7 @@ CREATE TABLE  `pbp2`.`time_table` (
         	domain.setFacultyId(rs.getString("faculty_id"));
         	domain.setDeptId(rs.getString("dept_id"));
         	domain.setIsTA(rs.getString("is_ta"));
+        	domain.setRemark(rs.getString("remark"));
         	domain.setIsProjectBase(rs.getString("is_project_base"));
 		return domain;
     }

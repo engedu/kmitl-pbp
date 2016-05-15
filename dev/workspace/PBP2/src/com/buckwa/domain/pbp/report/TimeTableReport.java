@@ -43,9 +43,21 @@ public class TimeTableReport implements Serializable{
 	
 	private String teachHrEdit;
 	
+	private String remark;
 	
 	
 	
+	
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
 	public String getTeachHrEdit() {
 		return teachHrEdit;
 	}

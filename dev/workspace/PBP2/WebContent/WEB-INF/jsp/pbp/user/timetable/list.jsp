@@ -130,6 +130,15 @@
                 attributes:{ class:"text-left" } ,
                 width: 100
             }
+            
+            ,                    
+            {
+                field: "remark",
+                title: "หมายเหตุ",
+                attributes:{ class:"text-left" } ,
+                width: 100
+            }
+
         ];
 	
 	

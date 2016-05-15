@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.TransformerException;
@@ -1112,11 +1114,17 @@ public class FacultyDaoImpl implements FacultyDao {
 							}
 							final Subject subject=subJectListReturnList.get(0);
 							
-							//teachTableTmp.setThaiName(subject.getSubjectTname());
-							//teachTableTmp.setEngName(subject.getSubjectEname());
-							//teachTableTmp.setCredit(subject.getCredit());
 							
-							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach);
+							boolean isInRejectList = checkInRejectList(subject.getSubjectId());
+							
+							String subjectRemark ="";
+							if(isInRejectList){
+								subjectRemark ="นำเข้าผลงานเอง";
+							}
+							
+							final String finalRemark = subjectRemark;
+							
+							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach +" finalRemark:"+finalRemark+" isInRejectList:"+isInRejectList);
 							
 							//final int nexCode = generateCodeUtil.getNextDepartmentCode(academicYear);
 							KeyHolder keyHolder = new GeneratedKeyHolder(); 
@@ -1143,8 +1151,8 @@ public class FacultyDaoImpl implements FacultyDao {
 											+ "eng_name,"
 											+ "lect_hr,"
 											+ "prac_hr,"
-											+ "credit, from_source, is_co_teach  )"
-											+ "values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
+											+ "credit, from_source, is_co_teach,remark  )"
+											+ "values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
 										 "", Statement.RETURN_GENERATED_KEYS);   
 									ps.setString(1,finalTeachtable.getFacultyId());
 									ps.setString(2,finalTeachtable.getDepartmentId()); 
@@ -1169,6 +1177,8 @@ public class FacultyDaoImpl implements FacultyDao {
 									ps.setString(20, subject.getCredit()+"");
 									ps.setString(21, SchoolConstants.FROM_SOUCE_REG);
 									ps.setString(22, finalIsCoTeach);
+									ps.setString(23, finalRemark);
+									
 									return ps;  
 									}
 								}, 	keyHolder); 	
@@ -1178,18 +1188,31 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							
 							//logger.info(" ############################### Start Create KPI User Mapping #########################");
+							// Check Found Skip
+				 
 							
-							AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
-							 
+							if(isInRejectList){
+								//key exists, skip
+								 
+							}else{
+
 								
-							academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
-							academicKPIUserMapping.setFromSource(SchoolConstants.FROM_SOUCE_REG);	
+								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
+								 
+								
+								academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
+								academicKPIUserMapping.setFromSource(SchoolConstants.FROM_SOUCE_REG);	
+								 
+								
+								academicKPIUserMapping.setStatus("APPROVED");
+								
+								//academicKPIDao.importwork(academicKPIUserMapping);
+								academicKPIDao.importworkTimeTable(semester,academicKPIUserMapping);								
+								
+							}
 							 
 							
-							academicKPIUserMapping.setStatus("APPROVED");
-							
-							//academicKPIDao.importwork(academicKPIUserMapping);
-							academicKPIDao.importworkTimeTable(semester,academicKPIUserMapping);
+
 							
 						}
 						
@@ -1205,10 +1228,28 @@ public class FacultyDaoImpl implements FacultyDao {
 		} 
 		
 		
-		
-
-		
 	}
+	
+	private boolean checkInRejectList(String subjectId){
+		boolean returnValue = false;
+		
+		Map<String, String> fruits = new HashMap<>();
+		fruits.put("01236071", "01236071");
+		//fruits.put("01136006", "01136006");
+		 
+		
+		if(fruits.containsKey(subjectId)){
+			//key exists
+			logger.info(" ### SubjectId "+subjectId+ " In Reject List , So Reject");
+			returnValue =true;
+		}else{
+			
+		}
+		
+		return returnValue;
+	}
+	
+	
 	@Override
 	public void addShareSubject( TimeTableReport timeTableReport,String facultyCode ) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
