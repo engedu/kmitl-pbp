@@ -52,7 +52,7 @@
 		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">คำนวณคะแนนให้เป็นปัจจุบัน</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 
-		                <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>		 
+		              <!--  <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/viewMarkDepartment.htm">คะแนนภาพรวมในภาควิชา</a></li>	-->	 
    						
 		            </ul> 
 		          </li>  

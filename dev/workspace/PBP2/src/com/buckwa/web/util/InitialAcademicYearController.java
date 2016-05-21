@@ -3,7 +3,11 @@ package com.buckwa.web.util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
@@ -15,6 +19,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.buckwa.dao.impl.uitl.ExcelReader;
+import com.buckwa.dao.impl.uitl.ExcelReader.ExcelRowMapper;
+import com.buckwa.dao.impl.uitl.RejectSubjectUtil;
 import com.buckwa.dao.intf.pbp.AcademicYearDao;
 import com.buckwa.domain.pam.Semester;
 import com.buckwa.domain.pbp.AcademicYear;
@@ -30,6 +37,9 @@ public class InitialAcademicYearController implements InitializingBean , BeanFac
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private RejectSubjectUtil rejectSubjectUtil;
 	
 	@Autowired
 	private AcademicYearUtil academicYearUtil;
@@ -89,6 +99,47 @@ public class InitialAcademicYearController implements InitializingBean , BeanFac
 				logger.info(" facultySQL:"+facultySQL);
 				facultyList  = this.jdbcTemplate.query(facultySQL,	new FacultyMapper() );	 
 			academicYearUtil.setFacultyList(facultyList);
+		}catch(Exception ex){
+			logger.info(ex.toString());;
+		}
+		
+		
+		logger.info("#############  Load Reject Subject  #############"); 
+		try{
+			
+			final Map<String,String> data = new HashMap<>();
+			final Pattern r = Pattern.compile("^[0-9]+$");
+			//ExcelReader excelReader = new ExcelReader("D:\\Project\\KMITL\\doc\\eject_subject.xls", 4,1);
+			
+			ExcelReader excelReader = new ExcelReader("/project/pbp/xlsx/eject_subject.xls", 4,1);
+			
+			List<String> rs = (List<String>) excelReader.readExcel(new ExcelRowMapper<String>() {
+
+				@Override
+				public String mapper(List<Object> rs, int rowIndex) {
+					
+					if(rs.size() >= 2){
+						String val = "";
+						if(rs.get(1) instanceof Double){
+							val = String.valueOf(((Double)rs.get(1)).intValue());
+						}else{
+							val= String.valueOf(rs.get(1));
+						}
+						Matcher m = r.matcher(val);
+						boolean find = m.find();
+						System.out.println(val + " " + find);
+						if(find){
+							data.put(val, val);
+							return val;
+						}
+						return null;
+					}
+					return null;
+				}
+			});
+			System.out.println("SIZE:" +  rs.size());
+			
+			rejectSubjectUtil.setRejectMap(data);
 		}catch(Exception ex){
 			logger.info(ex.toString());;
 		}

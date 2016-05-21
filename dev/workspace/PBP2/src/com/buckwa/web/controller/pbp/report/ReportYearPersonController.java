@@ -221,6 +221,7 @@ public class ReportYearPersonController{
 			logger.info("subReportFileName :" + subReportFileName);
 			params.put("SUBREPORT_DIR", reportPath);
 			
+			
 			JasperPrint jasperPrint = JasperFillManager.fillReport(reportFile, params, new JRBeanCollectionDataSource(reportList));
 			JasperReport reportDetail = JasperCompileManager.compileReport(subReportFileName);
 			
@@ -228,10 +229,12 @@ public class ReportYearPersonController{
 			
 			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round+".pdf";
 			
-			fileName = URLEncoder.encode(fileName);
+		//	fileName = URLEncoder.encode(fileName);
 					
 			httpResponse.setCharacterEncoding("utf-8");
-			httpResponse.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+			//httpResponse.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+			
+			httpResponse.setHeader("Content-Disposition","attachment; filename="+URLEncoder.encode(fileName, "UTF-8"));
 			
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			

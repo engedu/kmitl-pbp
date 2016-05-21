@@ -24,9 +24,11 @@
 					<tr>
 				 
 					<td class="tdLast"  style="text-align: center;" >	 
-					 <a rel="notLoading" href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecal.htm">  
-								 <input class="btn btn-primary" value="คำนวณคะแนนให้เป็นปัจจุบัน" type="button"   /> 
-					 </a> 
+ 
+					 
+					   <a rel="notLoading" onclick="recalculate();" > 
+							 	<input value="คำนวณคะแนนให้เป็นปัจจุบัน" class="btn btn-primary" type="button" onclick="#">
+								 </a>
 						 
 					</td> 
 					<td class="tdFirst" style="text-align: left;"  > <strong>ระบบจะทำการ ปรับปรุงข้อมูลคะแนนบุคลากรทั้งหมดของภาควิชา </strong><br>
@@ -40,7 +42,14 @@
  </div>
 </form:form>
 <script>
+function recalculate(){
+	var form = document.forms['mainForm'];
+	form.action = "<%=request.getContextPath()%>/head/pbp/markDepartmentRecal.htm";
+	form.method = 'GET';
+
 	
+	form.submit();
+}
 	function validateUpload (){		
 		
 		var form = document.forms['mainForm']; 

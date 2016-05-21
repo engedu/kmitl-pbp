@@ -1,4 +1,4 @@
-package th.co.baiwa.project.utils;
+package com.buckwa.dao.impl.uitl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import th.co.baiwa.project.utils.ExcelReader.ExcelRowMapper;
+import com.buckwa.dao.impl.uitl.ExcelReader.ExcelRowMapper;
 
 public class Example {
 	public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Example {
 
 		try {
 			final Pattern r = Pattern.compile("^[0-9]+$");
-			ExcelReader excelReader = new ExcelReader("C:\\Users\\Armdev\\Downloads\\eject_subj.xls", 4,1);
+			ExcelReader excelReader = new ExcelReader("D:\\Project\\KMITL\\doc\\eject_subject.xlsx", 4,1);
 			List<String> rs = (List<String>) excelReader.readExcel(new ExcelRowMapper<String>() {
 
 				@Override
@@ -40,13 +40,13 @@ public class Example {
 					return null;
 				}
 			});
-			System.out.println("SIZE {}" +  rs.size());
+			System.out.println("SIZE:" +  rs.size());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//map data
-		System.out.println("data {}" +  data.size());
+		System.out.println("data:" +  data.size());
 		
 	}
 }

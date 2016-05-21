@@ -8,9 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.TransformerException;
@@ -29,6 +30,7 @@ import org.springframework.ws.client.core.WebServiceMessageCallback;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
 
+import com.buckwa.dao.impl.uitl.RejectSubjectUtil;
 import com.buckwa.dao.intf.admin.GroupDao;
 import com.buckwa.dao.intf.pbp.AcademicKPIDao;
 import com.buckwa.dao.intf.pbp.FacultyDao;
@@ -74,6 +76,9 @@ public class FacultyDaoImpl implements FacultyDao {
 	@Autowired
 	private WebServiceTemplate  teachTableWSTemplate  ;	
 	
+	
+	@Autowired
+	private RejectSubjectUtil rejectSubjectUtil;
 	//subjectServiceWSTemplate
 	
 	@Autowired
@@ -1193,9 +1198,9 @@ public class FacultyDaoImpl implements FacultyDao {
 							
 							if(isInRejectList){
 								//key exists, skip
-								 
+								logger.info(" ############################### Check Reject True , So skip #########################");
 							}else{
-
+								logger.info(" ############################### Check Reject False , So Create Work #########################");
 								
 								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
 								 
@@ -1233,12 +1238,22 @@ public class FacultyDaoImpl implements FacultyDao {
 	private boolean checkInRejectList(String subjectId){
 		boolean returnValue = false;
 		
-		Map<String, String> fruits = new HashMap<>();
-		fruits.put("01236071", "01236071");
+		//Map<String, String> fruits = new HashMap<>();
+		
+		Map<String, String> rejectMap =rejectSubjectUtil.getRejectMap();
+		//fruits.put("01236071", "01236071");
 		//fruits.put("01136006", "01136006");
 		 
+		logger.info(" ### SubjectId  For Check Reject "+subjectId);
 		
-		if(fruits.containsKey(subjectId)){
+		Set keySet =rejectMap.keySet();
+		
+		Iterator iter =keySet.iterator();
+		
+		//while(iter.hasNext()){
+			//System.out.println(iter.next());
+		//}
+		if(rejectMap.containsKey(subjectId)){
 			//key exists
 			logger.info(" ### SubjectId "+subjectId+ " In Reject List , So Reject");
 			returnValue =true;

@@ -58,9 +58,7 @@
            		
            		ผลงานประจำปี ${person.pBPWorkTypeWrapper.academicYear}  
            		
-           		ปปป
-               		
-           		
+   
            		</td>
            	 
            	</tr> 
