@@ -136,7 +136,11 @@
            
  
             </ul> 
-          </li><!-- END Flyout Menu -->     
+          </li>
+           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
+           <a href="<%=request.getContextPath()%>/admin/work/init.htm">แก้ไขผลงาน</a>
+          </li>
+           <!-- END Flyout Menu -->     
 		</sec:authorize>
         </sec:authorize>  
           

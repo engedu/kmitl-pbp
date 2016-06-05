@@ -68,6 +68,8 @@ public class Person extends BaseDomain  {
 	
 	private String regId;
 	
+	private String username;
+	
 	private List<LovDetail> lovSexList;
 	private List<LovDetail> lovEmployeeTypeList;
 	private List<LovDetail> lovPositionList;
@@ -141,6 +143,14 @@ public class Person extends BaseDomain  {
 	
 	
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getRegId() {
 		return regId;
 	}

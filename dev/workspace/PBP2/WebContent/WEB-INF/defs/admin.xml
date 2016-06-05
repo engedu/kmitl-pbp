@@ -339,6 +339,14 @@
      <definition name="createTimeTable" extends="pbpUserLayout">
    <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
       <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/timetable/create.jsp"/>      
-  </definition>   
+  </definition> 
   
+   <!-- Work -->
+     <definition name="workList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/work/list.jsp"/>      
+  </definition>   
+     <definition name="adinAcademicWork" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/work/workDetail.jsp"/>      
+  </definition>    
 </tiles-definitions>

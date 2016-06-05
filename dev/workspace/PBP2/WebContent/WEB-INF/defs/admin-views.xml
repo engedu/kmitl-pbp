@@ -136,5 +136,9 @@
   <bean id="createTimeTable"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="createTimeTable" /></bean>
   
 	<!-- End User -->
+ 	<!-- TimeTable -->
+ 	<bean id="workList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="workList" /></bean>
+	<bean id="adinAcademicWork"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adinAcademicWork" /></bean>
+	
 		
 </beans>
