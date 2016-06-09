@@ -76,7 +76,11 @@ public class FacultyDaoImpl implements FacultyDao {
 	@Autowired
 	private WebServiceTemplate  teachTableWSTemplate  ;	
 	
+	@Autowired
+	private WebServiceTemplate  subjectServiceWSTemplateChum  ;	
 	
+	@Autowired
+	private WebServiceTemplate  teachTableWSTemplateChum  ;	
 	@Autowired
 	private RejectSubjectUtil rejectSubjectUtil;
 	//subjectServiceWSTemplate
@@ -939,6 +943,46 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 	
 	
+	@Override
+	public void updateFacultyWSChum(List<com.buckwa.ws.chum.oxm.Faculty> facultyList) {
+		//logger.info(" #  : "+BeanUtils.getBeanString(facultyList));	
+		
+		for(com.buckwa.ws.chum.oxm.Faculty tmp:facultyList){
+			
+			
+			final com.buckwa.ws.chum.oxm.Faculty finalfaculty = tmp; 
+			
+			// Check aready exist
+			final String academicYear = schoolUtil.getCurrentAcademicYear();
+			boolean isExist = isFacultyWSExistChum(finalfaculty,academicYear);
+			
+			if(!isExist){
+				
+				//final int nexCode = generateCodeUtil.getNextFacultyCode(academicYear);
+				KeyHolder keyHolder = new GeneratedKeyHolder(); 		
+				jdbcTemplate.update(new PreparedStatementCreator() {  
+					public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+						PreparedStatement ps = connection.prepareStatement("" +						
+								"  insert into faculty (name, academic_year,enable,code,icl_code,eng_name,abbreviation) values (?, ?,?,?,?,?,?)" +
+							 "", Statement.RETURN_GENERATED_KEYS);   
+						ps.setString(1,finalfaculty.getFacultyTname());
+						ps.setString(2,academicYear);
+						ps.setBoolean(3,true);		 	
+						ps.setString(4, finalfaculty.getFacultyId());
+						ps.setString(5, finalfaculty.getIclFacultyId());
+						ps.setString(6, finalfaculty.getFacultyEname());
+						ps.setString(7, finalfaculty.getBrief());
+						return ps;  
+						}
+					}, 	keyHolder); 	
+				Long returnid =  keyHolder.getKey().longValue();	
+				
+			}				
+			} 
+	  
+	}
+	
+	
  
 	
 	private boolean isFacultyWSExist (com.buckwa.ws.newws.oxm.Faculty factultyws,String academicYear){
@@ -968,6 +1012,32 @@ public class FacultyDaoImpl implements FacultyDao {
 		return returnValue;
 	}
 	
+	private boolean isFacultyWSExistChum (com.buckwa.ws.chum.oxm.Faculty factultyws,String academicYear){
+		boolean returnValue = false;
+		try{ 
+			/*
+			String sqltmp = "select count(*) as totalItem  from faculty t  where t.code='"+StringEscapeUtils.escapeSql(factultyws.getFacultyId())+
+					"' and icl_code='"+factultyws.getIclFacultyId()+
+					 "' and name like %"+factultyws.getFacultyTname()+"%"+
+					"' and academic_year="+academicYear;
+			*/
+			String sqltmp = "select count(*) as totalItem  from faculty t  where  t.name like '%"+factultyws.getFacultyTname()+"%'"+
+					" and t.academic_year="+academicYear;
+		//	logger.info(" # sqltmp : "+sqltmp );	
+			Long found = this.jdbcTemplate.queryForLong(sqltmp);
+			if(found!=null&&found.intValue()>0){
+				returnValue = true;
+				logger.info(" Found Faculty :"+factultyws.getFacultyTname()+"   , Do nothing !!");
+			}else{
+				logger.info(" Not Found Faculty :"+factultyws.getFacultyTname()+"   , Create New !!");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+	}
 	
 	
 	
@@ -1203,6 +1273,228 @@ public class FacultyDaoImpl implements FacultyDao {
 								logger.info(" ############################### Check Reject False , So Create Work #########################");
 								
 								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTable(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
+								 
+								
+								academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
+								academicKPIUserMapping.setFromSource(SchoolConstants.FROM_SOUCE_REG);	
+								 
+								
+								academicKPIUserMapping.setStatus("APPROVED");
+								
+								//academicKPIDao.importwork(academicKPIUserMapping);
+								academicKPIDao.importworkTimeTable(semester,academicKPIUserMapping);								
+								
+							}
+							 
+							
+
+							
+						}
+						
+					//	 }// End debug Subject
+				 }else{
+					 logger.info(" ### SubjectId null , skip on Create ");
+				 }
+				}catch(Exception exx){
+					exx.printStackTrace();
+				}
+				 }	 
+			} 
+		} 
+		
+		
+	}
+	
+	@Override
+	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
+		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
+		
+		for(com.buckwa.ws.chum.oxm.TeachTable tmp:teachTableList){ 
+			final com.buckwa.ws.chum.oxm.TeachTable finalTeachtable = tmp;  
+			
+		//	 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+ " Total Student:"+finalTeachtable.getStudentTotal() );
+			if(finalTeachtable.getTeacherId()==null||finalTeachtable.getSubjectId()==null||finalTeachtable.getSemester()==null||finalTeachtable.getLectOrPrac()==null
+					||finalTeachtable.getStudentTotal()==null||finalTeachtable.getStudentTotal().intValue()==0){ 				
+				// logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
+			}else{ 
+			// Check aready exist
+			//final String academicYear = schoolUtil.getCurrentAcademicYear();
+			boolean isExist = isTeachtableWSExistChum(finalTeachtable,academicYear);
+			
+			if(!isExist){  
+				
+				try{
+				// Get ThaiName,EngName,Credit
+			 
+					 if(tmp.getSubjectId()!=null){
+					
+					//	 if(tmp.getSubjectId().equals("01236044")){
+					
+						 
+					 
+						 com.buckwa.ws.chum.oxm.GetSubject getSubjectRequest = new com.buckwa.ws.chum.oxm.GetSubject();
+					 getSubjectRequest.setSubjectId(tmp.getSubjectId());
+					 getSubjectRequest.setDegree(degree);
+					 getSubjectRequest.setDetail(true);
+					// logger.info(" ###########  SubjectId:"+tmp.getSubjectId());
+					 
+					 
+					 com.buckwa.ws.chum.oxm.GetSubjectResponse returnObjSubject =(com.buckwa.ws.chum.oxm.GetSubjectResponse)subjectServiceWSTemplateChum.marshalSendAndReceive(getSubjectRequest, new WebServiceMessageCallback() {
+							public void doWithMessage(WebServiceMessage messageSubject) throws IOException, TransformerException {
+								try {
+									SOAPMessage soapMessageSubject = ((SaajSoapMessage)messageSubject).getSaajMessage();				 
+							       ByteArrayOutputStream out = new ByteArrayOutputStream();
+							     // soapMessageSubject.writeTo(out);
+						        //   logger.info(" soapMessageSubject SOAP Request Payload: " + new String(out.toByteArray()));
+							         
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});	 
+						
+						
+						
+					 com.buckwa.ws.chum.oxm.GetTeacherofSubject getTeacherofSubject = new com.buckwa.ws.chum.oxm.GetTeacherofSubject();
+						 getTeacherofSubject.setSubjectId(tmp.getSubjectId());
+						 getTeacherofSubject.setDegree(degree);
+						 getTeacherofSubject.setSemester(Integer.parseInt(finalTeachtable.getSemester()));
+						 getTeacherofSubject.setYear(finalTeachtable.getYear());
+						 
+						 
+						 com.buckwa.ws.chum.oxm.GetTeacherofSubjectResponse getTeacherofSubjectResponse =(com.buckwa.ws.chum.oxm.GetTeacherofSubjectResponse)teachTableWSTemplateChum.marshalSendAndReceive(getTeacherofSubject, new WebServiceMessageCallback() {
+								public void doWithMessage(WebServiceMessage messageSubject) throws IOException, TransformerException {
+									try {
+										SOAPMessage soapMessageSubject = ((SaajSoapMessage)messageSubject).getSaajMessage();				 
+								       ByteArrayOutputStream out = new ByteArrayOutputStream();
+								     //  soapMessageSubject.writeTo(out);
+							          // logger.info(" soapMessageSubject SOAP Request Payload: " + new String(out.toByteArray()));
+								         
+									} catch(Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});	 
+						 
+						String isCoTeach = "N";
+						//List<String> teacherIdList =getTeacherofSubjectResponse.getLect().getTeacherId();
+						//logger.info(" ## Teacher List :"+teacherIdList);
+						if(getTeacherofSubjectResponse.getLect()!=null){
+							if(getTeacherofSubjectResponse.getLect().getTeacherId()!=null&&getTeacherofSubjectResponse.getLect().getTeacherId().size()>1){
+								
+								//logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+" Found Lect List Size: "+getTeacherofSubjectResponse.getLect().getTeacherId().size()+" So  -----> Y");
+								isCoTeach="Y";
+							}							
+						}
+
+						//List<String> teacherIdPracList =getTeacherofSubjectResponse.getLect().getTeacherId();
+						//logger.info(" ## Teacher List :"+teacherIdList);
+//						if(getTeacherofSubjectResponse.getPrac()!=null){
+//							if(getTeacherofSubjectResponse.getPrac().getTeacherId()!=null&&getTeacherofSubjectResponse.getPrac().getTeacherId().size()>1){
+//								isCoTeach="Y";
+//								logger.info("  ### Check Is Co Teach SubjectId:"+tmp.getSubjectId()+" Degree:"+degree+"  Found Prac List Size: "+getTeacherofSubjectResponse.getPrac().getTeacherId().size()+" So  -----> Y");
+//							}							
+//						}	
+//						
+						
+						
+						
+						final String finalIsCoTeach = isCoTeach;
+						
+						
+						
+						List<com.buckwa.ws.chum.oxm.Subject> subJectListReturnList  =returnObjSubject.getSubject();
+						if(subJectListReturnList!=null&&subJectListReturnList.size()>0){
+							
+							if(subJectListReturnList.size()>1){
+							//	logger.info(" ############################################ Incorrect Size:"+ subJectListReturnList.size());
+							}
+							final com.buckwa.ws.chum.oxm.Subject subject=subJectListReturnList.get(0);
+							
+							
+							boolean isInRejectList = checkInRejectList(subject.getSubjectId());
+							
+							String subjectRemark ="";
+							if(isInRejectList){
+								subjectRemark ="นำเข้าผลงานเอง";
+							}
+							
+							final String finalRemark = subjectRemark;
+							
+							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach +" finalRemark:"+finalRemark+" isInRejectList:"+isInRejectList);
+							
+							//final int nexCode = generateCodeUtil.getNextDepartmentCode(academicYear);
+							KeyHolder keyHolder = new GeneratedKeyHolder(); 
+							jdbcTemplate.update(new PreparedStatementCreator() {  
+								public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+									PreparedStatement ps = connection.prepareStatement("" +						
+											"  insert into time_table ("
+											+ "faculty_id,"
+											+ "dept_id,"
+											+ "curr_id,"
+											+ "subject_id,"
+											+ "semester,"
+											+ "year,"
+											+ "class,"
+											+ "section,"
+											+ "teacher_id,"
+											+ "lect_or_prac,"
+											+ "teach_day,"
+											+ "teach_time,"
+											+ "teach_time2,"
+											+ "student_total,"
+											+ "degree ,"
+											+ "thai_name,"
+											+ "eng_name,"
+											+ "lect_hr,"
+											+ "prac_hr,"
+											+ "credit, from_source, is_co_teach,remark  )"
+											+ "values (?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)" +
+										 "", Statement.RETURN_GENERATED_KEYS);   
+									ps.setString(1,finalTeachtable.getFacultyId());
+									ps.setString(2,finalTeachtable.getDepartmentId()); 
+									ps.setString(3, finalTeachtable.getCurrId());
+									ps.setString(4, finalTeachtable.getSubjectId());
+									ps.setString(5, finalTeachtable.getSemester());
+									ps.setString(6, finalTeachtable.getYear());
+									ps.setString(7, finalTeachtable.getClazz());
+									ps.setString(8, finalTeachtable.getSection());
+									ps.setString(9, finalTeachtable.getTeacherId());
+									ps.setString(10, finalTeachtable.getLectOrPrac());
+									ps.setString(11, finalTeachtable.getTeachDay());
+									ps.setString(12, finalTeachtable.getTeachTime());
+									ps.setString(13, finalTeachtable.getTeachTime2());
+									ps.setString(14, finalTeachtable.getStudentTotal()+"");
+									ps.setString(15, finalTeachtable.getDegree()+"");
+									
+									ps.setString(16, subject.getSubjectTname()+"");
+									ps.setString(17, subject.getSubjectEname()+"");
+									ps.setString(18, subject.getLectHr()+"");
+									ps.setString(19, subject.getPracHr()+"");
+									ps.setString(20, subject.getCredit()+"");
+									ps.setString(21, SchoolConstants.FROM_SOUCE_REG);
+									ps.setString(22, finalIsCoTeach);
+									ps.setString(23, finalRemark);
+									
+									return ps;  
+									}
+								}, 	keyHolder); 	
+							Long returnid =  keyHolder.getKey().longValue();								
+							
+							jdbcTemplate.update("commit");
+							
+							
+							//logger.info(" ############################### Start Create KPI User Mapping #########################");
+							// Check Found Skip
+				 
+							
+							if(isInRejectList){
+								//key exists, skip
+								logger.info(" ############################### Check Reject True , So skip #########################");
+							}else{
+								logger.info(" ############################### Check Reject False , So Create Work #########################");
+								
+								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTableChum(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
 								 
 								
 								academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
@@ -1752,6 +2044,197 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 	}
 	
+	private AcademicKPIUserMapping getMatchingKPITeachTableChum(com.buckwa.ws.chum.oxm.TeachTable timetable, com.buckwa.ws.chum.oxm.Subject subject,final String finalIsCoTeach,String academicYear,String facultyCode){
+		AcademicKPIUserMapping returnObj = new AcademicKPIUserMapping();;
+		
+		try{
+			
+			String specialP1 = timetable.getDegree()+"";
+			String specialP2 = timetable.getLectOrPrac();			
+			String totalStudent = "0";
+			if(timetable.getStudentTotal()==null){
+				
+			}else {
+				totalStudent = timetable.getStudentTotal()+"";
+			}
+			 
+			//logger.info(" ###### specialP1:"+specialP1+"   specialP2:"+specialP2+"   totalStudent:"+totalStudent);
+			
+			
+//			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
+//					+ " and   total_student_to >= "+totalStudent+" AND total_student_from <="+totalStudent+ "  and k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
+
+
+			
+			String sqlKPI  = " select * from academic_kpi k where k.special_p1='"+specialP1+"' and k.special_p2='"+specialP2+"'"
+					+ " and    k.academic_year ='"+timetable.getYear()+"' and faculty_code="+facultyCode;
+
+			
+			//String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"'" ; 
+			//logger.info(" sql sqlKPI:"+sqlKPI);
+			List<AcademicKPI> academicKPIList  =null;
+			
+			try{
+				academicKPIList = this.jdbcTemplate.query(sqlKPI,	new AcademicKPIMapper() );	
+				//logger.info(" ########## Found Academic kpi list :"+academicKPIList);
+				if(academicKPIList!=null&&academicKPIList.size()>0){
+		 
+					// Add new for should kpi that use total student calculate
+					 
+					AcademicKPI zeroKPI  = academicKPIList.get(0);
+				 
+						for(AcademicKPI kpiTmp:academicKPIList){							
+							String isUseStudentCalculate =kpiTmp.getSpecialP4();
+							int studentTotalFromReg =timetable.getStudentTotal();
+							
+							//System.out.println(" TotalStudent From :"+kpiTmp.getTotalStudentFrom()+" totalStudentTo:"+kpiTmp.getTotalStudentTo()+"  isUseStudentCalculate:"+isUseStudentCalculate+"  studentTotalFromReg:"+studentTotalFromReg);
+							
+							if(kpiTmp.getTotalStudentFrom()!=null&&kpiTmp.getTotalStudentTo()!=null){
+								
+								try{
+									
+									int totalStudentFromInt  = Integer.parseInt(kpiTmp.getTotalStudentFrom());
+									int totalStudentToInt  = Integer.parseInt(kpiTmp.getTotalStudentTo());
+									
+									
+									
+									if(isUseStudentCalculate!=null&&isUseStudentCalculate.indexOf("1")!=-1){
+										if(studentTotalFromReg>=totalStudentFromInt&&studentTotalFromReg<=totalStudentToInt){
+											zeroKPI = kpiTmp;
+											break;
+										}
+									}
+									
+								}catch(Exception ex){
+									//ex.printStackTrace();
+								}
+								
+							}
+ 
+						}						
+					 
+					
+					
+					
+					
+					
+					
+					String userName =schoolUtil.getUserNameFromRegId(timetable.getTeacherId(),academicYear);
+					
+					
+					returnObj.setAcademicKPICode(zeroKPI.getCode());
+					returnObj.setAcademicYear(zeroKPI.getAcademicYear());
+					returnObj.setUserName(userName);
+					returnObj.setAcademicKPIId(zeroKPI.getAcademicKPIId());
+					returnObj.setWorkTypeCode(zeroKPI.getWorkTypeCode());
+					returnObj.setName(zeroKPI.getName());
+					returnObj.setRatio(100);
+					 
+					
+					//String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_code ="+zeroKPI.getCode()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+			
+					String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+zeroKPI.getAcademicKPIId()+" and academic_year='"+zeroKPI.getAcademicYear()+"'" ; 
+					
+					List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+					try{
+						//logger.info(" sqlAttribute:"+sqlAttribute);
+						academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+						
+						//logger.info(" ########## Found academicKPIAttributeList size: :"+academicKPIAttributeList.size());
+						
+						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+						
+						 for(AcademicKPIAttribute attTmp:academicKPIAttributeList ){	
+							//	logger.info(" ##### attTmp.getName():"+attTmp.getName());
+							 
+							 if("ชื่อวิชา".equalsIgnoreCase(attTmp.getName())){	
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 attTmp.setValue(subject.getSubjectTname());
+
+								
+								 attTmp.setIsCalculate("Y");
+								 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectEname());
+								 if( subject.getSubjectTname()==null|| subject.getSubjectTname().length()==0){
+									 valueTmp.setValue(subject.getSubjectId()+":"+subject.getSubjectEname());
+								 }
+								
+								 valueTmp.setName(attTmp.getName());
+								 
+								 academicKPIAttributeValueList.add(valueTmp);							 
+							 }
+							 if("หน่วยกิต".equalsIgnoreCase(attTmp.getName())){		
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 attTmp.setValue(subject.getCredit());
+								 attTmp.setIsCalculate("N");
+								 valueTmp.setValue(subject.getCredit());
+								 valueTmp.setName(attTmp.getName());
+								 
+								 academicKPIAttributeValueList.add(valueTmp);
+							 }
+							 if("จำนวนชั่วโมง".equalsIgnoreCase(attTmp.getName())){		
+								 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+								 
+								 if("ท".equalsIgnoreCase(timetable.getLectOrPrac())){
+									 attTmp.setValue(subject.getLectHr());
+									 attTmp.setIsCalculate("Y");
+									 valueTmp.setValue(subject.getLectHr());
+									 valueTmp.setName(attTmp.getName());
+								 }else{
+									 attTmp.setValue(subject.getPracHr());
+									 attTmp.setIsCalculate("Y");
+									 valueTmp.setValue(subject.getPracHr());
+									 valueTmp.setName(attTmp.getName());								 
+								 }
+								 
+								 academicKPIAttributeValueList.add(valueTmp);
+							 }
+							 
+							 if("สัดส่วน(%)".equalsIgnoreCase(attTmp.getName())){	
+								
+								 
+								 if("Y".equals(finalIsCoTeach)){
+									 AcademicKPIAttributeValue valueTmp = new AcademicKPIAttributeValue();
+									 
+								     if(attTmp.getValue()==null){
+								    	 valueTmp.setValue("100");
+								     }else{
+								    	 valueTmp.setValue("50");
+								     }
+									 
+									 valueTmp.setName(attTmp.getName());
+									 attTmp.setIsCalculate("Y");
+									 academicKPIAttributeValueList.add(valueTmp);										 
+								 }
+						 
+							 }							 
+							 
+							
+						 }
+						 
+						 returnObj.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
+						
+						// logger.info("  academicKPIAttributeValueList size:"+academicKPIAttributeValueList);
+					}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+						ex.printStackTrace();
+					} 									 
+					
+					zeroKPI.setAcademicKPIAttributeList(academicKPIAttributeList);
+					
+					//logger.info(" ########## KPI Zero:"+ BeanUtils.getBeanString(zeroKPI));
+				}
+				
+			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+				ex.printStackTrace();
+			} 
+			 
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnObj;
+		
+	}
+	
  
 	
 	private boolean isDepartmentWSExist (com.buckwa.ws.newws.oxm.Department departmentws,String academicYear){
@@ -1775,6 +2258,54 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 
 	private boolean isTeachtableWSExist (com.buckwa.ws.newws.oxm.TeachTable teachtablews,String academicYear){
+		boolean returnValue = false;
+		try{
+			
+			if(teachtablews.getTeacherId()==null||teachtablews.getSubjectId()==null||teachtablews.getSemester()==null||teachtablews.getLectOrPrac()==null){
+				returnValue=true;
+				
+				// logger.info(" ############ Found Null  isTeachtableWSExist : "+BeanUtils.getBeanString(teachtablews) );
+			}else{
+			
+			String sqltmp = "select count(*) as totalItem  from time_table t  where  1=1 "
+					//+ "t.faculty_id='"+StringEscapeUtils.escapeSql(teachtablews.getDepartmentId())+"'"
+					//+ " and t.dept_id='"+teachtablews.getDepartmentId()+"' "
+					//+ " and t.curr_id='"+teachtablews.getCurrId()+"' "
+					+ " and t.teacher_id='"+teachtablews.getTeacherId()+"' "
+					+ " and t.subject_id='"+teachtablews.getSubjectId()+"' "
+					+ " and t.semester='"+teachtablews.getSemester()+"' "
+					+ " and t.year='"+teachtablews.getYear()+"' "
+					+ " and t.section='"+teachtablews.getSection()+"' " 
+					+ " and t.lect_or_prac='"+teachtablews.getLectOrPrac()+"' ";
+					
+					//+ " and t.teach_time='"+teachtablews.getTeachTime()+"' "
+					//+ " and t.teach_time2='"+teachtablews.getTeachTime2()+"' ";
+					 
+			
+			
+			//logger.info(" # sqltmp Check Dup : "+sqltmp );	
+			Long found = this.jdbcTemplate.queryForLong(sqltmp);
+			//logger.info(" ##### found lond:"+found);
+			if(found!=null&&found.intValue()>0){
+				returnValue = true;
+				 
+				//logger.info(" #  Found Dup Do noting !!! " );
+			}else{
+				
+				//logger.info(" #  Not Found Dup Insert New !!! " );
+			}
+			
+			}
+			
+		}catch(Exception ex){
+			//logger.info(" #  Check Dup Exception Do noting !!! " );
+			returnValue =true;
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+	}
+	private boolean isTeachtableWSExistChum (com.buckwa.ws.chum.oxm.TeachTable teachtablews,String academicYear){
 		boolean returnValue = false;
 		try{
 			
@@ -2042,6 +2573,8 @@ public class FacultyDaoImpl implements FacultyDao {
 			domain.setIsHead(rs.getString("is_head"));
 			domain.setIsPresident(rs.getString("is_president"));
 			domain.setEmployeeType(rs.getString("employee_type"));
+			
+			domain.setRegId(rs.getString("reg_id"));
 			return domain;
 		}
 	}

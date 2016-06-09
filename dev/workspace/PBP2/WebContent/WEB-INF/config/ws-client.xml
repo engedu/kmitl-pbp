@@ -28,6 +28,7 @@
 		<property name="packagesToScan">
 	    	<list>	        		   
 	        	<value>com.buckwa.ws.newws.oxm</value>	 
+	        	<value>com.buckwa.ws.chum.oxm</value>	
 	   		 </list>
 		</property>
 	</bean>	 
@@ -122,6 +123,56 @@ class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggi
    <property name="logRequest" value="true" />
    <property name="logResponse" value="true" />
 </bean>
+
+
+<!--  Chumporn -->
+
+   <bean id="facultyWSTemplateChum" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${facultyService.chum.enpoint}</value></property>
+   
+    
+ </bean>
+  
+    <bean id="teacherWSTemplateChum" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${teacherService.chum.enpoint}</value></property>
+    
+ </bean>
+ 
+ 
+     <bean id="teachTableWSTemplateChum" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${teachTableService.chum.enpoint}</value></property>
+  
+ </bean>
+ 
+ 
+      <bean id="subjectServiceWSTemplateChum" class="org.springframework.ws.client.core.WebServiceTemplate">
+  <constructor-arg ref="messageFactory" />
+  <property name="marshaller" ref="marshaller"></property>
+  <property name="unmarshaller" ref="marshaller"></property>
+  <property name="messageSender">
+   <bean  class="org.springframework.ws.transport.http.CommonsHttpMessageSender"> </bean>
+  </property> 
+   <property name="defaultUri"><value>${subjectService.chum.enpoint}</value></property>
+    
+ </bean>
     
  </beans>
    

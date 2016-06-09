@@ -144,7 +144,7 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		 
 		 try{
 		String sql =" SELECT email FROM person_pbp where reg_id='"+regId+"' and academic_year="+academicYear;	
-		//logger.info("  getUserNameFromRegId sql: "+sql);
+		logger.info("  getUserNameFromRegId sql: "+sql);
 		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
 	 
 		 }catch(Exception ex){

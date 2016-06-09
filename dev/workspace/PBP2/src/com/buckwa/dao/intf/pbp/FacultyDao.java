@@ -47,10 +47,12 @@ public interface FacultyDao {
 	public void assignPresident(String oldPresident,String newPresident,String  academicYear );
 	
 	public void updateFacultyWS(List<com.buckwa.ws.newws.oxm.Faculty> facultyList);
+	public void updateFacultyWSChum(List<com.buckwa.ws.chum.oxm.Faculty> facultyList);
 	public void updateDepartmentWS(List<com.buckwa.ws.newws.oxm.Department> departmentList);
 	
 	public void updateTeachTableWS(int semester,List<com.buckwa.ws.newws.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea);
-	
+	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea);
+
 	public void addShareSubject( TimeTableReport timeTableReport ,String facultyCode);
 	
 	public Faculty getFacultyByCodeAndYear(String facCode ,String academicYear);

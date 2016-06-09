@@ -78,6 +78,7 @@
   	
   	  	<bean id="syncTimetableWS"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWS" /></bean>
   	<bean id="recalculate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="recalculate" /></bean>
+  	<bean id="syncTimetableWSChum"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWSChum" /></bean>
 
 	  	<!-- Year-->
 	<bean id="yearCreate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="yearCreate" /></bean>

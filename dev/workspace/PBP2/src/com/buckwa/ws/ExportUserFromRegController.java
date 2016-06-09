@@ -1,9 +1,6 @@
 package com.buckwa.ws;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buckwa.domain.admin.Holiday;
 import com.buckwa.domain.admin.HolidayCriteria;
 import com.buckwa.domain.common.BuckWaResponse;
-import com.buckwa.domain.pam.Year;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.ws.service.TimeTableWSService;
+import com.buckwa.ws.service.TimeTableWSServiceChum;
 
 
 @Controller
@@ -30,6 +27,9 @@ public class ExportUserFromRegController {
 	
 	@Autowired
 	private TimeTableWSService timeTableWSService;
+	
+	@Autowired
+	private TimeTableWSServiceChum timeTableWSServiceChum;
 	
 	@RequestMapping(value="init.htm", method = RequestMethod.GET)
 	public ModelAndView initCreate() {			
@@ -44,6 +44,21 @@ public class ExportUserFromRegController {
 		return mav;
 	}	
 	
+	
+	@RequestMapping(value="initChum.htm", method = RequestMethod.GET)
+	public ModelAndView initChum() {			
+	 
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.LEAVE_INIT);
+		
+		mav.setViewName("syncTimetableWSChum");		
+ 	
+	
+		return mav;
+	}	
+	
+	
 	@RequestMapping(value="syncTimeTableYearSemester.htm", method = RequestMethod.GET)
 	public ModelAndView syncTimeTableYearSemester(@RequestParam("academicYear") String academicYear,@RequestParam("semester") String semester) {			
 		 
@@ -57,7 +72,19 @@ public class ExportUserFromRegController {
 		return mav;
 	}	
 	
-	
+	@RequestMapping(value="syncTimeTableYearSemesterChum.htm", method = RequestMethod.GET)
+	public ModelAndView syncTimeTableYearSemesterChum(@RequestParam("academicYear") String academicYear,@RequestParam("semester") String semester) {			
+		 
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.LEAVE_INIT);
+		
+		mav.setViewName("syncTimetableWS");		 
+		BuckWaResponse response =  timeTableWSServiceChum.syncTimeTableYearTerm(academicYear, semester);
+ 	
+		return mav;
+	}	
+		
 	
 	@RequestMapping(value="assignKPIInit.htm", method = RequestMethod.GET)
 	public ModelAndView assignKPIInit( ) {			

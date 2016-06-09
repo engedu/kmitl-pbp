@@ -269,6 +269,12 @@
 		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
 	</definition>
 
+ 		<definition name="syncTimetableWSChum" extends="pbpUserLayout">
+		<put-attribute name="main"
+			value="/WEB-INF/jsp/pbp/admin/ws/listChum.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/admin/menu.jsp" />
+	</definition>
+	
  		<definition name="recalculate" extends="pbpUserLayout">
 		<put-attribute name="main"
 			value="/WEB-INF/jsp/pbp/admin/ws/recalculate.jsp" />

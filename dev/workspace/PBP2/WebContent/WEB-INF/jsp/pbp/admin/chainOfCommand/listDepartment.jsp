@@ -54,6 +54,10 @@
 				 		  <c:out value="${domain2.email}"/>  
 									      
 						</td>
+												 <td class="tdFirst" >
+				 		  <c:out value="${domain2.regId}"/>  
+									      
+						</td>
 							 <td class="tdFirst" >
 				 		  <c:out value="${domain2.employeeType}"/>  
 									      
