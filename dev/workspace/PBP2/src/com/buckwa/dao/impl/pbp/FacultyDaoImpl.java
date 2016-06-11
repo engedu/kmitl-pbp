@@ -830,6 +830,9 @@ public class FacultyDaoImpl implements FacultyDao {
 				}
 			}, 	keyHolder); 	
 		Long returnid =  keyHolder.getKey().longValue();		
+		
+		
+		// Initial KPI
  
 	}
 	
