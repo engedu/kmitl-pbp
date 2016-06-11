@@ -35,7 +35,8 @@
   
 	<link rel="stylesheet" href="<c:url value='/css/buckwa.css'/>">
 	<link rel="stylesheet" href="<c:url value='/css/suite.css'/>">
-  	<link rel="stylesheet" href="<c:url value='/stylesheets/foundation.min.css'/>">
+  	<link rel="stylesheet" href="<c:url value='/stylesheets/foundation.css'/>">
+<%--   	<link rel="stylesheet" href="<c:url value='/stylesheets/foundation.min.css'/>"> --%>
 	<link rel="stylesheet" href="<c:url value='/stylesheets/main.css'/>">
 	<link rel="stylesheet" href="<c:url value='/stylesheets/app.css'/>"> 
 	<link rel="stylesheet" href="<c:url value='/kendo/styles/kendo.common.min.css'/>"> 

@@ -29,7 +29,7 @@
  	          
 	          <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
            <a href="#">รายงานคะแนน</a><a href="#" class="flyout-toggle"></a>
-            <ul class="flyout"><!-- Flyout Menu -->
+            <ul class="flyout right"><!-- Flyout Menu -->
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/init.htm">คะแนนประจำปี</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 
                <li class="has-flyout"><a href="<%=request.getContextPath()%>/personReport/workTypeBarChart.htm">ระดับคะแนนแต่ละด้านในภาควิชา</a></li>
@@ -39,7 +39,7 @@
           </li><!-- END Flyout Menu -->    
 	 
           
-            <li class=""><span class="lsf-icon colororange" title="home"></span><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect=">ตารางสอนประจำปี</a></li>
+            <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect=">ตารางสอนประจำปี</a></li>
           
          
          
@@ -47,7 +47,7 @@
 		 <sec:authorize ifAnyGranted="ROLE_HEAD">
 		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
 		           <a href="#">หัวหน้าภาควิชา </a><a href="#" class="flyout-toggle"></a>
-		            <ul class="flyout"><!-- Flyout Menu -->
+		            <ul class="flyout right"><!-- Flyout Menu -->
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm">อนุมัติผลงาน</a></li>
 		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">คำนวณคะแนนให้เป็นปัจจุบัน</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
@@ -61,8 +61,8 @@
  		 <sec:authorize ifAnyGranted="ROLE_DEAN">
 		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
 		           <a href="#">คณบดี </a><a href="#" class="flyout-toggle"></a>
-		            <ul class="flyout"><!-- Flyout Menu -->
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/dean/facultyReport.htm">รายงานคะนแนทั้งคณะ</a></li>
+		            <ul class="flyout right"><!-- Flyout Menu -->
+		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/dean/facultyReport.htm">รายงานคะแนนทั้งคณะ</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/barChart.htm">รายงานระดับคะแนนแต่ละภาควิชา</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/workTypeBarChart.htm">รายงานระดับคะแนนแต่ละภาควิชา แต่ละด้าน</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/workTypeCompareBarChart.htm">รายงานเปรียบเทียบระดับคะแนนแต่ละภาควิชา แต่ละด้าน</a></li>
@@ -73,7 +73,7 @@
 		 <sec:authorize ifAnyGranted="ROLE_PRESIDENT">
 		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
 		           <a href="#">อธิการบดี </a><a href="#" class="flyout-toggle"></a>
-		            <ul class="flyout"><!-- Flyout Menu -->
+		            <ul class="flyout right"><!-- Flyout Menu -->
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/president/instituteReport.htm">รายงานคะแนนทั้งสถาบัน</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/barChart.htm">รายงานระดับคะแนนทั้งสถาบัน</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/workTypeBarChart.htm">รายงานระดับคะแนนทั้งสถาบัน  แต่ละด้าน</a></li>	               	 
@@ -89,7 +89,7 @@
       <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
            <a href="#">สถาบัน & บุคลากร</a><a href="#" class="flyout-toggle"></a>
-            <ul class="flyout"><!-- Flyout Menu -->
+            <ul class="flyout right"><!-- Flyout Menu -->
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/academicYear/init.htm">ปีการศึกษา</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/evaluateRound/init.htm">รอบการประเมิน</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/faculty/init.htm">หน่วยงาน</a></li>
@@ -108,7 +108,7 @@
  
            <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
            <a href="#">ภาระงาน</a><a href="#" class="flyout-toggle"></a>
-            <ul class="flyout"><!-- Flyout Menu -->
+            <ul class="flyout right"><!-- Flyout Menu -->
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/markRank/init.htm">เกณฑ์คะแนน</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/academicUnit/init.htm">หน่วยนับ</a></li>
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/pBPWorkType/init.htm">ประเภทภาระงาน</a></li>
@@ -123,7 +123,7 @@
            <a href="#">นำเข้าข้อมูลและคำนวณ </a><a href="#" class="flyout-toggle"></a>
            
            
-            <ul class="flyout"><!-- Flyout Menu -->
+            <ul class="flyout right"><!-- Flyout Menu -->
            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
             <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initChum.htm">นำเข้าตารางสอน (Webservice) ชุมพร</a></li>
                 <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
