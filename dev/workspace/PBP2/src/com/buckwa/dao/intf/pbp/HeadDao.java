@@ -11,6 +11,8 @@ public interface HeadDao {
 	
 	public AcademicKPIUserMappingWrapper getByHeadAcademicYear( String headUserName ,String academicYear,String status);
 	public Department getDepartmentMark( String headUserName , String academicYear );
+	public Department getDepartmentMarkByDepCode( String facultyCode,String depCod , String academicYear );
+	
 	public AcademicKPIUserMappingWrapper getByUserAcademicYear( String headUserName ,String academicYear,String status,String userName);
 	public Department getDepartmentMarkByUser( String userName , String academicYear );
 	

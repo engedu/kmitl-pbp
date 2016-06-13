@@ -95,6 +95,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		List<Faculty> facultyList  =null;
 		
 		try{
+			
 			facultyList = this.jdbcTemplate.query(sql,	new FacultyMapper() );	
 		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 			ex.printStackTrace();
@@ -108,6 +109,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			
 			for(Faculty facultyTmp:facultyList){
 				String sqlDepartment =" select *  from department where faculty_code ='" +facultyTmp.getCode()+"' and academic_year='"+facultyTmp.getAcademicYear()+"'"; 
+				logger.info(" sqlDepartment:"+sqlDepartment);
 				facultyTmp.setDean (getDeanByFacultyId(facultyTmp.getFacultyId()+"",getByAcademicYear))  ;
 				List<Department> departmentList  = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );
 				for(Department depTmp:departmentList){
@@ -490,7 +492,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	     
 	    String sql =" select * from person_pbp a 	     left join faculty f on(a.dean_faculty=f.name) 	     where  a.is_dean='Y'  and f.faculty_id="+facultyId+" and a.academic_year='"+academicYear+"'";
 	    
-	    logger.info(" getDeanByFacultyId sql:"+sql);
+	  //  logger.info(" getDeanByFacultyId sql:"+sql);
 	    
 	    try{
 	    	
@@ -503,7 +505,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	    	ex.printStackTrace();
 	    }
 		 
-	    logger.info(" Found Dean :"+BeanUtils.getBeanString(dean));
+	   // logger.info(" Found Dean :"+BeanUtils.getBeanString(dean));
 		return dean;
 	}
 	
@@ -517,7 +519,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		 AcademicPerson head =getHeadByDepartmentDesc( academicYear,department.getName());
 	     
  
-	    logger.info(" Found Head :"+BeanUtils.getBeanString(head));
+	   // logger.info(" Found Head :"+BeanUtils.getBeanString(head));
 		return head;
 	}
 	
@@ -529,7 +531,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	     AcademicPerson dean = null;
 	     
 	    String sql =" select * from person_pbp a 	          where  a.is_head='Y'  and a.head_department='"+departmentDesc+"' and a.academic_year='"+academicYear+"'";
-	    logger.info(" getHeadByDepartmentDesc sql:"+sql);
+	    //logger.info(" getHeadByDepartmentDesc sql:"+sql);
 	    try{
 	    	
 	    	List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sql,	new AcademicPersonMapper() );
@@ -541,7 +543,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	    	ex.printStackTrace();
 	    }
 		 
-	    logger.info(" Found Head :"+BeanUtils.getBeanString(dean));
+	   // logger.info(" Found Head :"+BeanUtils.getBeanString(dean));
 		return dean;
 	}
 	
@@ -2286,7 +2288,7 @@ public class FacultyDaoImpl implements FacultyDao {
 					 
 			
 			
-			//logger.info(" # sqltmp Check Dup : "+sqltmp );	
+			logger.info(" # sqltmp Check Dup : "+sqltmp );	
 			Long found = this.jdbcTemplate.queryForLong(sqltmp);
 			//logger.info(" ##### found lond:"+found);
 			if(found!=null&&found.intValue()>0){

@@ -99,11 +99,21 @@ public class AcademicPerson extends BaseDomain  {
 	
 	private String employeeTypeNo;
 	
+	private BigDecimal totalMark;
+	
 	 
+	public BigDecimal getTotalMark() {
+		return totalMark;
+	}
+
+	public void setTotalMark(BigDecimal totalMark) {
+		this.totalMark = totalMark;
+	}
+
 	public String getEmployeeTypeNo() {
 		String evalType = "1";
 		
-		if(employeeType.equalsIgnoreCase("����Ҫ���")){
+		if(employeeType.equalsIgnoreCase("ข้าราชการ")){
 			
 		}else{
 			evalType ="2";

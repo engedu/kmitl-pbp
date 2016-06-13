@@ -312,21 +312,19 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	}
 	
 	@Override
-	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeType,String facultyCode) {
-		logger.info("  ########### Start Call  userName :"+userName+" academicYear:"+academicYear+" round:"+round+" employeeType:"+employeeType+" facultyCode:"+facultyCode);
+	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeTypeNo,String facultyCode) {
+		logger.info("  ########### Start Call  userName :"+userName+" academicYear:"+academicYear+" round:"+round+" employeeTypeNO:"+employeeTypeNo+" facultyCode:"+facultyCode);
 		
 		
 		// Get Start ,End Date 
 		
 		String evalType = "1";
 		
-		if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
-		//if(employeeType.equalsIgnoreCase("2")){
-			
-	 
-		}else{
+		//if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
+		if(employeeTypeNo.equalsIgnoreCase("2")){
 			evalType ="2";
-		}
+	 
+		} 
 		
 		// ######## Start academic_year, academic_evaluate_round
 		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+evalType+"'"   ;  
@@ -341,7 +339,8 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		 Timestamp startTimeStamp = null;
 		 Timestamp endTimeStamp = null;
 		 
-		 if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
+		 //if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
+			if(employeeTypeNo.equalsIgnoreCase("1")){
 			 if("1".equalsIgnoreCase(round)){
 				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
 				 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
@@ -382,7 +381,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		pBPWorkTypeWrapper.setAcademicYear(academicYear);
 		pBPWorkTypeWrapper.setUserName(userName);
 		pBPWorkTypeWrapper.setRound(round);
-		pBPWorkTypeWrapper.setEmployeeType(employeeType);
+		pBPWorkTypeWrapper.setEmployeeType(employeeTypeNo);
 		pBPWorkTypeWrapper.setFacultyCode(facultyCode);
 		
 		pBPWorkTypeWrapper.setStartRoundDate(new Date(startTimeStamp.getTime()));
@@ -659,7 +658,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			} 
 			
 		//	BigDecimal totalInPercentWorkType = totalInWorkType.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
-		//	logger.info("totalInPercentWorkType :"+totalInWorkType + "  compare  :"+limitBase + "  ---->"+totalInPercentWorkType+"  % " );
+			logger.info(" getMarkDepartmetn totalInPercentWorkType :"+totalInWorkType );
 			tmp.setTotalInWorkType(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
 			tmp.setTotalInWorkType_E(totalInWorkType_E.setScale(2,RoundingMode.HALF_UP));
 			

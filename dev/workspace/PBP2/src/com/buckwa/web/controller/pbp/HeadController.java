@@ -506,6 +506,8 @@ public class HeadController {
 			request.put("academicYear",academicYear);
 			request.put("status",""); 
 			BuckWaResponse response = headService.getDepartmentMark(request);
+			//BuckWaResponse response = headService.getDepartmentMarkByDepCode(request);
+			
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				Department department = (Department)response.getResObj("department"); 
 				department.setAcademicYear(academicYear);
@@ -561,8 +563,9 @@ public class HeadController {
 					  			
 						 
 									//totalMark = totalMark.add(totalMarkTmp.getTotalInPercentCompareBaseWorkType());
-									totalMark = totalMark.add(totalMarkTmp.getTotalInPercentWorkType());
-								 
+									totalMark = totalMark.add(totalMarkTmp.getTotalInWorkType());
+									typeTmp.setTotalInWorkType(totalMark);
+									 logger.info(" Controller TotalInWorkType:"+totalMarkTmp.getTotalInWorkType());
 					    	  }
 					    	  
 					      }
@@ -573,15 +576,17 @@ public class HeadController {
 				     }
 				     
 				     
+			 
+				     
 				     if(totalPerson==0){
 				    	 totalPerson=1;
 				     }
-				     logger.info(" totalmark:"+totalMark+"  totalperson:"+totalPerson);
-				     BigDecimal totalInPercentCompareBaseWorkTypeAVG = totalMark.divide(new BigDecimal(totalPerson) ,2, BigDecimal.ROUND_HALF_UP);
+				     logger.info(" totalmark Faculty:"+totalMark+"  totalperson:"+totalPerson);
+				   //  BigDecimal totalInPercentCompareBaseWorkTypeAVG = totalMark.divide(new BigDecimal(totalPerson) ,2, BigDecimal.ROUND_HALF_UP);
  
 				     typeTmp.setTotalAllWorkType(totalMark); 
-				     typeTmp.setTotalInPercentCompareBaseWorkType(totalMark);
-				     typeTmp.setTotalInPercentCompareBaseWorkTypeAVG(totalInPercentCompareBaseWorkTypeAVG);
+				    // typeTmp.setTotalInPercentCompareBaseWorkType(totalMark);
+				    // typeTmp.setTotalInPercentCompareBaseWorkTypeAVG(totalInPercentCompareBaseWorkTypeAVG);
 				 
 					}
 					

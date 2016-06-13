@@ -320,12 +320,13 @@
                     type: "radarLine"
                 },
                 series: [{
-                    name: "คะแนนรวมอนุมัติ",
-                    field: "axisValue"
-                },
-                {
                     name: "คะแนนรวมรออนุมัติ",
                     field: "axisValue2"
+                },
+                {
+                
+                        name: "คะแนนรวมอนุมัติ",
+                        field: "axisValue"
                 }                
                 ],
                 categoryAxis: {

@@ -7,6 +7,8 @@ import com.buckwa.domain.common.BuckWaResponse;
 public interface HeadService {
 	public BuckWaResponse getByHeadAcademicYear(BuckWaRequest request);
 	public BuckWaResponse getDepartmentMark(BuckWaRequest request);
+	public BuckWaResponse getDepartmentMarkByDepCode(BuckWaRequest request);
+	
 	public BuckWaResponse getByUserAcademicYear(BuckWaRequest request);
 	public BuckWaResponse getDepartmentMarkByUser(BuckWaRequest request);
 	

@@ -19,11 +19,11 @@
 <form:form modelAttribute="workTypeCompareReport" action="workTypeCompareBarChart.htm" method="POST" name="mainForm">
 <table> 
 <tr>
-	<td><form:checkbox path="type1" /> ด้านวิชาการ</td>
-	<td><form:checkbox path="type2" /> งานพัฒนาวิชาการ</td> 
-	<td><form:checkbox path="type3" /> งานวิจัย หรือ สร้างสรรค์</td>
-	<td><form:checkbox path="type4" /> งานบริการวิชาการ</td>
-	<td><form:checkbox path="type5" /> งานทำนุบำรุงศิลป วัฒนธรรมและสร้างชื่อเสียงให้กับสถาบัน</td>
+	<td><form:checkbox path="type1" /> 1:ด้านวิชาการ</td>
+	<td><form:checkbox path="type2" /> 2:งานพัฒนาวิชาการ</td> 
+	<td><form:checkbox path="type3" /> 3:งานวิจัย หรือ สร้างสรรค์</td>
+	<td><form:checkbox path="type4" /> 4:งานบริการวิชาการ</td>
+	<td><form:checkbox path="type5" /> 5:งานทำนุบำรุงศิลป วัฒนธรรมและสร้างชื่อเสียงให้กับสถาบัน</td>
 </tr>
 <tr>
 	<td colspan="5"><input class="btn btn-primary" value="เปรียบเทียบ" type="submit"></td>

@@ -190,7 +190,7 @@ public class Person extends BaseDomain  {
 	public String getEmployeeTypeNo() {
 		String evalType = "1";
 		
-		if(employeeType.equalsIgnoreCase("����Ҫ���")){
+		if(employeeType.equalsIgnoreCase("ข้าราชการ")){
 			
 		}else{
 			evalType ="2";

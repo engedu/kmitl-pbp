@@ -144,7 +144,7 @@ public class DeanReportController {
 								rptObj = new WorkTypeCompareReport();
 								rptObj.setOrderNo(1);
 								rptObj.setCategoryName(workType.getDepartmentName());
-								rptObj.setGroupName(workType.getTypeName1());
+								rptObj.setGroupName("1:"+workType.getTypeName1());
 								rptObj.setAxisValue(workType.getMark1());
 								returnList.add(rptObj);
 							}
@@ -152,7 +152,7 @@ public class DeanReportController {
 								rptObj = new WorkTypeCompareReport();
 								rptObj.setOrderNo(2);
 								rptObj.setCategoryName(workType.getDepartmentName());
-								rptObj.setGroupName(workType.getTypeName2());
+								rptObj.setGroupName("2:"+workType.getTypeName2());
 								rptObj.setAxisValue(workType.getMark2());
 								returnList.add(rptObj);
 							}
@@ -160,7 +160,7 @@ public class DeanReportController {
 								rptObj = new WorkTypeCompareReport();
 								rptObj.setOrderNo(3);
 								rptObj.setCategoryName(workType.getDepartmentName());
-								rptObj.setGroupName(workType.getTypeName3());
+								rptObj.setGroupName("3:"+workType.getTypeName3());
 								rptObj.setAxisValue(workType.getMark3());
 								returnList.add(rptObj);
 							}
@@ -168,7 +168,7 @@ public class DeanReportController {
 								rptObj = new WorkTypeCompareReport();
 								rptObj.setOrderNo(4);
 								rptObj.setCategoryName(workType.getDepartmentName());
-								rptObj.setGroupName(workType.getTypeName4());
+								rptObj.setGroupName("4:"+workType.getTypeName4());
 								rptObj.setAxisValue(workType.getMark4());
 								returnList.add(rptObj);
 							}
@@ -176,7 +176,7 @@ public class DeanReportController {
 								rptObj = new WorkTypeCompareReport();
 								rptObj.setOrderNo(5);
 								rptObj.setCategoryName(workType.getDepartmentName());
-								rptObj.setGroupName(workType.getTypeName5());
+								rptObj.setGroupName("5:"+workType.getTypeName5());
 								rptObj.setAxisValue(workType.getMark5());
 								returnList.add(rptObj);
 							}

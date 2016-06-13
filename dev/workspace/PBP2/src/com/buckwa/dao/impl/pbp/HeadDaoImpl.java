@@ -619,18 +619,94 @@ public class HeadDaoImpl implements HeadDao {
 				 
 				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType,facultyCode)); 
 				totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
+				
+				personTmp.setTotalMark(totalMark);
 			}
 			
 		 
 			
 			department.setAcademicPersonList(academicPersonList); 
 		}
-		
-		
-		//Recal Mean
-		
+	 
+		return department;
+	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public Department getDepartmentMarkByDepCode( String facCode,String depCode ,String academicYear ) {	
 		 
-		
+		String sqlDepartment = " select  * from department where faculty_code='"+facCode+"' and code ='"+depCode+"'" ;
+		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.department_desc) 	where p.email='"+headUserName+"'";
+		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.head_department) 	where p.email='"+headUserName+"' and p.academic_year='"+academicYear+"'  and d.academic_year='"+academicYear+"'";
+
+		logger.info(" getDepartmentMarkByDepCode sql:"+sqlDepartment);
+		Department department=null;
+		try{
+			department = this.jdbcTemplate.queryForObject(sqlDepartment,	new DepartmentMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+			logger.info(" sqlDepartment:"+sqlDepartment);
+		}
+		if(department!=null){ 
+			// Get User belong to department 
+			String sqlacademicPerson = "  select * from person_pbp where department_desc ='"+department.getName()+"'   and  academic_year='"+academicYear+"'";
+			logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
+			List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlacademicPerson,	new AcademicPersonMapper() );  
+			
+			
+			if(academicPersonList!=null){
+				
+				logger.info("   ### Found Total Person belong to Department :"+academicPersonList.size());
+			}
+			
+			BigDecimal totalMark = new BigDecimal(0.00);
+			int personloop =0;
+			for(AcademicPerson personTmp:academicPersonList){ 
+				// Get KPI User Mapping  
+				personloop++;
+				logger.info("   ### Start Person Loop "+personloop);
+				
+				String employeeType = personTmp.getEmployeeTypeNo();
+				
+				String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
+				//logger.info(" sqlRound:"+sqlRound);
+				 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+				
+				// logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+				
+	 
+				 String round ="1";
+				 if(employeeType.equalsIgnoreCase("1")){
+					 
+					 long round1EndLong = academicYearEvaluateRound.getRound1EndDate().getTime();
+					 
+					 if(round1EndLong-System.currentTimeMillis()>0){
+						// logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 1");
+				 				 
+					 }else{
+						// logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 2");
+						 round ="2";		 
+						 
+					 } 
+					 
+				 } 		
+				 
+				 
+			    String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+				 
+				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYear(academicYear, personTmp.getEmail(),round,employeeType,facultyCode)); 
+				totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
+			}
+			
+		 
+			
+			department.setAcademicPersonList(academicPersonList); 
+		}
+	 
 		return department;
 	}
 	
@@ -753,34 +829,42 @@ public class HeadDaoImpl implements HeadDao {
 							depReport1.setMark1(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode1(tmp.getCode());
 							depReport1.setTypeName1(tmp.getShortDesc());
-							
+							markTotal = markTotal.add(tmp.getTotalInWorkType());
 						}else if(loop1==2){
 							//depReport1.setMark2(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
 							depReport1.setMark2(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode2(tmp.getCode());
 							depReport1.setTypeName2(tmp.getShortDesc());
+							markTotal = markTotal.add(tmp.getTotalInWorkType());
 						}else if(loop1==3){
 							//depReport1.setMark3(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
 							depReport1.setMark3(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode3(tmp.getCode());
 							depReport1.setTypeName3(tmp.getShortDesc());
+							markTotal = markTotal.add(tmp.getTotalInWorkType());
 						}else if(loop1==4){
 							//depReport1.setMark4(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
 							depReport1.setMark4(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode4(tmp.getCode());
 							depReport1.setTypeName4(tmp.getShortDesc());
+							markTotal = markTotal.add(tmp.getTotalInWorkType());
 						} else if(loop1==5){
 							//depReport1.setMark5(tmp.getTotalInPercentCompareBaseWorkTypeAVG()+"");
 							depReport1.setMark5(tmp.getTotalInWorkType()+"");
 							depReport1.setTypeCode5(tmp.getCode());
 							depReport1.setTypeName5(tmp.getShortDesc());
+							markTotal = markTotal.add(tmp.getTotalInWorkType());
 						}
 						
 						//markTotal = markTotal.add(tmp.getTotalInPercentCompareBaseWorkTypeAVG());
-						markTotal = markTotal.add(tmp.getTotalInWorkType());
+						//markTotal = markTotal.add(tmp.getTotalInWorkType());
+						logger.info(" Loop:"+loop1+" Mark1:"+depReport1.getMark1()+" Mark2:"+depReport1.getMark2()+" Mark3:"+depReport1.getMark3()+" Mark4:"+depReport1.getMark4()+" Mark5:"+depReport1.getMark5()+" MarkTotal:"+depReport1.getMarkTotal());
+
 						loop1++;
 					}
 			 
+					logger.info(" Final report_department Mark1:"+depReport1.getMark1()+" Mark2:"+depReport1.getMark2()+" Mark3:"+depReport1.getMark3()+" Mark4:"+depReport1.getMark4()+" Mark5:"+depReport1.getMark5()+" MarkTotal:"+depReport1.getMarkTotal());
+
 					depReport1.setMarkTotal(markTotal+"");
 					
 					
@@ -876,6 +960,9 @@ public class HeadDaoImpl implements HeadDao {
 				
 				int loop =1;
 				BigDecimal totalMarkBig = new BigDecimal(0.00);
+				if(pbpWorkTypeList!=null){
+					
+				
 				for(final PBPWorkType tmp:pbpWorkTypeList){
 						 
 						String shortDesc ="";
@@ -937,10 +1024,11 @@ public class HeadDaoImpl implements HeadDao {
 						totalMarkBig = totalMarkBig.add(tmp.getTotalInWorkType());
 					}
 					
-					
+					logger.info(" Loop:"+loop+" Mark1:"+depReport2.getMark1()+" Mark2:"+depReport2.getMark2()+" Mark3:"+depReport2.getMark3()+" Mark4:"+depReport2.getMark4()+" Mark5:"+depReport2.getMark5()+" MarkTotal:"+depReport2.getMarkTotal());
 					loop++;
 				}
 				 
+				}
 				depReport2.setMarkTotal(totalMarkBig+"");
 				
 				jdbcTemplate.update(new PreparedStatementCreator() {  

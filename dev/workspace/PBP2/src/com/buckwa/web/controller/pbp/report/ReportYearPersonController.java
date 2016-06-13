@@ -239,7 +239,7 @@ public class ReportYearPersonController{
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			
 			
-			logger.info("Output File Name :" + fileName);
+			logger.info("Output File Name :" + URLEncoder.encode(fileName, "UTF-8"));
 //			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
 				

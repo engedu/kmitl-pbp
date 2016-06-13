@@ -49,8 +49,8 @@
         	        },
         	        valueAxis: {
         	        	min: 0,
-        	        	max: 12000,
-        	        	majorUnit: 1000
+        	        	max: 100000,
+        	        	majorUnit: 5000
         	        },
                     tooltip: {
                         visible: true,
