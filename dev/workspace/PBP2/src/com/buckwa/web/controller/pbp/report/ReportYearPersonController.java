@@ -12,21 +12,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +40,14 @@ import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.PAMConstants;
 
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.bitwalker.useragentutils.UserAgent;
+
 @Controller
 @RequestMapping("/report")
 @SessionAttributes(types = MaternityLeave.class)
@@ -61,10 +62,17 @@ public class ReportYearPersonController{
 	private PBPWorkTypeService pbpWorkTypeService;
 	
 	@RequestMapping(value="/printReportYear.htm", method = RequestMethod.GET)
-	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse,@RequestParam("round") String round) {
+	public void printReportYear(HttpServletRequest httpRequest, HttpServletResponse httpResponse,@RequestParam("round") String round,@RequestHeader("User-Agent") String userAgent) {
 //		Person person = null;
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
+			System.out.println(" #### User Agent :"+userAgent);
+			UserAgent userAgentObj = UserAgent.parseUserAgentString(httpRequest.getHeader("User-Agent"));
+			
+			String browserType = userAgentObj.getBrowser().getName();
+			System.out.println("browserType:"+browserType);
+			//System.out.println("browserType:"+userAgentObj.getBrowser().getName() + " " + userAgentObj.getBrowserVersion());
+			
 			
 			httpResponse.setContentType("application/force-download");		
 			BuckWaRequest request = new BuckWaRequest();
@@ -137,13 +145,13 @@ public class ReportYearPersonController{
 				
 				if(null!= startRoundDate){
 					reportFrom = new SimpleDateFormat("d").format(startRoundDate)
-						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(startRoundDate)
+						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(startRoundDate)+" "
 						+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(startRoundDate);
 				}
 				
 				if(null!= endRoundDate){
 					reportTo = new SimpleDateFormat("d").format(endRoundDate)
-						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(endRoundDate)
+						+ " "+new SimpleDateFormat("MMMMM", new Locale("th", "TH")).format(endRoundDate)+" "
 						+ new SimpleDateFormat("yyyy", new Locale("th", "TH")).format(endRoundDate);
 				}
 				
@@ -167,7 +175,14 @@ public class ReportYearPersonController{
 			params.put("unit", person.getFacultyDesc());
 			params.put("degree", person.getMaxEducation());
 			params.put("age",  age);
-			params.put("employeeType", person.getEmployeeType());
+			
+			String empType ="พนักงาน";
+			if("ข้าราชการ".equals(person.getEmployeeType())){
+				empType ="ข้าราชการ";
+			}
+			params.put("employeeType", empType);
+			
+			logger.info(" employeeTypeซ" + empType);
 
 			if(null!=person.getWorkingDate()){
 				String startDayStr = new SimpleDateFormat("d", new Locale("th", "TH")).format(person.getWorkingDate());
@@ -227,19 +242,22 @@ public class ReportYearPersonController{
 			
 			params.put("subreportParameter", reportDetail);
 			
-			String fileName = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round+".pdf";
+			String fileNamex = person.getThaiName()+"_"+person.getThaiSurname()+"_"+year+"_"+round+".pdf";
+			String fileName =URLEncoder.encode(fileNamex,"UTF-8");
 			
-		//	fileName = URLEncoder.encode(fileName);
-					
-			httpResponse.setCharacterEncoding("utf-8");
-			//httpResponse.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
-			
-			httpResponse.setHeader("Content-Disposition","attachment; filename="+URLEncoder.encode(fileName, "UTF-8"));
-			
+			httpResponse.setContentType("application/pdf; charset=UTF-8");
+			httpResponse.setCharacterEncoding("UTF-8");
+	        if(browserType.contains("IE")||browserType.contains("Chrome"))
+	        	httpResponse.setHeader("Content-Disposition","attachment; filename="+fileName);
+	        if(browserType.contains("Firefox")){
+	        	httpResponse.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+fileName);
+	        }
+ 
+	 
 			JasperExportManager.exportReportToPdfStream(jasperPrint,  httpResponse.getOutputStream()); 
 			
 			
-			logger.info("Output File Name :" + URLEncoder.encode(fileName, "UTF-8"));
+			logger.info("Output File Name :" + fileName);
 //			ServletOutputStream outputStream = httpResponse.getOutputStream();
 			//httpResponse.setHeader("Content-Disposition", "attachment; filename="+user.getUsername()+"_"+year+"_"+round+".pdf");
 				

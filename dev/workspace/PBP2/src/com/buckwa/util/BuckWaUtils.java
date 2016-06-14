@@ -508,6 +508,15 @@ public class BuckWaUtils {
 		return thaiName;
 	}
 	
+	public static String getBrowserNameFromUserAgent(String userAgent){
+		
+		String returnType="";
+		
+		// #### User Agent :Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36
+		//
+		return returnType;
+	}
+	
 	public static void main(String arg[]) {
 
 		logger.info(" encrypt of chawean is :" + encrypt("password"));
