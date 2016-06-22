@@ -14,6 +14,54 @@
 <div class="entry">	
 
 <section class="twelve columns">
+
+
+	<div class="row">
+	
+		 	<table class="pbp-table">
+		 		<thead>
+		 		<tr><th colspan="4">
+            		<div class="pbp-header"> รอบการประเมิน  ประจำปี  ${academicYearWrapper.academicYear.name}  </div>
+             	</th></tr>
+             	</thead>
+			
+				<tbody>
+				
+				 
+				
+				<c:forEach items="${academicYearWrapper.academicYearEvaluateRoundList}" var="domain" varStatus="status">
+                     <tr style="border-top: 1px solid #e1e1e1;">
+					<td class="tdFirst" style="text-align: left;">${domain.evaluateTypeDesc}</td>
+					
+					 <c:if test="${domain.evaluateType=='1'}"> 
+					<td class="tdFirst"   style="text-align: left;">รอบ 1  &nbsp; 
+						${domain.round1StartDateShortThaiStr}    &nbsp; -  &nbsp; ${domain.round1EndDateShortThaiStr} 
+					</td>					 
+					<td class="tdFirst"   style="text-align: left;">รอบ 2  &nbsp; 
+						${domain.round2StartDateShortThaiStr}   &nbsp; -  &nbsp; ${domain.round2EndDateShortThaiStr}   
+					</td>					 
+					 </c:if>
+					 
+					 <c:if test="${domain.evaluateType!='1'}"> 
+					 <td class="tdFirst" colspan="2"  style="text-align: left;">รอบ 1  &nbsp; 
+					 	${domain.round1StartDateShortThaiStr}   &nbsp; -  &nbsp; ${domain.round1EndDateShortThaiStr} 
+					 </td>
+					 </c:if> 
+		 
+					 
+					</tr>
+				</c:forEach>	 
+				 
+ 		
+					 
+					
+				</tbody>				
+ 
+			</table>
+	
+	</div>
+
+
  
 	<div class="">
  
@@ -89,18 +137,20 @@
 	  	
 	  </tr>
 		</tbody>
-	</table>	
-		<table class="pbp-table"  ">
-		<thead>
- 
-			<tr>
-				<th class="thFirst"><div class="pbp-header">
-				<a rel="notLoading" class="colorwhite" href="<%=request.getContextPath()%>/anonymous/listByWorktypeFaculty.htm?academicYear=<c:out value="${anonymousWrapper.academicYear}"/>">
-				 View All  </a>  </div></th> 
-				 
-			</tr> 
-		</thead>	
 	</table>
+	
+		
+<!-- 		<table class="pbp-table"  "> -->
+<!-- 		<thead> -->
+ 
+<!-- 			<tr> -->
+<!-- 				<th class="thFirst"><div class="pbp-header"> -->
+<%-- 				<a rel="notLoading" class="colorwhite" href="<%=request.getContextPath()%>/anonymous/listByWorktypeFaculty.htm?academicYear=<c:out value="${anonymousWrapper.academicYear}"/>"> --%>
+<!-- 				 View All  </a>  </div></th>  -->
+				 
+<!-- 			</tr>  -->
+<!-- 		</thead>	 -->
+<!-- 	</table> -->
 	
 	<br>
 <!-- 	</td> -->

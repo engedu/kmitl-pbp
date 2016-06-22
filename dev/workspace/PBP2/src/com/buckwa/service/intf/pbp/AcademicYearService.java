@@ -15,6 +15,8 @@ public interface AcademicYearService {
 	
 	public BuckWaResponse getEvaluateRoundByYear(BuckWaRequest request);
 	public BuckWaResponse editDateEvaluateRound(BuckWaRequest request);
+	
+	public BuckWaResponse getCurrentEvalulateRoundStr(BuckWaRequest request);
 
 
 	

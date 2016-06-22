@@ -24,6 +24,8 @@ public class BuckWaUser extends User {
 	
 	private String firstLastName;
 	
+	private String currentRoundStr;
+	
 	@SuppressWarnings("deprecation")
 	public BuckWaUser(
 			String username, 
@@ -92,6 +94,14 @@ public class BuckWaUser extends User {
 
 	public void setPersonProfile(Person personProfile) {
 		this.personProfile = personProfile;
+	}
+
+	public String getCurrentRoundStr() {
+		return currentRoundStr;
+	}
+
+	public void setCurrentRoundStr(String currentRoundStr) {
+		this.currentRoundStr = currentRoundStr;
 	}
 
 	

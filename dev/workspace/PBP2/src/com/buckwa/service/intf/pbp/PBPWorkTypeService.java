@@ -28,6 +28,9 @@ public interface PBPWorkTypeService {
 	
 	public BuckWaResponse getRadarPlotPersonMark(BuckWaRequest request);
 	
+	public BuckWaResponse getRadarPlotPersonMarkByYear(BuckWaRequest request);
+	
+	
 	public BuckWaResponse getRadarPlotPersonMarkE(BuckWaRequest request);
 	 
 }

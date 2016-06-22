@@ -88,6 +88,27 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 	 
 		return response;
 	}
+	
+	@Override	
+	public BuckWaResponse getRadarPlotPersonMarkByYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String username = (String)request.get("username");
+			String academicYear = (String)request.get("academicYear");
+		 
+			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMarkByYear(username,academicYear);
+		 
+			 response.addResponse("radarPlotReportList",radarPlotReportList);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
 	@Override	
 	public BuckWaResponse getRadarPlotPersonMarkE(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();

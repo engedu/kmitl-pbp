@@ -31,4 +31,6 @@ public interface AcademicYearDao {
 	
 	public boolean  checkAlreadyAdjust();
 	
+	public String getCurrentEvalulateRoundStr( String userName,String academicYear) ;
+	
 }

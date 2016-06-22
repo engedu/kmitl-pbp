@@ -93,8 +93,8 @@
         	        },
         	        valueAxis: {
         	            min: 0,
-        	            max: 1000,
-        	            majorUnit: 100
+        	            max: 1200,
+        	            majorUnit: 200
         	        } 
         	        ,valueAxis:  {
         	            plotBands: [
@@ -153,8 +153,8 @@
        	        },
 				valueAxis: {
 					min: 0,
-					max: 1000,
-					majorUnit: 100
+					max: 1200,
+					majorUnit: 200
 				}
     	        ,valueAxis:  {
     	            plotBands: [
@@ -214,8 +214,8 @@
           	        },
 					valueAxis: {
 						min: 0,
-						max: 1000,
-						majorUnit: 100
+						max: 1200,
+						majorUnit: 200
 					}
         	        ,valueAxis:  {
         	            plotBands: [
@@ -274,8 +274,8 @@
           	        },
 					valueAxis: {
 						min: 0,
-						max: 1000,
-						majorUnit: 100
+						max: 1200,
+						majorUnit: 200
 					}
         	        ,valueAxis:  {
         	            plotBands: [
@@ -336,8 +336,8 @@
           	        },
           	      	valueAxis: {
 	          	    	min: 0,
-	          	    	max: 1000,
-	          	    	majorUnit: 100
+	          	    	max: 1200,
+	          	    	majorUnit: 200
           	    	}
         	        ,valueAxis:  {
         	            plotBands: [

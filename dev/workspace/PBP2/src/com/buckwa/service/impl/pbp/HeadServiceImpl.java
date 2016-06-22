@@ -118,6 +118,23 @@ public class HeadServiceImpl implements HeadService {
 		return response;
 	}
 	
+	@Override	
+	public BuckWaResponse getDepartmentMarkAllYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		 
+		try{				  
+			String academicYear = (String)request.get("academicYear");
+			String headUserName = (String)request.get("headUserName");			
+			Department department= ( Department)headDao.getDepartmentMarkAllYear(headUserName, academicYear);		 
+			 response.addResponse("department",department); 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
 	
 	
 	

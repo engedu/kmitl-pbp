@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,9 @@ import com.buckwa.service.intf.util.PathUtil;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
+import com.buckwa.web.util.AcademicYearUtil;
+
+import nl.bitwalker.useragentutils.UserAgent;
 
 @Controller
 
@@ -59,6 +63,9 @@ public class KMILTCommonController {
 	
 	@Autowired
 	private AcademicKPIService academicKPIService;	
+	
+	@Autowired
+	private AcademicYearUtil academicYearUtil;
 	
 	@RequestMapping(value = "/anonymous.htm")
 	public ModelAndView anonymouse() {
@@ -97,6 +104,16 @@ public class KMILTCommonController {
 				markRankWrapper.setAcademicYear(academicYear);
 				anonymousWrapper.setMarkRankWrapper(markRankWrapper);
 			}	
+			
+			 response = academicYearService.getCurrentAcademicYear(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				AcademicYearWrapper academicYearWrapper = (AcademicYearWrapper)response.getResObj("academicYearWrapper");
+				mav.addObject("academicYearWrapper", academicYearWrapper);	
+				academicYearWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
+			}
+			
+			
+			mav.addObject("academicYearList", academicYearUtil.getAcademicYearList()); 
  
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -105,6 +122,20 @@ public class KMILTCommonController {
 		mav.setViewName("anonymous");
 		
 		logger.info(" # anonymous success ");
+		return mav;
+ 
+	}
+	
+	
+	@RequestMapping(value = "/userManual.htm")
+	public ModelAndView userManual() {
+		logger.info(" # userManual 0 ");
+		ModelAndView mav = new ModelAndView();
+		String academicYear =schoolUtil.getCurrentAcademicYear();
+		mav.addObject("academicYearStr",academicYear);
+		mav.setViewName("userManual");
+		
+	 
 		return mav;
  
 	}
@@ -202,8 +233,6 @@ public class KMILTCommonController {
 				academicKPIWrapper.setAcademicYear(academicYear); 
 				mav.addObject("academicKPIWrapper", academicKPIWrapper);	
 			}	 
-			
-			
 
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -213,7 +242,7 @@ public class KMILTCommonController {
 	}	
 	
 	@RequestMapping(value="downloadDoc.htm")
-	public ModelAndView download(@RequestParam("fileCode") String fileCode ,HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+	public ModelAndView download(@RequestParam("fileCode") String fileCode ,HttpServletRequest httpRequest, HttpServletResponse httpResponse,@RequestHeader("User-Agent") String userAgent) {
 		
 		logger.info("#####  Start  Download   << "+ fileCode +" >> #### ");
 		
@@ -223,39 +252,65 @@ public class KMILTCommonController {
 		
 		try {
 			
-			 
+			UserAgent userAgentObj = UserAgent.parseUserAgentString(httpRequest.getHeader("User-Agent"));
+			
+			String browserType = userAgentObj.getBrowser().getName();
+			System.out.println("browserType:"+browserType);
 			
 			String filePath =pathUtil.getDocPath();
 			
 			String fullPath = "";
 			String  fileName ="";
 			
-			if("manual".equalsIgnoreCase(fileCode)){
-				fileName ="PBP User Manual_new.pdf";
+			if("manual1".equalsIgnoreCase(fileCode)){
+				fileName ="คู่มืออบรมโปรแกรมระบบประเมินคุณภาพวิชากการ.pdf";
 				fullPath =  filePath+fileName;
+			}else if("manual2".equalsIgnoreCase(fileCode)){
+				fileName ="ADMIN คณะ.pdf";
+				fullPath =  filePath+fileName;
+			}else if("manual3".equalsIgnoreCase(fileCode)){
+				fileName ="คู่มืออบรมโปรแกรมระบบประเมินคุณภาพวิชาการสำหรับประธานสาขา.pdf";
+				fullPath =  filePath+fileName;
+			}else if("manual4".equalsIgnoreCase(fileCode)){
+				fileName ="คู่มืออบรมโปรแกรมระบบประเมินคุณภาพวิชาการสำหรับผู้บริหาร.pdf";
+				fullPath =  filePath+fileName;		 
+					
 			}else if("2556".equalsIgnoreCase(fileCode)){
 				fileName ="2556.pdf";
 				fullPath =  filePath+fileName;
 		 
-		}else if("59".equalsIgnoreCase(fileCode)){
-			fileName ="Person Report.doc";
-			fullPath =  filePath+fileName;
-		}			 
+			}else if("59".equalsIgnoreCase(fileCode)){
+				fileName ="Person Report.doc";
+				fullPath =  filePath+fileName;
+			}		
+			
+			
 			logger.info("#####fullPath :"+fullPath);
 			
 			InputStream inputStream = new FileInputStream(fullPath);
 	 
 			
 			// Check For IE OR NOT for Encoder fileName !
-			String user_agent = httpRequest.getHeader("user-agent");
-			boolean isInternetExplorer = (user_agent.indexOf(BuckWaConstants.BROWSER_MSIE) > -1);
-			if (isInternetExplorer) {
-				 
-				httpResponse.setHeader("Content-disposition", "attachment; filename=\"" + URLEncoder.encode(fileName, "utf-8") + "\"");
-			} else {
-				 
-				httpResponse.setHeader("Content-disposition", "attachment; filename=\"" + MimeUtility.encodeWord(fileName) + "\"");
-			}
+//			String user_agent = httpRequest.getHeader("user-agent");
+//			boolean isInternetExplorer = (user_agent.indexOf(BuckWaConstants.BROWSER_MSIE) > -1);
+//			if (isInternetExplorer) {				 
+//				httpResponse.setHeader("Content-disposition", "attachment; filename=\"" + URLEncoder.encode(fileName, "utf-8") + "\"");
+//			} else {				 
+//				httpResponse.setHeader("Content-disposition", "attachment; filename=\"" + MimeUtility.encodeWord(fileName) + "\"");
+//			}
+//			
+			
+			 
+			String fileNamefinal =URLEncoder.encode(fileName,"UTF-8");
+			
+			httpResponse.setContentType("application/pdf; charset=UTF-8");
+			httpResponse.setCharacterEncoding("UTF-8");
+	        if(browserType.contains("IE")||browserType.contains("Chrome"))
+	        	httpResponse.setHeader("Content-Disposition","attachment; filename="+fileNamefinal);
+	        if(browserType.contains("Firefox")){
+	        	httpResponse.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+fileNamefinal);
+	        }
+ 
 			
 			FileCopyUtils.copy( inputStream, httpResponse.getOutputStream());
 			   

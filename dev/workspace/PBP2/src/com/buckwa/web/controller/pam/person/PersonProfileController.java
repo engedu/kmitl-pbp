@@ -1,18 +1,14 @@
 package com.buckwa.web.controller.pam.person;
 
-import static com.googlecode.charts4j.Color.BLACK;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +34,6 @@ import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.common.LovDetail;
 import com.buckwa.domain.pam.FileLocation;
-import com.buckwa.domain.pam.Paper;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pam.WorkPerson;
 import com.buckwa.domain.pam.WorkTemplate;
@@ -53,6 +48,7 @@ import com.buckwa.domain.pbp.AcademicUnitWrapper;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.domain.pbp.PBPWorkTypeSub;
 import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
+import com.buckwa.domain.pbp.report.RadarPlotReport;
 import com.buckwa.domain.pbp.report.TimeTableReport;
 import com.buckwa.domain.validator.pam.PersonProfileValidator;
 import com.buckwa.domain.validator.pbp.EditImportWorkValidator;
@@ -78,19 +74,6 @@ import com.buckwa.util.FileUtils;
 import com.buckwa.util.PAMConstants;
 import com.buckwa.util.school.SchoolUtil;
 import com.buckwa.web.util.AcademicYearUtil;
-import com.googlecode.charts4j.AxisLabels;
-import com.googlecode.charts4j.AxisLabelsFactory;
-import com.googlecode.charts4j.AxisStyle;
-import com.googlecode.charts4j.AxisTextAlignment;
-import com.googlecode.charts4j.Color;
-import com.googlecode.charts4j.Data;
-import com.googlecode.charts4j.GCharts;
-import com.googlecode.charts4j.LineStyle;
-import com.googlecode.charts4j.Plots;
-import com.googlecode.charts4j.RadarChart;
-import com.googlecode.charts4j.RadarPlot;
-import com.googlecode.charts4j.RadialAxisLabels;
-import com.googlecode.charts4j.Shape;
 
 @Controller
 @RequestMapping("/pam/person") 
@@ -194,6 +177,32 @@ public class PersonProfileController {
 				}	
 				
 
+				
+				request.put("academicYear", academicYear);
+				request.put("userName", BuckWaUtils.getUserNameFromContext());
+				request.put("round", person.getEvaluateRound());
+				request.put("employeeType", person.getEmployeeType());
+				request.put("facultyCode", facultyCode);
+
+			 
+				response = pBPWorkTypeService.getRadarPlotPersonMark(request);
+
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					List<RadarPlotReport> returnList = (List<RadarPlotReport>) response.getResObj("radarPlotReportList");
+					List<Double> doubleList = new ArrayList();
+					for(RadarPlotReport tmp:returnList){
+						
+						String valule2 =tmp.getAxisValue2();
+						Double doubleTmp = new Double(valule2);
+						doubleList.add(doubleTmp);						
+					}
+					
+					Double maxValue =Collections.max(doubleList);
+					maxValue=maxValue+300.00;
+					mav.addObject("maxValue", maxValue+"");
+					logger.info(" ######## Max Grap Value :"+maxValue);
+					 
+				}
 
 				/**----- Set Session --- */
 				//httpRequest.getSession().setAttribute("personProFileSession" , person);
@@ -223,14 +232,16 @@ public class PersonProfileController {
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.PERSON_INIT);
 		try {
 			
-			String academicYear = academicYearUtil.getAcademicYear();
+			
+			String academicYear = schoolUtil.getCurrentAcademicYear();
+			
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
 		 
 			
 			BuckWaRequest request = new BuckWaRequest();
 			request.put("username", user.getUsername());
-			request.put("academicYear", academicYearUtil.getAcademicYear());
+			request.put("academicYear", academicYear);
 			BuckWaResponse response = personProfileService.getByUsername(request);
 			
 			
@@ -351,6 +362,31 @@ public class PersonProfileController {
 				
 
 
+				request.put("academicYear", academicYear);
+				request.put("userName", BuckWaUtils.getUserNameFromContext());
+				request.put("round", person.getEvaluateRound());
+				request.put("employeeType", person.getEmployeeType());
+				request.put("facultyCode", facultyCode);
+
+			 
+				response = pBPWorkTypeService.getRadarPlotPersonMark(request);
+
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					List<RadarPlotReport> returnList = (List<RadarPlotReport>) response.getResObj("radarPlotReportList");
+					List<Double> doubleList = new ArrayList();
+					for(RadarPlotReport tmp:returnList){
+						
+						String valule2 =tmp.getAxisValue2();
+						Double doubleTmp = new Double(valule2);
+						doubleList.add(doubleTmp);						
+					}
+					
+					Double maxValue =Collections.max(doubleList);
+					maxValue=maxValue+300.00;
+					mav.addObject("maxValue", maxValue+"");
+					logger.info(" ######## Max Grap Value :"+maxValue);
+					 
+				}
 				/**----- Set Session --- */
 				//httpRequest.getSession().setAttribute("personProFileSession" , person);
 				

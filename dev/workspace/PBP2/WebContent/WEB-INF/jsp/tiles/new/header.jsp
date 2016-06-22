@@ -25,6 +25,9 @@
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/pam/person/initWorkImport.htm">นำเข้าผลงาน</a></li> 
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/pam/person/initAcademicWork.htm">ผลงานประจำปี</a></li>
 	          <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/anonymous.htm">กฎระเบียบ</a></li>
+	          
+
+	          
 	        <!--  <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/message/init.htm">ข้อความ</a></li>-->
  	          
 	          <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
@@ -39,7 +42,7 @@
           </li><!-- END Flyout Menu -->    
 	 
           
-            <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect=">ตารางสอนประจำปี</a></li>
+            <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/personTimeTable/init.htm?academicYearSelect=">ตารางสอน</a></li>
           
          
          
@@ -146,6 +149,9 @@
         </sec:authorize>  
           
           
+        <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/userManual.htm">คู่มือใช้งาน</a></li>
+          
+          
 <%--           <li class=""><span class="lsf-icon colororange" title="key"></span>
  		    		<sec:authorize ifAnyGranted="ROLE_USER">
 				  <a href="<%=request.getContextPath()%>/j_spring_security_logout">  ออกจากระบบ   </a>	  
@@ -166,6 +172,17 @@
         </ul>
       </div>  
       <div class="twelve columns header_nav_fullwidth">
+       <div style="width: 30%; float: left; padding-left: 20px; padding-top: 5px;">
+       
+        <sec:authorize ifAnyGranted="ROLE_USER">
+       <sec:authorize ifNotGranted="ROLE_ADMIN">
+      <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+     	<sec:authentication property="principal.currentRoundStr" />	  
+      </sec:authorize>
+      </sec:authorize>
+      </sec:authorize>
+   
+       </div>
         <ul id="menu-header" class="bottom-menu horizontal right">
          	<li class="">
          	ปีการศึกษา  ${academicYearStr}

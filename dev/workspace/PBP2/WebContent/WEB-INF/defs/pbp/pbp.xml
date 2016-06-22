@@ -16,6 +16,9 @@
       <put-attribute name="main"   value="/WEB-INF/jsp/pbp/anonymous/kpiListAll.jsp"/>      
   </definition>   
   
+     <definition name="userManual" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/usermanual/list.jsp"/>      
+  </definition>   
          
   <!--  Start Admin -->
   

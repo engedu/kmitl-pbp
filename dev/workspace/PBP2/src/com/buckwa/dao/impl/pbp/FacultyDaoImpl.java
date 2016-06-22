@@ -109,7 +109,7 @@ public class FacultyDaoImpl implements FacultyDao {
 			
 			for(Faculty facultyTmp:facultyList){
 				String sqlDepartment =" select *  from department where faculty_code ='" +facultyTmp.getCode()+"' and academic_year='"+facultyTmp.getAcademicYear()+"'"; 
-				logger.info(" sqlDepartment:"+sqlDepartment);
+//				logger.info(" sqlDepartment:"+sqlDepartment);
 				facultyTmp.setDean (getDeanByFacultyId(facultyTmp.getFacultyId()+"",getByAcademicYear))  ;
 				List<Department> departmentList  = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );
 				for(Department depTmp:departmentList){
@@ -230,7 +230,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 		String returnValue="";
 		String sql =" select *  from faculty where name ='"+name+"' and academic_year="+academicYear ; 
-		logger.info(" sql:"+sql);
+//		logger.info(" sql:"+sql);
 		 Faculty  faculty   =null;
 		
 		try{
@@ -241,7 +241,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		}
 		
 	 
-		logger.info(" sql faculty:"+BeanUtils.getBeanString(faculty));
+		//logger.info(" sql faculty:"+BeanUtils.getBeanString(faculty));
 		return returnValue;
 	}
 	
@@ -697,7 +697,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	    	ex.printStackTrace();
 	    }
 		 
-	    logger.info(" Found President :"+BeanUtils.getBeanString(dean));
+//	    logger.info(" Found President :"+BeanUtils.getBeanString(dean));
 		return dean;
 	}
 	

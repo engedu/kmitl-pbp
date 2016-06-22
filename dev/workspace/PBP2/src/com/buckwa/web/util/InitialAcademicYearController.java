@@ -96,9 +96,9 @@ public class InitialAcademicYearController implements InitializingBean , BeanFac
 			
 			 List<Faculty> facultyList =new ArrayList();
 		 
-				logger.info(" facultySQL:"+facultySQL);
-				facultyList  = this.jdbcTemplate.query(facultySQL,	new FacultyMapper() );	 
-			academicYearUtil.setFacultyList(facultyList);
+				//logger.info(" facultySQL:"+facultySQL);
+				//facultyList  = this.jdbcTemplate.query(facultySQL,	new FacultyMapper() );	 
+			//academicYearUtil.setFacultyList(facultyList);
 		}catch(Exception ex){
 			logger.info(ex.toString());;
 		}

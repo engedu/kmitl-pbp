@@ -13,7 +13,7 @@
 <body> 
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
-            <strong>ระดับคะแนนในภาควิชา    ${departmentName}    
+            <strong>ระดับคะแนนในภาควิชา   ${departmentName}    
         <!--     <a href="<%=request.getContextPath()%>/json/person/getBarchart">JSON Object</a> -->
             </h1> 
   <div id="example">
@@ -58,8 +58,8 @@
         	        },
         	        valueAxis: {
         	        	min: 0,
-        	        	max: 4000,
-        	        	majorUnit: 300
+        	        	max: ${maxValue} ,
+        	        	majorUnit: ${interval} 
         	        },
                     tooltip: {
                         visible: true,

@@ -68,7 +68,7 @@
                 dataSource: {
                     transport: {
                         read: {
-                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNew/1",
+                            url: "<%=request.getContextPath()%>/json/person/getRadarPlotNewByYear/<c:out value="${academicYear}"/>",
                             dataType: "json"
                         }
                     } 
@@ -102,7 +102,7 @@
      		    dataSource: {
      		        transport: {
      		            read: {
-     		                url:    "<%=request.getContextPath()%>/json/person/getRadarPlotNew/1",
+     		                url:    "<%=request.getContextPath()%>/json/person/getRadarPlotNewByYear/<c:out value="${academicYear}"/>",
      		                dataType: "Json"
      		            }
      		        }

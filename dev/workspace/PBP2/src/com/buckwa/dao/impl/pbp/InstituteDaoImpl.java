@@ -68,7 +68,7 @@ public class InstituteDaoImpl implements InstituteDao {
 		
 		BuckWaRequest request = new BuckWaRequest();
 		
-		logger.info(" ################################# Start Calculat Person #####################################");
+	//	logger.info(" ################################# Start Calculat Person #####################################");
 		
 		
 		  jdbcTemplate.update("  delete from report_department  ");  ;
@@ -83,7 +83,11 @@ public class InstituteDaoImpl implements InstituteDao {
 			 request = new BuckWaRequest(); 
 			request.put("academicYear",academicYear);
 			request.put("status",""); 
-			List<Department> departmentListX = getDepartmentMark(academicYear);
+			//List<Department> departmentListX = getDepartmentMark(academicYear);
+			
+			List<Department> departmentListX = getDepartmentMarkAllYear(academicYear);
+			
+		 
 			if(departmentListX!=null&&departmentListX.size()>0){	
 				
 			 for(Department departmentx:departmentListX){
@@ -987,6 +991,67 @@ public class InstituteDaoImpl implements InstituteDao {
 
 			
 		 
+			
+			
+		}
+		 
+		
+		return departmentList;
+	}
+	
+	private List<Department> getDepartmentMarkAllYear( String academicYear ) {	
+		 
+		List<Department> departmentList=new ArrayList<Department>();
+		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.department_desc) 	where p.email='"+headUserName+"'";
+		String sqlDepartment = " select * from department 	 where academic_year="+academicYear;
+
+	//	logger.info("  getDepartmentMark sqlDepartment:"+sqlDepartment);
+		
+		try{
+			departmentList = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+			//logger.info(" sqlDepartment:"+sqlDepartment);
+		}
+		if(departmentList!=null&&departmentList.size()>0){ 
+			
+			for(Department department:departmentList){
+				
+				// Get User belong to department 
+				String sqlacademicPerson = "  select * from person_pbp where department_desc ='"+department.getName()+"'   and  academic_year='"+academicYear+"'";
+				//logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
+				List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlacademicPerson,	new AcademicPersonMapper() );  
+				
+				if(academicPersonList!=null&&academicPersonList.size()>0){
+					
+				
+				
+					BigDecimal totalMark = new BigDecimal(0.00);
+					
+					AcademicPerson zeroPerson = academicPersonList.get(0);
+					
+					 logger.info(" ######### Start Calculate Faculty:"+ zeroPerson.getFacultyDesc()+" Department:"+department.getName()+" Total Person:"+academicPersonList.size());
+					 for(AcademicPerson personTmp:academicPersonList){ 
+						 logger.info(personTmp.getEmail()+" "+personTmp.getThaiName()+" "+personTmp.getThaiSurname());
+					 }
+					 
+					 
+					for(AcademicPerson personTmp:academicPersonList){ 
+						// Get KPI User Mapping  
+						
+						String employeeType = personTmp.getEmployeeTypeNo();
+ 
+						 String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+						personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYearAllYear(academicYear, personTmp.getEmail(),employeeType,facultyCode)); 
+						totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
+					}		
+					
+					department.setAcademicPersonList(academicPersonList); 
+				
+				}
+				
+			}
+ 
 			
 			
 		}

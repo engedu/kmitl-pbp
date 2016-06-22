@@ -248,7 +248,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 	
 	@Override
 	public Person getByUsername(String email,String academicYear) {
-		logger.info("- start");
+		//logger.info("- start");
 		
 		  String SQL_GET_ALL_PBPL = 
 				" SELECT p.person_id, " +
@@ -279,7 +279,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 		sql.append(SQL_GET_ALL_PBPL);
 		sql.append(" WHERE p.email = '"+email+"'");
 		sql.append(" AND p.status = 'A' and p.academic_year='" +academicYear+"'");
-		logger.info("  ######## sql:"+sql.toString());
+		//logger.info("  ######## sql:"+sql.toString());
 		Person result=null;
 		try {
 			
@@ -292,12 +292,12 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 
 		try {
 			String facultyCodeSQL =" select code   from faculty where academic_year="+academicYear+" and name ='"+result.getFacultyDesc()+"'";
-			logger.info("  ######## facultyCodeSQL:"+facultyCodeSQL);
+			//logger.info("  ######## facultyCodeSQL:"+facultyCodeSQL);
 			List<String> facultyCodeReturnList =  this.jdbcTemplate.query(facultyCodeSQL, new CodeMapper() );
 			if(facultyCodeReturnList!=null&&facultyCodeReturnList.size()>0){
 				String facultyCode = facultyCodeReturnList.get(0);
 				result.setFacultyCode(facultyCode);
-				logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
+				//logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
 				
 				result.setAcademicYearList(academicYearUtil.getAcademicYearList());
 			}
@@ -335,11 +335,11 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 	
 	@Override
 	public Person getByUserId(Long userid,String academicYear) {
-		logger.info("- start user id:"+userid);
+		//logger.info("- start user id:"+userid);
 		
 		 String SQL_GET_BYUSERID = 	" SELECT a.*,b.user_id FROM person_pbp a inner join buckwauser b on a.email = b.username  and b.user_id="+userid+" and a.academic_year='"+academicYear+"'";
 		
-		 logger.info(" SQL_GET_BYUSERID :"+SQL_GET_BYUSERID);
+		// logger.info(" SQL_GET_BYUSERID :"+SQL_GET_BYUSERID);
 		Person result=null;
 		try {
 			result = this.jdbcTemplate.queryForObject(SQL_GET_BYUSERID, personPBPMapper );
@@ -707,7 +707,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setThaiSurname(rs.getString("thai_surname"));
 			domain.setRateNo(rs.getString("rate_no"));
 			domain.setEmployeeType(rs.getString("employee_type"));
-			logger.info(" ### employee_type:"+rs.getString("employee_type"));
+			
 			domain.setEmployeeTypeNo(rs.getString("employee_type")); // set for employeeType // FIXME
 			domain.setMaxEducation(rs.getString("max_education"));
 			domain.setEmail(rs.getString("email"));
@@ -731,7 +731,7 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setBirthdate(rs.getDate("birth_date"));
 			
 			logger.info(" ### picture:"+rs.getString("picture"));
-         
+			logger.info(" ###"+rs.getString("email")+":"+rs.getString("thai_name")+" "+rs.getString("thai_surname")+" : "+rs.getString("faculty_desc")+" :"+rs.getString("department_desc"));
 			return domain;
 		}
 	}

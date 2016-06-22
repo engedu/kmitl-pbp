@@ -38,5 +38,11 @@ public interface PBPWorkTypeDao {
 	
 	
 	public List<RadarPlotReport> getRadarPlotPersonMark( String userName,String academicYear,String round);
+	public List<RadarPlotReport> getRadarPlotPersonMarkByYear( String userName,String academicYear);
 	public List<RadarPlotReport> getRadarPlotPersonMarkE( String userName,String academicYear,String round);
+	
+	
+	
+	public PBPWorkTypeWrapper getCalculateByAcademicYearAllYear(String academicYear,String userName,String employeeType,String facultyCode); 
+
 }

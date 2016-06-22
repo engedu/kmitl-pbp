@@ -51,16 +51,18 @@ public class PersonReportController {
 		ModelAndView mav = new ModelAndView();
 		
 		try{
-		String selectAcademicYear = person.getAcademicYear();
+		//String selectAcademicYear = person.getAcademicYear();
+		String academicYear =  schoolUtil.getCurrentAcademicYear();
+		mav.addObject("academicYear", academicYear);
 		String round = person.getEvaluateRound();
-		logger.info(" Start  academicYear:"+selectAcademicYear+"  round:"+round+" employeeType:"+person.getEmployeeType());
+		logger.info(" Start  academicYear:"+academicYear+"  round:"+round+" employeeType:"+person.getEmployeeType());
 		
 		BuckWaUser user = BuckWaUtils.getUserFromContext();
 		logger.info("viewUserProfile  username :"+user.getUsername());
 
 		BuckWaRequest request = new BuckWaRequest();
 		request.put("username", user.getUsername());
-		request.put("academicYear", selectAcademicYear);
+		request.put("academicYear", academicYear);
 
 		BuckWaResponse response = personProfileService.getByUsername(request);
 

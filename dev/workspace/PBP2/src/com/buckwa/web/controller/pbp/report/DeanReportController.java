@@ -16,6 +16,7 @@ import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
+import com.buckwa.domain.pbp.report.FacultyReportLevel;
 import com.buckwa.domain.pbp.report.WorkTypeCompareReport;
 import com.buckwa.service.intf.pbp.DeanService;
 import com.buckwa.service.intf.pbp.FacultyService;
@@ -57,6 +58,45 @@ public class DeanReportController {
 		try{
 			String academicYear =schoolUtil.getCurrentAcademicYear();
 		mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		
+		
+		BuckWaRequest request = new BuckWaRequest();
+
+		String userName = BuckWaUtils.getUserNameFromContext();
+	 
+		request.put("username", userName);
+		request.put("academicYear", academicYear);
+		BuckWaResponse response = facultyService.getFacultyByDeanUserNameandYear(request);
+
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			Faculty faculty = (Faculty) response.getResObj("faculty");
+			System.out.println(" faculty :"+faculty);
+			if (faculty != null) {
+
+				request.put("faculty", faculty);
+				request.put("academicYear", academicYear);
+				response = deanService.getFacultyReportLevel(request);
+
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					List<FacultyReportLevel> reportWorkTypeDepartmentList = (List<FacultyReportLevel>) response.getResObj("facultyReportLevelList");
+					System.out.println(" reportWorkTypeDepartmentList :"+reportWorkTypeDepartmentList);
+					if(reportWorkTypeDepartmentList!=null&&reportWorkTypeDepartmentList.size()>0){
+						FacultyReportLevel zeroReport =reportWorkTypeDepartmentList.get(0);
+						String maxValue =zeroReport.getMark();					
+						System.out.println(" mark :"+maxValue);
+						mav.addObject("maxValue",ReportUtil.getMaxValuePad(maxValue));
+						mav.addObject("interval",ReportUtil.getIntervalValue(maxValue));
+						
+					}else{
+						mav.addObject("maxValue","500");
+						mav.addObject("interval","100");
+					}
+					
+					
+				}
+			}
+		}
+		
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

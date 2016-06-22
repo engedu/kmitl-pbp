@@ -632,6 +632,64 @@ public class HeadDaoImpl implements HeadDao {
 	}
 	
 	
+	@Override
+	public Department getDepartmentMarkAllYear( String headUserName ,String academicYear ) {	
+		 
+		
+		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.department_desc) 	where p.email='"+headUserName+"'";
+		String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.head_department) 	where p.email='"+headUserName+"' and p.academic_year='"+academicYear+"'  and d.academic_year='"+academicYear+"'";
+
+		logger.info("  getDepartmentMark sqlDepartment:"+sqlDepartment);
+		Department department=null;
+		try{
+			department = this.jdbcTemplate.queryForObject(sqlDepartment,	new DepartmentMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+			logger.info(" sqlDepartment:"+sqlDepartment);
+		}
+		if(department!=null){ 
+			// Get User belong to department 
+			String sqlacademicPerson = "  select * from person_pbp where department_desc ='"+department.getName()+"'   and  academic_year='"+academicYear+"'";
+			logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
+			List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlacademicPerson,	new AcademicPersonMapper() );  
+			
+			
+			if(academicPersonList!=null){
+				
+				logger.info("   ### Found Total Person belong to Department :"+academicPersonList.size());
+			}
+			
+			BigDecimal totalMark = new BigDecimal(0.00);
+			int personloop =0;
+			for(AcademicPerson personTmp:academicPersonList){ 
+				// Get KPI User Mapping  
+				personloop++;
+				logger.info("   ### Start Person Loop "+personloop);
+				
+				String employeeType = personTmp.getEmployeeTypeNo();
+				
+				String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
+				//logger.info(" sqlRound:"+sqlRound);
+				 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+				
+	 
+				 
+				 
+			    String facultyCode = facultyDao.getFacultyByCodeByAcademicYearAndName(academicYear, personTmp.getFacultyDesc());
+				 
+				personTmp.setpBPWorkTypeWrapper(pBPWorkTypeDao.getCalculateByAcademicYearAllYear(academicYear, personTmp.getEmail(),employeeType,facultyCode)); 
+				totalMark = totalMark.add(personTmp.getpBPWorkTypeWrapper().getTotalMark()).setScale(2);
+				
+				personTmp.setTotalMark(totalMark);
+			}
+			
+		 
+			
+			department.setAcademicPersonList(academicPersonList); 
+		}
+	 
+		return department;
+	}
 	
 	
 	

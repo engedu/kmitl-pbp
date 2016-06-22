@@ -184,6 +184,121 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		return radarPlotList;
 	}
 	
+	@Override
+	public List<RadarPlotReport> getRadarPlotPersonMarkByYear( String username,String academicYear) {			
+		List<RadarPlotReport> radarPlotList = new ArrayList();
+		
+		String sql =" select *  from report_person where academic_year ='"+academicYear+"'   and username='"+username+"' and round is not null " ;   
+		//String sql =" ";
+		logger.info("  getRadarPlotPersonMark sql:"+sql); 
+		  	 
+		try{
+			
+			List<ReportPbp> reportPbpList  = this.jdbcTemplate.query(sql,	new ReportPbpMapper() );	
+			
+			
+			if(reportPbpList!=null&&reportPbpList.size()>0){
+				
+				String worktypeName1 ="";
+				String worktypeName2 ="";
+				String worktypeName3 ="";
+				String worktypeName4 ="";
+				String worktypeName5 ="";
+				
+				BigDecimal totalMark1 = new BigDecimal(0.00);
+				BigDecimal totalMark1_E = new BigDecimal(0.00);
+				
+				BigDecimal totalMark2 = new BigDecimal(0.00);
+				BigDecimal totalMark2_E = new BigDecimal(0.00);
+				
+				BigDecimal totalMark3 = new BigDecimal(0.00);
+				BigDecimal totalMark3_E = new BigDecimal(0.00);
+				
+				BigDecimal totalMark4 = new BigDecimal(0.00);
+				BigDecimal totalMark4_E = new BigDecimal(0.00);
+				
+				BigDecimal totalMark5 = new BigDecimal(0.00);
+				BigDecimal totalMark5_E = new BigDecimal(0.00);
+				
+		 
+				
+				
+				for(ReportPbp tmp:reportPbpList){
+					worktypeName1 = tmp.getWork_type_name1();
+					worktypeName2 = tmp.getWork_type_name2();
+					worktypeName3 = tmp.getWork_type_name3();
+					worktypeName4 = tmp.getWork_type_name4();
+					worktypeName5 = tmp.getWork_type_name5();
+					
+					
+					totalMark1 = totalMark1.add(new BigDecimal(tmp.getMark_1()));
+					totalMark2 = totalMark2.add(new BigDecimal(tmp.getMark_2()));
+					totalMark3 = totalMark3.add(new BigDecimal(tmp.getMark_3()));
+					totalMark4 = totalMark4.add(new BigDecimal(tmp.getMark_4()));
+					totalMark5 = totalMark5.add(new BigDecimal(tmp.getMark_5()));
+					
+					
+					
+					totalMark1_E = totalMark1_E.add(new BigDecimal(tmp.getE_mark_1()));
+					totalMark2_E = totalMark2_E.add(new BigDecimal(tmp.getE_mark_2()));
+					totalMark3_E = totalMark3_E.add(new BigDecimal(tmp.getE_mark_3()));
+					totalMark4_E = totalMark4_E.add(new BigDecimal(tmp.getE_mark_4()));
+					totalMark5_E = totalMark5_E.add(new BigDecimal(tmp.getE_mark_5()));
+					
+					
+				}
+				
+				 
+				
+				RadarPlotReport r1 = new RadarPlotReport();
+				r1.setAxisName(worktypeName1);
+				r1.setAxisValue(totalMark1+"");
+				r1.setAxisName2(worktypeName1);
+				r1.setAxisValue2(totalMark1_E+"");
+				
+				RadarPlotReport r2 = new RadarPlotReport();
+				r2.setAxisName(worktypeName2);
+				r2.setAxisValue(totalMark2+"");
+				r2.setAxisName2(worktypeName2);
+				r2.setAxisValue2(totalMark2_E+"");
+				
+				RadarPlotReport r3 = new RadarPlotReport();
+				r3.setAxisName(worktypeName3);
+				r3.setAxisValue(totalMark3+"");
+				r3.setAxisName2(worktypeName3);
+				r3.setAxisValue2(totalMark3_E+"");
+				
+				RadarPlotReport r4 = new RadarPlotReport();
+				r4.setAxisName(worktypeName4);
+				r4.setAxisValue(totalMark4+"");
+				r4.setAxisName2(worktypeName4);
+				r4.setAxisValue2(totalMark4_E+"");
+				
+				RadarPlotReport r5 = new RadarPlotReport();
+				r5.setAxisName(worktypeName5);
+				r5.setAxisValue(totalMark5+"");
+				r5.setAxisName2(worktypeName5);
+				r5.setAxisValue2(totalMark5_E+"");
+				
+				radarPlotList.add(r1);
+				radarPlotList.add(r2);
+				radarPlotList.add(r3);
+				radarPlotList.add(r4);
+				radarPlotList.add(r5);				
+				
+				
+			}
+			
+			
+			
+
+			 
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return radarPlotList;
+	}
 	
 	 
 	private PBPWorkTypeWrapper  getExcistPersonMark( String username,String academicYear,String round) {	
@@ -715,6 +830,401 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 			
 			
 			updateReportPerson(pBPWorkTypeWrapper);
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return pBPWorkTypeWrapper;
+	} 
+	
+	
+	
+	
+	@Override
+	public PBPWorkTypeWrapper getCalculateByAcademicYearAllYear( String academicYear,String userName ,String employeeTypeNo,String facultyCode) {
+		logger.info("  ###########  :"+userName +"   employeeTypeNO:"+employeeTypeNo );
+		
+		
+		// Get Start ,End Date 
+		
+		String evalType = "1";
+		
+		//if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
+		if(employeeTypeNo.equalsIgnoreCase("2")){
+			evalType ="2";
+	 
+		} 
+		
+		// ######## Start academic_year, academic_evaluate_round
+		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+evalType+"'"   ;  
+		//logger.info(" sqlRound:"+sqlRound);
+		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+		
+		 //logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		 
+		 long startTime =0l;
+		 long endTime =0l;
+		 
+		 Timestamp startTimeStamp = null;
+		 Timestamp endTimeStamp = null;
+		 
+		 //if(employeeType.equalsIgnoreCase("ข้าราชการ")||employeeType.equalsIgnoreCase("2")){
+			if(employeeTypeNo.equalsIgnoreCase("1")){
+			 
+				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
+				 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
+				 
+		 
+				 endTime = academicYearEvaluateRound.getRound2EndDate().getTime();
+				 endTimeStamp = academicYearEvaluateRound.getRound2EndDate();
+		 
+			 
+		 }else{
+			 
+			 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
+			 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
+			 
+			 endTime = academicYearEvaluateRound.getRound1EndDate().getTime();
+			 endTimeStamp = academicYearEvaluateRound.getRound1EndDate(); 
+			 
+		 }
+				 
+		 logger.info(" Calculate Date Range :"+startTimeStamp+" - "+endTimeStamp);
+		 
+		 
+		 
+		 
+		
+		String sql =" select *  from pbp_work_type where academic_year ='"+academicYear+"' and faculty_code='"+facultyCode+"'" ;  
+		
+		//logger.info(" ### [1] pbp_work_type #### getByAcademicYear sql:"+sql);
+		
+		PBPWorkTypeWrapper pBPWorkTypeWrapper = new PBPWorkTypeWrapper();	 	
+		//String academicYear,String userName,String round,String employeeType,String facultyCode
+		
+		pBPWorkTypeWrapper.setAcademicYear(academicYear);
+		pBPWorkTypeWrapper.setUserName(userName);
+		 
+		pBPWorkTypeWrapper.setEmployeeType(employeeTypeNo);
+		pBPWorkTypeWrapper.setFacultyCode(facultyCode);
+		
+		pBPWorkTypeWrapper.setStartRoundDate(new Date(startTimeStamp.getTime()));
+		pBPWorkTypeWrapper.setEndRoundDate(new Date(endTimeStamp.getTime()));
+		
+		try{
+			
+		///**### [1] pbp_work_type ----*/	
+		List<PBPWorkType> pBPWorkTypeList  = this.jdbcTemplate.query(sql,	new PBPWorkTypeMapper() );	 
+		for(PBPWorkType tmp:pBPWorkTypeList){
+ 
+			try{
+ 
+					
+					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" " +
+							" and academic_year='"+tmp.getAcademicYear()+"' and user_name='"+userName+"' and create_date BETWEEN '"+startTimeStamp+"' AND '"+endTimeStamp+"'"; 
+					//logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
+					List<AcademicKPIUserMapping> academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
+					
+					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
+						
+						logger.info("  worktype code:"+tmp.getCode()+" list below ");
+						for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){
+							
+							try{
+								
+								String sqlkpi =" select *  from academic_kpi where academic_kpi_id ="+mappingTmp.getAcademicKPIId() ; 
+								//logger.info(" ### sqlkpi:"+sqlkpi);
+								 AcademicKPI  academicKPI  = this.jdbcTemplate.queryForObject(sqlkpi,	new AcademicKPIMapper() );
+								 mappingTmp.setAcademicKPI(academicKPI);
+								 
+								 	
+							 	//logger.info(" ### [4] academic_kpi_attribute_value --####");
+								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
+								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
+								try{
+									academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
+									//System.out.print( mappingTmp.getKpiUserMappingId()+":"+ academicKPIAttributeValueList.size()+",");
+								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+									ex.printStackTrace();
+								} 
+								mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
+								 
+								//logger.info(" ### [5] academic_kpi_attribute --####");	
+								String sqlAttribute  =" select *  from academic_kpi_attribute  where academic_kpi_id ="+mappingTmp.getAcademicKPIId()+" and academic_year='"+mappingTmp.getAcademicYear()+"'" ; 
+								List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
+								try{
+									academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
+								}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+									ex.printStackTrace();
+								} 									
+								
+								for(AcademicKPIAttributeValue attributeValueTmp: academicKPIAttributeValueList){
+									//logger.info("  Start set is calculate  attributeName  :"+attributeValueTmp.getName() ); 
+									for(AcademicKPIAttribute attributeTmp:academicKPIAttributeList){
+										String isCalculate = attributeTmp.getIsCalculate();
+										//String isValidateNumber= attributeTmp.getIsCalculate();
+										String attributeName = attributeTmp.getName();
+										
+										if(attributeName!=null){
+											String attributeValueName = attributeValueTmp.getName();
+											if(attributeName.equalsIgnoreCase(attributeValueName)){
+												if("Y".equalsIgnoreCase(isCalculate)){
+													attributeValueTmp.setIsCalculate("Y");
+												}
+											}
+										}else{
+											logger.info(" Found Attribute Name null");
+										}
+									}
+								}
+								mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
+								 
+							}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+								ex.printStackTrace();
+							} 
+	 
+							
+						}
+						
+					}
+					
+					tmp.setAcademicKPIUserMappingList(academicKPIUserMappingList);
+			//	} 
+				
+			}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+				ex.printStackTrace();
+			} 
+		}
+		
+		
+		// Callculate 
+		
+//		logger.info("  ##########  ##########   ##########  Start Calculate   ##########  ##########  ##########" );
+	 
+
+		BigDecimal totalMark = new BigDecimal(0.00);
+		BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
+		BigDecimal totalPercentMark = new BigDecimal(0.00);
+		BigDecimal totalPercentMarkComareBase = new BigDecimal(0.00);
+		
+		BigDecimal totalMark_E = new BigDecimal(0.00);
+		BigDecimal totalMarkCompareBase_E = new BigDecimal(0.00);
+		BigDecimal totalPercentMark_E = new BigDecimal(0.00);
+		BigDecimal totalPercentMarkComareBase_E = new BigDecimal(0.00);
+		
+		for(PBPWorkType tmp:pBPWorkTypeList){
+			BigDecimal maxMark =  tmp.getMaxHour();
+			BigDecimal limitBase = tmp.getLimitBase();
+			
+			BigDecimal minHour =tmp.getMinHour();
+			BigDecimal maxHour =tmp.getMaxHour();
+			
+			BigDecimal totalInWorkType = new BigDecimal(0.00);
+			BigDecimal totalInWorkType_E = new BigDecimal(0.00);
+			
+			List<AcademicKPIUserMapping> academicKPIUserMappingList =  tmp.getAcademicKPIUserMappingList();
+			if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){	
+				
+				for(AcademicKPIUserMapping mappingTmp:academicKPIUserMappingList){					
+					BigDecimal totalMappingTmp = new BigDecimal(0.0);
+					BigDecimal totalMappingTmp_E = new BigDecimal(0.0);
+					//logger.info(" Start With Total Mark:"+totalMappingTmp);
+					AcademicKPI kpiTmp = mappingTmp.getAcademicKPI();					
+					String mappingStatus = mappingTmp.getStatus();		
+					
+					
+					
+					if("APPROVED".equalsIgnoreCase(mappingStatus)){ 	
+						String calResultStr =""; 
+						List<AcademicKPIAttributeValue>  academicKPIAttributeValueList  =mappingTmp.getAcademicKPIAttributeValueList();						
+						//logger.info("   ########## Mapping id:"+mappingTmp.getKpiUserMappingId()+" Statatus  Approve , So Start Calculate " );
+						//logger.info(" KPI Mark:"+kpiTmp.getMark()+" Multiply Value:"+kpiTmp.getMultiplyValue());    
+						BigDecimal multiplyValueBig = new BigDecimal(0.00);						
+						try{
+							multiplyValueBig = new BigDecimal(kpiTmp.getMultiplyValue());
+							multiplyValueBig.setScale(2);
+						}catch(Exception ex){
+							multiplyValueBig = new BigDecimal(1).setScale(2);
+						}
+						
+						calResultStr= " ("+multiplyValueBig+" ตัวคุณ )"+" X ("+kpiTmp.getMark()+" คะแนน KPI )";						
+						if(kpiTmp.getMultiplyValue()!=null&&multiplyValueBig.doubleValue()>0){							
+							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()).multiply(multiplyValueBig).setScale(2); 							 
+							//logger.info("  Found multiply value :"+kpiTmp.getMultiplyValue()+"  So multiply by :"+kpiTmp.getMultiplyValue()+" = "+totalMappingTmp);
+						}else{									 	
+							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()); 							
+						//	logger.info("  No multiply value :"+kpiTmp.getMultiplyValue()+"  So Add by :"+kpiTmp.getMultiplyValue()+" = "+totalMappingTmp);
+						}					
+						//logger.info("  Start is calculate attribute size :"+academicKPIAttributeValueList.size());
+								for(AcademicKPIAttributeValue attributeValueTmp: academicKPIAttributeValueList){ 
+										String isCalculate = attributeValueTmp.getIsCalculate(); 
+										String attributeValueName = attributeValueTmp.getName();										
+										if("Y".equalsIgnoreCase(isCalculate)){	 
+										String attributeValueValue = attributeValueTmp.getValue(); 
+										BigDecimal tmpBeforCall = totalMappingTmp;
+										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));											
+											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
+											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
+										}else{ 
+											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
+ 											try{
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));											
+											}catch(Exception ex){
+												
+												logger.info("  Exception #############   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
+												ex.printStackTrace();
+											}
+											calResultStr=calResultStr+ " X (" +attributeValueValue+" "+attributeValueName+")";
+										}
+ 
+								}
+								
+								
+							}
+								//logger.info("  Call Str: "+calResultStr);
+								logger.info(mappingTmp.getKpiUserMappingId()+":APPROVED --> "+calResultStr+" = "+totalMappingTmp);
+								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2));	
+								updateCallResultStr(mappingTmp);
+								
+								//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2));   
+								//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
+								totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2));	
+								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2));	
+						
+						//logger.info("   Mark after other Attribute :"+totalMappingTmp);
+					} else{
+						//logger.info("   ##########  Mapping id:"+mappingTmp.getKpiUserMappingId()+"  Statatus Not Approve , So Calculate for Temporary Mark" );
+						
+ 						
+						
+						String calResultStr =""; 
+						List<AcademicKPIAttributeValue>  academicKPIAttributeValueList  =mappingTmp.getAcademicKPIAttributeValueList();
+						
+						//logger.info("   ########## Mapping id:"+mappingTmp.getKpiUserMappingId()+" Statatus  Approve , So Start Calculate " );
+						//logger.info(" KPI Mark:"+kpiTmp.getMark()+" Multiply Value:"+kpiTmp.getMultiplyValue());    
+						BigDecimal multiplyValueBig = new BigDecimal(0.00);						
+						try{
+							multiplyValueBig = new BigDecimal(kpiTmp.getMultiplyValue());
+							multiplyValueBig.setScale(2);
+						}catch(Exception ex){
+							multiplyValueBig = new BigDecimal(1).setScale(2);
+						}
+						
+						calResultStr= " ("+multiplyValueBig+" ตัวคุณ )"+" X ("+kpiTmp.getMark()+" คะแนน KPI )";						
+						if(kpiTmp.getMultiplyValue()!=null&&multiplyValueBig.doubleValue()>0){							
+							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()).multiply(multiplyValueBig).setScale(2); 
+							//logger.info("  Found multiply value :"+kpiTmp.getMultiplyValue()+"  So multiply by :"+kpiTmp.getMultiplyValue()+" = "+totalMappingTmp);
+						}else{									 	
+							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()); 
+							//logger.info("  No multiply value :"+kpiTmp.getMultiplyValue()+"  So Add by :"+kpiTmp.getMultiplyValue()+" = "+totalMappingTmp);
+						}					
+						//logger.info("  Start is calculate attribute size :"+academicKPIAttributeValueList.size());
+								for(AcademicKPIAttributeValue attributeValueTmp: academicKPIAttributeValueList){ 
+										String isCalculate = attributeValueTmp.getIsCalculate(); 
+										String attributeValueName = attributeValueTmp.getName();										
+										if("Y".equalsIgnoreCase(isCalculate)){	 
+										String attributeValueValue = attributeValueTmp.getValue(); 
+										BigDecimal tmpBeforCall = totalMappingTmp;
+										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));
+											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
+											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
+										}else{ 
+											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
+ 											try{
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));
+											}catch(Exception ex){
+												ex.printStackTrace();
+											}
+											calResultStr=calResultStr+ " X (" +attributeValueValue+" "+attributeValueName+")";
+										}
+ 
+								}
+								
+								
+							}
+								//logger.info("  Call Str: "+calResultStr+" = "+totalMappingTmp);
+								logger.info(mappingTmp.getKpiUserMappingId()+":NOT APPROVED --> "+calResultStr+" = "+totalMappingTmp);
+								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
+								updateCallResultStr(mappingTmp);
+														
+								//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));   
+								//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
+								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));
+						
+						
+						
+					}
+					
+				 
+					//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+					//mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2));   
+					//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
+					//totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2));
+				} 				
+			} 
+			
+		//	BigDecimal totalInPercentWorkType = totalInWorkType.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
+			//logger.info(" getMarkDepartmetn totalInPercentWorkType :"+totalInWorkType );
+			tmp.setTotalInWorkType(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+			tmp.setTotalInWorkType_E(totalInWorkType_E.setScale(2,RoundingMode.HALF_UP));
+			
+			logger.info(tmp.getName()+"   "+totalInWorkType  );
+			
+			//tmp.setTotalInPercentWorkType(totalInPercentWorkType.setScale(2));
+			if(totalInWorkType.compareTo(minHour)==-1){
+			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
+				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+				tmp.setCompareBaseStatus("UNDER");
+			}else  if(totalInWorkType.compareTo(maxHour)==1){
+				//tmp.setTotalInPercentCompareBaseWorkType ( tmp.getMaxPercent() .setScale(2));
+				tmp.setTotalInWorkTypeCompareBase( tmp.getMinHour() .setScale(2,RoundingMode.HALF_UP));
+				tmp.setCompareBaseStatus("OVER");
+			}else {
+			//	tmp.setTotalInPercentCompareBaseWorkType(totalInPercentWorkType.setScale(2));
+				tmp.setTotalInWorkTypeCompareBase(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+				tmp.setCompareBaseStatus("NORMAL");
+			}
+			
+			tmp.setTotalInWorkTypeCompareBase_E(totalInWorkType_E.setScale(2));
+			
+			totalPercentMark =totalPercentMark.add(tmp.getTotalInPercentWorkType().setScale(2,RoundingMode.HALF_UP));
+			totalPercentMarkComareBase =totalPercentMarkComareBase.add(tmp.getTotalInPercentCompareBaseWorkType().setScale(2,RoundingMode.HALF_UP));
+			totalMark = totalMark.add(totalInWorkType.setScale(2,RoundingMode.HALF_UP));
+			totalMarkCompareBase =totalMarkCompareBase.add(tmp.getTotalInWorkTypeCompareBase().setScale(2,RoundingMode.HALF_UP));
+			
+			
+			totalPercentMark_E =totalPercentMark_E.add(tmp.getTotalInPercentWorkType_E().setScale(2));
+			totalPercentMarkComareBase_E =totalPercentMarkComareBase_E.add(tmp.getTotalInPercentCompareBaseWorkType_E().setScale(2,RoundingMode.HALF_UP));
+			totalMark_E = totalMark_E.add(totalInWorkType_E.setScale(2,RoundingMode.HALF_UP));
+			totalMarkCompareBase_E =totalMarkCompareBase_E.add(tmp.getTotalInWorkTypeCompareBase_E().setScale(2,RoundingMode.HALF_UP));
+			
+			//logger.info(" total Mark:"+totalMark);
+		} 
+		
+			//BigDecimal totalPercentMark = totalMark.multiply(new BigDecimal(100)).divide(maxMark,2,RoundingMode.HALF_UP); 
+			//logger.info(" totalPercentMark  :"+totalPercentMark);
+			pBPWorkTypeWrapper.setTotalMark(totalMark.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalMarkCompareBase(totalMarkCompareBase);
+			pBPWorkTypeWrapper.setTotalPercentMark(totalPercentMark.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase(totalPercentMarkComareBase.setScale(2,RoundingMode.HALF_UP));
+			
+			
+			pBPWorkTypeWrapper.setTotalMark_E(totalMark_E.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalMarkCompareBase_E(totalMarkCompareBase_E);
+			pBPWorkTypeWrapper.setTotalPercentMark_E(totalPercentMark_E.setScale(2,RoundingMode.HALF_UP));
+			pBPWorkTypeWrapper.setTotalPercentMarkCompareBase_E(totalPercentMarkComareBase_E.setScale(2,RoundingMode.HALF_UP));
+			
+			// 1- Because mark_rank keep 0,1
+			// int employeeTypeGetSalary = Integer.parseInt(employeeType) -1;
+			//pBPWorkTypeWrapper.setIncreaseSalaryRate(getIncreaseSalaryRate(totalPercentMarkComareBase,academicYear,employeeTypeGetSalary+"",round));
+			pBPWorkTypeWrapper.setpBPWorkTypeList(pBPWorkTypeList);
+			
+			
+			//updateReportPerson(pBPWorkTypeWrapper);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();

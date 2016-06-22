@@ -25,5 +25,7 @@ public interface HeadDao {
 	public MinMaxBean getDepartmentMeanByWorkTypeCode( String academicYear ,String facultyCode,String departmentCode,String worktypecode);
 	
 	
+	public Department getDepartmentMarkAllYear( String headUserName , String academicYear );
+	
 	
 }

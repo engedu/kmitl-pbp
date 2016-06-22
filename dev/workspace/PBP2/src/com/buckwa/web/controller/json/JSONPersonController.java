@@ -67,7 +67,7 @@ public class JSONPersonController {
 		 
 		try {
 
-			String academicYear = academicYearUtil.getAcademicYear();
+			String academicYear = schoolUtil.getCurrentAcademicYear();
 			logger.info(" Start  academicYear:" + academicYear);
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("radarPlotNew  username :" + user.getUsername()+ " academicYear:"+academicYear+" round :"+round);
@@ -102,6 +102,68 @@ public class JSONPersonController {
 	
 				 
 					response = pBPWorkTypeService.getRadarPlotPersonMark(request);
+	
+					if (response.getStatus() == BuckWaConstants.SUCCESS) {
+						 returnList = (List<RadarPlotReport>) response.getResObj("radarPlotReportList");
+						 
+					}
+				}else{
+					response.setStatus(BuckWaConstants.FAIL);
+				}
+ 
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			mav.addObject(BuckWaConstants.ERROR_CODE, BuckWaConstants.ERROR_E001);
+		}
+
+		return returnList;
+	}
+	
+	@RequestMapping(value = "/getRadarPlotNewByYear/{academicYear}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<RadarPlotReport> radarPlotNewByYear(HttpServletRequest httpRequest,@PathVariable String academicYear) {
+	 
+		List<RadarPlotReport> returnList = new ArrayList<RadarPlotReport>();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("initPerson");
+		 
+		try {
+
+			//String academicYear = schoolUtil.getCurrentAcademicYear();
+			//logger.info(" Start  academicYear:" + academicYear);
+			BuckWaUser user = BuckWaUtils.getUserFromContext();
+			logger.info("radarPlotNew  username :" + user.getUsername()+ " academicYear:"+academicYear);
+
+			BuckWaRequest request = new BuckWaRequest();
+			request.put("username", user.getUsername());
+			request.put("academicYear", academicYear);
+			
+			BuckWaResponse response = new BuckWaResponse();
+ 
+			Person person = new Person();
+ 
+				response = personProfileService.getByUsername(request);
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					person = (Person) response.getResObj("person");
+
+					user.setFirstLastName(person.getThaiName() + " " + person.getThaiSurname());
+	 
+					person.setAcademicYear(academicYear);
+					person.setAcademicYearList(academicYearUtil.getAcademicYearList());
+					 
+					user.setPersonProfile(person);
+					mav.addObject("person", person);
+					 
+					String facultyCode = person.getFacultyCode();
+	
+					request.put("academicYear", academicYear);
+					request.put("userName", BuckWaUtils.getUserNameFromContext());
+					request.put("round", person.getEvaluateRound());
+					request.put("employeeType", person.getEmployeeType());
+					request.put("facultyCode", facultyCode);
+	
+				 
+					response = pBPWorkTypeService.getRadarPlotPersonMarkByYear(request);
 	
 					if (response.getStatus() == BuckWaConstants.SUCCESS) {
 						 returnList = (List<RadarPlotReport>) response.getResObj("radarPlotReportList");

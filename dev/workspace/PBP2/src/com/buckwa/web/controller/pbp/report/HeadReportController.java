@@ -1,5 +1,7 @@
 package com.buckwa.web.controller.pbp.report;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pbp.Department;
+import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
 import com.buckwa.domain.pbp.report.MinMaxBean;
+import com.buckwa.service.intf.pbp.FacultyService;
 import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
@@ -23,6 +28,9 @@ public class HeadReportController {
 	
 	@Autowired
 	private SchoolUtil schoolUtil;
+	
+	@Autowired
+	private FacultyService facultyService;
 
 	@Autowired
 	private HeadService headService;
@@ -44,8 +52,45 @@ public class HeadReportController {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		try{
-			String academicYear =schoolUtil.getCurrentAcademicYear();
+		String academicYear =schoolUtil.getCurrentAcademicYear();
 		mav.addObject("departmentName", schoolUtil.getDepartmentByHeadUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		
+		
+		BuckWaRequest request = new BuckWaRequest();
+
+		String userName = BuckWaUtils.getUserNameFromContext(); 
+
+		request.put("username", userName);
+		request.put("academicYear", academicYear);
+		BuckWaResponse response = facultyService.getDepartmentByHeadUserNameandYear(request);
+
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			Department department = (Department) response.getResObj("department");
+			if (department != null) {
+				request.put("department", department);
+				request.put("academicYear", academicYear);
+				response = headService.getReportWorkTypeDepartment(request);
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					List<DepartmentWorkTypeReport> reportWorkTypeDepartmentList = (List<DepartmentWorkTypeReport>) response.getResObj("departmentWorkTypeReportList");
+				
+					if(reportWorkTypeDepartmentList!=null&&reportWorkTypeDepartmentList.size()>0){
+						DepartmentWorkTypeReport zeroReport =reportWorkTypeDepartmentList.get(0);
+						String maxValue =zeroReport.getMarkTotal();						
+						
+						mav.addObject("maxValue",ReportUtil.getMaxValuePad(maxValue));
+						mav.addObject("interval",ReportUtil.getIntervalValue(maxValue));
+						
+					}else{
+						mav.addObject("maxValue","500");
+						mav.addObject("interval","100");
+					}
+					
+					
+				}
+			}
+		}
+		
+
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}

@@ -81,6 +81,25 @@ public class AcademicYearServiceImpl implements AcademicYearService {
 		return response;
 	}
 	
+	
+	@Override
+	public BuckWaResponse getCurrentEvalulateRoundStr(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{		
+			String acedemicYear =(String)request.get("academicYear");
+			String userName =(String)request.get("username");
+			String currentRoundStr= ( String)academicYearDao.getCurrentEvalulateRoundStr(userName, acedemicYear);
+			 
+			 response.addResponse("currentRoundStr",currentRoundStr);			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+		return response;
+	}
+	
+	
 	@Override
 	public BuckWaResponse getByYear(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();

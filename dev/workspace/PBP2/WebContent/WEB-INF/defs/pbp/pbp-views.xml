@@ -12,6 +12,7 @@
 	<bean id="anonymous"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymous" /></bean>	
 	<bean id="anonymousAcademicKPIList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymousAcademicKPIList" /></bean>
 	<bean id="anonymousAcademicKPIListAll"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="anonymousAcademicKPIListAll" /></bean>
+	<bean id="userManual"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="userManual" /></bean>	
 	
 	<!--  Start Admin -->
 	

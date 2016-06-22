@@ -25,6 +25,7 @@ import com.buckwa.domain.pam.Semester;
 import com.buckwa.domain.pbp.AcademicKPI;
 import com.buckwa.domain.pbp.AcademicKPIAttribute;
 import com.buckwa.domain.pbp.AcademicKPIWrapper;
+import com.buckwa.domain.pbp.AcademicPerson;
 import com.buckwa.domain.pbp.AcademicYear;
 import com.buckwa.domain.pbp.AcademicYearEvaluateRound;
 import com.buckwa.domain.pbp.AcademicYearWrapper;
@@ -32,6 +33,7 @@ import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.FacultyWrapper;
 import com.buckwa.domain.pbp.PBPWorkType;
+import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
 import com.buckwa.web.util.AcademicYearUtil;
 
@@ -107,13 +109,58 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 			}
 			academicYearWrapper.setAcademicYearEvaluateRoundList(academicYearEvaluateRoundList);
 		}
-		
-	 
-		
-		
+		 
 		return academicYearWrapper;
 	}
 	
+	@Override
+	public String getCurrentEvalulateRoundStr( String userName,String academicYear) {		
+		
+		String returnStr ="";
+		
+		
+		
+		String sqlacademicPerson = "  select * from person_pbp   where email ='"+userName+"'  and  academic_year='"+academicYear+"'";		 
+		AcademicPerson academicPerson  = this.jdbcTemplate.queryForObject(sqlacademicPerson,	new AcademicPersonMapper() ); 
+		
+		String employeeType = academicPerson.getEmployeeTypeNo();
+		
+		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
+		logger.info(" sqlRound:"+sqlRound);
+		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+		
+		 logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		
+		 long startTime =0l;
+		 long endTime =0l;
+		 
+		 Timestamp startTimeStamp = null;
+		 Timestamp endTimeStamp = null;
+		 String round ="1";
+		 if(employeeType.equalsIgnoreCase("1")){
+			 
+			 long round1EndLong = academicYearEvaluateRound.getRound1EndDate().getTime();
+			 
+			 if(round1EndLong-System.currentTimeMillis()>0){  
+				 
+				 returnStr="ข้าราชการ รอบ 1: "+academicYearEvaluateRound.getRound1StartDateShortThaiStr()+" - "+academicYearEvaluateRound.getRound1EndDateShortThaiStr();
+			 }else{
+				 returnStr="ข้าราชการ รอบ 2: "+academicYearEvaluateRound.getRound2StartDateShortThaiStr()+" - "+academicYearEvaluateRound.getRound2EndDateShortThaiStr();
+			 }
+			 
+
+			 
+		 }else{
+			 returnStr="พนักงาน รอบ:  "+academicYearEvaluateRound.getRound1StartDateShortThaiStr()+" - "+academicYearEvaluateRound.getRound1EndDateShortThaiStr();
+
+			 
+		 }
+				 
+ 
+		return returnStr;
+	}
+	
+
 
 	@Override
 	public AcademicYearWrapper getFullAcademicYear( ) {		
@@ -715,4 +762,27 @@ CREATE TABLE  `pbp`.`academic_evaluate_round` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	 */
 	
+	
+	private static class AcademicPersonMapper implements RowMapper<AcademicPerson> {
+		@Override
+		public AcademicPerson mapRow(ResultSet rs, int rowNum) throws SQLException {
+			AcademicPerson domain = new AcademicPerson();
+			domain.setPersonId(rs.getLong("person_id"));
+			//domain.setEmployeeId(rs.getString("employee_id"));
+			//domain.setCitizenId(rs.getString("citizen_id"));
+			
+			domain.setThaiName(rs.getString("thai_name").trim());
+			domain.setThaiSurname(rs.getString("thai_surname"));
+	
+			domain.setEmail(rs.getString("email"));
+			domain.setFacultyDesc(rs.getString("faculty_desc"));
+			domain.setDepartmentDesc(rs.getString("department_desc"));
+			domain.setIsDean(rs.getString("is_dean"));
+			domain.setIsHead(rs.getString("is_head"));
+			domain.setIsPresident(rs.getString("is_president"));
+			domain.setEmployeeType(rs.getString("employee_type"));
+			domain.setRegId(rs.getString("reg_id"));
+			return domain;
+		}
+	}
 }

@@ -505,8 +505,9 @@ public class HeadController {
 			request.put("headUserName",headUserName);
 			request.put("academicYear",academicYear);
 			request.put("status",""); 
-			BuckWaResponse response = headService.getDepartmentMark(request);
-			//BuckWaResponse response = headService.getDepartmentMarkByDepCode(request);
+			
+			//BuckWaResponse response = headService.getDepartmentMark(request);			 
+			BuckWaResponse response = headService.getDepartmentMarkAllYear(request);
 			
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	
 				Department department = (Department)response.getResObj("department"); 

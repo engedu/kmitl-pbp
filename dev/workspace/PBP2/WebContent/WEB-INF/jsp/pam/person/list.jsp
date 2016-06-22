@@ -338,7 +338,7 @@
                         visible: true,
                     },
                     min: 0,
-                    max: 1000
+                    max: ${maxValue}
                 },
                 tooltip: {
                     visible: true,

@@ -18,8 +18,10 @@ import com.buckwa.domain.common.BuckWaResponse;
 import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pbp.AcademicYearWrapper;
 import com.buckwa.service.intf.pam.PersonProfileService;
+import com.buckwa.service.intf.pbp.AcademicYearService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
+import com.buckwa.util.school.SchoolUtil;
 
 @Controller
 public class CommonController {  
@@ -29,12 +31,22 @@ public class CommonController {
 	private PersonProfileService personProfileService;
 	
 	@Autowired
+	private AcademicYearService academicYearService;	
+	
+	
+	@Autowired
 	private AcademicYearDao academicYearDao;
+	
+	@Autowired
+	private SchoolUtil schoolUtil;
 	
 	@RequestMapping(value = "/preLogin.htm")
 	public ModelAndView preLogin(HttpServletRequest httpRequest) {
 		logger.info(" # preLogin ");
 		ModelAndView mav = new ModelAndView();
+		
+		String currentAcademicYear =schoolUtil.getCurrentAcademicYear();
+		mav.addObject("academicYearStr", currentAcademicYear);
 		mav.setViewName("preLogin");
 		
 		//String url = httpRequest.getContextPath() + "/anonymous.htm";
@@ -74,6 +86,8 @@ public class CommonController {
 			url = httpRequest.getContextPath() + "/preLogin.htm";
 		}
 		
+		String currentAcademicYear =schoolUtil.getCurrentAcademicYear();
+		mav.addObject("academicYearStr", currentAcademicYear);
 		logger.info(" ### URL by Role:"+url);
 		mav.setView(new RedirectView(url));
 		return mav;	
@@ -113,6 +127,14 @@ public class CommonController {
 					Person person = (Person) response.getResObj("person");
 					user.setFirstLastName(person.getThaiName()+" "+person.getThaiSurname()); 
 				} 
+				
+				
+				response = academicYearService.getCurrentEvalulateRoundStr(request);
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					String currentRoundStr = (String) response.getResObj("currentRoundStr");
+					user.setCurrentRoundStr(currentRoundStr);
+				} 
+				
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				mav.addObject(BuckWaConstants.ERROR_CODE, BuckWaConstants.ERROR_E001);
