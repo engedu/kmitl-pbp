@@ -61,6 +61,7 @@ public class ChainOfCommandController {
 				mav.addObject("facultyWrapper", facultyWrapper);	
 				facultyWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
 			}	
+			
 	 		  
 		}catch(Exception ex){
 			ex.printStackTrace();

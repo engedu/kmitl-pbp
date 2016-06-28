@@ -66,7 +66,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	@Autowired
 	private GenerateCodeUtil  generateCodeUtil;
 	
-	
+ 
 	@Autowired
 	private GroupDao groupDao;
  
@@ -948,6 +948,8 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 	
 	
+	
+	
 	@Override
 	public void updateFacultyWSChum(List<com.buckwa.ws.chum.oxm.Faculty> facultyList) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(facultyList));	
@@ -1086,7 +1088,49 @@ public class FacultyDaoImpl implements FacultyDao {
 	  
 	}
 	
-	 
+	
+	@Override
+	public void updateDepartmentWSChum(List<com.buckwa.ws.chum.oxm.Department> departmentList) {
+		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
+		
+		for(com.buckwa.ws.chum.oxm.Department tmp:departmentList){
+			
+			
+			final com.buckwa.ws.chum.oxm.Department finaldepartment = tmp; 
+			
+			// Check aready exist
+			final String academicYear = schoolUtil.getCurrentAcademicYear();
+			boolean isExist = isDepartmentWSExistChum(finaldepartment,academicYear);
+		 
+			if(!isExist){
+				
+				//final int nexCode = generateCodeUtil.getNextDepartmentCode(academicYear);
+				KeyHolder keyHolder = new GeneratedKeyHolder(); 
+				jdbcTemplate.update(new PreparedStatementCreator() {  
+					public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+						PreparedStatement ps = connection.prepareStatement("" +						
+								"  insert into department (name, academic_year,code,faculty_code,eng_name) values (?, ?,?,?,?)" +
+							 "", Statement.RETURN_GENERATED_KEYS);   
+						ps.setString(1,finaldepartment.getDepartmentName());
+						ps.setString(2,academicYear); 
+						ps.setString(3, finaldepartment.getDepartmentId());
+						ps.setString(4, finaldepartment.getFacultyId());
+						ps.setString(5, finaldepartment.getDepartmentEname());
+						return ps;  
+						}
+					}, 	keyHolder); 	
+				Long returnid =  keyHolder.getKey().longValue();	
+				
+			}				
+			}
+			
+
+
+	  
+	}
+	
+	
+	
 	
 	@Override
 	public void updateTeachTableWS(int semester,List<com.buckwa.ws.newws.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
@@ -1202,6 +1246,21 @@ public class FacultyDaoImpl implements FacultyDao {
 								subjectRemark ="นำเข้าผลงานเอง";
 							}
 							
+							int pracHr = 0;
+							
+							try{
+								pracHr =Integer.parseInt(subject.getPracHr());
+							}catch(Exception ex){
+								ex.printStackTrace();
+							}
+							
+							if(pracHr>=8){
+								subjectRemark ="นำเข้าผลงานเอง";
+								isInRejectList = true;
+								
+								logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+"  PracHr > 8 -----------------> Eject");
+							}
+							
 							final String finalRemark = subjectRemark;
 							
 							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach +" finalRemark:"+finalRemark+" isInRejectList:"+isInRejectList);
@@ -1311,7 +1370,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	}
 	
 	@Override
-	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear) {
+	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> teachTableList,int degree,String facultyCode,String academicYear,String regId) {
 		//logger.info(" #  : "+BeanUtils.getBeanString(departmentList));	
 		
 		for(com.buckwa.ws.chum.oxm.TeachTable tmp:teachTableList){ 
@@ -1324,8 +1383,13 @@ public class FacultyDaoImpl implements FacultyDao {
 			}else{ 
 			// Check aready exist
 			//final String academicYear = schoolUtil.getCurrentAcademicYear();
-			boolean isExist = isTeachtableWSExistChum(finalTeachtable,academicYear);
-			
+				
+				 
+				String newRegId = regId;
+	 
+				
+			boolean isExist = isTeachtableWSExistChum(finalTeachtable,academicYear,newRegId);
+		 
 			if(!isExist){  
 				
 				try{
@@ -1415,7 +1479,7 @@ public class FacultyDaoImpl implements FacultyDao {
 							//	logger.info(" ############################################ Incorrect Size:"+ subJectListReturnList.size());
 							}
 							final com.buckwa.ws.chum.oxm.Subject subject=subJectListReturnList.get(0);
-							
+							 
 							
 							boolean isInRejectList = checkInRejectList(subject.getSubjectId());
 							
@@ -1424,7 +1488,26 @@ public class FacultyDaoImpl implements FacultyDao {
 								subjectRemark ="นำเข้าผลงานเอง";
 							}
 							
+							int pracHr = 0;
+							
+							try{
+								pracHr =Integer.parseInt(subject.getPracHr());
+							}catch(Exception ex){
+								ex.printStackTrace();
+							}
+							
+							if(pracHr>=8){
+								subjectRemark ="นำเข้าผลงานเอง";
+								isInRejectList = true;
+								
+								logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+"  PracHr > 8 -----------------> Eject");
+							}
+							
 							final String finalRemark = subjectRemark;
+							
+					 
+							
+							finalTeachtable.setTeacherId(newRegId);
 							
 							logger.info(" "+finalTeachtable.getSubjectId()+" :"+subject.getSubjectEname()+" Co-Teach:"+finalIsCoTeach +" finalRemark:"+finalRemark+" isInRejectList:"+isInRejectList);
 							
@@ -1477,7 +1560,7 @@ public class FacultyDaoImpl implements FacultyDao {
 									ps.setString(18, subject.getLectHr()+"");
 									ps.setString(19, subject.getPracHr()+"");
 									ps.setString(20, subject.getCredit()+"");
-									ps.setString(21, SchoolConstants.FROM_SOUCE_REG);
+									ps.setString(21, SchoolConstants.FROM_SOUCE_REG_CHUM);
 									ps.setString(22, finalIsCoTeach);
 									ps.setString(23, finalRemark);
 									
@@ -1499,11 +1582,11 @@ public class FacultyDaoImpl implements FacultyDao {
 							}else{
 								logger.info(" ############################### Check Reject False , So Create Work #########################");
 								
-								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTableChum(tmp,subject,finalIsCoTeach,academicYear,facultyCode);
+								AcademicKPIUserMapping academicKPIUserMapping =  getMatchingKPITeachTableChum(tmp,newRegId,subject,finalIsCoTeach,academicYear,facultyCode);
 								 
 								
 								academicKPIUserMapping.setIsCoTeach(finalIsCoTeach);
-								academicKPIUserMapping.setFromSource(SchoolConstants.FROM_SOUCE_REG);	
+								academicKPIUserMapping.setFromSource(SchoolConstants.FROM_SOUCE_REG_CHUM);	
 								 
 								
 								academicKPIUserMapping.setStatus("APPROVED");
@@ -2049,7 +2132,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 	}
 	
-	private AcademicKPIUserMapping getMatchingKPITeachTableChum(com.buckwa.ws.chum.oxm.TeachTable timetable, com.buckwa.ws.chum.oxm.Subject subject,final String finalIsCoTeach,String academicYear,String facultyCode){
+	private AcademicKPIUserMapping getMatchingKPITeachTableChum(com.buckwa.ws.chum.oxm.TeachTable timetable,String teacherId, com.buckwa.ws.chum.oxm.Subject subject,final String finalIsCoTeach,String academicYear,String facultyCode){
 		AcademicKPIUserMapping returnObj = new AcademicKPIUserMapping();;
 		
 		try{
@@ -2124,7 +2207,7 @@ public class FacultyDaoImpl implements FacultyDao {
 					
 					
 					
-					String userName =schoolUtil.getUserNameFromRegId(timetable.getTeacherId(),academicYear);
+					String userName =schoolUtil.getUserNameFromRegId(teacherId,academicYear);
 					
 					
 					returnObj.setAcademicKPICode(zeroKPI.getCode());
@@ -2261,7 +2344,28 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 		return returnValue;
 	}
+	
+	private boolean isDepartmentWSExistChum (com.buckwa.ws.chum.oxm.Department departmentws,String academicYear){
+		boolean returnValue = false;
+		try{
+			
+			String sqltmp = "select count(*) as totalItem  from department t  where t.code='"+StringEscapeUtils.escapeSql(departmentws.getDepartmentId())+"' and faculty_code='"+departmentws.getFacultyId()+"' and academic_year="+academicYear;
+			//logger.info(" # sqltmp : "+sqltmp );	
+			Long found = this.jdbcTemplate.queryForLong(sqltmp);
+			if(found!=null&&found.intValue()>0){
+				returnValue = true;
+			//	logger.info(" Found Departement :"+departmentws.getDepartmentName()+"   , Do nothing !!");
+			}else{
+			//	logger.info(" Not Found Department :"+departmentws.getDepartmentName()+"   , Create New !!");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+	}
 
+	
 	private boolean isTeachtableWSExist (com.buckwa.ws.newws.oxm.TeachTable teachtablews,String academicYear){
 		boolean returnValue = false;
 		try{
@@ -2310,7 +2414,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		
 		return returnValue;
 	}
-	private boolean isTeachtableWSExistChum (com.buckwa.ws.chum.oxm.TeachTable teachtablews,String academicYear){
+	private boolean isTeachtableWSExistChum (com.buckwa.ws.chum.oxm.TeachTable teachtablews,String academicYear,String newRegId){
 		boolean returnValue = false;
 		try{
 			
@@ -2324,7 +2428,7 @@ public class FacultyDaoImpl implements FacultyDao {
 					//+ "t.faculty_id='"+StringEscapeUtils.escapeSql(teachtablews.getDepartmentId())+"'"
 					//+ " and t.dept_id='"+teachtablews.getDepartmentId()+"' "
 					//+ " and t.curr_id='"+teachtablews.getCurrId()+"' "
-					+ " and t.teacher_id='"+teachtablews.getTeacherId()+"' "
+					+ " and t.teacher_id='"+newRegId+"' "
 					+ " and t.subject_id='"+teachtablews.getSubjectId()+"' "
 					+ " and t.semester='"+teachtablews.getSemester()+"' "
 					+ " and t.year='"+teachtablews.getYear()+"' "
@@ -2336,16 +2440,16 @@ public class FacultyDaoImpl implements FacultyDao {
 					 
 			
 			
-			//logger.info(" # sqltmp Check Dup : "+sqltmp );	
+			logger.info(" # sqltmp Check Dup : "+sqltmp );	
 			Long found = this.jdbcTemplate.queryForLong(sqltmp);
 			//logger.info(" ##### found lond:"+found);
 			if(found!=null&&found.intValue()>0){
 				returnValue = true;
 				 
-				//logger.info(" #  Found Dup Do noting !!! " );
+				logger.info(" #  Found Dup Do noting !!! " );
 			}else{
 				
-				//logger.info(" #  Not Found Dup Insert New !!! " );
+				logger.info(" #  Not Found Dup Insert New !!! " );
 			}
 			
 			}
@@ -2413,6 +2517,16 @@ public class FacultyDaoImpl implements FacultyDao {
 		this.jdbcTemplate.update("delete  from academic_kpi_user_mapping where from_source ='REG' and  academic_year="+academicYear); 
 		this.jdbcTemplate.update("delete  from academic_kpi_attribute_value where from_source ='REG' and  academic_year="+academicYear); 
 		this.jdbcTemplate.update("delete  from time_table where from_source ='REG' and  year="+academicYear); 
+		
+	}
+	
+	
+	@Override
+	public void deleteTimeTableAndMappingChum(String academicYear) {
+		// TODO Auto-generated method stub
+		this.jdbcTemplate.update("delete  from academic_kpi_user_mapping where from_source ='REG_CHUM' and  academic_year="+academicYear); 
+		this.jdbcTemplate.update("delete  from academic_kpi_attribute_value where from_source ='REG_CHUM' and  academic_year="+academicYear); 
+		this.jdbcTemplate.update("delete  from time_table where from_source ='REG_CHUM' and  year="+academicYear); 
 		
 	}
 

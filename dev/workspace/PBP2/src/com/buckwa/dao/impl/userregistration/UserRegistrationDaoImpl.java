@@ -330,7 +330,7 @@ public class UserRegistrationDaoImpl implements UserRegistrationDao {
 	public User getUserByUsernameFromBuckwa(String userName) { 
 		
 		String sql = " select * from buckwauser where username ='"+userName+"'";		
-		logger.info("##SQL : " + sql);
+//		logger.info("##SQL : " + sql);
 		RowMapper<User> mapper = new RowMapper<User>() {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User domain = new User();						 

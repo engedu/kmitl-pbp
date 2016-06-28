@@ -849,7 +849,7 @@ public class PersonProfileController {
 					List<AcademicKPIAttribute> ratioList =academicKPI.getAcademicKPIAttributeList();
 					for(AcademicKPIAttribute tmp:ratioList){
 						String attributeName =tmp.getName();
-						logger.info(" Attribute Name:"+attributeName+" index of �Ѵ��ǹ:"+attributeName.indexOf("สัดส่วน"));
+						logger.info(" Attribute Name:"+attributeName+" index of สัดส่วน:"+attributeName.indexOf("สัดส่วน"));
 						
 						if(attributeName.indexOf("สัดส่วน")!=-1){
 							tmp.setValue("100");

@@ -84,12 +84,13 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 		sb.append( "  create_by,      " );
 		sb.append( "  create_date,    " );
 		sb.append( "  update_by,      " );
-		sb.append( "  update_date )   " );
+		sb.append( "  update_date ,  " );
+		sb.append( "  citizen_id )   " );
 		sb.append( " VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " );
 		sb.append( "  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " );
 		sb.append( "  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " );
 		sb.append( "  ?, ?," );
-		sb.append( " 'A',?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP ) " );
+		sb.append( " 'A',?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP ,?) " );
 
 		PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {
@@ -128,7 +129,7 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				ps.setString( 32, person.getPersonType());
 				ps.setString( 33, person.getCreateBy());
 				ps.setString( 34, person.getUpdateBy());
-				
+				ps.setString( 35, person.getCitizenId());
 				return ps;  
 			}
 		};
@@ -193,12 +194,12 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 
 		
 		sb.append( "  update_date,       " );
-		sb.append( "  reg_id        " );
-		
+		sb.append( "  reg_id   ,     " );
+		sb.append( "  citizen_id        " );
 		
 		sb.append( " ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?,?,?,  " );
  
-		sb.append( " ?, CURRENT_TIMESTAMP, ?,?, CURRENT_TIMESTAMP,? ) " );
+		sb.append( " ?, CURRENT_TIMESTAMP, ?,?, CURRENT_TIMESTAMP,?,? ) " );
 
 		PreparedStatementCreator preparedStatementCreator = new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {
@@ -218,13 +219,14 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				ps.setString( 11, person.getPicture());
 				
 				System.out.println(" person.getWorkingDate():"+person.getWorkingDate()+"     person.getBirthdate():"+person.getBirthdate());
-				ps.setDate( 11, new java.sql.Date(person.getWorkingDate().getTime()));
-				ps.setDate( 12, new java.sql.Date(person.getBirthdate().getTime()));
+				ps.setDate( 12, new java.sql.Date(person.getWorkingDate().getTime()));
+				ps.setDate( 13, new java.sql.Date(person.getBirthdate().getTime()));
 				
-				ps.setString( 13, person.getCreateBy());
-				ps.setString( 14, person.getUpdateBy());
-				ps.setString( 15, currentAcademicYearFinal );
-				ps.setString( 16, person.getRegId() );
+				ps.setString( 14, person.getCreateBy());
+				ps.setString( 15, person.getUpdateBy());
+				ps.setString( 16, currentAcademicYearFinal );
+				ps.setString( 17, person.getRegId() );
+				ps.setString( 18, person.getCitizenId() );
 				return ps;  
 			}
 		};
@@ -349,7 +351,8 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 		"     picture = ?, " +
 		"     person_type = ?, " +
 		"     update_by = ?, " +
-		"     update_date = CURRENT_TIMESTAMP " +
+		"     update_date = CURRENT_TIMESTAMP , " +
+		"     citizen_id = ? " +
 		" WHERE email = ? ";
 	
 	 
@@ -380,6 +383,7 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				person.getPicture(),
 				person.getPersonType(),
 				person.getUpdateBy(),
+				person.getCitizenId(),
 				person.getEmail()
 			});
 			
@@ -412,8 +416,8 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 		sb.append( "  max_education =?,       " );
 		sb.append( "  reg_id =?,       " ); 
 		sb.append( "  working_date =?,       " );
-		sb.append( "  birth_date =?       " );
-  
+		sb.append( "  birth_date =? ,      " );
+		sb.append( "  citizen_id =?       " );
 		sb.append( "  where email =?  and academic_year=?   " );
  
 
@@ -434,8 +438,9 @@ public class ImportProfileDaoImpl implements ImportProfileDao {
 				ps.setString( 10, person.getRegId() );
 				ps.setDate( 11, new java.sql.Date(person.getWorkingDate().getTime()));
 				ps.setDate( 12, new java.sql.Date(person.getBirthdate().getTime()));
-				ps.setString( 13 , person.getEmail());
-				ps.setString( 14, currentAcademicYearFinal );
+				ps.setString( 13 , person.getCitizenId());
+				ps.setString( 14 , person.getEmail());
+				ps.setString( 15, currentAcademicYearFinal );
 	 
 	 
 				return ps;  

@@ -162,15 +162,13 @@ public class HeadDaoImpl implements HeadDao {
 	public AcademicKPIUserMappingWrapper getByHeadAcademicYear( String headUserName ,String academicYear,String status) {	 
 		
 		AcademicKPIUserMappingWrapper   academicKPIUserMappingWrapper = new AcademicKPIUserMappingWrapper(); 
-		// Get Department belong to head
-		
-		//String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.department_desc) 	where p.email='"+headUserName+"' and p.academic_year='"+academicYear+"'  and d.academic_year='"+academicYear+"'";
-		String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.head_department) 	where p.email='"+headUserName+"' and p.academic_year='"+academicYear+"'  and d.academic_year='"+academicYear+"'";
+ 		String sqlDepartment = " select d.* from department d 	inner join person_pbp p on (d.name=p.head_department) 	where p.email='"+headUserName+"' and p.academic_year='"+academicYear+"'  and d.academic_year='"+academicYear+"'";
 
-		logger.info("  getByHeadAcademicYear sqlDepartment:"+sqlDepartment);
+		//logger.info("  getByHeadAcademicYear sqlDepartment:"+sqlDepartment);
 		Department department=null;
 		try{
 			department = this.jdbcTemplate.queryForObject(sqlDepartment,	new DepartmentMapper() );	
+			logger.info("  Department :"+department.getCode()+":"+department.getName());
 		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
 			ex.printStackTrace();
 		}
@@ -178,7 +176,7 @@ public class HeadDaoImpl implements HeadDao {
 			
 			// Get User belong to department 
 			String sqlacademicPerson = "  select * from person_pbp where department_desc ='"+department.getName()+"'  and  academic_year='"+academicYear+"'";
-			logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
+			//logger.info("  getByHeadAcademicYear sqlacademicPerson:"+sqlacademicPerson);
 			List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlacademicPerson,	new AcademicPersonMapper() );
 			
 			
@@ -186,18 +184,19 @@ public class HeadDaoImpl implements HeadDao {
 		    int departmentTotalNotApprove = 0;
 			int totalByDepartment =0;
 			
-			
+			int loop =1;
 			for(AcademicPerson personTmp:academicPersonList){
 				
 				// Get KPI User Mapping 
+				logger.info("  Loop :"+loop+++":"+personTmp.getThaiName()+" "+personTmp.getThaiSurname());
 				
 				String employeeType = personTmp.getEmployeeTypeNo();
 				
 				String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
-				logger.info(" sqlRound:"+sqlRound);
+				///logger.info(" sqlRound:"+sqlRound);
 				 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 				
-				 logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+				 //logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
 				
 				 long startTime =0l;
 				 long endTime =0l;
@@ -209,23 +208,23 @@ public class HeadDaoImpl implements HeadDao {
 					 
 					 long round1EndLong = academicYearEvaluateRound.getRound1EndDate().getTime();
 					 
-					 if(round1EndLong-System.currentTimeMillis()>0){
-						 logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 1");
+					 //if(round1EndLong-System.currentTimeMillis()>0){
+						 //logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 1");
 						 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
 						 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
 						 
-						 endTime = academicYearEvaluateRound.getRound1EndDate().getTime();
-						 endTimeStamp = academicYearEvaluateRound.getRound1EndDate();						 
-					 }else{
-						 logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 2");
-						 round ="2";
-						 startTime = academicYearEvaluateRound.getRound2StartDate().getTime();
-						 startTimeStamp = academicYearEvaluateRound.getRound2StartDate();
+						// endTime = academicYearEvaluateRound.getRound1EndDate().getTime();
+						// endTimeStamp = academicYearEvaluateRound.getRound1EndDate();						 
+					// }else{
+						// logger.info(" round 1 Start From:"+academicYearEvaluateRound.getRound1StartDate()+" to "+academicYearEvaluateRound.getRound1EndDate()+" doday :"+new Timestamp(System.currentTimeMillis()) +" so use round 2");
+					//	 round ="2";
+					//	 startTime = academicYearEvaluateRound.getRound2StartDate().getTime();
+					//	 startTimeStamp = academicYearEvaluateRound.getRound2StartDate();
 						 
 						 endTime = academicYearEvaluateRound.getRound2EndDate().getTime();
 						 endTimeStamp = academicYearEvaluateRound.getRound2EndDate();
 						 
-					 }
+					// }
 					 
  
 					 
@@ -315,7 +314,7 @@ public class HeadDaoImpl implements HeadDao {
 						// departmentTotalApproved   =departmentTotalApproved+ totalApproved;
 					   //  departmentTotalNotApprove  =  departmentTotalNotApprove+totalNotApprove;
 					     
-					     logger.info(" departmentTotalApproved:"+departmentTotalApproved+"     departmentTotalNotApprove:"+departmentTotalNotApprove);
+//					     logger.info(" departmentTotalApproved:"+departmentTotalApproved+"     departmentTotalNotApprove:"+departmentTotalNotApprove);
 					     
 					     totalByPerson= totalByPerson+totalApproved+totalNotApprove;
 					     

@@ -58,7 +58,7 @@
 		                    <input type="text"  name="academicKPIAttributeList[${status.index}].value" value="${domain.value}"  id="academicKPIAttributeList${status.index}" />
 		                    <input type="hidden"  name="academicKPIAttributeList[${status.index}].name"  value="${domain.name}"  />
 		                   	<span class="require">*</span> <form:errors		path="unitCode" cssClass="require" />
-		                   	 <c:if test="${domain.isValidateNumber=='Y'}">กรอกค่าตัวเลขเท่านั้นไม่เกิน 100 </c:if>
+		                   	 <c:if test="${domain.isValidateNumber=='Y'}">กรอกค่าตัวเลข</c:if>
 		                   	 <c:if test="${domain.isValidateNumber=='Y'}"> 
 		                   	 	<script> 
 		                   	 	$(document).ready (function(){

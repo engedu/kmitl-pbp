@@ -41,6 +41,7 @@ import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
+import com.buckwa.web.util.AcademicYearUtil;
 import com.googlecode.charts4j.AxisLabels;
 import com.googlecode.charts4j.AxisLabelsFactory;
 import com.googlecode.charts4j.AxisStyle;
@@ -78,8 +79,12 @@ public class HeadController {
 	@Autowired
 	private WebboardTopicService  webboardTopicService;
 	
+	@Autowired
+	private AcademicYearUtil academicYearUtil;
+	
+	
 	@RequestMapping(value="init.htm", method = RequestMethod.GET)
-	public ModelAndView initList() {
+	public ModelAndView initList(@RequestParam("academicYear") String academicYear) {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("headWorkList");
@@ -87,7 +92,11 @@ public class HeadController {
 			BuckWaRequest request = new BuckWaRequest(); 
 			 
 			String headUserName = BuckWaUtils.getUserNameFromContext();
-			String academicYear =schoolUtil.getCurrentAcademicYear();
+			
+			if(academicYear==null||academicYear.length()==0){
+				academicYear =schoolUtil.getCurrentAcademicYear();
+			}
+		//	String academicYear =schoolUtil.getCurrentAcademicYear();
 			
 			request.put("headUserName",headUserName);
 			request.put("academicYear",academicYear);
@@ -97,8 +106,10 @@ public class HeadController {
 				AcademicKPIUserMappingWrapper academicKPIUserMappingWrapper = (AcademicKPIUserMappingWrapper)response.getResObj("academicKPIUserMappingWrapper");
 			 
 				academicKPIUserMappingWrapper.setAcademicYear(academicYear);
+				academicKPIUserMappingWrapper.setAcademicYearList(academicYearUtil.getAcademicYearList());
 				mav.addObject("academicKPIUserMappingWrapper", academicKPIUserMappingWrapper);	
-			}				  
+			}		
+			 
 		}catch(Exception ex){
 			ex.printStackTrace();
 			mav.addObject("errorCode", "E001"); 

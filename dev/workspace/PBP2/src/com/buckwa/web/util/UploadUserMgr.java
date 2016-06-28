@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -163,9 +164,21 @@ public class UploadUserMgr {
 			user.setUsername(getCellValue(r.getCell(4), 4));
 			user.setPassword("5f4dcc3b5aa765d61d8327deb882cf99");
 			String name = getCellValue(r.getCell(3), 3);
-			logger.info("## name : " + name);
-			user.setFirst_name(name.split(" ")[0]);
-			user.setLast_name(name.split(" ")[1]);
+			
+		 
+			
+			StringTokenizer st = new StringTokenizer(name);
+		 
+		     user.setFirst_name(st.nextToken());
+		     user.setLast_name(st.nextToken());
+		     
+		    	
+		     
+		 
+			
+			//user.setFirst_name(name.split(" ")[0]);
+			//logger.info("## name 0: " + name.split(" ")[0]);
+		//	user.setLast_name(name.split(" ")[1]);
 			user.setEmail(getCellValue(r.getCell(4), 4));
 			user.setEnabled(true);
 			user.setIcNumber(getCellValue(r.getCell(2), 2));
@@ -197,6 +210,7 @@ public class UploadUserMgr {
 	public String getCellValue(Cell c ,int index){
 		String v = "";
 		try{
+			
 			switch (c.getCellType()) {
 			
 			case Cell.CELL_TYPE_STRING:
@@ -209,7 +223,10 @@ public class UploadUserMgr {
 				    if (HSSFDateUtil.isCellDateFormatted(c)) { 
 				           v=BuckWaDateUtils.get_MMddyyyy_thai_from_date(c.getDateCellValue()); 
 				    }else{
-				    	v = String.valueOf( c.getNumericCellValue()) ;
+				    	//c.setCellType(Cell.CELL_TYPE_STRING);
+				    	logger.info("## CELL ปปปปป: " + index + " : " + c.getNumericCellValue()+" after read:"+v);
+				    	Double numbervalue = c.getNumericCellValue();
+				    	v = String.valueOf( (numbervalue==null)? "" : numbervalue.longValue()) ;
 				    }
 				 
 				    logger.info("## CELL : " + index + " : " + c.getNumericCellValue()+" after read:"+v);
@@ -224,6 +241,12 @@ public class UploadUserMgr {
 				}
 				break;
 			}
+			
+
+			
+			
+			
+			
 		}catch(Exception e){
 			logger.info("## CELL ERROR " );
 			return null;
@@ -292,8 +315,8 @@ public class UploadUserMgr {
 		failList = new ArrayList<User>();
 		logger.info("*************** INSERT DATA *********************");
 		for(User u : listSuccessLogin){
-			logger.info("*************** INSERT LOOP *********************");
-			logger.info("*************** USERNAME  : " + u.getUsername());
+		//	logger.info("*************** INSERT LOOP *********************");
+		//	logger.info("*************** USERNAME  : " + u.getUsername());
 			//find detail
 			Person person = this.findPersonData( u.getIcNumber(),u.getRegId());
 			
@@ -314,7 +337,7 @@ public class UploadUserMgr {
 					u.setStatusRecord("CREATE");
 					isUserSuccess = true;
 				}else{
-					logger.info("## userRegistrationDao.update2");
+//					logger.info("## userRegistrationDao.update2");
 					userRegistrationDao.updateUserRegister(u);
 					u.setStatusRecord("UPDATE");
 					isUserSuccess = true;
@@ -324,11 +347,11 @@ public class UploadUserMgr {
 				if(person != null){
 					isPersonSucess = false;
 					if( importProfileDao.isExistPerson( u.getUsername()) == false){
-						logger.info("## importProfileDao.createPBP");
+						//logger.info("## importProfileDao.createPBP");
 						importProfileDao.createPBP(person);
 						isPersonSucess = true;
 					}else{
-						logger.info("## importProfileDao.updatePBP");
+						//logger.info("## importProfileDao.updatePBP");
 						//importProfileDao.updatePBP(person);
 						importProfileDao.updatePBPNew(person);
 						isPersonSucess = true;
@@ -355,8 +378,9 @@ public class UploadUserMgr {
 		if(icNumber == null) return person;
 		
 		for(Person p : listSuccessPerson){
+			logger.info(" IC:"+icNumber+":"+p.getCitizenId());
 			if(icNumber.equals( p.getCitizenId())){
-				logger.info("findPersonData : " + icNumber + " : " + p.getCitizenId()+" RegId:"+regId);
+				logger.info("findPersonData : "+p.getUsername() + icNumber + " : " + p.getCitizenId()+" RegId:"+regId);
 				p.setRegId(regId);
 				return p;
 			}

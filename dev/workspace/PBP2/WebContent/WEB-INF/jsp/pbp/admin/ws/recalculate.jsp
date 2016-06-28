@@ -35,7 +35,7 @@
 					 
 					<td class="tdLast"  style="text-align: center;" >	 
 					 <a rel="notLoading" href="<%=request.getContextPath()%>/admin/timetablews/recalculate.htm?academicYear=<c:out value="${academicYearStr}"/>&semester=1">  
-								 <input class="btn btn-primary" value="Re-Calculate" type="button"   /> 
+								 <input class="btn btn-primary" value="Re-Calculate All" type="button"   /> 
 					 </a> 
 						 
 					</td> 
@@ -53,6 +53,61 @@
 		</div>		
  
 	</div>
+	
+	
+			 <div class="pbptableWrapper">
+            
+             
+			<table class="pbp-table">
+				<thead>
+				    <tr><th colspan="4"> 
+		               <div class="pbp-header">  
+			 <a rel="notLoading" href="<%=request.getContextPath()%>/admin/timetablews/recalculateAllDepartment.htm">  
+								 <input class="btn btn-primary" value="คำนวนทุกคณะ" type="button"   /> 
+					 </a> 
+  </div> 
+				    </th>
+				    </tr>
+				    <tr>
+					<th class="thFirst">คณะ</th> 
+					<th class="thLast">ภาควิชา</th>
+					 <th class="thLast">Recalculate</th>
+	                </tr>  
+				</thead>
+				<tbody>
+				<c:forEach items="${facultyWrapper.facultyList}" var="domain"  varStatus="status"> 
+					<tr>
+						<td class="tdFirst" width="10%;">
+							 <c:out value="${domain.name}"/>   
+						</td>
+ 						<td class="tdFirst" width="20%;" colspan="2" > 
+						
+						 <table>
+						 <c:forEach items="${domain.departmentList}" var="domain2"   varStatus="status2">  
+						    <tr> 
+						    	<td>
+					  <c:out value="${domain2.name}"/>   
+						    	
+						    	</td>
+						    	<td>
+   
+					  <a rel="notLoading" href="<%=request.getContextPath()%>/admin/timetablews/recalculateByDepartment.htm?headUserName=<c:out value="${domain2.head.email}"/>"> RecalCulate</a><br>
+						    	
+						    	</td>
+						    </tr>
+						 </c:forEach>						 
+						 </table>
+ 
+
+			</td>
+					</tr>				
+				</c:forEach>				
+ 									
+				</tbody>
+			</table>
+			 
+		</div> 
+		</div>
 </div>
 </form:form>
 <script>

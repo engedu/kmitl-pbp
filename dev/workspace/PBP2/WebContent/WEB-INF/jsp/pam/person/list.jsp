@@ -321,12 +321,14 @@
                 },
                 series: [{
                     name: "คะแนนรวมรออนุมัติ",
-                    field: "axisValue2"
+                    field: "axisValue2",
+                    color: '#FF8000'
                 },
                 {
                 
                         name: "คะแนนรวมอนุมัติ",
-                        field: "axisValue"
+                        field: "axisValue",
+                        color: '#138021'
                 }                
                 ],
                 categoryAxis: {

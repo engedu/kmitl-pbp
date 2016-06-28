@@ -51,7 +51,7 @@
 		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
 		           <a href="#">หัวหน้าภาควิชา </a><a href="#" class="flyout-toggle"></a>
 		            <ul class="flyout right"><!-- Flyout Menu -->
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm">อนุมัติผลงาน</a></li>
+		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/init.htm?academicYear=">อนุมัติผลงาน</a></li>
 		             <li class="has-flyout"><a href="<%=request.getContextPath()%>/head/pbp/markDepartmentRecalInit.htm">คำนวณคะแนนให้เป็นปัจจุบัน</a></li>	
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/barChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/headReport/workTypeBarChart.htm">ระดับคะแนนในภาควิชาแต่ละด้าน</a></li> 
@@ -73,17 +73,17 @@
 		            </ul> 
 		          </li>  
 		 </sec:authorize>   
-		 <sec:authorize ifAnyGranted="ROLE_PRESIDENT">
-		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
-		           <a href="#">อธิการบดี </a><a href="#" class="flyout-toggle"></a>
-		            <ul class="flyout right"><!-- Flyout Menu -->
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/president/instituteReport.htm">รายงานคะแนนทั้งสถาบัน</a></li>	
-		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/barChart.htm">รายงานระดับคะแนนทั้งสถาบัน</a></li>
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/workTypeBarChart.htm">รายงานระดับคะแนนทั้งสถาบัน  แต่ละด้าน</a></li>	               	 
-		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/workTypeCompareBarChart.htm">รายงานเปรียบเทียบระดับคะแนนทั้งสถาบัน  แต่ละด้าน</a></li>	               	 
-		            </ul> 
-		          </li>  
-		 </sec:authorize>             
+<%-- 		 <sec:authorize ifAnyGranted="ROLE_PRESIDENT"> --%>
+<!-- 		           <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span> -->
+<!-- 		           <a href="#">อธิการบดี </a><a href="#" class="flyout-toggle"></a> -->
+<!-- 		            <ul class="flyout right">Flyout Menu -->
+<%-- 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/president/instituteReport.htm">รายงานคะแนนทั้งสถาบัน</a></li>	 --%>
+<%-- 		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/barChart.htm">รายงานระดับคะแนนทั้งสถาบัน</a></li> --%>
+<%-- 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/workTypeBarChart.htm">รายงานระดับคะแนนทั้งสถาบัน  แต่ละด้าน</a></li>	               	  --%>
+<%-- 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/presidentReport/workTypeCompareBarChart.htm">รายงานเปรียบเทียบระดับคะแนนทั้งสถาบัน  แต่ละด้าน</a></li>	               	  --%>
+<!-- 		            </ul>  -->
+<!-- 		          </li>   -->
+<%-- 		 </sec:authorize>              --%>
           
         
       </sec:authorize>

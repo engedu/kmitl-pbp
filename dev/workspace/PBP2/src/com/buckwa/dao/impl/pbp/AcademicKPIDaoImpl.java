@@ -482,6 +482,110 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 		}
 		
 	}
+	
+	
+	@Override
+	public Long importworkTimeTableChum(int semester,AcademicKPIUserMapping domain) {
+	//	logger.info("  ########## importworkdomain : "+BeanUtils.getBeanString(domain));	
+		 
+		final AcademicKPIUserMapping finalDomain = domain;
+		String semesterStr = semester+"";
+		
+		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+finalDomain.getAcademicYear()+"' and evaluate_type='1'"   ;  
+		//logger.info(" sqlRound:"+sqlRound);
+		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+		
+		// logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		 
+		 long startTime =0l;
+		 long endTime =0l;
+		 
+		 Timestamp startTimeStamp = null;
+		 Timestamp endTimeStamp = null;
+		 
+		  
+			 if("1".equalsIgnoreCase(semesterStr)){
+				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime();
+				 startTimeStamp = academicYearEvaluateRound.getRound1StartDate();
+				 
+				 endTime = academicYearEvaluateRound.getRound1EndDate().getTime();
+				 endTimeStamp = academicYearEvaluateRound.getRound1EndDate();
+			 }else{
+				 startTime = academicYearEvaluateRound.getRound2StartDate().getTime();
+				 startTimeStamp = academicYearEvaluateRound.getRound2StartDate();
+				 
+				 endTime = academicYearEvaluateRound.getRound2EndDate().getTime();
+				 endTimeStamp = academicYearEvaluateRound.getRound2EndDate();
+			 }
+			 
+		 	
+			final long createDateLong = (startTime+endTime)/2;
+		// logger.info(" Start Time:"+startTime+" endTime:"+endTime+" createDateLong:"+createDateLong);
+		 
+		
+		
+		
+		
+		if(finalDomain.getAcademicKPIId()!=null){
+			
+			if("Y".equalsIgnoreCase(finalDomain.getIsCoTeach())){
+				finalDomain.setStatus(SchoolConstants.STATUS_CREATE_CO_TEACH);
+			}
+			
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder(); 		
+		jdbcTemplate.update(new PreparedStatementCreator() {  
+			public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+				PreparedStatement ps = connection.prepareStatement("" +						
+						"  insert into academic_kpi_user_mapping (academic_kpi_code, academic_year,user_name,academic_kpi_id,work_type_code"
+						+ " ,name,ratio,create_date,status,from_source, is_co_teach) values (?, ?,? ,?,?,?,?,?,?,?,?)" +
+					 "", Statement.RETURN_GENERATED_KEYS);   
+				ps.setString(1,finalDomain.getAcademicKPICode()); 
+				ps.setString(2,finalDomain.getAcademicYear());	
+				ps.setString(3,finalDomain.getUserName());
+				ps.setLong(4, finalDomain.getAcademicKPIId());
+				ps.setString(5, finalDomain.getWorkTypeCode());
+				ps.setString(6, finalDomain.getName());
+				ps.setInt(7, finalDomain.getRatio());
+				ps.setTimestamp(8, new Timestamp(createDateLong));
+				ps.setString(9, finalDomain.getStatus());
+				ps.setString(10, finalDomain.getFromSource());
+				ps.setString(11, finalDomain.getIsCoTeach());
+				return ps;  
+				}
+			}, 	keyHolder); 	
+		final Long returnid =  keyHolder.getKey().longValue();	
+		
+		//logger.info(" ######################### academic_kpi_return_id:"+returnid);
+		
+		
+		List<AcademicKPIAttributeValue> academicKPIAttributeValueList =finalDomain.getAcademicKPIAttributeValueList();
+		for(final AcademicKPIAttributeValue tmp:academicKPIAttributeValueList){
+			
+			jdbcTemplate.update(new PreparedStatementCreator() {  
+				public PreparedStatement createPreparedStatement(Connection connection)throws SQLException {  
+					PreparedStatement ps = connection.prepareStatement("" +						
+							"  insert into academic_kpi_attribute_value (kpi_user_mapping_id, name,value,academic_year,create_date ,from_source) values (?, ?,?,?,?,?  )" +
+						 "", Statement.RETURN_GENERATED_KEYS);   
+					ps.setLong(1,returnid);
+					ps.setString(2,tmp.getName());
+					ps.setString(3,tmp.getValue());	 
+					ps.setString(4,finalDomain.getAcademicYear());	 
+					ps.setTimestamp(5, new Timestamp(createDateLong));
+					ps.setString(6, finalDomain.getFromSource());
+					//logger.info(" insert  academic_kpi_attribute_value  with academic_kpi_user_mapping_id: "+returnid+"  with attribute name:"+tmp.getName()+"  value:"+tmp.getValue());
+					return ps;  
+					}
+				}, 	keyHolder); 				
+	 
+			
+		} 
+		return returnid;
+		} else{
+			return 1l;
+		}
+	}
+	
 	@Override
 	public boolean isAttributeExistCreate(AcademicKPIAttribute academicKPIAttribute) {
 		 boolean returnValue = false;

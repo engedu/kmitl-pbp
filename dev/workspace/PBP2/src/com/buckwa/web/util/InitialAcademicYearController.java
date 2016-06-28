@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -143,6 +144,49 @@ public class InitialAcademicYearController implements InitializingBean , BeanFac
 		}catch(Exception ex){
 			logger.info(ex.toString());;
 		}
+		
+		
+		logger.info("#############  Load ChumPorn Reg Id Mapping  #############"); 
+ 
+		
+		try {
+			
+			final Map<String, String> regMap = new HashMap<String, String>();
+			//TODO change C:\\Users\\Developer\\Downloads\\Reg_ID_Mapping.xlsx , [InputStream Or String Path]
+			//ExcelReader excelReader = new ExcelReader("D:\\Project\\pbp\\xlsx\\Reg_ID_Mapping.xlsx", 3);
+			ExcelReader excelReader = new ExcelReader("/project/pbp/xlsx/Reg_ID_Mapping.xlsx", 3);
+			excelReader.readExcel(new ExcelRowMapper<String>(){
+				private String  getValue(Object value){
+					String v = null;
+					if(value == null){
+						v = null;
+					}else if(value instanceof Double){
+						v = ""+ ((Double)value).longValue();
+					}else{
+						v = value.toString();
+					}
+					return  v;
+				}
+				@Override
+				public String mapper(List rs, int rowIndex) {
+					String columnB = getValue(rs.get(1));
+					String columnC = getValue(rs.get(2));
+
+					if(StringUtils.isEmpty(columnB)) return null;
+					System.out.println(columnB + " : " + columnC);
+					regMap.put(columnB, columnC);
+					return columnB;
+				}
+				
+			});
+			
+			//TODO USE regMap
+			System.out.println("RegId SIZE : " + regMap.size());
+			
+			rejectSubjectUtil.setChumRegIdMappingMap(regMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 		
 		
 	}

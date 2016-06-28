@@ -297,9 +297,11 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			if(facultyCodeReturnList!=null&&facultyCodeReturnList.size()>0){
 				String facultyCode = facultyCodeReturnList.get(0);
 				result.setFacultyCode(facultyCode);
-				//logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
+				logger.info("  ########  Found Faculty Code :"+facultyCode+"  name:"+result.getFacultyDesc());
 				
 				result.setAcademicYearList(academicYearUtil.getAcademicYearList());
+			}else{
+				logger.info("  ####### Not Found Faculty Code for:"+result.getFacultyDesc());
 			}
 			
 		} catch (EmptyResultDataAccessException e) {

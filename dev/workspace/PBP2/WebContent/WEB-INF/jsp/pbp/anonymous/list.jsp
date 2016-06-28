@@ -14,14 +14,15 @@
 <div class="entry">	
 
 <section class="twelve columns">
-
-
+ 
+   facultyCode: ${facultyCode} :  ${facultyDesc}
+   <section class="five columns">
 	<div class="row">
 	
 		 	<table class="pbp-table">
 		 		<thead>
 		 		<tr><th colspan="4">
-            		<div class="pbp-header"> รอบการประเมิน  ประจำปี  ${academicYearWrapper.academicYear.name}  </div>
+            		<div class="pbp-header"> รอบการประเมิน  ประจำปีการศึกษา  ${academicYearWrapper.academicYear.name}  </div>
              	</th></tr>
              	</thead>
 			
@@ -60,8 +61,16 @@
 			</table>
 	
 	</div>
-
-
+  </section>
+  
+     <section class="four columns">
+	 
+ 	
+	  <a href="<%=request.getContextPath()%>/downloadDoc.htm?fileCode=declare${facultyCode}" class="list-group-item"> <img src="<c:url value="/images/icon/pdf_logo.png"/>" /> &nbsp; <b> ประกาศหลักเกณฑ์วิธีการคิดภาระงานทางวิชาการคณาจารย์ <br>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;พ.ศ. 2558 คณะ${facultyDesc}</b></a>
+ 
+	</section>
+  
+</section>
  
 	<div class="">
  

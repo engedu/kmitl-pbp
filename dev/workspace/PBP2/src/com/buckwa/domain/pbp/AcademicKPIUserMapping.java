@@ -20,9 +20,24 @@ public class AcademicKPIUserMapping   extends BaseDomain{
 	
 	private String isCoTeach;
 	private String fromSource;
+	private String fromSourceText;
 	
 	
 	 
+	
+	
+	public String getFromSourceText() {
+		String returnStr ="";
+		 if(this.fromSource==null||this.fromSource.trim().length()==0){
+			 returnStr ="M";
+		 }else{
+			 returnStr ="A";
+		 }
+		 return returnStr;
+	}
+	public void setFromSourceText(String fromSourceText) {
+		this.fromSourceText = fromSourceText;
+	}
 	public String getFromSource() {
 		return fromSource;
 	}

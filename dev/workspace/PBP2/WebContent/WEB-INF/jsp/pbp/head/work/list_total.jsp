@@ -8,9 +8,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%> 
 <form:form modelAttribute="academicKPIUserMappingWrapper" action="search.htm" method="POST" name="mainForm">
-
+ 
 <div style="width: 80%; text-align: center; padding-left: 10%; font-size: 16px;">
-
+<br>
+<div>
+            			<b> ปีการศึกษา  &nbsp; </b>
+	            			<form:select path="academicYear" cssStyle="width:20%" onchange="initApprove(this.value);">  
+								<form:options items="${academicKPIUserMappingWrapper.academicYearList}" itemValue="name" itemLabel="name" />
+							</form:select> 
+</div>
 
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
@@ -25,6 +31,7 @@
 		<thead>   
 			<tr>
 				<th  class="thLast" width="200px;" >   บุคลากร      </th>
+					<th  class="thLast" width="100px;">   ประเภท      </th>
 				<th   class="thFirst" width="150px;"> <span class="require">รออนุมัติ  (${academicKPIUserMappingWrapper.totalNotApprove}) </span></th> 
 				<th   class="thFirst" width="150px;">อนุมัติแล้ว (${academicKPIUserMappingWrapper.totalApproved}) </th>
 				 <th   class="thFirst" width="150px;">รวม (${academicKPIUserMappingWrapper.total}) </th>
@@ -49,6 +56,18 @@
 						
 					
 						 </td>
+					 <td class="tdLast"  >	
+					  <c:choose>		
+			        <c:when test="${domain.employeeTypeNo==1}">
+			       	 ข้าราชการ
+			        </c:when>
+					<c:otherwise>	
+					พนักงาน
+					</c:otherwise> 
+					</c:choose>
+	 
+				</td>
+						 
 						<td class="tdBoth" style="text-align: center;" >
 						
 						
@@ -106,6 +125,11 @@
 		window.location.href='<%=request.getContextPath()%>/pam/person/view.htm';
 	}
 	
- 
+	function initApprove(valueIn){
+		var form = document.forms['mainForm'];
+		form.action = "<%=request.getContextPath()%>/head/pbp/init.htm?academicYear="+valueIn;
+		form.method = 'GET'; 
+		form.submit();
+	}
  
 </script>

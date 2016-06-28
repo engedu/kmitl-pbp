@@ -87,6 +87,7 @@ public class KMILTCommonController {
 			 
 			logger.info(" # anonymous 2");
 			String facultyCode = BuckWaUtils.getFacultyCodeFromUserContext();
+			logger.info(" # anonymous facultyCode:"+facultyCode);
 			request.put("academicYear",academicYear);
 			request.put("facultyCode",facultyCode);
 			response = pBPWorkTypeService.getByAcademicYearFacultyCode(request);
@@ -114,7 +115,10 @@ public class KMILTCommonController {
 			
 			
 			mav.addObject("academicYearList", academicYearUtil.getAcademicYearList()); 
- 
+			mav.addObject("facultyCode", facultyCode); 
+			mav.addObject("facultyDesc", BuckWaUtils.getFacultyDescFromUserContext()); 
+		 
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 			mav.addObject("errorCode", "E001"); 
@@ -284,6 +288,68 @@ public class KMILTCommonController {
 				fullPath =  filePath+fileName;
 			}		
 			
+			
+			
+			
+			
+			if("declare01".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะวิศวกรรมศาสตร์.pdf";
+				fullPath =  filePath+fileName;
+			}
+			if("declare02".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะสถาปัตย์กรรมศาสตร์.pdf";
+				fullPath =  filePath+fileName;
+			}			
+			
+			if("declare03".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะครุศาสตร์อุตสาหกรรม.pdf";
+				fullPath =  filePath+fileName;
+			}				
+			
+			
+			if("declare04".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะเทคโนโลยีการเกษตร.pdf";
+				fullPath =  filePath+fileName;
+			}			
+			
+			if("declare05".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะวิทยาศาสตร์.pdf";
+				fullPath =  filePath+fileName;
+			}		
+			
+			if("declare06".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะอุตสาหกรรมเกษตร.pdf";
+				fullPath =  filePath+fileName;
+			}		
+			
+			if("declare07".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะเทคโนโลยีสารสนเทศ.pdf";
+				fullPath =  filePath+fileName;
+			}		
+			if("declare09".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 วิทยาลัยนานาชาติ.pdf";
+				fullPath =  filePath+fileName;
+			}					
+			
+			if("declare10".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 วิทยาลัยนาโนเทคโนโลยีพระจอมเกล้าลาดกระบัง.pdf";
+				fullPath =  filePath+fileName;
+			}					
+			
+			if("declare11".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 วิทยาลัยนวัตกรรมการผลิตขั้นสูง.pdf";
+				fullPath =  filePath+fileName;
+			}					
+			if("declare12".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 คณะการบริหารและจัดการ.pdf";
+				fullPath =  filePath+fileName;
+			}		
+			
+			if("declare13".equalsIgnoreCase(fileCode)){
+				fileName ="ประกาศ 2558 วิทยาเขตชุมพรเขตรอุดมศักดิ์.pdf";
+				fullPath =  filePath+fileName;
+			}		
+ 			
 			
 			logger.info("#####fullPath :"+fullPath);
 			

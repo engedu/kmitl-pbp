@@ -49,9 +49,10 @@ public interface FacultyDao {
 	public void updateFacultyWS(List<com.buckwa.ws.newws.oxm.Faculty> facultyList);
 	public void updateFacultyWSChum(List<com.buckwa.ws.chum.oxm.Faculty> facultyList);
 	public void updateDepartmentWS(List<com.buckwa.ws.newws.oxm.Department> departmentList);
+	public void updateDepartmentWSChum(List<com.buckwa.ws.chum.oxm.Department> departmentList);
 	
 	public void updateTeachTableWS(int semester,List<com.buckwa.ws.newws.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea);
-	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea);
+	public void updateTeachTableWSChum(int semester,List<com.buckwa.ws.chum.oxm.TeachTable> timetableList,int degree,String facultyCode,String academicYea,String newRegId);
 
 	public void addShareSubject( TimeTableReport timeTableReport ,String facultyCode);
 	
@@ -63,6 +64,8 @@ public interface FacultyDao {
 	public List<Faculty> getAllFaculty(String academicYear);
 	
 	public void deleteTimeTableAndMapping(String academicYear);
+	public void deleteTimeTableAndMappingChum(String academicYear);
+	 
 	 
 	public List<Faculty> getFacultyListByAcademicYear( String getByAcademicYear) ;
 	

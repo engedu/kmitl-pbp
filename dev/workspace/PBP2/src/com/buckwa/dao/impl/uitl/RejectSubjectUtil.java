@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class RejectSubjectUtil {
 	
 	private Map<String,String> rejectMap = new HashMap<>();
+	
+	private Map<String,String> chumRegIdMappingMap = new HashMap<>();
 
 	public Map<String, String> getRejectMap() {
 		return rejectMap;
@@ -16,6 +18,14 @@ public class RejectSubjectUtil {
 
 	public void setRejectMap(Map<String, String> rejectMap) {
 		this.rejectMap = rejectMap;
+	}
+
+	public Map<String, String> getChumRegIdMappingMap() {
+		return chumRegIdMappingMap;
+	}
+
+	public void setChumRegIdMappingMap(Map<String, String> chumRegIdMappingMap) {
+		this.chumRegIdMappingMap = chumRegIdMappingMap;
 	}
 	
 	

@@ -29,8 +29,16 @@ public class AcademicKPIUserMappingWrapper   extends BaseDomain{
 	
 	private String academicSelectId;
 	
+	private List<AcademicYear> academicYearList;
 	
 	
+	
+	public List<AcademicYear> getAcademicYearList() {
+		return academicYearList;
+	}
+	public void setAcademicYearList(List<AcademicYear> academicYearList) {
+		this.academicYearList = academicYearList;
+	}
 	public PBPWorkType getpBPWorkType() {
 		return pBPWorkType;
 	}

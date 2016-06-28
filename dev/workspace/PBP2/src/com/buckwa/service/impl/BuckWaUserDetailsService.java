@@ -87,6 +87,8 @@ public class BuckWaUserDetailsService implements UserDetailsService {
 	    		   user.setFacultyCode("11");
 	    	   }else if(username.indexOf("12")!=-1){
 	    		   user.setFacultyCode("12");
+	    	   }else if(username.indexOf("13")!=-1){
+	    		   user.setFacultyCode("13");
 	    	   }
 	    	   
 	       }

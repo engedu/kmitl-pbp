@@ -101,7 +101,8 @@ public class BuckWaUtils {
 			BuckWaUser buckwaUser = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Person person =buckwaUser.getPersonProfile();
 			facultyCode = person.getFacultyCode();
-			logger.info("   ########### facultyCode:"+facultyCode);
+			person.getFacultyDesc();
+		 	//logger.info("   ########### facultyDesc:"+person.getFacultyDesc());
 		} catch (Exception ex) {
 			 ex.printStackTrace();
 			// User Not Found
@@ -112,6 +113,24 @@ public class BuckWaUtils {
 		return facultyCode;
 	}
 	
+	public static String getFacultyDescFromUserContext() throws BuckWaException {
+
+		String returnStr = null;
+		try {
+			BuckWaUser buckwaUser = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Person person =buckwaUser.getPersonProfile();
+			//facultyCode = person.getFacultyCode();
+			returnStr =person.getFacultyDesc();
+		 	//logger.info("   ########### facultyDesc:"+person.getFacultyDesc());
+		} catch (Exception ex) {
+			 ex.printStackTrace();
+			// User Not Found
+			// throw new BuckWaException("E003","");
+
+		}
+
+		return returnStr;
+	}
 	
 
 	public static boolean ifAnyGROUP(String groupName) {
@@ -120,9 +139,9 @@ public class BuckWaUtils {
 			BuckWaUser user = (BuckWaUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Collection<GrantedAuthority> grantedAutority = user.getAuthorities();
 			for (GrantedAuthority tmp : grantedAutority) {
-				logger.info("  xxxxxx:" + tmp.getAuthority());
+				//logger.info("  xxxxxx:" + tmp.getAuthority());
 				if (BuckWaConstants.ROLE_STORE_ADMIN.equals(tmp.getAuthority())) {
-					logger.info("  Found Match ing :" + tmp.getAuthority());
+					//logger.info("  Found Match ing :" + tmp.getAuthority());
 					return true;
 				}
 			}
@@ -139,12 +158,12 @@ public class BuckWaUtils {
 			Collection<GrantedAuthority> grantedAutority = user.getAuthorities();
 			for (GrantedAuthority tmp : grantedAutority) {
 				if (roleName.equals(tmp.getAuthority())) {
-					logger.info(" Found Match ing :" + tmp.getAuthority());
+					//logger.info(" Found Match ing :" + tmp.getAuthority());
 					return true;
 				}
 			}
 		} catch (Exception ex) {
-			logger.info(" No User Session !!!!! ");
+			//logger.info(" No User Session !!!!! ");
 			//ex.printStackTrace();
 		}
 		return returnResult;
@@ -256,7 +275,7 @@ public class BuckWaUtils {
 			char tmpStr = (char) ((int) (Math.random() * 26) + 97);
 			sb.append(tmpStr);
 		}
-		logger.info(" pass:" + sb.toString());
+		//logger.info(" pass:" + sb.toString());
 		return sb.toString();
 	}
 

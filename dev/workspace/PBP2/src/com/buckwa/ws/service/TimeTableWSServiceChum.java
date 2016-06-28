@@ -27,6 +27,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import com.buckwa.dao.impl.uitl.RejectSubjectUtil;
 import com.buckwa.dao.intf.pbp.FacultyDao;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
@@ -64,7 +65,8 @@ public class TimeTableWSServiceChum   {
 	@Autowired
 	private WebServiceTemplate  teacherWSTemplateChum  ;
 	
-
+	@Autowired
+	private RejectSubjectUtil rejectSubjectUtil;
 	
 	
 	@Autowired
@@ -91,7 +93,7 @@ public class TimeTableWSServiceChum   {
 		try{		
 			
 			
-			//facultyDao.deleteTimeTableAndMapping(academicYear);;
+			facultyDao.deleteTimeTableAndMappingChum(academicYear);;
 			
 			logger.info(" 1. Faculty ");
 			logger.info(" 2.Department ");
@@ -122,40 +124,73 @@ public class TimeTableWSServiceChum   {
 			}); 
 
 			List<Faculty> facultyList =returnObj.getFaculty();
-			facultyDao.updateFacultyWSChum(facultyList);;			
+			
+			//facultyDao.updateFacultyWSChum(facultyList);;		
 			
 			
-			//logger.info(" ################################# Start get Dapartment From WS ##########################");
+			for(Faculty facttmp:facultyList){
+          
+				
+			logger.info(" Faculty :"+facttmp.getFacultyTname());
+			GetDepartmentList departmentRequest = new GetDepartmentList();
+			departmentRequest.setFacultyId(facttmp.getFacultyId());		
 			
-//			
-//			for(Faculty facttmp:facultyList){
-//                
-//				GetDepartmentList departmentRequest = new GetDepartmentList();
-//				departmentRequest.setFacultyId(facttmp.getFacultyId());		
-//				
-//				
-//				GetDepartmentListResponse returnObjDepartment =(GetDepartmentListResponse)facultyWSTemplate.marshalSendAndReceive(departmentRequest, new WebServiceMessageCallback() {
-//					public void doWithMessage(WebServiceMessage messagedepartment) throws IOException, TransformerException {
-//						try {
-//							SOAPMessage soapMessageDepartment = ((SaajSoapMessage)messagedepartment).getSaajMessage();				 
-//					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-//					       soapMessageDepartment.writeTo(out);
-//				            logger.info(" Department SOAP Request Payload: " + new String(out.toByteArray()));
-//					         
-//						} catch(Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}); 
-//
-//				List<Department> departmentList =returnObjDepartment.getDepartment();
-//
-//				facultyDao.updateDepartmentWS(departmentList);;
-//			
-//			}
-//			
+			
+			GetDepartmentListResponse returnObjDepartment =(GetDepartmentListResponse)facultyWSTemplateChum.marshalSendAndReceive(departmentRequest, new WebServiceMessageCallback() {
+				public void doWithMessage(WebServiceMessage messagedepartment) throws IOException, TransformerException {
+					try {
+						SOAPMessage soapMessageDepartment = ((SaajSoapMessage)messagedepartment).getSaajMessage();				 
+				       ByteArrayOutputStream out = new ByteArrayOutputStream();
+				       soapMessageDepartment.writeTo(out);
+			           // logger.info(" Department SOAP Request Payload: " + new String(out.toByteArray()));
+				         
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}); 
+
+			List<Department> departmentList =returnObjDepartment.getDepartment();
+			
+			for(Department deptmp:departmentList){
+				
+				logger.info(" Department :"+deptmp.getDepartmentName());
+			
+			GetTeacherList teacherRequest = new GetTeacherList();
+			teacherRequest.setFacultyId(facttmp.getFacultyId());
+			teacherRequest.setDepartmentId(deptmp.getDepartmentId());
+			
+			
+			GetTeacherListResponse returnObjTeacher =(GetTeacherListResponse)teacherWSTemplateChum.marshalSendAndReceive(teacherRequest, new WebServiceMessageCallback() {
+				public void doWithMessage(WebServiceMessage messageTeacher) throws IOException, TransformerException {
+					try {
+						SOAPMessage soapMessageTeacher = ((SaajSoapMessage)messageTeacher).getSaajMessage();				 
+				       ByteArrayOutputStream out = new ByteArrayOutputStream();
+				     //  soapMessageTeacher.writeTo(out);
+			         //   logger.info(" Department SOAP Request Payload: " + new String(out.toByteArray()));
+				         
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}); 	
+			
+			List<TeacherList> teacherListWS =returnObjTeacher.getTeacherList();
+			//logger.info(" ################### Faculty : "+facttmp.getFacultyId()+":"+facttmp.getFacultyTname());
+			//logger.info(" ######  Department : "+deptmp.getDepartmentId()+" : "+deptmp.getDepartmentName()+" : "+deptmp.getDepartmentEname());
+			int teacherLoop =1;
+			for(TeacherList teacherListWSTmp:teacherListWS){
+				
+				logger.info(teacherLoop++ +"--->"+teacherListWSTmp.getTeacherId()+":"+teacherListWSTmp.getTeacherTname());
+			}
+			
+			}
 			
 
+			//facultyDao.updateDepartmentWSChum(departmentList);;
+		
+		}
+			 	
 			
 			
 			List<String> teacherIdList = new ArrayList();
@@ -304,7 +339,17 @@ public class TimeTableWSServiceChum   {
 				
 				
 			//}else{
+			 
+			Map regIdMap =rejectSubjectUtil.getChumRegIdMappingMap();
+			String newRegId = "0";
+			try{
 				
+			 
+			  newRegId = (String)regIdMap.get(teacherTmp.getTeacherIdStr());
+			  logger.info(" ############ Teacher Id Str:"+teacherTmp.getTeacherIdStr()+"  after get key "+newRegId );
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
 		 
 			
 			    String facultyCode = teacherTmp.getFacultyCode();
@@ -337,7 +382,7 @@ public class TimeTableWSServiceChum   {
 				
 				logger.info(" Semester:"+semester+" degree:"+degree+"  "+teacherTmp.getTeacherIdStr()+":"+teacherTmp.getName()+"  TeachTableSize:"+teachSize );
 		 
-				facultyDao.updateTeachTableWSChum(semester,teachTableResponseList,degree,facultyCode,academicYear);
+				facultyDao.updateTeachTableWSChum(semester,teachTableResponseList,degree,facultyCode,academicYear,newRegId);
 				 
 				
 			}
