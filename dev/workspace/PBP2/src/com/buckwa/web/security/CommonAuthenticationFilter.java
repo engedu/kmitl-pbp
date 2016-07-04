@@ -20,6 +20,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.TextEscapeUtils;
 
+import com.buckwa.domain.common.BuckWaRequest;
+import com.buckwa.service.intf.admin.AdminUserService;
+
  
 
 
@@ -46,6 +49,10 @@ public class CommonAuthenticationFilter extends
 		super(DEFAULT_FILTER_PROCESSES_URL);
 	}
 
+	 
+		@Autowired
+		private AdminUserService adminUserService;
+	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
 			HttpServletResponse response) throws AuthenticationException,
@@ -76,13 +83,23 @@ public class CommonAuthenticationFilter extends
 		}
 		setDetails(request, authRequest);
 		Authentication authentication = null;
+		
+		BuckWaRequest buckwaRequest = new BuckWaRequest();
+		
+		buckwaRequest.put("userName", username);
+		buckwaRequest.put("clientIP",request.getRemoteAddr());
+	 
 		try{
 			authentication = this.getAuthenticationManager().authenticate(authRequest);
+			buckwaRequest.put("loginStatus", "SUCCESS");
+			adminUserService.loginLoging(buckwaRequest);
 		}catch(Exception e){
+			buckwaRequest.put("loginStatus", "FAIL");
+			adminUserService.loginLoging(buckwaRequest);
 			e.printStackTrace();
 			throw new BadCredentialsException("Invalid username/password");
 		}
-		
+	 
 		return authentication;
 	}
 

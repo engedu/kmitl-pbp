@@ -17,6 +17,8 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	private String employeeType; 
 	private String facultyCode;
 	
+	private String isFirstLogin;
+	
 	private BigDecimal totalMark = new BigDecimal(0.00);
 	private BigDecimal totalMarkCompareBase = new BigDecimal(0.00);
 	private BigDecimal totalPercentMark = new BigDecimal(0.00);
@@ -46,6 +48,12 @@ public class PBPWorkTypeWrapper  extends BaseDomain{
 	
 	
 	 
+	public String getIsFirstLogin() {
+		return isFirstLogin;
+	}
+	public void setIsFirstLogin(String isFirstLogin) {
+		this.isFirstLogin = isFirstLogin;
+	}
 	public Date getStartRoundDate() {
 		return startRoundDate;
 	}

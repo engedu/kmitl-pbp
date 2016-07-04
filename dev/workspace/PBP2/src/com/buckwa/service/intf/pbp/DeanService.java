@@ -11,5 +11,7 @@ public interface DeanService {
 	public BuckWaResponse getReportWorkTypeFaculty(BuckWaRequest request);
 	
 	public BuckWaResponse getReportWorkTypeCompareFaculty(BuckWaRequest request);
+	
+	//public BuckWaResponse getDepartmentMeanByWorkTypeCode(BuckWaRequest request);
 }
 

@@ -78,7 +78,14 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 			String round = (String)request.get("round");
 			List<RadarPlotReport> radarPlotReportList= ( List<RadarPlotReport>)pBPWorkTypeDao.getRadarPlotPersonMark(username,academicYear,round);
 		 
-			 response.addResponse("radarPlotReportList",radarPlotReportList);
+			if(radarPlotReportList==null||radarPlotReportList.size()==0){
+				response.setStatus(BuckWaConstants.FAIL);
+				response.setErrorCode("E025");	
+			}else{
+				response.addResponse("radarPlotReportList",radarPlotReportList);
+			}
+			
+			 
  	
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -170,6 +177,10 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 			
 			PBPWorkTypeWrapper pBPWorkTypeWrapper= ( PBPWorkTypeWrapper)pBPWorkTypeDao.getExsistCalculateByAcademicYear(academicYear,userName,round,employeeType,facultyCode);
 		 
+			System.out.println("  Fist Login:"+pBPWorkTypeWrapper.getIsFirstLogin());
+			if("Y".equalsIgnoreCase(pBPWorkTypeWrapper.getIsFirstLogin())){
+				response.setErrorCode("E001");	
+			} 
 			 response.addResponse("pBPWorkTypeWrapper",pBPWorkTypeWrapper);
  	
 		}catch(Exception ex){

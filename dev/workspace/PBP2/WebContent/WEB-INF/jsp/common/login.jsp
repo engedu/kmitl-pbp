@@ -29,9 +29,18 @@
 							id="cancelBtn" type="button" class="btn btn-primary" rel="notLoading" />
 	                        </center>
 	                     </td>
+
 	                  </tr>
+
 	              </tbody>
 	            </table>
+				</div>
+				
+				<div >
+				<br>
+				 <span style="color: red;"> * </span><b>ชื่อผู้เข้าใช้ และรหัสผ่าน คือ email และ password ของแอคเคาท์เก่า(Generation1) ของเมล์สถาบันฯ </b>
+				 <br>
+				 
 				</div>
 			  </div>
 			  <div class="four columns"></div>

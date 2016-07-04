@@ -27,6 +27,8 @@ import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaDateUtils;
 import com.buckwa.util.PAMConstants;
 
+
+
 @Service("userService")
 public class AdminUserServiceImpl implements AdminUserService {
 	private static Logger logger = Logger.getLogger(AdminUserServiceImpl.class);
@@ -133,6 +135,25 @@ public class AdminUserServiceImpl implements AdminUserService {
 		return response;
 	}
 
+	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public BuckWaResponse loginLoging(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try {
+			String userName = request.get("userName")+"";
+			String loginStatus = request.get("loginStatus")+"";
+			String clientIP = request.get("clientIP")+"";
+				userDao.loginLoging(userName,loginStatus,clientIP); 
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");
+		}
+		return response;
+	}
+	
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public BuckWaResponse updateRegisterUser(BuckWaRequest request) {

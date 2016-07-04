@@ -10,6 +10,8 @@ public class AcademicKPIAttributeValue  extends BaseDomain{
 	private String value; 
 	private String academicYear;
 	
+	private String isValidateNumber;
+	
 	private Long academicKPIMappingId;
 	//new field by tum 19/07/2014
 	private Integer ratio;
@@ -62,6 +64,12 @@ public class AcademicKPIAttributeValue  extends BaseDomain{
 	}
 	public void setIsCalculate(String isCalculate) {
 		this.isCalculate = isCalculate;
+	}
+	public String getIsValidateNumber() {
+		return isValidateNumber;
+	}
+	public void setIsValidateNumber(String isValidateNumber) {
+		this.isValidateNumber = isValidateNumber;
 	}
 	
 	 

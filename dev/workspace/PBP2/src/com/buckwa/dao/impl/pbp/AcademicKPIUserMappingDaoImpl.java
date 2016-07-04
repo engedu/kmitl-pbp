@@ -3,7 +3,9 @@ package com.buckwa.dao.impl.pbp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,17 +63,6 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 					 mappingTmp.setAcademicKPI(academicKPI);
 					 
 					 
-						String sqlAttributeValue =" SELECT a.* ,b.ratio AS ratio FROM academic_kpi_attribute_value a LEFT JOIN academic_kpi_user_mapping b ON a.kpi_user_mapping_id = b.kpi_user_mapping_id WHERE a.kpi_user_mapping_id ="+id; 
-						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList<AcademicKPIAttributeValue>();
-						try{
-							logger.info(" sqlAttributeValue:"+sqlAttributeValue);
-							academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
-							
-						}catch (org.springframework.dao.EmptyResultDataAccessException ex){
-							ex.printStackTrace();
-						} 
-						
-						mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
 						
 						
 						
@@ -88,6 +79,37 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 						
 						mappingTmp.setAcademicKPIAttributeList(academicKPIAttributeList);
 						
+						
+						Map<String,String> isValidateNoMap = new HashMap();
+						for(AcademicKPIAttribute attTmp:academicKPIAttributeList){
+							String attName =attTmp.getName();
+							String validateNo =attTmp.getIsValidateNumber();
+							
+							isValidateNoMap.put(attName, validateNo);
+						}
+											 
+					 
+					 
+					 
+						String sqlAttributeValue =" SELECT a.* ,b.ratio AS ratio FROM academic_kpi_attribute_value a LEFT JOIN academic_kpi_user_mapping b ON a.kpi_user_mapping_id = b.kpi_user_mapping_id WHERE a.kpi_user_mapping_id ="+id; 
+						List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList<AcademicKPIAttributeValue>();
+						try{
+							logger.info(" sqlAttributeValue:"+sqlAttributeValue);
+							academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
+							
+							for(AcademicKPIAttributeValue valueTmp:academicKPIAttributeValueList){
+								String valueName= valueTmp.getName();
+								String isValidateNoValue =  isValidateNoMap.get(valueName);
+								valueTmp.setIsValidateNumber(isValidateNoValue);
+								
+							}
+							
+						}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+							ex.printStackTrace();
+						} 
+						
+						mappingTmp.setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
+
 						
 						// Get Image
 						

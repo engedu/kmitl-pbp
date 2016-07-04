@@ -34,5 +34,8 @@ public interface AdminUserService {
 	public BuckWaResponse updateLeaveAccumulate(BuckWaRequest request);
 	
 	public BuckWaResponse getUserDepartmentByOffset(BuckWaRequest request);	
+	
+	public BuckWaResponse loginLoging(BuckWaRequest request);	
+	
 	 
 }

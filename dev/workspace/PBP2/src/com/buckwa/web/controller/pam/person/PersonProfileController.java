@@ -174,6 +174,12 @@ public class PersonProfileController {
 					PBPWorkTypeWrapper pBPWorkTypeWrapper = (PBPWorkTypeWrapper)response.getResObj("pBPWorkTypeWrapper"); 
 					pBPWorkTypeWrapper.setAcademicYear(academicYear);
 					person.setpBPWorkTypeWrapper(pBPWorkTypeWrapper);
+					System.out.println("  Fist Login controller:"+pBPWorkTypeWrapper.getIsFirstLogin());
+					if("Y".equalsIgnoreCase(pBPWorkTypeWrapper.getIsFirstLogin())){
+						mav.addObject("errorCode", "E025");
+					}
+					
+					
 				}	
 				
 
@@ -182,7 +188,7 @@ public class PersonProfileController {
 				request.put("userName", BuckWaUtils.getUserNameFromContext());
 				request.put("round", person.getEvaluateRound());
 				request.put("employeeType", person.getEmployeeType());
-				request.put("facultyCode", facultyCode);
+		 		request.put("facultyCode", facultyCode);
 
 			 
 				response = pBPWorkTypeService.getRadarPlotPersonMark(request);
@@ -204,9 +210,7 @@ public class PersonProfileController {
 					 
 				}
 
-				/**----- Set Session --- */
-				//httpRequest.getSession().setAttribute("personProFileSession" , person);
-				
+ 
 				
 			} else {
 				logger.info("  Fail !!!! :"+response.getErrorCode()+" : "+response.getErrorDesc());
@@ -882,11 +886,11 @@ public class PersonProfileController {
 	
 	@RequestMapping(value="importwork.htm", method = RequestMethod.POST)
 	public ModelAndView importworkPOST(HttpServletRequest httpRequest, @ModelAttribute AcademicKPI academicKPI , BindingResult result) {
-		logger.info(" Start  academicKPI:"+BeanUtils.getBeanString(academicKPI));
+	//	logger.info(" Start  academicKPI:"+BeanUtils.getBeanString(academicKPI));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("importworkCreate");
 		try{
-			logger.info(" ## replyMessageNew:"+academicKPI.getReplyMessage());
+		//	logger.info(" ## replyMessageNew:"+academicKPI.getReplyMessage());
 			 
 			//new ReplyPBPMessageNewValidator().validate(academicKPI, result);			
 			//if (result.hasErrors()) {				
@@ -924,7 +928,7 @@ public class PersonProfileController {
 					valueTmp.setName(tmp.getName());
 					//valueTmp.(tmp.getRownum());
 					valueTmp.setRatio(tmp.getRatio());
-					logger.info(" Controller attribute name:"+tmp.getName()+"  value:"+tmp.getValue());
+				//	logger.info(" Controller attribute name:"+tmp.getName()+"  value:"+tmp.getValue());
 					academicKPIAttributeValueList.add(valueTmp);
 				} 
 				
@@ -952,10 +956,10 @@ public class PersonProfileController {
 					newMessage.setCreateBy(BuckWaUtils.getFullNameFromContext());
 					
 					requestRelyMessage.put("message", newMessage);
-					logger.info(" replyMessage newMessage:"+BeanUtils.getBeanString(newMessage));
+				//	logger.info(" replyMessage newMessage:"+BeanUtils.getBeanString(newMessage));
 					BuckWaResponse responseRelyMessage = webboardTopicService.replyPBPMessage(requestRelyMessage);
 					if(responseRelyMessage.getStatus()==BuckWaConstants.SUCCESS){		
-						logger.info(" replyMessage newMessage Success");
+					//	logger.info(" replyMessage newMessage Success");
 						mav.addObject("successCode", responseRelyMessage.getSuccessCode()); 
 						academicKPI.setReplyMessage("");
 						mav = viewWork(academicKPI.getAcademicKPIUserMappingId()+"");	

@@ -83,7 +83,21 @@ public class AdminUserDaoImpl implements AdminUserDao {
 				.getEmail(), user.getSignatureImagePath(), user.getUsername());
 
 	}
+	
+	@Override
+	public void loginLoging(String userName ,String loginStatus,String clientIP) {
+		logger.info("AdminUserDaoImpl.loginLoging userName:"+userName+":"+loginStatus+":"+clientIP);
+	 
+		int xx = this.jdbcTemplate
+				.update(
+						"insert into access_log (user_login, login_status,client_ip,create_date) values (?, ?,?,NOW())",
+						userName, loginStatus, clientIP  );
 
+	}
+
+
+	
+	
 	@Override
 	public void updateSignatureImagePath(User user) {
 		logger.info("AdminUserDaoImpl.updateSignatureImagePath(User user)");

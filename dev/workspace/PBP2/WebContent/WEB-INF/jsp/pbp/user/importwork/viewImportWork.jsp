@@ -7,7 +7,8 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
-
+<script type="text/javascript" src='<c:url value="/js/inputNumber.js"/>'></script>
+ 
 <form:form modelAttribute="academicKPIUserMappingWrapper" action="editImportwork.htm" method="POST" name="mainForm" enctype="multipart/form-data">		 
 <form:hidden path="academicYear"/>
  
@@ -23,6 +24,7 @@
  					
 					</th>
  
+							 	
 							 					
 					</tr>
  
@@ -63,8 +65,8 @@
 				 </td>
 			</tr>
 			<tr>
-				<td class="tdFirst">คะแนน:</td>
-				<td class="tdLast"> 
+				<td class="tdFirst">คะแนน KPI:</td>
+				<td class="tdLast" style="text-align: left;"> 
 				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
@@ -75,14 +77,24 @@
 				 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status != 'APPROVED' }">     
 						<tr>
 							<td class="tdFirst">
-							  <c:out  value="${domain.name}"/>
+							  <c:out  value="${domain.name}"/>  
 		                    
 							</td>
  							<td class="tdFirst" style="text-align: left;"  > 
  							 
-		                    <input   name="academicKPIAttributeValueList[${status.index}].value" value="${domain.value}" style="width: 90%;" />
+		                    <input   name="academicKPIAttributeValueList[${status.index}].value" value="${domain.value}"  id="academicKPIAttributeValueList${status.index}" style="width: 90%;" />
 		                     <input type="hidden"  name="academicKPIAttributeValueList[${status.index}].name" value="${domain.name}"  />
 		                     <span class="require">*</span>  
+		                     
+		                      <c:if test="${domain.isValidateNumber=='Y'}">กรอกค่าตัวเลข</c:if>
+		                   	 <c:if test="${domain.isValidateNumber=='Y'}"> 
+		                   	 	<script> 
+		                   	 	$(document).ready (function(){
+									var inputNumber = $('#academicKPIAttributeValueList${status.index}');
+									inputNumber.keydown(numberUtil.inputNumber);
+		                   	 	});
+		                   	 </script>
+		                   	 </c:if>
 							</td>
 						</tr>
 		</c:if>
@@ -107,8 +119,8 @@
 				
 				
 				<td class="tdFirst">การคำนวณ:</td>
-				<td class="tdLast"> 
-				<c:out  value="${academicKPIUserMappingWrapper.academicKPIUserMapping.calResultStr}"/>
+				<td class="tdLast" style="text-align: left;">
+				<b><c:out  value="${academicKPIUserMappingWrapper.academicKPIUserMapping.calResultStr}"/></b>
 				
 				</td>
 				</tr>	

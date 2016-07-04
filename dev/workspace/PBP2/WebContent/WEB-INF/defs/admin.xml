@@ -177,6 +177,11 @@
   
   
   
+     <definition name="accessLogList" extends="pbpUserLayout">
+   <put-attribute name="left"    value="/WEB-INF/jsp/admin/left.jsp"/> 
+      <put-attribute name="main"   value="/WEB-INF/jsp/admin/accessLog/list.jsp"/>      
+  </definition> 
+  
     <!--  User Registration   -->
     <definition name="register" extends="baseLayout">
       <put-attribute name="main"   value="/WEB-INF/jsp/admin/user/register.jsp"/>      

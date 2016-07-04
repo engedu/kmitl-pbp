@@ -12,12 +12,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.TextEscapeUtils;
+
+import com.buckwa.domain.common.BuckWaRequest;
+import com.buckwa.service.intf.admin.AdminUserService;
 
 
 
@@ -36,7 +40,7 @@ public class CommonAuthenticationFilter extends
 	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 	private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
 	
- 
+
 
 	protected CommonAuthenticationFilter() {
 		super(DEFAULT_FILTER_PROCESSES_URL);
@@ -73,6 +77,8 @@ public class CommonAuthenticationFilter extends
 		username = username.trim();
 		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
 				username, password);
+
+		
 		HttpSession session = request.getSession(false);
 		if (session != null || getAllowSessionCreation()) {
 			request.getSession().setAttribute(

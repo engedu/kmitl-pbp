@@ -145,11 +145,23 @@
            <a href="<%=request.getContextPath()%>/admin/work/init.htm">แก้ไขผลงาน</a>
           </li>
            <!-- END Flyout Menu -->     
+           
+           
+           
 		</sec:authorize>
         </sec:authorize>  
           
           
         <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/userManual.htm">คู่มือใช้งาน</a></li>
+        
+        
+        
+       <sec:authorize ifAnyGranted="ROLE_ADMIN">
+      <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
+       <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/admin/accessLog/init.htm">Access Log</a></li>
+                        
+		</sec:authorize>
+        </sec:authorize>  
           
           
 <%--           <li class=""><span class="lsf-icon colororange" title="key"></span>

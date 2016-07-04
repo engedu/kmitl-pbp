@@ -43,6 +43,10 @@
  
 	<!-- End User -->
 	
+	
+	
+	<bean id="accessLogList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="accessLogList" /></bean>
+	
 	 <!--  Start User Registration   -->
    	<bean id="register"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="register" /></bean>  	
  	<bean id="registerEdit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="registerEdit" /></bean>  	

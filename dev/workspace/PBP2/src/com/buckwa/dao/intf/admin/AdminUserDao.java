@@ -31,4 +31,6 @@ public interface AdminUserDao {
 	
 	public PagingBean getUserDepartmentByOffset(PagingBean pagingBean);	
 	
+	public void loginLoging(String userName,String loginStatus,String clientIP);
+	
 }
