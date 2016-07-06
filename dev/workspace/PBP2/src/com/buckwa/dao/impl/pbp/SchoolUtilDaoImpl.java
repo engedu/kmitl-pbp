@@ -153,6 +153,24 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 	     return userName;
 }
 	
+	
+	
+	public String getFacultyCodeFromRegId (String  regId,String academicYear) {  
+		 String userName = null;
+		 
+		 try{
+			 String sql ="   select f.code from faculty f 			 left join person_pbp p on (p.faculty_desc=f.name)			 where p.reg_id='"+regId+"' and p.academic_year="+academicYear;	
+		//String sql =" SELECT email FROM person_pbp where reg_id='"+regId+"' and academic_year="+academicYear;	
+		logger.info("  getUserNameFromRegId sql: "+sql);
+		userName = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return userName;
+}
+	
+	
 	public String getRegIdFromUserName (String  email,String academicYear) {  
 		 String userName = null;
 		 

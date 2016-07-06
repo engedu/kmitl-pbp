@@ -366,6 +366,58 @@ public class TimeTableWSService   {
 	} 
 	
 	
+	
+	public BuckWaResponse syncTimeTableYearTermRegId(String academicYear,String regId) {
+		logger.info(" #################### Sync. Webservice  academicYear:"+academicYear);
+		BuckWaResponse response = new BuckWaResponse();
+		try{		
+			
+			String userName =schoolUtil.getUserNameFromRegId(regId,academicYear);
+			facultyDao.deleteTimeTableAndMappingRegId(academicYear,regId,userName);;
+			
+		 
+	 
+			List<Teacher> teacherList  = new ArrayList();
+		 
+			String facultyCode =schoolUtil.getFacultyCodeFromRegId(regId,academicYear);
+			
+			Teacher pbpTeacher = new Teacher();
+			pbpTeacher.setTeacherIdStr(regId);	
+			pbpTeacher.setFacultyCode(facultyCode);
+			pbpTeacher.setAcademicYear(academicYear);
+			teacherList.add(pbpTeacher);
+ 
+		 
+			logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 1 ##########################");			
+			 getAndInsertTeachTableWS(1,1, teacherList);				
+			logger.info(" ################################# Start get TimeTable From WS Semester 1 degree 2 ##########################");			
+			getAndInsertTeachTableWS(1,2, teacherList);			
+			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 1 ##########################");			
+			 getAndInsertTeachTableWS(2,1, teacherList);				
+			logger.info(" ################################# Start get TimeTable From WS Semester 2 degree 2 ##########################");			
+			getAndInsertTeachTableWS(2,2, teacherList);	
+			
+	 
+			
+			
+		
+			 
+			 
+			logger.info(" ################################# Start Recalculate ##########################");
+			
+			//recalculate(academicYear);
+			 
+			logger.info(" ---- End With Success---" );
+		}catch(Exception ex){
+			logger.info(" ---- End With Error---" );
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+		return response;
+	} 
+	
+	
 	private void getAndInsertTeachTableWS(int semester,int degree ,List<Teacher> teacherListIn){
 		 
 		String academicYear = schoolUtil.getCurrentAcademicYear();
@@ -414,7 +466,7 @@ public class TimeTableWSService   {
 					teachSize = teachTableResponseList.size();
 				}
 				
-				logger.info(" Semester:"+semester+" degree:"+degree+"  "+teacherTmp.getTeacherIdStr()+":"+teacherTmp.getName()+"  TeachTableSize:"+teachSize );
+				logger.info(" Semester:"+semester+" degree:"+degree+"  "+teacherTmp.getTeacherIdStr()+":"+teacherTmp.getName()+"  TeachTableSize:"+teachSize +" facultyCode:"+facultyCode);
 		 
 				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);
 				 

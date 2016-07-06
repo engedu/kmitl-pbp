@@ -64,6 +64,7 @@ public interface FacultyDao {
 	public List<Faculty> getAllFaculty(String academicYear);
 	
 	public void deleteTimeTableAndMapping(String academicYear);
+	public void deleteTimeTableAndMappingRegId(String academicYear,String regId,String userName);
 	public void deleteTimeTableAndMappingChum(String academicYear);
 	 
 	 

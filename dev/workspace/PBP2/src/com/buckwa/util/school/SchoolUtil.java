@@ -68,6 +68,19 @@ public class SchoolUtil {
 		
 	}
 	
+	public  String getFacultyCodeFromRegId(String regId,String academicYear ){
+		String returnValue ="";
+		try{
+			
+			returnValue= schoolUtilDao.getFacultyCodeFromRegId(regId,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
 	public  String getRegIdFromUserName(String userName ,String academicYear){
 		String returnValue ="";
 		try{

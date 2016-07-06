@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buckwa.domain.admin.Holiday;
 import com.buckwa.domain.admin.HolidayCriteria;
+import com.buckwa.domain.admin.Menu;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pam.Person;
 import com.buckwa.domain.pbp.AcademicPerson;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
@@ -93,6 +96,39 @@ public class ExportUserFromRegController {
 		return mav;
 	}	
 	
+	@RequestMapping(value="initRegId.htm", method = RequestMethod.GET)
+	public ModelAndView initSyncTimeTableByRegId() {			
+	 
+		ModelAndView mav = new ModelAndView();
+		
+		Person syncTimeTablePerson = new Person();
+		mav.addObject("syncTimeTablePerson", syncTimeTablePerson);	
+		mav.setViewName("syncTimetableWSRegId");		
+ 	
+	
+		return mav;
+	}	
+	
+	
+	
+	@RequestMapping(value="initRegId.htm", method = RequestMethod.POST)
+	public ModelAndView initSyncTimeTableByRegIdPOST(@ModelAttribute("syncTimeTablePerson") Person syncTimeTablePerson) {			
+	 
+		ModelAndView mav = new ModelAndView();
+		System.out.println(" #### initSyncTimeTableByRegIdPOST RegId:"+syncTimeTablePerson.getRegId());;
+		
+		if(syncTimeTablePerson!=null&&syncTimeTablePerson.getRegId().trim().length()>0){
+			System.out.println(" #### Call Sync TimeTable Service###");
+			String academicYear =schoolUtil.getCurrentAcademicYear();
+			BuckWaResponse response =  timeTableWSService.syncTimeTableYearTermRegId(academicYear,syncTimeTablePerson.getRegId());
+		}
+		 
+		mav.addObject("syncTimeTablePerson", syncTimeTablePerson);	
+		mav.setViewName("syncTimetableWSRegId");		
+ 	
+	
+		return mav;
+	}	
 	
 	@RequestMapping(value="initChum.htm", method = RequestMethod.GET)
 	public ModelAndView initChum() {			

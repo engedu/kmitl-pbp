@@ -530,7 +530,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					
 					String sqlMap =" select *  from academic_kpi_user_mapping  where work_type_code ="+tmp.getCode()+" " +
 							" and academic_year='"+tmp.getAcademicYear()+"' and user_name='"+userName+"' and create_date BETWEEN '"+startTimeStamp+"' AND '"+endTimeStamp+"'"; 
-					logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
+					//logger.info("### [2] academic_kpi_user_mapping ###  sqlMap:"+sqlMap);
 					List<AcademicKPIUserMapping> academicKPIUserMappingList = this.jdbcTemplate.query(sqlMap,	new AcademicKPIUserMappingMapper() );	
 					
 					if(academicKPIUserMappingList!=null&&academicKPIUserMappingList.size()>0){
@@ -548,7 +548,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 								 	
 							 	//logger.info(" ### [4] academic_kpi_attribute_value --####");
 								String sqlAttributeValue =" select *  from academic_kpi_attribute_value where kpi_user_mapping_id ="+mappingTmp.getKpiUserMappingId() ; 
-								logger.info(" sqlAttributeValue:"+sqlAttributeValue); 
+								//logger.info(" sqlAttributeValue:"+sqlAttributeValue); 
 								List<AcademicKPIAttributeValue> academicKPIAttributeValueList = new ArrayList();
 								try{
 									academicKPIAttributeValueList = this.jdbcTemplate.query(sqlAttributeValue,	new AcademicKPIAttributeValueMapper() );
@@ -642,7 +642,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 					AcademicKPI kpiTmp = mappingTmp.getAcademicKPI();					
 					String mappingStatus = mappingTmp.getStatus();		
 					
-					logger.info(" Start KPIMapping ID:"+mappingTmp.getKpiUserMappingId() );
+					//logger.info(" Start KPIMapping ID:"+mappingTmp.getKpiUserMappingId() );
 					
 					if("APPROVED".equalsIgnoreCase(mappingStatus)){ 	
 						String calResultStr =""; 
@@ -694,7 +694,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 								
 							}
 								//logger.info("  Call Str: "+calResultStr);
-								logger.info(mappingTmp.getKpiUserMappingId()+":APPROVED --> "+calResultStr+" = "+totalMappingTmp);
+								logger.info(" ID: "+mappingTmp.getKpiUserMappingId()+":APPROVED --> "+calResultStr+" = "+totalMappingTmp);
 								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2));	
 								updateCallResultStr(mappingTmp);
 								
@@ -739,7 +739,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										String attributeValueValue = attributeValueTmp.getValue(); 
 										BigDecimal tmpBeforCall = totalMappingTmp;
 										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
-											logger.info(" สัดส่วน"+attributeValueValue);
+										//	logger.info(" สัดส่วน"+attributeValueValue);
 											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));
 											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
 											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
@@ -758,7 +758,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 								
 							}
 								//logger.info("  Call Str: "+calResultStr);
-								logger.info(mappingTmp.getKpiUserMappingId()+":NOT APPROVED --> "+calResultStr+" = "+totalMappingTmp);
+								logger.info(" ID: "+mappingTmp.getKpiUserMappingId()+":NOT APPROVED --> "+calResultStr+" = "+totalMappingTmp);
 								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
 								updateCallResultStr(mappingTmp);
 														

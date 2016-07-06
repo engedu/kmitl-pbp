@@ -216,10 +216,10 @@ public class PersonProfileServiceImpl implements PersonProfileService {
 		pagingBean.setLimitItemTo(3);
 		
 		try {
-			logger.info(" PersonProfileServiceImpl.getByUsername");
+			//logger.info(" PersonProfileServiceImpl.getByUsername");
 			String username =  String.valueOf(request.get("username"));
 			String academicYear =  String.valueOf(request.get("academicYear"));
-			logger.info(" PersonProfileServiceImpl.getByUsername  username:"+username+"  academicYear:"+academicYear);
+			//logger.info(" PersonProfileServiceImpl.getByUsername  username:"+username+"  academicYear:"+academicYear);
 			Person person = personProfileDao.getByUsername(username,academicYear);
 			if (person != null) {
  
@@ -236,7 +236,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
 			e.printStackTrace();
 			response.setStatus(BuckWaConstants.FAIL);
 			response.setErrorCode(BuckWaConstants.ERROR_E001);
-			logger.info(" PersonProfileServiceImpl.getByUsername Error !!:"+e.getMessage());
+		//	logger.info(" PersonProfileServiceImpl.getByUsername Error !!:"+e.getMessage());
 		}
 		return response;
 	}

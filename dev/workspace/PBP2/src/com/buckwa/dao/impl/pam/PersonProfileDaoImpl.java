@@ -732,8 +732,8 @@ public class PersonProfileDaoImpl implements PersonProfileDao {
 			domain.setWorkingDate(rs.getDate("working_date"));
 			domain.setBirthdate(rs.getDate("birth_date"));
 			
-			logger.info(" ### picture:"+rs.getString("picture"));
-			logger.info(" ###"+rs.getString("email")+":"+rs.getString("thai_name")+" "+rs.getString("thai_surname")+" : "+rs.getString("faculty_desc")+" :"+rs.getString("department_desc"));
+			//logger.info(" ### picture:"+rs.getString("picture"));
+			logger.info(" ###   "+rs.getString("email")+":"+rs.getString("thai_name")+" "+rs.getString("thai_surname")+" : "+rs.getString("faculty_desc")+" :"+rs.getString("department_desc"));
 			return domain;
 		}
 	}

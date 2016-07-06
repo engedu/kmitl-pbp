@@ -15,6 +15,8 @@ public interface SchoolUtilDao {
 	
 	
 	public String  getUserNameFromRegId(String courseId,String academicYear  );
+	public String  getFacultyCodeFromRegId(String courseId,String academicYear  );
+	
 	public String  getDepartmentByUserName(String userName,String academicYear );
 	public String  getDepartmentByHeadUserName(String userName,String academicYear );
 	

@@ -1346,6 +1346,7 @@ public class FacultyDaoImpl implements FacultyDao {
 								academicKPIUserMapping.setStatus("APPROVED");
 								
 								//academicKPIDao.importwork(academicKPIUserMapping);
+								academicKPIUserMapping.setAcademicYear(academicYear);
 								academicKPIDao.importworkTimeTable(semester,academicKPIUserMapping);								
 								
 							}
@@ -1968,7 +1969,7 @@ public class FacultyDaoImpl implements FacultyDao {
 
 			
 			//String sql =" select *  from academic_kpi where academic_year ='"+getByAcademicYear+"'" ; 
-			//logger.info(" sql sqlKPI:"+sqlKPI);
+			logger.info(" sql sqlKPI:"+sqlKPI);
 			List<AcademicKPI> academicKPIList  =null;
 			
 			try{
@@ -2034,7 +2035,7 @@ public class FacultyDaoImpl implements FacultyDao {
 					
 					List<AcademicKPIAttribute> academicKPIAttributeList = new ArrayList();
 					try{
-						//logger.info(" sqlAttribute:"+sqlAttribute);
+						logger.info(" sqlAttribute:"+sqlAttribute);
 						academicKPIAttributeList = this.jdbcTemplate.query(sqlAttribute,	new AcademicKPIAttributeMapper() );
 						
 						//logger.info(" ########## Found academicKPIAttributeList size: :"+academicKPIAttributeList.size());
@@ -2517,6 +2518,22 @@ public class FacultyDaoImpl implements FacultyDao {
 		this.jdbcTemplate.update("delete  from academic_kpi_user_mapping where from_source ='REG' and  academic_year="+academicYear); 
 		this.jdbcTemplate.update("delete  from academic_kpi_attribute_value where from_source ='REG' and  academic_year="+academicYear); 
 		this.jdbcTemplate.update("delete  from time_table where from_source ='REG' and  year="+academicYear); 
+		
+	}
+	
+	@Override
+	public void deleteTimeTableAndMappingRegId(String academicYear,String teacherId,String userName) {
+		// TODO Auto-generated method stub
+		
+		String sql1 ="delete  from academic_kpi_user_mapping where from_source ='REG' and  academic_year="+academicYear+" and user_name='"+userName+"'";
+		String sql2 ="delete  from time_table where from_source ='REG' and  year="+academicYear+" and teacher_id="+teacherId;
+		
+		System.out.println(" sql1:"+sql1);
+		System.out.println(" sql2:"+sql2);
+		
+		this.jdbcTemplate.update(sql1); 
+		//this.jdbcTemplate.update("delete  from academic_kpi_attribute_value where from_source ='REG' and  academic_year="+academicYear); 
+		this.jdbcTemplate.update(sql2); 
 		
 	}
 	

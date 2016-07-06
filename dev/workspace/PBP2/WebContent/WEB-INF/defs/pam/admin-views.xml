@@ -77,6 +77,7 @@
   	<bean id="initImportStudentInSec"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="initImportStudentInSec" /></bean>
   	
   	  	<bean id="syncTimetableWS"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWS" /></bean>
+  	  	<bean id="syncTimetableWSRegId"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWSRegId" /></bean>
   	<bean id="recalculate"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="recalculate" /></bean>
   	<bean id="syncTimetableWSChum"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="syncTimetableWSChum" /></bean>
 

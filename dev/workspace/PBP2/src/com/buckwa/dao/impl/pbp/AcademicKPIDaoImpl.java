@@ -30,6 +30,7 @@ import com.buckwa.domain.pbp.AcademicYearEvaluateRound;
 import com.buckwa.domain.pbp.PBPWorkType;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
+import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolConstants;
 import com.buckwa.util.school.SchoolUtil;
 
@@ -385,6 +386,8 @@ public class AcademicKPIDaoImpl implements AcademicKPIDao {
 	//	logger.info("  ########## importworkdomain : "+BeanUtils.getBeanString(domain));	
 		 
 		final AcademicKPIUserMapping finalDomain = domain;
+		
+		logger.info(" Domain:"+BeanUtils.getBeanString(domain));
 		String semesterStr = semester+"";
 		
 		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+finalDomain.getAcademicYear()+"' and evaluate_type='1'"   ;  

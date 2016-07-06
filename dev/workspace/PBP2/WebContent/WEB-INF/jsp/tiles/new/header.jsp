@@ -128,6 +128,7 @@
            
             <ul class="flyout right"><!-- Flyout Menu -->
            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
+                 <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initRegId.htm">นำเข้าตารางสอน (Webservice)รายบุคล </a></li>
             <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initChum.htm">นำเข้าตารางสอน (Webservice) ชุมพร</a></li>
                 <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวณคะแนน</a></li>
