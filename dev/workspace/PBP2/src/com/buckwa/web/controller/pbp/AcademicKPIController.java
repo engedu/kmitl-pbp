@@ -373,7 +373,7 @@ public class AcademicKPIController {
 	
 	@RequestMapping(value="edit.htm", method = RequestMethod.POST)
 	public ModelAndView editKPI(HttpServletRequest httpRequest,@ModelAttribute AcademicKPI academicKPI, BindingResult result) {
-		logger.info(" Start   editKPI:"+BeanUtils.getBeanString(academicKPI));
+//		logger.info(" Start   editKPI:"+BeanUtils.getBeanString(academicKPI));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("academicKPIEdit");
 		try{

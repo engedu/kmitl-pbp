@@ -104,11 +104,12 @@ public class UploadUserMgr {
 	}
 	
 	public void readPersonData(Sheet infomationsheet){
-		logger.info("*************************LOAD ***********************");
+		logger.info("*************************readPersonData LOAD ***********************");
 		int max = infomationsheet.getLastRowNum() + 1;
 		listSuccessPerson = new ArrayList<Person>();
 		listErrorPerson = new ArrayList<Person>();
-		for( int i = 2 ; i < max ; i++){
+		logger.info("## readPersonData max : " + max);
+		for( int i = 1 ; i < max ; i++){
 			Row  r =  infomationsheet.getRow(i);
 			logger.info("## readPersonData ROW : " + (i+1));
 			Person person = new Person();
@@ -149,7 +150,7 @@ public class UploadUserMgr {
 	}
 	
 	public void readLoginData (Sheet loginsheet){
-		logger.info("*************************LOAD ***********************");
+		logger.info("*************************readLoginData LOAD ***********************");
 		int max = loginsheet.getLastRowNum() + 1;
 		listSuccessLogin = new ArrayList<User>();
 		listErrorLogin = new ArrayList<User>();
