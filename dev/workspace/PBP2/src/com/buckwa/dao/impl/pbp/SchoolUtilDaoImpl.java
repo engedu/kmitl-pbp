@@ -68,6 +68,22 @@ public class SchoolUtilDaoImpl implements SchoolUtilDao {
 		 }
 	     return userName;
 	}
+ 
+	public String getHeadUserNamebyDepartmentDesc (String  facultyDesc,String  departmentDesc,String academicYear) {  
+		 String code = null;		 
+		 try{
+			 String sql ="  select email from person_pbp where head_department ='"+departmentDesc+"' and faculty_desc ='"+facultyDesc+"' and academic_year="+academicYear;
+	//	String sql =" select code from department where name ='"+departmentName+"' and academic_year="+academicYear;	
+		logger.info("  getHeadUserNamebyDepartmentDesc sql: "+sql);
+		code = (String)this.jdbcTemplate.queryForObject(	sql , String.class); 
+	 
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }
+	     return code;
+	}
+	
+	
 	
 	public String getDepartmentCodeByDepartmentName (String  departmentName,String academicYear) {  
 		 String code = null;		 

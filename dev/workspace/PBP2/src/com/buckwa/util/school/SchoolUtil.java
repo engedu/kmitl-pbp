@@ -193,6 +193,18 @@ public class SchoolUtil {
 		
 	}
 	
+	public   String getHeadUserNamebyDepartmentDesc(String facultyDesc ,String departmentDesc,String academicYear){
+		String returnValue ="";
+		try{
+			return schoolUtilDao.getHeadUserNamebyDepartmentDesc(facultyDesc,departmentDesc,academicYear);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return returnValue;
+		
+	}
+	
 	public   String getFacutyByUserName(String userName,String academicYear){
 		String returnValue ="";
 		try{

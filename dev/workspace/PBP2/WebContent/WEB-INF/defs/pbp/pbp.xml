@@ -251,6 +251,11 @@
    <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
    </definition> 
    
+      <definition name="deanDepartmentBarchartInit" extends="pbpUserLayout">
+   <put-attribute name="main"   value="/WEB-INF/jsp/pbp/dean/departmentBarChart.jsp"/>  
+   <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  
+   </definition>    
+   
          <definition name="deanWorkTypeBarchartInit" extends="pbpUserLayout">
    <put-attribute name="main"   value="/WEB-INF/jsp/pbp/dean/workTypeBarChart.jsp"/>  
    <put-attribute name="left"   value="/WEB-INF/jsp/pbp/report/person/left.jsp"/>  

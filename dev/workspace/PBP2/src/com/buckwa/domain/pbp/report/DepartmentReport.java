@@ -1,6 +1,9 @@
 package com.buckwa.domain.pbp.report;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.buckwa.domain.pbp.Department;
 
 public class DepartmentReport  implements Serializable{
 	
@@ -29,6 +32,26 @@ public class DepartmentReport  implements Serializable{
 	
 	private String markTotal;
 	
+	private String departmentNameSelect;
+	
+	private List<Department> departmentList;
+	
+	public List<Department> getDepartmentList() {
+		return departmentList;
+	}
+
+	public String getDepartmentNameSelect() {
+		return departmentNameSelect;
+	}
+
+	public void setDepartmentNameSelect(String departmentNameSelect) {
+		this.departmentNameSelect = departmentNameSelect;
+	}
+
+	public void setDepartmentList(List<Department> departmentList) {
+		this.departmentList = departmentList;
+	}
+
 	public String getDepartmentCode() {
 		return departmentCode;
 	}

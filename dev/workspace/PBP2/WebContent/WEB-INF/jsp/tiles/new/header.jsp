@@ -69,8 +69,10 @@
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/barChart.htm">รายงานระดับคะแนนแต่ละภาควิชา</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/workTypeBarChart.htm">รายงานระดับคะแนนแต่ละภาควิชา แต่ละด้าน</a></li>
 		              <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/workTypeCompareBarChart.htm">รายงานเปรียบเทียบระดับคะแนนแต่ละภาควิชา แต่ละด้าน</a></li>
-		              	 
-		            </ul> 
+		              	<hr>
+		               <li class="has-flyout"><a href="<%=request.getContextPath()%>/deanReport/departmentBarChart.htm">ระดับคะแนนในภาควิชา</a></li> 	 
+		              	
+		                           </ul> 
 		          </li>  
 		 </sec:authorize>   
 <%-- 		 <sec:authorize ifAnyGranted="ROLE_PRESIDENT"> --%>

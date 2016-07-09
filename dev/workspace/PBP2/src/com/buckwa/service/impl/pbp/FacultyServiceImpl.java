@@ -156,6 +156,7 @@ public class FacultyServiceImpl implements FacultyService {
 		try{				 
 			
 			String username = (String)request.get("username");
+			System.out.println(" getDepartmentByHeadUserNameandYear headName service username :"+username);
 			String academicYear = (String)request.get("academicYear");
 			Department department=  facultyDao.getDepartmentByHeadUserName(username,academicYear);
 		 

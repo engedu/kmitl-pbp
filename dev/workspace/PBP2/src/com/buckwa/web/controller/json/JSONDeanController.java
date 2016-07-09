@@ -2,6 +2,7 @@ package com.buckwa.web.controller.json;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buckwa.domain.BuckWaUser;
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
 import com.buckwa.domain.pbp.report.FacultyReportLevel;
 import com.buckwa.domain.pbp.report.RadarPlotReport;
+import com.buckwa.service.intf.pam.PersonProfileService;
 import com.buckwa.service.intf.pbp.DeanService;
 import com.buckwa.service.intf.pbp.FacultyService;
+import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.service.intf.pbp.PBPReportService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
@@ -46,6 +51,12 @@ public class JSONDeanController {
 
 	@Autowired
 	private FacultyService facultyService;
+	
+	@Autowired
+	private HeadService headService;
+	
+	@Autowired
+	private PersonProfileService personProfileService;
 
 	@RequestMapping(value = "/facultyReport", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<RadarPlotReport> facultyReport() {
@@ -89,6 +100,83 @@ public class JSONDeanController {
 		return returnList;
 	}
 
+	@RequestMapping(value = "/getDepartmentBarchart/{headUserName}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<RadarPlotReport> getDepartmentBarchart(@PathVariable String headUserName) {
+		logger.info(" headUserName:" + headUserName);
+		List<RadarPlotReport> returnList = new ArrayList<RadarPlotReport>();
+		ModelAndView mav = new ModelAndView();
+	 
+		try {
+			BuckWaRequest request = new BuckWaRequest();
+//			StringTokenizer st2 = new StringTokenizer(headUserName, "@");
+//			int loop =0;
+//			while (st2.hasMoreElements()) {			
+//				if(loop==0){
+//					headUserName = headUserName+st2.nextElement()+"@kmilt.ac.th";
+//				}
+//				loop++;
+//			}
+//			
+			
+			headUserName =headUserName+"@kmitl.ac.th";
+			
+			String academicYear = schoolUtil.getCurrentAcademicYear();
+ 
+			request.put("username", headUserName);
+			request.put("academicYear", academicYear);
+			BuckWaResponse response = facultyService.getDepartmentByHeadUserNameandYear(request);
+
+			if (response.getStatus() == BuckWaConstants.SUCCESS) {
+				Department department = (Department) response.getResObj("department");
+
+				if (department != null) {
+
+					request.put("department", department);
+					request.put("academicYear", academicYear);
+					response = headService.getReportWorkTypeDepartment(request);
+
+					if (response.getStatus() == BuckWaConstants.SUCCESS) {
+						List<DepartmentWorkTypeReport> reportWorkTypeDepartmentList = (List<DepartmentWorkTypeReport>) response.getResObj("departmentWorkTypeReportList");
+
+						request.put("username", headUserName);
+						request.put("academicYear", academicYear);
+						response = personProfileService.getByUsername(request);
+						if (response.getStatus() == BuckWaConstants.SUCCESS) {
+							Person person = (Person) response.getResObj("person");
+							String firstLast = person.getThaiName() + " " + person.getThaiSurname();
+
+							int loopx = 1;
+							for (DepartmentWorkTypeReport personTmp : reportWorkTypeDepartmentList) {
+								String tmpRegId = personTmp.getPersonName();
+								RadarPlotReport reportTmp = new RadarPlotReport();
+								// if(!firstLast.equalsIgnoreCase(tmpRegId)){
+								reportTmp.setAxisName(" ");
+								// }else{
+								reportTmp.setAxisName(personTmp.getPersonName());
+								// }
+
+								reportTmp.setAxisValue(personTmp.getMarkTotal());
+
+								reportTmp.setOrderNo(loopx);
+								returnList.add(reportTmp);
+								loopx++;
+							}
+
+							mav.addObject("department", department);
+						}
+					}
+
+				}
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001");
+		}
+		return returnList;
+	}
+
+	
 	@RequestMapping(value = "/getBarchart", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<RadarPlotReport> getBarchart() {
 

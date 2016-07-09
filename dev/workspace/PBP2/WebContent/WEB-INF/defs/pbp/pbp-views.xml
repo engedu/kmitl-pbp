@@ -114,6 +114,7 @@
         <bean id="deanBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanBarchartInit" /></bean>		
  	   <bean id="deanWorkTypeBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanWorkTypeBarchartInit" /></bean>		
  	   <bean id="deanWorkTypeCompareBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanWorkTypeCompareBarchartInit" /></bean>		
+      <bean id="deanDepartmentBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="deanDepartmentBarchartInit" /></bean>		
     
    
        	<bean id="headBarchartInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="headBarchartInit" /></bean>		

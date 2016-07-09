@@ -30,4 +30,6 @@ public interface SchoolUtilDao {
 	
 	public String getDepartmentCodeByDepartmentName (String  departmentName,String academicYear);
 	
+	public String getHeadUserNamebyDepartmentDesc (String  facultyDesc,String  departmentDesc,String academicYear);
+	
 }

@@ -3,6 +3,8 @@ package com.buckwa.web.controller.pbp.report;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buckwa.domain.common.BuckWaRequest;
 import com.buckwa.domain.common.BuckWaResponse;
+import com.buckwa.domain.pam.Person;
+import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
+import com.buckwa.domain.pbp.report.DepartmentReport;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
 import com.buckwa.domain.pbp.report.FacultyReportLevel;
-import com.buckwa.domain.pbp.report.MinMaxBean;
 import com.buckwa.domain.pbp.report.WorkTypeCompareReport;
 import com.buckwa.service.intf.pbp.DeanService;
 import com.buckwa.service.intf.pbp.FacultyService;
+import com.buckwa.service.intf.pbp.HeadService;
 import com.buckwa.util.BuckWaConstants;
 import com.buckwa.util.BuckWaUtils;
 import com.buckwa.util.school.SchoolUtil;
@@ -39,6 +44,11 @@ public class DeanReportController {
 	
 	@Autowired
 	private DeanService deanService;
+	
+	
+	@Autowired
+	private HeadService headService;
+	
 	
 	@RequestMapping(value = "/init.htm", method = RequestMethod.GET)
 	public ModelAndView radarChart() {
@@ -105,6 +115,183 @@ public class DeanReportController {
 		logger.info(" End  ");
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/departmentBarChart.htm", method = RequestMethod.GET)
+	public ModelAndView departmentBarChart() {
+		logger.info(" Start  ");
+		ModelAndView mav = new ModelAndView();
+		try{
+			String academicYear =schoolUtil.getCurrentAcademicYear();
+		mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		
+		DepartmentReport departmentReport = new DepartmentReport();
+		String departmentName="";
+		
+		BuckWaRequest request = new BuckWaRequest();
+
+		String userName = BuckWaUtils.getUserNameFromContext();
+	 
+		System.out.println(" departmentBarChart deanname:"+userName+" academicYear:"+academicYear);
+		request.put("username", userName);
+		request.put("academicYear", academicYear);
+		BuckWaResponse response = facultyService.getFacultyByDeanUserNameandYear(request);
+
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			Faculty faculty = (Faculty) response.getResObj("faculty");
+			System.out.println(" faculty :"+faculty);
+			if (faculty != null) {
+				
+				departmentReport.setDepartmentList(faculty.getDepartmentList());
+				Department zeroDep = faculty.getDepartmentList().get(0);
+				departmentName = zeroDep.getName();
+				System.out.println(" departmentName Zero :"+departmentName);
+				mav.addObject("departmentName",departmentName);
+				
+				
+				
+				String headName =  schoolUtil.getHeadUserNamebyDepartmentDesc(faculty.getName(),zeroDep.getName(),academicYear);
+				
+				System.out.println(" headName Zero :"+headName);
+				request.put("username", headName);
+				
+				 
+				String[] output = headName.split("@");
+ 
+				
+				mav.addObject("headName",output[0]);
+				request.put("academicYear", academicYear);
+				 response = facultyService.getDepartmentByHeadUserNameandYear(request);
+ 
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					Department department = (Department) response.getResObj("department");
+					if (department != null) {
+						request.put("department", department);
+						request.put("academicYear", academicYear);
+						response = headService.getReportWorkTypeDepartment(request);
+						if (response.getStatus() == BuckWaConstants.SUCCESS) {
+							List<DepartmentWorkTypeReport> reportWorkTypeDepartmentList = (List<DepartmentWorkTypeReport>) response.getResObj("departmentWorkTypeReportList");
+						
+							if(reportWorkTypeDepartmentList!=null&&reportWorkTypeDepartmentList.size()>0){
+								DepartmentWorkTypeReport zeroReport =reportWorkTypeDepartmentList.get(0);
+								String maxValue =zeroReport.getMarkTotal();						
+								
+								mav.addObject("maxValue",ReportUtil.getMaxValuePad(maxValue));
+								mav.addObject("interval",ReportUtil.getIntervalValue(maxValue));
+								
+							}else{
+								mav.addObject("maxValue","500");
+								mav.addObject("interval","100");
+							}
+							
+							
+						}
+					}
+				}				
+				
+ 
+			}
+		}
+		
+		mav.addObject("departmentReport",departmentReport);
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		mav.setViewName("deanDepartmentBarchartInit");
+		logger.info(" End  ");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/departmentBarChart.htm", method = RequestMethod.POST)
+	public ModelAndView departmentBarChartPOST(HttpServletRequest httpRequest, @ModelAttribute DepartmentReport departmentReport) {
+		logger.info(" Start  ");
+		ModelAndView mav = new ModelAndView();
+		try{
+			String academicYear =schoolUtil.getCurrentAcademicYear();
+		mav.addObject("facultyName", schoolUtil.getFacutyByDeanUserName(BuckWaUtils.getUserNameFromContext(),academicYear));	
+		
+	 
+		String departmentNameSelect  = departmentReport.getDepartmentNameSelect();
+		
+	 
+		
+		BuckWaRequest request = new BuckWaRequest();
+
+		String userName = BuckWaUtils.getUserNameFromContext();
+	 
+		System.out.println(" departmentBarChart deanname:"+userName+" academicYear:"+academicYear);
+		request.put("username", userName);
+		request.put("academicYear", academicYear);
+		BuckWaResponse response = facultyService.getFacultyByDeanUserNameandYear(request);
+
+		if (response.getStatus() == BuckWaConstants.SUCCESS) {
+			Faculty faculty = (Faculty) response.getResObj("faculty");
+			System.out.println(" faculty :"+faculty);
+			if (faculty != null) {
+				
+				departmentReport.setDepartmentList(faculty.getDepartmentList());
+		 
+				 
+				mav.addObject("departmentName",departmentNameSelect);
+				
+				
+				
+				String headName =  schoolUtil.getHeadUserNamebyDepartmentDesc(faculty.getName(),departmentNameSelect,academicYear);
+				
+				System.out.println(" headName Zero :"+headName);
+				request.put("username", headName);
+				
+				 
+				String[] output = headName.split("@");
+ 
+				
+				mav.addObject("headName",output[0]);
+				request.put("academicYear", academicYear);
+				 response = facultyService.getDepartmentByHeadUserNameandYear(request);
+ 
+				if (response.getStatus() == BuckWaConstants.SUCCESS) {
+					Department department = (Department) response.getResObj("department");
+					if (department != null) {
+						request.put("department", department);
+						request.put("academicYear", academicYear);
+						response = headService.getReportWorkTypeDepartment(request);
+						if (response.getStatus() == BuckWaConstants.SUCCESS) {
+							List<DepartmentWorkTypeReport> reportWorkTypeDepartmentList = (List<DepartmentWorkTypeReport>) response.getResObj("departmentWorkTypeReportList");
+						
+							if(reportWorkTypeDepartmentList!=null&&reportWorkTypeDepartmentList.size()>0){
+								DepartmentWorkTypeReport zeroReport =reportWorkTypeDepartmentList.get(0);
+								String maxValue =zeroReport.getMarkTotal();						
+								
+								mav.addObject("maxValue",ReportUtil.getMaxValuePad(maxValue));
+								mav.addObject("interval",ReportUtil.getIntervalValue(maxValue));
+								
+							}else{
+								mav.addObject("maxValue","500");
+								mav.addObject("interval","100");
+							}
+							
+							
+						}
+					}
+				}				
+				
+ 
+			}
+		}
+		
+		mav.addObject("departmentReport",departmentReport);
+		
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		mav.setViewName("deanDepartmentBarchartInit");
+		logger.info(" End  ");
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping(value = "/workTypeBarChart.htm", method = RequestMethod.GET)
 	public ModelAndView workTypeBarChart() {

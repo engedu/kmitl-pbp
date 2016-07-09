@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 	<link rel="stylesheet" href="<c:url value='/kendo/styles/custom.css'/>"> 
 	<link rel="stylesheet" href="<c:url value='/kendo/styles/kendo.common.min.css'/>"> 
@@ -11,11 +12,23 @@
 <script type="text/javascript" src='<c:url value="/kendo/js/angular.min.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/kendo/js/kendo.all.min.js"/>'></script> 	 
 <body> 
+<form:form modelAttribute="departmentReport" action="departmentBarChart.htm" method="POST" name="mainForm">
+
+<br>
+<div style="width: 90%; text-align: center; font-size: 18px;"> 
+
+ 	            			<form:select path="departmentNameSelect" cssStyle="width:20%" onchange="initDepartment();" > 
+								<form:options items="${departmentReport.departmentList}" itemValue="name" itemLabel="name" />
+							</form:select>   
+							
+							
+ 
+</div>
 
 <h1 id="exampleTitle"> 
             <span ><img src="<c:url value="/images/chart_example.jpg"/>"    /></span>
             <strong>ระดับคะแนนในภาควิชา   ${departmentName}    
-        <!--     <a href="<%=request.getContextPath()%>/json/person/getBarchart">JSON Object</a> -->
+        
             </h1> 
   <div id="example">
     <div class="demo-section k-content">
@@ -29,7 +42,7 @@
                  dataSource: {
                      transport: {
                          read: {
-                         	 url: "<%=request.getContextPath()%>/json/head/getBarchart",
+                         	 url: "<%=request.getContextPath()%>/json/dean/getDepartmentBarchart/${headName}",
                              dataType: "json"
                          }
                      } 
@@ -74,7 +87,7 @@
         		    dataSource: {
         		        transport: {
         		            read: {
-        		                url:    "<%=request.getContextPath()%>/json/head/getBarchart",
+        		                url:    "<%=request.getContextPath()%>/json/dean/getDepartmentBarchart/${headName}",
         		                dataType: "Json"
         		            }
         		        }
@@ -101,6 +114,14 @@
         $(document).bind("kendo:skinChange", createChart);
     </script>
 </div>
+ </form:form>
  
-
+ <script type="text/javascript">
+	function initDepartment(){
+		var form = document.forms['mainForm'];
+		form.action = "<%=request.getContextPath()%>/deanReport/departmentBarChart.htm";
+		form.method = 'POST'; 
+		form.submit();
+	}
+</script>
 </body>
