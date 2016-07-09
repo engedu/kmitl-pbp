@@ -17,8 +17,8 @@
 <br>
 <div style="width: 90%; text-align: center; font-size: 18px;"> 
 
- 	            			<form:select path="departmentNameSelect" cssStyle="width:20%" onchange="initDepartment();" > 
-								<form:options items="${departmentReport.departmentList}" itemValue="name" itemLabel="name" />
+ 	            			<form:select  path="departmentNameSelect" cssStyle="width:20%;font-size: 25px;" onchange="initDepartment();" > 
+								<form:options   items="${departmentReport.departmentList}" itemValue="name" itemLabel="name" />
 							</form:select>   
 							
 							
