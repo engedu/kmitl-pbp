@@ -181,8 +181,8 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 	
 	
 	@Override
-	public void approve( String id) {		 		
-		String sql =" update   academic_kpi_user_mapping set status='APPROVED' where kpi_user_mapping_id ="+id+"" ; 
+	public void approve( String id,String approveBy) {		 		
+		String sql =" update   academic_kpi_user_mapping set status='APPROVED',approve_by ='"+approveBy+"' , approve_date_time =CURRENT_TIMESTAMP  where kpi_user_mapping_id ="+id+"" ; 
 		logger.info(" sql:"+sql);
 		this.jdbcTemplate.update(sql); 
 	 
@@ -236,6 +236,18 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 		this.jdbcTemplate.update(sql); 
 		this.jdbcTemplate.update(sqlAttributeValue); 
 		this.jdbcTemplate.update(sqlAttachFile); 
+	  
+	}
+	
+	
+	@Override
+	public void unApprove( String id) {		 		
+		String sql =" update academic_kpi_user_mapping set status ='CREATE' where kpi_user_mapping_id ="+id+"" ; 
+	 
+ 
+		logger.info(" sql:"+sql);
+ 
+		this.jdbcTemplate.update(sql); 
 	  
 	}
 	

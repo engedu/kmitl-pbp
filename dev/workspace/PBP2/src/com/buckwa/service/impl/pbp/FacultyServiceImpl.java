@@ -49,6 +49,25 @@ public class FacultyServiceImpl implements FacultyService {
 		return response;
 	}
 	@Override	
+	public BuckWaResponse getAllMarkByAcademicYear(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+			FacultyWrapper facultyWrapper= ( FacultyWrapper)facultyDao.getAllMarkByAcademicYear(academicYear);
+		 
+			 response.addResponse("facultyWrapper",facultyWrapper);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	@Override	
 	public BuckWaResponse getFacultyListByAcademicYear(BuckWaRequest request) {
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 

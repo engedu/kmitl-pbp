@@ -10,6 +10,6 @@ public interface AcademicKPIUserMappingService {
 	public BuckWaResponse update(BuckWaRequest request);
 	public BuckWaResponse delete(BuckWaRequest request);
 	public BuckWaResponse changeKPI(BuckWaRequest request);
-	
+	public BuckWaResponse unApprove(BuckWaRequest request);
 }
 

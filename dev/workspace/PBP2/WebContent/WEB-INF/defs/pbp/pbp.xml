@@ -318,4 +318,10 @@
    </definition>  	
   	
   	
+  	<!--  Admin Report -->
+    <definition name="adminReportList" extends="pbpUserLayout">     
+      <put-attribute name="main"   value="/WEB-INF/jsp/pbp/admin/report/list.jsp"/>      
+  </definition>   	
+  	
+  	
 </tiles-definitions>

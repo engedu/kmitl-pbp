@@ -186,7 +186,9 @@ public class HeadController {
 			
 			String approveUserName =(String)httpRequest.getSession().getAttribute("approveUserName");
 			BuckWaRequest request = new BuckWaRequest(); 
+			String headUserName = BuckWaUtils.getUserNameFromContext();
 			request.put("kpiUserMappingId",kpiUserMappingId);
+			request.put("headUserName",headUserName);
 			BuckWaResponse response = academicKPIUserMappingService.approve(request);
 			 logger.info(" ### approveWork after approve ");
 			if(response.getStatus()==BuckWaConstants.SUCCESS){	

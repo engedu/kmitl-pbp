@@ -126,10 +126,10 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		String employeeType = academicPerson.getEmployeeTypeNo();
 		
 		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+employeeType+"'"   ;  
-		logger.info(" sqlRound:"+sqlRound);
+	//	logger.info(" sqlRound:"+sqlRound);
 		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 		
-		 logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
+		// logger.info(" academicYearEvaluateRound:"+BeanUtils.getBeanString(academicYearEvaluateRound));
 		
 		 long startTime =0l;
 		 long endTime =0l;
@@ -166,9 +166,9 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 	public AcademicYearWrapper getFullAcademicYear( ) {		
 		
 		String yearThai = academicYearUtil.getSystemYearThai();
-		logger.info(" yearThai:"+yearThai);
+		//logger.info(" yearThai:"+yearThai);
 		String sql =" select *  from academic_year where year_status ='Y'" ; 
-		logger.info(" sql:"+sql);
+		//logger.info(" sql:"+sql);
 		AcademicYear academicYear = this.jdbcTemplate.queryForObject(sql,	new AcademicYearMapper() );				
 		AcademicYearWrapper academicYearWrapper = new AcademicYearWrapper();
 		academicYearWrapper.setAcademicYear(academicYear);
@@ -192,7 +192,7 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		if(academicYear!=null){
 			
 			String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+currentAcademicYearStr+"'"   ;  
-			logger.info(" sqlRound:"+sqlRound);
+			//logger.info(" sqlRound:"+sqlRound);
 			List<AcademicYearEvaluateRound> academicYearEvaluateRoundList  = this.jdbcTemplate.query(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
 			
 			for(AcademicYearEvaluateRound roundTmp: academicYearEvaluateRoundList){
@@ -235,10 +235,10 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		int  rows_totalItem = jdbcTemplate.queryForInt(checkExistSql.toString()); 
 		
 		if(rows_totalItem==0){
-			logger.info(" academicYearStr :"+academicYearStr +"  Not Found , Create New");
+			//logger.info(" academicYearStr :"+academicYearStr +"  Not Found , Create New");
 			// Insert New
 			String sql =" select *  from academic_year where year_status ='Y'" ; 
-			logger.info(" sql:"+sql);
+			//logger.info(" sql:"+sql);
 			final AcademicYear academicYearCurrent = this.jdbcTemplate.queryForObject(sql,	new AcademicYearMapper() );		
 			
 			final Long startTimeNexYear = academicYearCurrent.getStartDate().getTime()+(365*24*60*60*1000);
@@ -261,7 +261,7 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 		}
 		
 		String sql =" select *  from academic_year where name ='"+academicYearStr+"'" ; 
-		logger.info(" sql:"+sql);
+		//logger.info(" sql:"+sql);
 		AcademicYear academicYear = this.jdbcTemplate.queryForObject(sql,	new AcademicYearMapper() );				
 		AcademicYearWrapper academicYearWrapper = new AcademicYearWrapper();
 		academicYearWrapper.setAcademicYear(academicYear);
@@ -281,12 +281,12 @@ public class AcademicYearDaoImpl implements AcademicYearDao {
 	public AcademicYear getByYear(   String academicYearStr) {		 	
  
 			String sql =" select *  from academic_year where name ='"+academicYearStr+"'" ;  
-			logger.info(" sql:"+sql);
+			//logger.info(" sql:"+sql);
 			 AcademicYear academicYear  = this.jdbcTemplate.queryForObject(sql,	new AcademicYearMapper() );		
 			 
 					
 					String sqlSemester =" select *  from semester where academic_year='"+academicYear.getName()+"'"; 
-					logger.info(" sqlSemester:"+sql);
+					//logger.info(" sqlSemester:"+sql);
 					List<Semester> semesterList = this.jdbcTemplate.query(sqlSemester,	new SemesterMapper() );	
 					
 					academicYear.setSemesterList(semesterList);

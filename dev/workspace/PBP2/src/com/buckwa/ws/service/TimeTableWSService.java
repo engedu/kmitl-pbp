@@ -102,74 +102,13 @@ public class TimeTableWSService   {
 		
 	}
  
-	public BuckWaResponse syncTimeTable() {
-		logger.info(" ---- Start---" );
-		BuckWaResponse response = new BuckWaResponse();
-		try{					
-			// Get All Teacher
-			// Get TimeTable By Teacher
-			GetListTeachers request = new GetListTeachers();
-			request.setFacultyId("07");
-			request.setSemester("1");
-			request.setYear("2557");
-			GetListTeachersResponse returnObj =(GetListTeachersResponse)supportWSTemplate.marshalSendAndReceive(request);
-			
-			logger.info(" Return Str :"+ returnObj.getReturn());
-			String originalStr = returnObj.getReturn();
-			String afterRemoveHeader = originalStr.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>", "");
-			//String afterAddRoot  = " <WrapperText  xmlns=\"http://reg.kmitl.ac.th\"> "+afterRemoveHeader+" </WrapperText>";
-			String afterAddRoot  = " <WrapperText> "+afterRemoveHeader+" </WrapperText>";
-			
-			logger.info(" afterAddRoot Str :"+ afterAddRoot);
-			
-		    JAXBContext jaxbContext = JAXBContext.newInstance(WrapperText.class);
-		    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		     
-		    //StringReader reader = new StringReader(afterAddRoot);
-		   // WrapperText wrapperText = (WrapperText) jaxbUnmarshaller.unmarshal(reader );
-		  //  logger.info(" Objec after unmashall :"+ BeanUtils.getBeanString(wrapperText));
-		    
-		    
-		    XMLReader reader = XMLReaderFactory.createXMLReader();
-		    JAXBContext jc = JAXBContext.newInstance("com.buckwa.ws.oxm");
-		    Unmarshaller u = jc.createUnmarshaller();
-
-		    //Create an XMLReader to use with our filter
-		  //  XMLReader reader2 = XMLReaderFactory.createXMLReader();
-
-		    //Create the filter (to add namespace) and set the xmlReader as its parent.
-		    NamespaceFilter inFilter = new NamespaceFilter("http://reg.kmitl.ac.th", true);
-		    inFilter.setParent(reader);
-
-		    //Prepare the input, in this case a java.io.File (output)
-		    StringReader stringReader = new StringReader(afterAddRoot);
-		    InputSource is = new InputSource(stringReader);
-
-		    //Create a SAXSource specifying the filter
-		    SAXSource source = new SAXSource(inFilter, is);
-
-		    //Do unmarshalling
-		    Object myJaxbObject = u.unmarshal(source);
-		    
-		    logger.info(" myJaxbObject Str :"+ BeanUtils.getBeanString(myJaxbObject));
-			//timeTableWSDao.syncTimeTable();
-			
-			logger.info(" ---- End With Success---" );
-		}catch(Exception ex){
-			logger.info(" ---- End With Error---" );
-			ex.printStackTrace();
-			response.setStatus(BuckWaConstants.FAIL);
-			response.setErrorCode("E001");			
-		}
-		return response;
-	}
 
 	public BuckWaResponse syncTimeTableYearTerm(String academicYear,String semesterx) {
 		logger.info(" #################### Sync. Webservice  academicYear:"+academicYear);
 		BuckWaResponse response = new BuckWaResponse();
 		try{		
 			
-			
+			logger.info(" ################################# Delete Time Table and WORK ##########################");
 			facultyDao.deleteTimeTableAndMapping(academicYear);;
 			
 			logger.info(" 1. Faculty ");
@@ -450,8 +389,8 @@ public class TimeTableWSService   {
 						try {
 							SOAPMessage soapMessageTeachTable = ((SaajSoapMessage)messageTeachTable).getSaajMessage();				 
 					       ByteArrayOutputStream out = new ByteArrayOutputStream();
-					       //soapMessageTeachTable.writeTo(out);
-				           // logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
+					       soapMessageTeachTable.writeTo(out);
+				            logger.info(" messageTeachTable SOAP Request Payload: " + new String(out.toByteArray()));
 					         
 						} catch(Exception e) {
 							e.printStackTrace();
@@ -467,7 +406,11 @@ public class TimeTableWSService   {
 				}
 				
 				logger.info(" Semester:"+semester+" degree:"+degree+"  "+teacherTmp.getTeacherIdStr()+":"+teacherTmp.getName()+"  TeachTableSize:"+teachSize +" facultyCode:"+facultyCode);
-		 
+				int ttloop =1;
+				for(TeachTable tttmp:teachTableResponseList){
+					logger.info(ttloop+++" "+tttmp.getSubjectId());
+				}
+				
 				facultyDao.updateTeachTableWS(semester,teachTableResponseList,degree,facultyCode,academicYear);
 				 
 				
@@ -656,5 +599,66 @@ public class TimeTableWSService   {
 		return response;
 	} 
 		
+	public BuckWaResponse syncTimeTable() {
+		logger.info(" ---- Start---" );
+		BuckWaResponse response = new BuckWaResponse();
+		try{					
+			// Get All Teacher
+			// Get TimeTable By Teacher
+			GetListTeachers request = new GetListTeachers();
+			request.setFacultyId("07");
+			request.setSemester("1");
+			request.setYear("2557");
+			GetListTeachersResponse returnObj =(GetListTeachersResponse)supportWSTemplate.marshalSendAndReceive(request);
+			
+			logger.info(" Return Str :"+ returnObj.getReturn());
+			String originalStr = returnObj.getReturn();
+			String afterRemoveHeader = originalStr.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>", "");
+			//String afterAddRoot  = " <WrapperText  xmlns=\"http://reg.kmitl.ac.th\"> "+afterRemoveHeader+" </WrapperText>";
+			String afterAddRoot  = " <WrapperText> "+afterRemoveHeader+" </WrapperText>";
+			
+			logger.info(" afterAddRoot Str :"+ afterAddRoot);
+			
+		    JAXBContext jaxbContext = JAXBContext.newInstance(WrapperText.class);
+		    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		     
+		    //StringReader reader = new StringReader(afterAddRoot);
+		   // WrapperText wrapperText = (WrapperText) jaxbUnmarshaller.unmarshal(reader );
+		  //  logger.info(" Objec after unmashall :"+ BeanUtils.getBeanString(wrapperText));
+		    
+		    
+		    XMLReader reader = XMLReaderFactory.createXMLReader();
+		    JAXBContext jc = JAXBContext.newInstance("com.buckwa.ws.oxm");
+		    Unmarshaller u = jc.createUnmarshaller();
+
+		    //Create an XMLReader to use with our filter
+		  //  XMLReader reader2 = XMLReaderFactory.createXMLReader();
+
+		    //Create the filter (to add namespace) and set the xmlReader as its parent.
+		    NamespaceFilter inFilter = new NamespaceFilter("http://reg.kmitl.ac.th", true);
+		    inFilter.setParent(reader);
+
+		    //Prepare the input, in this case a java.io.File (output)
+		    StringReader stringReader = new StringReader(afterAddRoot);
+		    InputSource is = new InputSource(stringReader);
+
+		    //Create a SAXSource specifying the filter
+		    SAXSource source = new SAXSource(inFilter, is);
+
+		    //Do unmarshalling
+		    Object myJaxbObject = u.unmarshal(source);
+		    
+		    logger.info(" myJaxbObject Str :"+ BeanUtils.getBeanString(myJaxbObject));
+			//timeTableWSDao.syncTimeTable();
+			
+			logger.info(" ---- End With Success---" );
+		}catch(Exception ex){
+			logger.info(" ---- End With Error---" );
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+		return response;
+	}
 	
 }

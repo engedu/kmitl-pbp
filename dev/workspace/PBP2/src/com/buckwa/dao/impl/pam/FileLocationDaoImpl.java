@@ -153,10 +153,10 @@ public class FileLocationDaoImpl implements FileLocationDao {
 			sb.append( " INSERT INTO academic_kpi_attach_file  ");
 			sb.append( " 	(full_path_name,                   ");
 		 
-			sb.append( " 	kpi_user_mapping_id ,file_name          )        ");
+			sb.append( " 	kpi_user_mapping_id ,file_name ,create_date,create_by         )        ");
 			 
 		 
-			sb.append( " VALUES (  ?, ?,?  ) " );
+			sb.append( " VALUES (  ?, ?,?, CURRENT_TIMESTAMP,?  ) " );
 			
 		 
 			logger.info("sql : "+sb.toString());
@@ -167,7 +167,7 @@ public class FileLocationDaoImpl implements FileLocationDao {
 					ps.setString( 1 ,academicKPIAttachFile.getFullFilePathName());
 					ps.setString( 2 , academicKPIAttachFile.getKpiUserMappingId());
 					ps.setString( 3 , academicKPIAttachFile.getFileName());
-					 
+					ps.setString( 4 , academicKPIAttachFile.getCreateBy()); 
 				 
 					return ps;  
 				}

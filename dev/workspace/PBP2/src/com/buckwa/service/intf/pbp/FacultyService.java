@@ -6,6 +6,8 @@ import com.buckwa.domain.common.BuckWaResponse;
 
 public interface FacultyService {
 	public BuckWaResponse getByAcademicYear(BuckWaRequest request);
+	public BuckWaResponse getAllMarkByAcademicYear(BuckWaRequest request);
+	
 	public BuckWaResponse create(BuckWaRequest request); 
 	public BuckWaResponse createDepartment(BuckWaRequest request);
 	

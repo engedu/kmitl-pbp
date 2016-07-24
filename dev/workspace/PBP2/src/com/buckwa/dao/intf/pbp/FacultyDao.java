@@ -74,6 +74,8 @@ public interface FacultyDao {
 	
 	public void  assignKPIInit();
 	
+	public FacultyWrapper getAllMarkByAcademicYear(String  academicYear );
+	
 	 
 	 
 }

@@ -139,7 +139,36 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		  	 
 		try{
 			
-			ReportPbp reportPbp  = this.jdbcTemplate.queryForObject(sql,	new ReportPbpMapper() );	
+			List<ReportPbp> reportPbpList  = this.jdbcTemplate.query(sql,	new ReportPbpMapper() );
+			
+			ReportPbp reportPbp  =null;
+			if(reportPbpList==null||reportPbpList.size()==0){
+				reportPbp = new ReportPbp();
+				reportPbp.setMark_1("0.00");
+				reportPbp.setE_mark_1("0.00");
+				reportPbp.setWork_type_name1("0.00");
+				
+				reportPbp.setMark_2("0.00");
+				reportPbp.setE_mark_2("0.00");
+				reportPbp.setWork_type_name2("0.00");
+				
+				
+				reportPbp.setMark_3("0.00");
+				reportPbp.setE_mark_3("0.00");
+				reportPbp.setWork_type_name3("0.00");
+				
+				
+				reportPbp.setMark_4("0.00");
+				reportPbp.setE_mark_4("0.00");
+				reportPbp.setWork_type_name4("0.00");
+				
+				
+				reportPbp.setMark_5("0.00");
+				reportPbp.setE_mark_5("0.00");
+				reportPbp.setWork_type_name5("0.00");
+			}else{
+				reportPbp = reportPbpList.get(0);
+			}
 			
 			RadarPlotReport r1 = new RadarPlotReport();
 			r1.setAxisName(reportPbp.getWork_type_name1());
@@ -695,14 +724,14 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 							}
 								//logger.info("  Call Str: "+calResultStr);
 								logger.info(" ID: "+mappingTmp.getKpiUserMappingId()+":APPROVED --> "+calResultStr+" = "+totalMappingTmp);
-								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2));	
+								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2,RoundingMode.HALF_UP) );	
 								updateCallResultStr(mappingTmp);
 								
 								//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
-								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2));   
+								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));   
 								//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
-								totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2));	
-								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2));	
+								totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
+								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
 						
 						//logger.info("   Mark after other Attribute :"+totalMappingTmp);
 					} else{

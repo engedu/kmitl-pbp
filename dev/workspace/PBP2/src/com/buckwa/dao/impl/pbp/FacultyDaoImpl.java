@@ -2,6 +2,7 @@ package com.buckwa.dao.impl.pbp;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,7 @@ import com.buckwa.dao.impl.uitl.RejectSubjectUtil;
 import com.buckwa.dao.intf.admin.GroupDao;
 import com.buckwa.dao.intf.pbp.AcademicKPIDao;
 import com.buckwa.dao.intf.pbp.FacultyDao;
+import com.buckwa.dao.intf.pbp.PBPWorkTypeDao;
 import com.buckwa.domain.pbp.AcademicKPI;
 import com.buckwa.domain.pbp.AcademicKPIAttribute;
 import com.buckwa.domain.pbp.AcademicKPIAttributeValue;
@@ -43,6 +45,7 @@ import com.buckwa.domain.pbp.ChainOfCommandWrapper;
 import com.buckwa.domain.pbp.Department;
 import com.buckwa.domain.pbp.Faculty;
 import com.buckwa.domain.pbp.FacultyWrapper;
+import com.buckwa.domain.pbp.report.RadarPlotReport;
 import com.buckwa.domain.pbp.report.TimeTableReport;
 import com.buckwa.util.BeanUtils;
 import com.buckwa.util.school.SchoolConstants;
@@ -65,6 +68,10 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 	@Autowired
 	private GenerateCodeUtil  generateCodeUtil;
+	
+	
+	@Autowired
+	private PBPWorkTypeDao  pBPWorkTypeDao;
 	
  
 	@Autowired
@@ -130,9 +137,133 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 	
 	@Override
+	public FacultyWrapper getAllMarkByAcademicYear( String academicYear) {		 		
+		String sql =" select *  from faculty where academic_year ='"+academicYear+"'" ; 
+		logger.info(" sql:"+sql);
+		List<Faculty> facultyList  =null;
+		
+		try{
+			
+			facultyList = this.jdbcTemplate.query(sql,	new FacultyMapper() );	
+		}catch (org.springframework.dao.EmptyResultDataAccessException ex){
+			ex.printStackTrace();
+		}
+					
+	 
+		FacultyWrapper facultyWrapper = new FacultyWrapper(); 
+		
+		
+		if(facultyList!=null&&facultyList.size()>0){
+			
+			for(Faculty facultyTmp:facultyList){
+				String sqlDepartment =" select *  from department where faculty_code ='" +facultyTmp.getCode()+"' and academic_year='"+facultyTmp.getAcademicYear()+"'"; 
+//				logger.info(" sqlDepartment:"+sqlDepartment);
+				facultyTmp.setDean (getDeanByFacultyId(facultyTmp.getFacultyId()+"",academicYear))  ;
+				List<Department> departmentList  = this.jdbcTemplate.query(sqlDepartment,	new DepartmentMapper() );
+				for(Department depTmp:departmentList){
+					//depTmp.setHead (getHeadByDepartmentId(depTmp.getDepartmentId()+"",getByAcademicYear))  ;
+					//depTmp.setHead (getHeadByDepartmentDesc(depTmp.getDepartmentId()+"",getByAcademicYear,depTmp.getName()))  ;
+		 			
+						List<AcademicPerson> headList = new ArrayList();
+						
+						String sqlAcademicPerson = " select * from person_pbp where department_desc='"+depTmp.getName()+"' and academic_year='"+depTmp.getAcademicYear()+"'";
+						logger.info(" sqlAcademicPerson sql:"+sqlAcademicPerson);
+					    
+						List<AcademicPerson> academicPersonList  = this.jdbcTemplate.query(sqlAcademicPerson,	new AcademicPersonMapper() );
+						
+						
+						for(AcademicPerson personTmp:academicPersonList){
+							String employeeTypeNo =personTmp.getEmployeeTypeNo();
+							String email = personTmp.getEmail();
+							if("2".equalsIgnoreCase(employeeTypeNo)){
+								// พนักงาน
+								 
+								
+								List<RadarPlotReport> markList =pBPWorkTypeDao.getRadarPlotPersonMark(email,academicYear,"1");
+								if(markList!=null&markList.size()>0){
+									int loopmark =1;
+									for(RadarPlotReport markTmp:markList){
+										if(loopmark==1){
+											personTmp.setMark1(markTmp.getAxisValue());
+										}else if(loopmark==2){
+											personTmp.setMark2(markTmp.getAxisValue());
+										}else if (loopmark==3){
+											personTmp.setMark3(markTmp.getAxisValue());
+										}else if (loopmark==4){
+											personTmp.setMark4(markTmp.getAxisValue());
+										}else if (loopmark==5){
+											personTmp.setMark5(markTmp.getAxisValue());
+										} 
+										loopmark++;
+									}
+								}
+								
+								
+							}else{
+								// ข้าราชการ รวมสองรอบ
+								List<RadarPlotReport> markList1 =pBPWorkTypeDao.getRadarPlotPersonMark(email,academicYear,"1");
+								
+								List<RadarPlotReport> markList2 =pBPWorkTypeDao.getRadarPlotPersonMark(email,academicYear,"2");
+								
+								
+								for(int i=1;i<=5;i++){
+									if(i==1){
+										RadarPlotReport r1 = markList1.get(0);
+										RadarPlotReport r2 = markList2.get(0);
+										BigDecimal tmpBig = new BigDecimal(r1.getAxisValue()).add(new BigDecimal(r2.getAxisValue()));
+										personTmp.setMark1(tmpBig+"");
+									}else if(i==2){
+										RadarPlotReport r1 = markList1.get(1);
+										RadarPlotReport r2 = markList2.get(1);
+										BigDecimal tmpBig = new BigDecimal(r1.getAxisValue()).add(new BigDecimal(r2.getAxisValue()));
+										personTmp.setMark2(tmpBig+"");
+									}else if (i==3){
+										RadarPlotReport r1 = markList1.get(2);
+										RadarPlotReport r2 = markList2.get(2);
+										BigDecimal tmpBig = new BigDecimal(r1.getAxisValue()).add(new BigDecimal(r2.getAxisValue()));
+										personTmp.setMark3(tmpBig+"");
+									}else if (i==4){
+										RadarPlotReport r1 = markList1.get(3);
+										RadarPlotReport r2 = markList2.get(3);
+										BigDecimal tmpBig = new BigDecimal(r1.getAxisValue()).add(new BigDecimal(r2.getAxisValue()));
+										personTmp.setMark4(tmpBig+"");
+									}else if (i==5){
+										RadarPlotReport r1 = markList1.get(4);
+										RadarPlotReport r2 = markList2.get(4);
+										BigDecimal tmpBig = new BigDecimal(r1.getAxisValue()).add(new BigDecimal(r2.getAxisValue()));
+										personTmp.setMark5(tmpBig+"");
+									} 
+									
+								}
+								
+								
+								
+							}
+							
+							
+						}
+						
+						
+						depTmp.setAcademicPersonList(academicPersonList);
+ 
+					
+				}
+				
+				facultyTmp.setDepartmentList(departmentList);
+			}
+
+		} 
+		facultyWrapper.setFacultyList(facultyList);
+		facultyWrapper.setPresident(getPresident(academicYear));
+		
+		return facultyWrapper;
+	}
+	
+	
+	@Override
 	public List<Faculty> getFacultyListByAcademicYear( String getByAcademicYear) {		 		
 		String sql =" select *  from faculty where academic_year ='"+getByAcademicYear+"'" ; 
-		logger.info(" sql:"+sql);
+	//	logger.info(" sql:"+sql);
 		List<Faculty> facultyList  =null;
 		
 		try{
@@ -1142,7 +1273,16 @@ public class FacultyDaoImpl implements FacultyDao {
 		//	 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+ " Total Student:"+finalTeachtable.getStudentTotal() );
 			if(finalTeachtable.getTeacherId()==null||finalTeachtable.getSubjectId()==null||finalTeachtable.getSemester()==null||finalTeachtable.getLectOrPrac()==null
 					||finalTeachtable.getStudentTotal()==null||finalTeachtable.getStudentTotal().intValue()==0){ 				
-				// logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
+				 logger.info(" ############ Subject Id : "+finalTeachtable.getSubjectId()+" ############ Found Null  or total Student 0 Skipp----------- : "  );
+			     
+//				 if(finalTeachtable.getStudentTotal()==null){
+//					 
+//					 
+//				 }else if(finalTeachtable.getStudentTotal().intValue()==0){
+//					 
+//					 
+//				 }
+			
 			}else{ 
 			// Check aready exist
 			//final String academicYear = schoolUtil.getCurrentAcademicYear();

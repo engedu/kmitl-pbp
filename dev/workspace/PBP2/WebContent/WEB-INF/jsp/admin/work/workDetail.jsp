@@ -105,14 +105,9 @@
 						</td>					
 						
 					 <td class="" width="65px"> 
-							 <c:forEach items="${domain2.academicKPIAttributeValueList}" var="domain3" varStatus="status3">					      
-						           
-						            <c:if test="${domain3.name=='สัดส่วน(%)'}">
-						          
-						           <c:out value="${domain3.value}"/> %
-						            </c:if>
-								    
-							</c:forEach>  
+					  <c:if test="${domain2.status=='APPROVED'}">
+						 <a rel="notLoading" onclick="return confirmPage('ยืนยันยกเลิกอนุมัติ  ?')" href="<%=request.getContextPath()%>/admin/work/unApprove.htm?kpiUserMappingId=<c:out value="${domain2.kpiUserMappingId}"/>&username=<c:out value="${person.username}"/> ">  <span style="color: red;">ยกเลิก อนุมัติ</span></a>
+						</c:if>
 						</td>					
 						
 	

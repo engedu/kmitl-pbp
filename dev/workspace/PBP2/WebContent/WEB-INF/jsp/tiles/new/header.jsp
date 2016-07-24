@@ -129,9 +129,9 @@
            
            
             <ul class="flyout right"><!-- Flyout Menu -->
-           <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li>
+<%--            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/init.htm">นำเข้าตารางสอน (Webservice) </a></li> --%>
                  <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initRegId.htm">นำเข้าตารางสอน (Webservice)รายบุคล </a></li>
-            <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initChum.htm">นำเข้าตารางสอน (Webservice) ชุมพร</a></li>
+<%--             <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/initChum.htm">นำเข้าตารางสอน (Webservice) ชุมพร</a></li> --%>
                 <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetable/init.htm">แก้ไขตารางสอน</a></li> 
               <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/recalculateInit.htm">คำนวณคะแนน</a></li>
             <!--    <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/timetablews/assignKPIInit.htm">กำหนด kpi คณะ</a></li>
@@ -161,8 +161,15 @@
         
        <sec:authorize ifAnyGranted="ROLE_ADMIN">
       <sec:authorize ifNotGranted="ROLE_ADMIN_FAC">	
-       <li class=""><span class="lsf-icon colororange" title="tile"></span><a href="<%=request.getContextPath()%>/admin/accessLog/init.htm">Access Log</a></li>
-                        
+      
+         <li class="has-flyout"><span class="lsf-icon colororange" title="tile"></span>
+           <a href="#">รายงาน</a><a href="#" class="flyout-toggle"></a> 
+            <ul class="flyout right"><!-- Flyout Menu -->
+           <li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/pbp/report/init.htm">รายงานคะแนนบุคลากรทั้งสถาบัน </a></li>
+ 			<li class="has-flyout"><a href="<%=request.getContextPath()%>/admin/accessLog/init.htm">Access Log </a></li>
+            </ul> 
+          </li>
+          
 		</sec:authorize>
         </sec:authorize>  
           

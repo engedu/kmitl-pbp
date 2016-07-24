@@ -278,6 +278,7 @@ public class AcademicKPIServiceImpl implements AcademicKPIService {
 					academicKPIAttachFile.setKpiUserMappingId(String.valueOf(academicKPIId));
 					academicKPIAttachFile.setFullFilePathName(uploadPath + tmpFileName);
 					academicKPIAttachFile.setFileName(tmpFileName);
+					academicKPIAttachFile.setCreateBy(BuckWaUtils.getUserNameFromContext());
 					fileLocationService.createPBPAttachFile(academicKPIAttachFile);
 				}				
 			}

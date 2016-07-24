@@ -44,8 +44,9 @@ public class AcademicKPIUserMappingServiceImpl implements AcademicKPIUserMapping
 		BuckWaResponse response = new BuckWaResponse();
 		try{				 
 			
+			String headUserName =  request.get("headUserName")+"";
 			String kpiUserMappingId =  request.get("kpiUserMappingId")+"";
-			 academicKPIUserMappingDao.approve(kpiUserMappingId);
+			 academicKPIUserMappingDao.approve(kpiUserMappingId,headUserName);
 		  
  	
 		}catch(Exception ex){
@@ -108,5 +109,23 @@ public class AcademicKPIUserMappingServiceImpl implements AcademicKPIUserMapping
 		return response;
 	}
 	
+	
+	
+	@Override	
+	public BuckWaResponse unApprove(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String kpiUserMappingId =  (String)request.get("kpiUserMappingId");
+			 academicKPIUserMappingDao.unApprove(kpiUserMappingId); 
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
 	
 }

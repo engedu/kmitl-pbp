@@ -135,4 +135,7 @@
 	 <bean id="personTimeTableInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personTimeTableInit" /></bean>
 	  <bean id="personYearReportInit"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="personYearReportInit" /></bean>
 	 
+	 <!--  Admin Report -->
+	 
+	 <bean id="adminReportList"	class="org.springframework.web.servlet.view.tiles2.TilesView"><property name="url" value="adminReportList" /></bean>
 </beans>

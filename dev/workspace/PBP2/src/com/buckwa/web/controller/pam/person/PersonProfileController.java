@@ -1281,9 +1281,7 @@ public class PersonProfileController {
 			new EditImportWorkValidator().validate(academicKPIUserMappingWrapper, result);			
 			if (result.hasErrors()) {				
 				mav.setViewName("viewImportWork");
-				
-				mav.addObject("errorDesc", "Require Field Cannot be left blank"); 
-				
+					
 				logger.info(" ## editImportworkPOST Found Error Validate Fail ###");
 			}else {	
 				
@@ -1445,13 +1443,14 @@ public class PersonProfileController {
 						academicKPIAttachFile.setKpiUserMappingId(academicKPI.getAcademicKPIUserMappingId()+"");
 						academicKPIAttachFile.setFullFilePathName(fullFilePathName);
 						academicKPIAttachFile.setFileName(file);
+						academicKPIAttachFile.setCreateBy(BuckWaUtils.getUserNameFromContext());
 						
 						
 						logger.info("FILE >> "+academicKPIAttachFile);
 						logger.info("## File Size :" + originalfile.getSize());
 						logger.info("## File Name Original :" + file);
 						logger.info("## Upload Path :" + uploadPath);
-						
+						logger.info("## createBy :" + academicKPIAttachFile.getCreateBy());
 						//String fileUpload = uploadPath+file;
 						String fileUpload = fullFilePathName;
 						
@@ -1697,13 +1696,13 @@ public class PersonProfileController {
 					academicKPIAttachFile.setKpiUserMappingId(academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getKpiUserMappingId()+"");
 					academicKPIAttachFile.setFullFilePathName(fullFilePathName);
 					academicKPIAttachFile.setFileName(file);
-					
+					academicKPIAttachFile.setCreateBy(BuckWaUtils.getUserNameFromContext());
 					
 					logger.info("FILE >> "+academicKPIAttachFile);
 					logger.info("## File Size :" + originalfile.getSize());
 					logger.info("## File Name Original :" + file);
 					logger.info("## Upload Path :" + uploadPath);
-					
+					logger.info("## Create By:" + academicKPIAttachFile.getCreateBy());
 					//String fileUpload = uploadPath+file;
 					String fileUpload = fullFilePathName;
 					

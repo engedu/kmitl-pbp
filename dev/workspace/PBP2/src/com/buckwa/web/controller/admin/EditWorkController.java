@@ -197,6 +197,29 @@ public class EditWorkController {
 		return mav;
 	}
 	
+	@RequestMapping(value="unApprove.htm", method = RequestMethod.GET)
+	public ModelAndView unApprove(@RequestParam("kpiUserMappingId") String kpiUserMappingId,@RequestParam("username") String username  ,HttpServletRequest httpRequest ) {
+		logger.info(" Start unApprove  kpiUserMappingId:"+kpiUserMappingId+" username:"+username);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("viewImportWork");
+		try{
+			BuckWaRequest request = new BuckWaRequest();
+			 
+		  
+			request.put("kpiUserMappingId",kpiUserMappingId);
+			BuckWaResponse response = academicKPIUserMappingService.unApprove(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+ 
+				mav=initAcademicWorkGET(httpRequest,username);
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value="search.htm" )
 	public ModelAndView search(HttpServletRequest httpRequest,@ModelAttribute User user) {
 		logger.info(" Start  ");

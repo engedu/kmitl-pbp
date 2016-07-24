@@ -60,22 +60,33 @@
 			
 			<tr>
 				<td class="tdFirst">คะแนน:</td>
-				<td class="tdLast"> 
+				<td class="tdLast" style="text-align: left;">
 				${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.mark} คะแนน/ ${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPI.unitDesc}
 				 </td>
 			</tr> 
 		 			<c:forEach items="${academicKPIUserMappingWrapper.academicKPIUserMapping.academicKPIAttributeValueList}" var="domain" varStatus="status">
 						<tr>
-							<td class="tdFirst">
+							<td class="tdFirst"  style="text-align: left;">
 							  <c:out  value="${domain.name}"/>
 		                    
 							</td>
- 							<td class="tdFirst"> 
+ 							<td class="tdFirst" style="text-align: left;">
 		                   <c:out  value="${domain.value}"/>
 		                   	 
 							</td>						
 						</tr>
 					</c:forEach>	 
+					
+					<tr>
+				
+				
+				<td class="tdFirst">การคำนวณ:</td>
+				<td class="tdLast" style="text-align: left;">
+				<b><c:out  value="${academicKPIUserMappingWrapper.academicKPIUserMapping.calResultStr}"/></b>
+				
+				</td>
+				</tr>					
+					
 		</table>
  
     </div>
