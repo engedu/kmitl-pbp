@@ -109,7 +109,7 @@
 <script type="text/javascript">
 function init (){
 	var form = document.forms['mainForm']; 
-	form.action ="<%=request.getContextPath()%>/head/pbp/init.htm";
+	form.action ="<%=request.getContextPath()%>/head/pbp/init.htm?academicYear="; 
 	form.method='GET';	
 	form.submit();	
 }

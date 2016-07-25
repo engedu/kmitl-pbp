@@ -27,5 +27,7 @@ public interface HeadDao {
 	
 	public Department getDepartmentMarkAllYear( String headUserName , String academicYear );
 	
+	public AcademicKPIUserMappingWrapper listApproveByAcademicYear( String headUserName ,String academicYear,String status,String userName);
+	
 	
 }

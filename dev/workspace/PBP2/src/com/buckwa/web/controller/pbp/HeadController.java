@@ -84,7 +84,8 @@ public class HeadController {
 	
 	
 	@RequestMapping(value="init.htm", method = RequestMethod.GET)
-	public ModelAndView initList(@RequestParam("academicYear") String academicYear) {
+	public ModelAndView initList( ) {
+		//public ModelAndView initList(@RequestParam("academicYear") String academicYear) {
 		logger.info(" Start  ");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("headWorkList");
@@ -93,9 +94,9 @@ public class HeadController {
 			 
 			String headUserName = BuckWaUtils.getUserNameFromContext();
 			
-			if(academicYear==null||academicYear.length()==0){
-				academicYear =schoolUtil.getCurrentAcademicYear();
-			}
+			//if(academicYear==null||academicYear.length()==0){
+			String	academicYear =schoolUtil.getCurrentAcademicYear();
+			//}
 		//	String academicYear =schoolUtil.getCurrentAcademicYear();
 			
 			request.put("headUserName",headUserName);
