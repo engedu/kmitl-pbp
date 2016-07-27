@@ -32,6 +32,8 @@ public interface PBPWorkTypeService {
 	
 	
 	public BuckWaResponse getRadarPlotPersonMarkE(BuckWaRequest request);
+	
+	public BuckWaResponse getCurretnEvalulate(BuckWaRequest request);
 	 
 }
 

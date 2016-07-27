@@ -82,6 +82,16 @@ public class PersonYearReportController {
 			BuckWaResponse response = personProfileService.getByUsername(request);
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Person person = (Person) response.getResObj("person");
+				
+				
+				request.put("academicYear",academicYearSelect);	 
+				request.put("employeeType",person.getEmployeeTypeNo());
+				  response = pBPWorkTypeService.getCurretnEvalulate(request);
+				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+					String roundCurrent = (String)response.getResObj("round"); 
+					person.setEvaluateRound(roundCurrent);
+					personYearReport.setEvaluateRound(roundCurrent);
+				} 
 				personYearReport.setPerson(person);
 			}
 			

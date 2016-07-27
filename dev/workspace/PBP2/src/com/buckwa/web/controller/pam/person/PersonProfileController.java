@@ -154,13 +154,24 @@ public class PersonProfileController {
 				
 				person.setAcademicYear(academicYear);
 				person.setAcademicYearList(academicYearUtil.getAcademicYearList());
-				person.setEvaluateRound("1");
+				
+				
+				request.put("academicYear",academicYear);	 
+				request.put("employeeType",person.getEmployeeTypeNo());
+				response = pBPWorkTypeService.getCurretnEvalulate(request);
+				if(response.getStatus()==BuckWaConstants.SUCCESS){	
+					String roundCurrent = (String)response.getResObj("round"); 
+					person.setEvaluateRound(roundCurrent);
+				}else{
+					person.setEvaluateRound("1");
+				}
+				
+
+				
+			
 				user.setPersonProfile(person);
 				mav.addObject("person", person);
-			 
-				
-		 
-				 
+			  
 				request.put("academicYear",academicYear);
 				request.put("userName",BuckWaUtils.getUserNameFromContext());
 				request.put("round",person.getEvaluateRound());
@@ -420,18 +431,39 @@ public class PersonProfileController {
 		mav.setViewName("academicWork");
 		mav.addObject(BuckWaConstants.PAGE_SELECT, BuckWaConstants.PERSON_INIT);
 		try {
+			
+			
+			
+			
+			
+			
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
 			logger.info("viewUserProfile  username :"+user.getUsername());
 
 			BuckWaRequest request = new BuckWaRequest();
+			
+			
+			
+			request.put("academicYear",selectAcademicYear);	 
+			request.put("employeeType",user.getPersonProfile().getEmployeeTypeNo());
+			BuckWaResponse response = pBPWorkTypeService.getCurretnEvalulate(request);
+			if(response.getStatus()==BuckWaConstants.SUCCESS){	
+				String roundCurrent = (String)response.getResObj("round"); 
+				round =roundCurrent;
+			} 
+						
+			
+			
+			
 			request.put("username", user.getUsername());
 			request.put("academicYear",selectAcademicYear );
 
-			BuckWaResponse response = personProfileService.getByUsername(request);
+			 response = personProfileService.getByUsername(request);
 
 			if (response.getStatus() == BuckWaConstants.SUCCESS) {
 				Person person = (Person) response.getResObj("person");
 				person.setAcademicYear(selectAcademicYear);
+				person.setEvaluateRound(round);
 				user.setFirstLastName(person.getThaiName()+" "+person.getThaiSurname()); 
 				
 				mav.addObject("person", person); 

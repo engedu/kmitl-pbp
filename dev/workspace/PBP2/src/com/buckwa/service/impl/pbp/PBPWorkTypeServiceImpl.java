@@ -192,6 +192,30 @@ public class PBPWorkTypeServiceImpl implements PBPWorkTypeService {
 		return response;
 	}
 	
+	@Override	
+	public BuckWaResponse getCurretnEvalulate(BuckWaRequest request) {
+		BuckWaResponse response = new BuckWaResponse();
+		try{				 
+			
+			String academicYear = (String)request.get("academicYear");
+	 
+			String employeeType = (String)request.get("employeeType");
+		 
+			
+			String round= ( String)pBPWorkTypeDao.getCurretnEvalulate(academicYear ,employeeType);
+	 
+			 response.addResponse("round",round);
+ 	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			response.setStatus(BuckWaConstants.FAIL);
+			response.setErrorCode("E001");			
+		}
+	 
+		return response;
+	}
+	
+	
 	
 	
 	@Override	

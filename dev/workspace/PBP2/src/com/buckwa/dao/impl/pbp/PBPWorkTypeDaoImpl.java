@@ -464,6 +464,47 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 	}
 	
 	@Override
+	public String  getCurretnEvalulate( String academicYear,String employeeTypeNo ) {
+		logger.info("  ########### academicYear :"+academicYear +"   employeeTypeNO:"+employeeTypeNo );		
+		
+		String returnEvalRound ="1";
+		
+		
+		String evalType = "1";
+	 
+		if(employeeTypeNo.equalsIgnoreCase("2")){
+			evalType ="2";
+	 
+		} 
+ 
+		String sqlRound =" select *  from academic_evaluate_round where academic_year  ='"+academicYear+"' and evaluate_type='"+evalType+"'"   ;  
+ 
+		 AcademicYearEvaluateRound  academicYearEvaluateRound   = this.jdbcTemplate.queryForObject(sqlRound,	new AcademicYearEvaluateRoundMapper() );	
+		
+ 
+		 long startTime =0l;
+		 long endTime =0l;
+ 
+ 
+				 startTime = academicYearEvaluateRound.getRound1StartDate().getTime(); 
+				 endTime = academicYearEvaluateRound.getRound1EndDate().getTime();
+	 
+	 
+				// startTime2 = academicYearEvaluateRound.getRound2StartDate().getTime(); 
+				// endTime2 = academicYearEvaluateRound.getRound2EndDate().getTime();
+			 
+				 Long currentTime = System.currentTimeMillis();
+				 if(currentTime>=startTime&&currentTime<endTime){
+					 returnEvalRound ="1";
+				 }else{
+					 returnEvalRound ="2";
+				 }
+		 
+ 
+	 
+		return returnEvalRound;
+	} 
+	
 	public PBPWorkTypeWrapper getCalculateByAcademicYear( String academicYear,String userName,String round,String employeeTypeNo,String facultyCode) {
 		logger.info("  ###########  :"+userName +"   employeeTypeNO:"+employeeTypeNo );		
 		String evalType = "1";
@@ -873,6 +914,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 		}
 		return pBPWorkTypeWrapper;
 	} 
+	
 	
 	
 	

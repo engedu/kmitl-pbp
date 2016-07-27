@@ -44,5 +44,7 @@ public interface PBPWorkTypeDao {
 	
 	
 	public PBPWorkTypeWrapper getCalculateByAcademicYearAllYear(String academicYear,String userName,String employeeType,String facultyCode); 
+	
+	public String  getCurretnEvalulate( String academicYear,String employeeTypeNo );
 
 }

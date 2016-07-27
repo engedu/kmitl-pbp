@@ -35,7 +35,6 @@ import com.buckwa.domain.pbp.PBPWorkTypeWrapper;
 import com.buckwa.domain.pbp.report.DepartmentReport;
 import com.buckwa.domain.pbp.report.DepartmentWorkTypeReport;
 import com.buckwa.domain.pbp.report.MinMaxBean;
-import com.buckwa.util.BeanUtils;
 import com.buckwa.util.BuckWaDateUtils;
 import com.buckwa.util.school.SchoolConstants;
 import com.buckwa.util.school.SchoolUtil;
