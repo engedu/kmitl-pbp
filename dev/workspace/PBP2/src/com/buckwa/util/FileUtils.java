@@ -24,7 +24,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			int readBytes = 0;
 			byte[] buffer = new byte[10000];
 			while ((readBytes = inputStream.read(buffer, 0, 10000)) != -1) {
-				logger.info("---- Uploading ..... Sucess ----");
+				//logger.info("---- Uploading ..... Sucess ----");
 				outputStream.write(buffer, 0, readBytes);
 			}
 			inputStream.close();

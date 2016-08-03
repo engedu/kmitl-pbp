@@ -423,7 +423,7 @@ public class PersonProfileController {
 	
 	@RequestMapping(value="initAcademicWork.htm", method = RequestMethod.GET)
 	public ModelAndView initAcademicWorkGET(HttpServletRequest httpRequest  ) {
-		logger.info(" Start "); 
+//		logger.info(" Start "); 
 		String selectAcademicYear =schoolUtil.getCurrentAcademicYear();
 		String round = "1";
 		 
@@ -438,7 +438,7 @@ public class PersonProfileController {
 			
 			
 			BuckWaUser user = BuckWaUtils.getUserFromContext();
-			logger.info("viewUserProfile  username :"+user.getUsername());
+		//	logger.info("viewUserProfile  username :"+user.getUsername());
 
 			BuckWaRequest request = new BuckWaRequest();
 			
@@ -885,7 +885,7 @@ public class PersonProfileController {
 					List<AcademicKPIAttribute> ratioList =academicKPI.getAcademicKPIAttributeList();
 					for(AcademicKPIAttribute tmp:ratioList){
 						String attributeName =tmp.getName();
-						logger.info(" Attribute Name:"+attributeName+" index of สัดส่วน:"+attributeName.indexOf("สัดส่วน"));
+//						logger.info(" Attribute Name:"+attributeName+" index of สัดส่วน:"+attributeName.indexOf("สัดส่วน"));
 						
 						if(attributeName.indexOf("สัดส่วน")!=-1){
 							tmp.setValue("100");
@@ -1296,7 +1296,7 @@ public class PersonProfileController {
 	
 	@RequestMapping(value="editImportwork.htm", method = RequestMethod.POST)
 	public ModelAndView editImportworkPOST(HttpServletRequest httpRequest, @ModelAttribute AcademicKPIUserMappingWrapper academicKPIUserMappingWrapper , BindingResult result) {
-		logger.info(" Start  academicKPIUserMappingWrapper:"+BeanUtils.getBeanString(academicKPIUserMappingWrapper));
+//		logger.info(" Start  academicKPIUserMappingWrapper:"+BeanUtils.getBeanString(academicKPIUserMappingWrapper));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("viewImportWork");
 		try{
@@ -1305,7 +1305,7 @@ public class PersonProfileController {
 			for(final AcademicKPIAttributeValue tmp:academicKPIAttributeValueList){
 				tmp.setAcademicKPIMappingId(academicKPIUserMappingWrapper.getAcademicKPIUserMapping().getKpiUserMappingId());
 	            
-				logger.info("  update :"+BeanUtils.getBeanString(tmp));
+				//logger.info("  update :"+BeanUtils.getBeanString(tmp));
 			 		
 			}
 			academicKPIUserMappingWrapper.getAcademicKPIUserMapping().setAcademicKPIAttributeValueList(academicKPIAttributeValueList);
@@ -1350,7 +1350,7 @@ public class PersonProfileController {
 				
 				String	url = httpRequest.getContextPath() + "/pam/person/initAcademicWork.htm"; 
 				
-				logger.info(" ### Redirect to :"+url);
+			//	logger.info(" ### Redirect to :"+url);
 				mav.setView(new RedirectView(url));
  
 			}

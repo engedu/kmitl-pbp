@@ -810,14 +810,15 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										BigDecimal tmpBeforCall = totalMappingTmp;
 										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
 										//	logger.info(" สัดส่วน"+attributeValueValue);
-											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2,RoundingMode.HALF_UP)).divide(new BigDecimal(100));
 											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
 											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
 										}else{ 
 											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +" So :"+tmpBeforCall+"*"+attributeValueValue+"  = "+totalMappingTmp);
  											try{
-											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2));
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue.trim()).setScale(2));
 											}catch(Exception ex){
+												System.out.println(" Number Formate Exception attributeName:"+attributeValueName+" value:"+attributeValueValue);
 												ex.printStackTrace();
 											}
 											calResultStr=calResultStr+ " X (" +attributeValueValue+" "+attributeValueName+")";
@@ -1142,7 +1143,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										String attributeValueValue = attributeValueTmp.getValue(); 
 										BigDecimal tmpBeforCall = totalMappingTmp;
 										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
-											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));											
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2,RoundingMode.HALF_UP)).divide(new BigDecimal(100));											
 											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
 											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
 										}else{ 
@@ -1163,14 +1164,14 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 							}
 								//logger.info("  Call Str: "+calResultStr);
 								logger.info(mappingTmp.getKpiUserMappingId()+":APPROVED --> "+calResultStr+" = "+totalMappingTmp);
-								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2));	
+								mappingTmp.setCalResultStr(calResultStr+" = "+totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
 								updateCallResultStr(mappingTmp);
 								
 								//BigDecimal totalPercentInMapping = totalMappingTmp.multiply(new BigDecimal(100)).divide( limitBase ,2,RoundingMode.HALF_UP); 
-								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2));   
+								mappingTmp.setTotalInMapping(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));   
 								//mappingTmp.setTotalPercentInMapping(totalPercentInMapping.setScale(2));
-								totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2));	
-								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2));	
+								totalInWorkType =totalInWorkType.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
+								totalInWorkType_E =totalInWorkType_E.add(totalMappingTmp.setScale(2,RoundingMode.HALF_UP));	
 						
 						//logger.info("   Mark after other Attribute :"+totalMappingTmp);
 					} else{
@@ -1193,7 +1194,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 						
 						calResultStr= " ("+multiplyValueBig+" ตัวคุณ )"+" X ("+kpiTmp.getMark()+" คะแนน KPI )";						
 						if(kpiTmp.getMultiplyValue()!=null&&multiplyValueBig.doubleValue()>0){							
-							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()).multiply(multiplyValueBig).setScale(2); 
+							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()).multiply(multiplyValueBig).setScale(2,RoundingMode.HALF_UP); 
 							//logger.info("  Found multiply value :"+kpiTmp.getMultiplyValue()+"  So multiply by :"+kpiTmp.getMultiplyValue()+" = "+totalMappingTmp);
 						}else{									 	
 							totalMappingTmp =totalMappingTmp.add(kpiTmp.getMark()); 
@@ -1207,7 +1208,7 @@ public class PBPWorkTypeDaoImpl implements PBPWorkTypeDao {
 										String attributeValueValue = attributeValueTmp.getValue(); 
 										BigDecimal tmpBeforCall = totalMappingTmp;
 										if(attributeValueName.indexOf("สัดส่วน(%)")!=-1){ 
-											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2)).divide(new BigDecimal(100));
+											totalMappingTmp =totalMappingTmp.multiply(new BigDecimal(attributeValueValue).setScale(2,RoundingMode.HALF_UP)).divide(new BigDecimal(100));
 											//logger.info("   Attribute Name:"+attributeValueName+"   Attribute value:"+attributeValueValue+ " isCal:"+isCalculate +"  So :"+tmpBeforCall+"*"+attributeValueValue+"/100 = "+totalMappingTmp);
 											calResultStr=calResultStr+ " X (" +attributeValueName+" "+attributeValueValue+")";
 										}else{ 

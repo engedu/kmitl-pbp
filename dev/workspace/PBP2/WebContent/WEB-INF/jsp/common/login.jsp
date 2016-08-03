@@ -38,6 +38,10 @@
 				
 				<div >
 				<br>
+				<span style="color: red; font-size: 17px;">  <b>ขยายเวลาการนำเข้าผลงานจนถึง  15 สิงหาคม 2559</b></span>
+				<br>
+					<br>
+						<br>
 				 <span style="color: red;"> * </span><b>ชื่อผู้เข้าใช้ และรหัสผ่าน คือ email และ password ของแอคเคาท์เก่า(Generation1) ของเมล์สถาบันฯ </b>
 				 <br>
 				 

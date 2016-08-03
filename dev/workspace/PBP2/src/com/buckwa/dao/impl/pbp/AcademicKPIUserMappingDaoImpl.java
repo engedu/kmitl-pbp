@@ -134,7 +134,7 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 						sbmessage.append(" where 1=1 and topic_id="+mappingTmp.getKpiUserMappingId());	
 				 
 						String sql =sbmessage.toString();		
-						logger.info(" sql sbmessage:"+sql);			
+						//logger.info(" sql sbmessage:"+sql);			
 						List <Message> messageList = this.jdbcTemplate.query(
 								sql,
 								new RowMapper<Message>() {
@@ -268,7 +268,8 @@ public class AcademicKPIUserMappingDaoImpl implements AcademicKPIUserMappingDao 
 			domain.setStatus(rs.getString("status"));
 			domain.setRatio(rs.getInt("ratio"));
 			domain.setCalResultStr(rs.getString("cal_result_str"));
-			logger.info(rs.getInt("ratio"));
+			domain.setUserName(rs.getString("user_name"));
+			//logger.info(rs.getInt("ratio"));
 		 
 		return domain;
     }

@@ -63,7 +63,7 @@
 					
 <!-- 					</th></tr> -->
 		   	   		<tr>
-		   	   			<th class="thFirst" width="60%">ภาระงาน</th>
+		   	   			<th class="thFirst" width="60%">ภาระงาน  </th>
 		   	   			<th class="thFirst" width="15%">คะแนน</th>
  						<th class="thFirst" width="20%">หมายเหตุ</th>
 		   	   		</tr>
@@ -71,7 +71,7 @@
 		   	   	
 		   	   	<tbody> 
 		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
-		   			<tr class="row1">
+		   			<tr class="row1"  >
 		   			
 		   			
 <!-- 		   				<td class="tdFirst"> -->
@@ -86,7 +86,7 @@
 <!-- 		   				 </td> -->
 		   				 
 		   				 
-		   				 <td class="tdFirst">
+		   				 <td class="tdFirst" >
 		   				 	<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value="${academicKPIWrapper.index}"/>">  
  		   				     ${domain.name} 
  		   				</a>

@@ -7,7 +7,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.buckwa.domain.*" %>
 <%@ page import="java.util.*" %>  
-
+ 
 <form:form modelAttribute="academicKPIUserMappingWrapper" action="importwork.htm" method="POST" name="mainForm" enctype="multipart/form-data">		 
 <form:hidden path="academicYear"/>
  
@@ -29,16 +29,22 @@
 				 
 	     	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='CREATE'}">
 	 
-<a rel="notLoading" class="button approve" href="<%=request.getContextPath()%>/head/pbp/approveWork.htm?kpiUserMappingId=${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}">
-	 <%-- <img src="<c:url value="/images/approve.jpg"/>" width="40" height="40"/> --%>Approve
-	 </a>
-	 </c:if>	
+			<a rel="notLoading" class="button approve" onclick="return confirmPage('ยืนยันอนุมัติ  ?')"  href="<%=request.getContextPath()%>/head/pbp/approveWork.htm?kpiUserMappingId=${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}">
+			 <%-- <img src="<c:url value="/images/approve.jpg"/>" width="40" height="40"/> --%>Approve
+			 </a>
+			 </c:if>	
 
 	     	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='CREATE_CO_TEACH'}">
 	 
-<a rel="notLoading" class="button approve" href="<%=request.getContextPath()%>/head/pbp/approveWork.htm?kpiUserMappingId=${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}">
+<a rel="notLoading" class="button approve"  onclick="return confirmPage('ยืนยันอนุมัติ  ?')" href="<%=request.getContextPath()%>/head/pbp/approveWork.htm?kpiUserMappingId=${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}">
 	 <%-- <img src="<c:url value="/images/approve.jpg"/>" width="40" height="40"/> --%>Approve
 	 </a>
+	 
+	 </c:if>	
+	 
+	 	     	 <c:if test="${academicKPIUserMappingWrapper.academicKPIUserMapping.status=='APPROVED'}">
+	 <a rel="notLoading" class="button approve"  onclick="return confirmPage('ยืนยันยกเลิกอนุมัติ  ?')" href="<%=request.getContextPath()%>/head/pbp/unApprove.htm?kpiUserMappingId=<c:out value="${academicKPIUserMappingWrapper.academicKPIUserMapping.kpiUserMappingId}"/>">   Unapprove</a>
+ 
 	 </c:if>		 
 	 
  		
@@ -126,7 +132,8 @@
 
 	
 	 &nbsp;
-	<input class="btn btn-primary" value="<spring:message code="label.button.back"/>" type="button" onclick="init();">
+	 
+	<a rel="notLoading" class="btn btn-primary"  href="<%=request.getContextPath()%>/head/pbp/initByUserName.htm?userName=<c:out value="${academicKPIUserMappingWrapper.academicKPIUserMapping.userName}"/>"> ย้อนกลับ </a>
 	</div>
 
 	
@@ -210,11 +217,11 @@
  <script type="text/javascript">
 	function init (){
 		var form = document.forms['mainForm']; 
-		form.action ="<%=request.getContextPath()%>/head/pbp/init.htm";
+		form.action ="<%=request.getContextPath()%>/head/pbp/initByUserName.htm?userName=<c:out value="${academicKPIUserMappingWrapper.academicKPIUserMapping.userName}"/>";
 		form.method='GET';	
 		form.submit();	
 	}
-	
+ 
 	function replyMessagex (){	 
 		 
 		var form = document.forms['mainForm']; 

@@ -31,7 +31,7 @@
 					
 					</th></tr>
 		   	   		<tr>
-		   	   			<th class="thFirst">ภาระงาน</th>
+		   	   			<th class="thFirst">ภาระงาน ปป</th>
 		   	   			<th class="thFirst">คะแนน</th>
  						<th class="thFirst">หมายเหตุ</th>
 		   	   		</tr>
@@ -40,14 +40,14 @@
 		   	   	<tbody> 
 		   		<c:forEach items="${academicKPIWrapper.academicKPIList}" var="domain" varStatus="status">  
 		   			<tr class="row1">
-		   				<td class="tdFirst">
+		   				<td class="tdFirst" >
 		   			  <c:if test="${domain.fromRegis != 'Y' }"> 
 		   				<a rel="notLoading" href="<%=request.getContextPath()%>/pam/person/importwork.htm?academicKPICode=<c:out  value="${domain.code}"/>&academicYear=<c:out  value="${academicKPIWrapper.academicYear}"/>&index=<c:out  value=""/>"> 
 		   				     ${domain.name}
 		   				</a>		
 		   				</c:if>
 		   				 <c:if test="${domain.fromRegis == 'Y' }">    
-		   				  ${domain.name}
+		   			  ${domain.name}  
 		   				 </c:if>				 
 		   				 </td>
 		   				<td class="tdFirst">${domain.mark} คะแนน/ ${domain.unitDesc}</td>

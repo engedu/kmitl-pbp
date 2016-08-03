@@ -32,11 +32,11 @@ public class LdapCustomUserDetailsMapper extends LdapUserDetailsMapper {
 	public UserDetails mapUserFromContext(DirContextOperations ctx,
 			String username, Collection<? extends GrantedAuthority> authority) {
 
-		logger.info(" username:"+username);
+		logger.info("LDAP  username:"+username);
     	BuckWaUser user  =null;
         try{        	
         	if(!isUserEnable(username)){
-        		  logger.info("   Found user:"+username+" but not enable ");
+        		  logger.info(" LDAP   Found user:"+username+" but not enable ");
         		  throw new Exception();
         	}
        	List< GrantedAuthority>  authorities = getAuthorities(username);     	 
@@ -58,7 +58,7 @@ public class LdapCustomUserDetailsMapper extends LdapUserDetailsMapper {
 	    	   throw new Exception();
 	       }
         }catch(Exception ex){
-        	  logger.info("Login Error, Not Found user:"+username);
+        	  logger.info(" LDAP Login Error, Not Found user:"+username);
         	ex.printStackTrace();
         	throw new UsernameNotFoundException("User "+username+" Not Found");        	
         }

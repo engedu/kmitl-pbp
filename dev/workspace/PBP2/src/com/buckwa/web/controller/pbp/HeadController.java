@@ -150,6 +150,29 @@ public class HeadController {
 		return mav;
 	}	
 	
+	@RequestMapping(value="unApprove.htm", method = RequestMethod.GET)
+	public ModelAndView unApprove(@RequestParam("kpiUserMappingId") String kpiUserMappingId ,HttpServletRequest httpRequest ) {
+		logger.info(" Start unApprove  kpiUserMappingId:"+kpiUserMappingId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("headWorkUserList");
+		try{
+			BuckWaRequest request = new BuckWaRequest();
+			 
+		  
+			request.put("kpiUserMappingId",kpiUserMappingId);
+			BuckWaResponse response = academicKPIUserMappingService.unApprove(request);
+
+			String approveUserName =(String)httpRequest.getSession().getAttribute("approveUserName");
+	
+	 
+		 
+			return initByUserName(httpRequest,approveUserName);	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			mav.addObject("errorCode", "E001"); 
+		}
+		return mav;
+	}
 	
 	@RequestMapping(value="viewWork.htm", method = RequestMethod.GET)
 	public ModelAndView viewWork(@RequestParam("kpiUserMappingId") String kpiUserMappingId  ) {

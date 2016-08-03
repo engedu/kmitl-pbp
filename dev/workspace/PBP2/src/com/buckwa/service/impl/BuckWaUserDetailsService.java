@@ -59,7 +59,7 @@ public class BuckWaUserDetailsService implements UserDetailsService {
 	       }
 	       
 	       
-	       System.out.println(" ## User Login :"+username);
+	      // System.out.println(" ## User Login :"+username);
 	       
 	       if(username.indexOf("admin")!=-1){
 	    	   
@@ -185,7 +185,7 @@ public class BuckWaUserDetailsService implements UserDetailsService {
     } 
     
     public List<GrantedAuthority> findAllAuthority(String sql) {
-	    	logger.info(" jdbcTemplate:"+jdbcTemplate);
+	    	//logger.info(" jdbcTemplate:"+jdbcTemplate);
 	    	return jdbcTemplate.query( sql, new AuthorityrMapper());
     }
     
@@ -223,13 +223,14 @@ public class BuckWaUserDetailsService implements UserDetailsService {
     	        boolean enable =false;
     	        while (rs.next()) {    	        	 
     	        	enable = rs.getBoolean("enable");
-    	        	logger.info(" isUserEnable:"+enable);
+    	        	//logger.info(" isUserEnable:"+enable);
     	        }    	        
     	        if(enable ==true){
     	        	result = true;
     	        }
     	        logger.info(" isUserEnable:"+enable+" result:"+result);
     		}catch(Exception ex){
+    			  
     			ex.printStackTrace();
     		}    		
     		return result;

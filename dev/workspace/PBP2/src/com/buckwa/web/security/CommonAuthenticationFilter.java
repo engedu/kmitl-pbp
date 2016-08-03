@@ -57,7 +57,7 @@ public class CommonAuthenticationFilter extends
 	public Authentication attemptAuthentication(HttpServletRequest request,
 			HttpServletResponse response) throws AuthenticationException,
 			IOException, ServletException {
-		logger.info("CommonAuthenticationFilter.attemptAuthentication method");
+//		logger.info("CommonAuthenticationFilter.attemptAuthentication method");
 		String username = obtainUsername(request);
 		String password = obtainPassword(request);
 //		String captcha = obtainCaptcha(request);
